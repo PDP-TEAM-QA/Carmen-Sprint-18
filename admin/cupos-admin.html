@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cupos - Admin - Carmen Factoring</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">cärmen</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <span style="color: #666; font-weight: 500;">Panel Administrativo</span>
+                <a href="#" class="btn-secondary">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="dashboard-admin.html"><i class="fas fa-arrow-left"></i> Volver</a>
+        <span>/</span>
+        <span class="breadcrumb-title">CUPOS - GESTIÓN GRANDES PAGADORES</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Icon Menu -->
+        <div class="icon-menu">
+            <a href="dashboard-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="icon-card-label">Inicio</div>
+            </a>
+
+            <a href="facturas-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="icon-card-label">Facturas</div>
+            </a>
+
+            <a href="liquidaciones-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="icon-card-label">Liquidaciones</div>
+            </a>
+
+            <a href="operaciones-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="icon-card-label">Operaciones</div>
+            </a>
+
+            <a href="cupos-admin.html" class="icon-card active">
+                <div class="icon-card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="icon-card-label">Cupos</div>
+            </a>
+
+            <a href="reportes-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="icon-card-label">Reportes</div>
+            </a>
+        </div>
+
+        <!-- Alert -->
+        <div class="alert alert-warning">
+            <strong><i class="fas fa-chart-line"></i> Atención:</strong> 2 grandes pagadores están utilizando más del 80% de su cupo asignado. Considere ajustar límites.
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="stats-grid">
+            <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <div class="stat-label" style="opacity: 0.9;">Total Grandes Pagadores</div>
+                <div class="stat-value" style="color: white;">48</div>
+                <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">
+                    <i class="fas fa-building"></i> Activos
+                </div>
+            </div>
+
+            <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                <div class="stat-label" style="opacity: 0.9;">Cupo Total Asignado</div>
+                <div class="stat-value" style="color: white; font-size: 32px;">$850M</div>
+                <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">
+                    <i class="fas fa-dollar-sign"></i> Disponible sistema
+                </div>
+            </div>
+
+            <div class="stat-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white;">
+                <div class="stat-label" style="opacity: 0.9;">Cupo Utilizado</div>
+                <div class="stat-value" style="color: white; font-size: 32px;">$425M</div>
+                <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">
+                    <i class="fas fa-chart-pie"></i> 50% uso promedio
+                </div>
+            </div>
+
+            <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                <div class="stat-label" style="opacity: 0.9;">Cupo Disponible</div>
+                <div class="stat-value" style="color: white; font-size: 32px;">$425M</div>
+                <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">
+                    <i class="fas fa-check-circle"></i> Listo para usar
+                </div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section" style="margin-top: 30px;">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Buscar Gran Pagador</label>
+                    <input type="text" placeholder="Nombre o NIT">
+                </div>
+                <div class="filter-group">
+                    <label>% Uso del Cupo</label>
+                    <select>
+                        <option value="">Todos</option>
+                        <option value="bajo">0% - 50%</option>
+                        <option value="medio">51% - 80%</option>
+                        <option value="alto">81% - 100%</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Estado</label>
+                    <select>
+                        <option value="">Todos</option>
+                        <option value="activo">Activo</option>
+                        <option value="bloqueado">Bloqueado</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button class="btn-primary" style="width: 100%;">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </div>
+                <div class="filter-group">
+                    <button class="btn-success" style="width: 100%;">
+                        <i class="fas fa-plus"></i> Nuevo Gran Pagador
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Gran Pagador</th>
+                        <th>Cupo Asignado</th>
+                        <th>Cupo Utilizado</th>
+                        <th>Disponible</th>
+                        <th>% Uso</th>
+                        <th>Facturas Activas</th>
+                        <th>Último Uso</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #fff3cd;">
+                        <td><strong>ROSERO BENAVIDES CARLOS</strong></td>
+                        <td>$50,000,000</td>
+                        <td style="font-weight: 700; color: var(--color-danger);">$42,500,000</td>
+                        <td style="color: var(--color-warning);">$7,500,000</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill danger" style="width: 85%;"></div>
+                            </div>
+                            <div style="text-align: center; font-size: 12px; margin-top: 5px; font-weight: 600; color: var(--color-danger);">85%</div>
+                        </td>
+                        <td><span class="badge badge-warning">12</span></td>
+                        <td>Hace 2 horas</td>
+                        <td><span class="badge badge-success">Activo</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view" title="Ver historial">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit" title="Configurar">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="background: #fff3cd;">
+                        <td><strong>TRANS JAPAGO PARDO</strong></td>
+                        <td>$100,000,000</td>
+                        <td style="font-weight: 700; color: var(--color-warning);">$82,000,000</td>
+                        <td style="color: var(--color-warning);">$18,000,000</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill warning" style="width: 82%;"></div>
+                            </div>
+                            <div style="text-align: center; font-size: 12px; margin-top: 5px; font-weight: 600; color: var(--color-warning);">82%</div>
+                        </td>
+                        <td><span class="badge badge-warning">28</span></td>
+                        <td>Hace 15 min</td>
+                        <td><span class="badge badge-success">Activo</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>TRANSPORTES TIERRA ADENTRO SAS</strong></td>
+                        <td>$75,000,000</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$45,000,000</td>
+                        <td style="color: var(--color-success);">$30,000,000</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 60%;"></div>
+                            </div>
+                            <div style="text-align: center; font-size: 12px; margin-top: 5px; font-weight: 600;">60%</div>
+                        </td>
+                        <td><span class="badge badge-info">18</span></td>
+                        <td>Hace 1 hora</td>
+                        <td><span class="badge badge-success">Activo</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>YENNY PAOLA GOMEZ</strong></td>
+                        <td>$30,000,000</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$12,500,000</td>
+                        <td style="color: var(--color-success);">$17,500,000</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill success" style="width: 42%;"></div>
+                            </div>
+                            <div style="text-align: center; font-size: 12px; margin-top: 5px; font-weight: 600;">42%</div>
+                        </td>
+                        <td><span class="badge badge-info">8</span></td>
+                        <td>Hace 3 horas</td>
+                        <td><span class="badge badge-success">Activo</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>JOSE SANCHEZ</strong></td>
+                        <td>$20,000,000</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$8,200,000</td>
+                        <td style="color: var(--color-success);">$11,800,000</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill success" style="width: 41%;"></div>
+                            </div>
+                            <div style="text-align: center; font-size: 12px; margin-top: 5px; font-weight: 600;">41%</div>
+                        </td>
+                        <td><span class="badge badge-info">5</span></td>
+                        <td>Hace 1 día</td>
+                        <td><span class="badge badge-success">Activo</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><strong>EDGAR OSORIO</strong></td>
+                        <td>$25,000,000</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$3,500,000</td>
+                        <td style="color: var(--color-success);">$21,500,000</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill success" style="width: 14%;"></div>
+                            </div>
+                            <div style="text-align: center; font-size: 12px; margin-top: 5px; font-weight: 600;">14%</div>
+                        </td>
+                        <td><span class="badge badge-info">2</span></td>
+                        <td>Hace 2 días</td>
+                        <td><span class="badge badge-success">Activo</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="background: #e2e3e5;">
+                        <td><strong>JENNY SAVEDRA</strong></td>
+                        <td>$15,000,000</td>
+                        <td style="font-weight: 700;">$0</td>
+                        <td style="color: var(--color-success);">$15,000,000</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-fill success" style="width: 0%;"></div>
+                            </div>
+                            <div style="text-align: center; font-size: 12px; margin-top: 5px; font-weight: 600;">0%</div>
+                        </td>
+                        <td><span class="badge badge-secondary">0</span></td>
+                        <td>Nunca</td>
+                        <td><span class="badge badge-secondary">Sin uso</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-cog"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Analysis Card -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 30px;">
+            <div class="card">
+                <h3 class="card-header">
+                    <i class="fas fa-chart-pie"></i> Distribución de Cupos
+                </h3>
+                <div style="text-align: center; padding: 30px;">
+                    <div style="width: 200px; height: 200px; border-radius: 50%; margin: 0 auto; background: conic-gradient(var(--color-success) 0% 50%, var(--color-primary) 50% 85%, var(--color-warning) 85% 95%, var(--color-danger) 95% 100%);"></div>
+                    <div style="margin-top: 30px; text-align: left;">
+                        <div style="display: flex; align-items: center; margin: 10px 0;">
+                            <div style="width: 20px; height: 20px; background: var(--color-success); margin-right: 10px;"></div>
+                            <span>Disponible (50%)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin: 10px 0;">
+                            <div style="width: 20px; height: 20px; background: var(--color-primary); margin-right: 10px;"></div>
+                            <span>En uso normal (35%)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin: 10px 0;">
+                            <div style="width: 20px; height: 20px; background: var(--color-warning); margin-right: 10px;"></div>
+                            <span>Uso alto 80-89% (10%)</span>
+                        </div>
+                        <div style="display: flex; align-items: center; margin: 10px 0;">
+                            <div style="width: 20px; height: 20px; background: var(--color-danger); margin-right: 10px;"></div>
+                            <span>Uso crítico +90% (5%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-header">
+                    <i class="fas fa-trophy"></i> Top 5 Grandes Pagadores (Mes)
+                </h3>
+                <div style="padding: 20px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--color-border);">
+                        <div>
+                            <div style="font-weight: 600;">1. TRANS JAPAGO PARDO</div>
+                            <div style="font-size: 13px; color: #666;">82 operaciones</div>
+                        </div>
+                        <div style="font-weight: 700; color: var(--color-primary);">$820M</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--color-border);">
+                        <div>
+                            <div style="font-weight: 600;">2. TRANSPORTES TIERRA ADENTRO</div>
+                            <div style="font-size: 13px; color: #666;">65 operaciones</div>
+                        </div>
+                        <div style="font-weight: 700; color: var(--color-primary);">$680M</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--color-border);">
+                        <div>
+                            <div style="font-weight: 600;">3. ROSERO BENAVIDES CARLOS</div>
+                            <div style="font-size: 13px; color: #666;">48 operaciones</div>
+                        </div>
+                        <div style="font-weight: 700; color: var(--color-primary);">$510M</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--color-border);">
+                        <div>
+                            <div style="font-weight: 600;">4. YENNY PAOLA GOMEZ</div>
+                            <div style="font-size: 13px; color: #666;">35 operaciones</div>
+                        </div>
+                        <div style="font-weight: 700; color: var(--color-primary);">$380M</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px;">
+                        <div>
+                            <div style="font-weight: 600;">5. JOSE SANCHEZ</div>
+                            <div style="font-size: 13px; color: #666;">28 operaciones</div>
+                        </div>
+                        <div style="font-weight: 700; color: var(--color-primary);">$295M</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Alert -->
+        <div class="alert alert-info" style="margin-top: 20px;">
+            <strong><i class="fas fa-info-circle"></i> Información:</strong> El cupo de cada gran pagador representa el máximo valor total en facturas que pueden estar activas simultáneamente. Cuando una factura se completa (desembolso), el cupo se libera automáticamente. Los cupos con uso superior al 80% requieren monitoreo para evitar bloqueos de operaciones.
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">Calle 72A # 22 - 07</p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">+57 310 375 4945</p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">info@carmen.com.co</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

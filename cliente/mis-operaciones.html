@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Operaciones - Carmen Factoring</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">cärmen</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <a href="#" class="btn-primary">SOLICITA UN CRÉDITO</a>
+                <a href="#" class="btn-secondary">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="dashboard-cliente.html"><i class="fas fa-arrow-left"></i> Volver</a>
+        <span>TRANS JAPAGO PARDO</span>
+        <span>/</span>
+        <span class="breadcrumb-title">MIS OPERACIONES</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Icon Menu -->
+        <div class="icon-menu">
+            <a href="dashboard-cliente.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="icon-card-label">Inicio</div>
+            </a>
+
+            <a href="#" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="icon-card-label">Mis documentos</div>
+            </a>
+
+            <a href="#" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="icon-card-label">Mis teneros</div>
+            </a>
+
+            <a href="#" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <div class="icon-card-label">Mis solicitudes</div>
+            </a>
+
+            <a href="mis-facturas.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="icon-card-label">Mis facturas</div>
+            </a>
+
+            <a href="mis-liquidaciones.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="icon-card-label">Mis liquidaciones</div>
+            </a>
+
+            <a href="mis-operaciones.html" class="icon-card active">
+                <div class="icon-card-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="icon-card-label">Mis operaciones</div>
+            </a>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Fecha Inicio</label>
+                    <input type="date" value="2025-12-01">
+                </div>
+                <div class="filter-group">
+                    <label>Fecha Fin</label>
+                    <input type="date" value="2026-01-31">
+                </div>
+                <div class="filter-group">
+                    <label>Gran Pagador</label>
+                    <select>
+                        <option value="">Todos</option>
+                        <option>TRANS JAPAGO PARDO</option>
+                        <option>TRANSPORTES TIERRA ADENTRO SAS</option>
+                        <option>YENNY PAOLA GOMEZ</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Estado</label>
+                    <select>
+                        <option value="">Todos</option>
+                        <option value="proceso">En proceso</option>
+                        <option value="desembolsado">Desembolsado</option>
+                        <option value="rechazado">Rechazado</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button class="btn-primary" style="width: 100%;">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#Operación</th>
+                        <th>Fecha</th>
+                        <th>CUFE</th>
+                        <th>Gran Pagador</th>
+                        <th>Valor Negociado</th>
+                        <th>Destino</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>21007</strong></td>
+                        <td>4/9/2025</td>
+                        <td>MNE-0470033</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$5,150,000</td>
+                        <td><span class="badge badge-info">💳 Cupo crédito</span></td>
+                        <td><span class="badge badge-success">DESEMBOLSADO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view" onclick="verDetalle('21007')" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit" title="Descargar comprobante">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>21006</td>
+                        <td>4/9/2025</td>
+                        <td>MNE-0470177</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$7,050,000</td>
+                        <td><span class="badge badge-info">💰 My cash</span></td>
+                        <td><span class="badge badge-success">DESEMBOLSADO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view" onclick="verDetalle('21006')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>21005</td>
+                        <td>4/9/2025</td>
+                        <td>MNE-0470124</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$3,050,000</td>
+                        <td><span class="badge badge-info">🏦 Cuenta propia</span></td>
+                        <td><span class="badge badge-warning">EN PROCESO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view" onclick="verDetalle('21005')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>21004</td>
+                        <td>4/3/2025</td>
+                        <td>MNE-0476134</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td style="font-weight: 700; color: var(--color-danger);">$0</td>
+                        <td><span class="badge badge-secondary">N/A</span></td>
+                        <td><span class="badge badge-danger">RECHAZADO BILLY</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view" onclick="verDetalle('21004')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>21003</td>
+                        <td>4/9/2025</td>
+                        <td>MNE-0476076</td>
+                        <td>EDGAR OSORIO</td>
+                        <td style="font-weight: 700; color: var(--color-danger);">$0</td>
+                        <td><span class="badge badge-secondary">N/A</span></td>
+                        <td><span class="badge badge-danger">NEGADO CARMEN</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view" onclick="verDetalle('21003')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>21002</td>
+                        <td>4/9/2025</td>
+                        <td>MNE-0476101</td>
+                        <td>ROSERO BENAVIDES CARLOS</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$1,200,000</td>
+                        <td><span class="badge badge-info">💰 My cash</span></td>
+                        <td><span class="badge badge-success">DESEMBOLSADO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view" onclick="verDetalle('21002')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>21001</td>
+                        <td>1/8/2025</td>
+                        <td>MNE-0470089</td>
+                        <td>JENNY SAVEDRA</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$2,100,000</td>
+                        <td><span class="badge badge-info">💳 Cupo crédito</span></td>
+                        <td><span class="badge badge-success">DESEMBOLSADO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view" onclick="verDetalle('21001')">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="stats-grid" style="margin-top: 30px;">
+            <div class="stat-card">
+                <div class="stat-label">Total Operaciones (Mes)</div>
+                <div class="stat-value">7</div>
+                <div style="color: var(--color-success); font-size: 14px; margin-top: 10px;">
+                    <i class="fas fa-arrow-up"></i> 40% vs mes anterior
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Monto Total Negociado</div>
+                <div class="stat-value" style="font-size: 28px;">$28.5M</div>
+                <div style="color: #666; font-size: 14px; margin-top: 10px;">
+                    Enero 2026
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Tasa de Éxito</div>
+                <div class="stat-value">71%</div>
+                <div class="progress-bar" style="margin-top: 15px;">
+                    <div class="progress-fill success" style="width: 71%;"></div>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Ahorro en Comisiones</div>
+                <div class="stat-value" style="font-size: 28px;">$850K</div>
+                <div style="color: #666; font-size: 14px; margin-top: 10px;">
+                    vs factoring tradicional
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Detalle Operación -->
+    <div id="modal-detalle" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 class="modal-header">
+                <i class="fas fa-file-invoice-dollar"></i> Detalle Operación #<span id="modalOpNum">21007</span>
+            </h2>
+            
+            <div class="card" style="box-shadow: none; padding: 0;">
+                <h3 style="margin-bottom: 15px; color: var(--color-primary);">Información de la Factura</h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div>
+                            <div style="color: #666; font-size: 13px;">CUFE</div>
+                            <div style="font-weight: 600;">MNE-0470033</div>
+                        </div>
+                        <div>
+                            <div style="color: #666; font-size: 13px;">N° Factura</div>
+                            <div style="font-weight: 600;">19917</div>
+                        </div>
+                        <div>
+                            <div style="color: #666; font-size: 13px;">Gran Pagador</div>
+                            <div style="font-weight: 600;">TRANS JAPAGO PARDO</div>
+                        </div>
+                        <div>
+                            <div style="color: #666; font-size: 13px;">Valor Factura</div>
+                            <div style="font-weight: 600; color: var(--color-primary);">$5,432,140</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 15px; color: var(--color-primary);">Liquidación</h3>
+                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0;">
+                        <span>Valor factura:</span>
+                        <strong>$5,432,140</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0; color: var(--color-danger);">
+                        <span>Descuento + Intereses + Comisión:</span>
+                        <strong>-$282,140</strong>
+                    </div>
+                    <hr style="border: none; border-top: 2px solid var(--color-primary); margin: 15px 0;">
+                    <div style="display: flex; justify-content: space-between; margin: 10px 0; font-size: 18px;">
+                        <strong>Valor desembolsado:</strong>
+                        <strong style="color: var(--color-success);">$5,150,000</strong>
+                    </div>
+                    <div style="margin-top: 15px; padding: 15px; background: white; border-radius: 8px;">
+                        <div style="color: #666; font-size: 13px;">Destino:</div>
+                        <div style="font-weight: 600; color: var(--color-primary);">💳 Cupo de Crédito</div>
+                    </div>
+                </div>
+
+                <h3 style="margin-bottom: 15px; color: var(--color-primary);">Timeline de la Operación</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker completed"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">1. Factura recibida</div>
+                            <div class="timeline-time">4/9/2025 10:23 AM</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker completed"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">2. Verificación de condiciones</div>
+                            <div class="timeline-time">4/9/2025 10:24 AM - Aprobada</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker completed"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">3. Consulta Billy (CUFE)</div>
+                            <div class="timeline-time">4/9/2025 10:25 AM - Verificada</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker completed"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">4. Liquidación generada</div>
+                            <div class="timeline-time">4/9/2025 10:26 AM</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker completed"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">5. Aprobación del cliente</div>
+                            <div class="timeline-time">4/9/2025 12:45 PM</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker completed"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">6. Compra en Billy</div>
+                            <div class="timeline-time">4/9/2025 12:46 PM - Estado 037</div>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker completed"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-title">7. Desembolso completado</div>
+                            <div class="timeline-time">4/9/2025 12:47 PM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 20px;">
+                <button class="btn-primary" onclick="downloadComprobante()">
+                    <i class="fas fa-download"></i> Descargar Comprobante
+                </button>
+                <button class="btn-secondary" onclick="closeModal()">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">Calle 72A # 22 - 07</p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">+57 310 375 4945</p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">info@carmen.com.co</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function verDetalle(opNum) {
+            document.getElementById('modalOpNum').textContent = opNum;
+            document.getElementById('modal-detalle').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-detalle').classList.remove('active');
+        }
+
+        function downloadComprobante() {
+            alert('Descargando comprobante de operación...');
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>

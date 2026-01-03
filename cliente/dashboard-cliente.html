@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Cliente - Carmen Factoring</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">cärmen</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <a href="#" class="btn-primary">SOLICITA UN CRÉDITO</a>
+                <a href="#" class="btn-secondary">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="#"><i class="fas fa-arrow-left"></i> Volver</a>
+        <span class="breadcrumb-title">TRANS JAPAGO PARDO</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Icon Menu -->
+        <div class="icon-menu">
+            <a href="dashboard-cliente.html" class="icon-card active">
+                <div class="icon-card-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="icon-card-label">Inicio</div>
+            </a>
+
+            <a href="#" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="icon-card-label">Mis documentos</div>
+            </a>
+
+            <a href="#" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="icon-card-label">Mis teneros</div>
+            </a>
+
+            <a href="#" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <div class="icon-card-label">Mis solicitudes</div>
+            </a>
+
+            <a href="mis-facturas.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="icon-card-label">Mis facturas</div>
+            </a>
+
+            <a href="mis-liquidaciones.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="icon-card-label">Mis liquidaciones</div>
+            </a>
+
+            <a href="mis-operaciones.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="icon-card-label">Mis operaciones</div>
+            </a>
+        </div>
+
+        <!-- Welcome Section -->
+        <div class="card">
+            <h2 class="card-header">Bienvenido al Sistema de Factoring</h2>
+            <div class="card-body">
+                <p style="margin-bottom: 20px;">Administre sus facturas, solicite liquidaciones y consulte el estado de sus operaciones de factoring.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Cupo Disponible</div>
+                        <div class="stat-value">$5,000,000</div>
+                        <div class="progress-bar" style="margin-top: 15px;">
+                            <div class="progress-fill success" style="width: 75%;"></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Facturas Disponibles</div>
+                        <div class="stat-value">12</div>
+                        <p style="color: #666; font-size: 12px; margin-top: 10px;">Elegibles para vender</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Operaciones en Proceso</div>
+                        <div class="stat-value">3</div>
+                        <p style="color: #666; font-size: 12px; margin-top: 10px;">Pendientes de aprobación</p>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-label">Total Negociado (Mes)</div>
+                        <div class="stat-value">$28M</div>
+                        <p style="color: #666; font-size: 12px; margin-top: 10px;">Enero 2026</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card">
+            <h3 class="card-header">Acciones Rápidas</h3>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <a href="mis-facturas.html" class="btn-primary" style="padding: 15px 30px;">
+                    <i class="fas fa-plus"></i> Vender Nueva Factura
+                </a>
+                <a href="mis-liquidaciones.html" class="btn-secondary" style="padding: 15px 30px;">
+                    <i class="fas fa-file-invoice"></i> Ver Liquidaciones Pendientes
+                </a>
+                <a href="mis-operaciones.html" class="btn-secondary" style="padding: 15px 30px;">
+                    <i class="fas fa-history"></i> Historial de Operaciones
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card">
+            <h3 class="card-header">Actividad Reciente</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker completed"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Operación #21007 Completada</div>
+                        <div class="timeline-time">Hace 2 horas - $5,200,000 desembolsado a My cash</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker in-progress"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Liquidación #1456 Pendiente de Aprobación</div>
+                        <div class="timeline-time">Hace 4 horas - CUFE: MNE-0470033</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker completed"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Nueva Factura Elegible</div>
+                        <div class="timeline-time">Hace 1 día - Gran Pagador: TRANS JAPAGO PARDO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito. La consecuencia de este avance es sin duda alguna, el desear actualizar, los servicios y beneficios ofrecidos inicialmente.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">
+                    Calle 72A # 22 - 07
+                </p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">
+                    +57 310 375 4945
+                </p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">
+                    info@carmen.com.co
+                </p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

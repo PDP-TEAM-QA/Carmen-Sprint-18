@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facturas - Admin - Carmen Factoring</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">cärmen</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <span style="color: #666; font-weight: 500;">Panel Administrativo</span>
+                <a href="#" class="btn-secondary">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="dashboard-admin.html"><i class="fas fa-arrow-left"></i> Volver</a>
+        <span>/</span>
+        <span class="breadcrumb-title">FACTURAS - VERIFICACIÓN</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Icon Menu -->
+        <div class="icon-menu">
+            <a href="dashboard-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="icon-card-label">Inicio</div>
+            </a>
+
+            <a href="facturas-admin.html" class="icon-card active">
+                <div class="icon-card-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="icon-card-label">Facturas</div>
+            </a>
+
+            <a href="liquidaciones-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="icon-card-label">Liquidaciones</div>
+            </a>
+
+            <a href="operaciones-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="icon-card-label">Operaciones</div>
+            </a>
+
+            <a href="cupos-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="icon-card-label">Cupos</div>
+            </a>
+
+            <a href="reportes-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="icon-card-label">Reportes</div>
+            </a>
+        </div>
+
+        <!-- Alert -->
+        <div class="alert alert-warning">
+            <strong><i class="fas fa-clock"></i> Atención:</strong> Hay 3 facturas pendientes de verificación. Por favor revise y procese.
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Fecha Inicio</label>
+                    <input type="date" value="2026-01-01">
+                </div>
+                <div class="filter-group">
+                    <label>Fecha Fin</label>
+                    <input type="date" value="2026-01-31">
+                </div>
+                <div class="filter-group">
+                    <label>Cliente</label>
+                    <select>
+                        <option value="">Todos</option>
+                        <option>TRANS JAPAGO PARDO</option>
+                        <option>TRANSPORTES TIERRA ADENTRO SAS</option>
+                        <option>YENNY PAOLA GOMEZ</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Estado Verificación</label>
+                    <select>
+                        <option value="">Todos</option>
+                        <option value="proceso">En proceso</option>
+                        <option value="aprobado">Aprobado</option>
+                        <option value="rechazado">Rechazado</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <button class="btn-primary" style="width: 100%;">
+                        <i class="fas fa-search"></i> Buscar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>CUFE</th>
+                        <th>Cliente</th>
+                        <th>Gran Pagador</th>
+                        <th>Valor</th>
+                        <th>Vencimiento</th>
+                        <th>Validaciones</th>
+                        <th>Estado Billy</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background: #fff3cd;">
+                        <td>1</td>
+                        <td>MNE-0470089</td>
+                        <td>JENNY SAVEDRA</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td>$2,220,864</td>
+                        <td>2/22/2026</td>
+                        <td>
+                            <div class="validation-list">
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">A crédito</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">No vencida</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Estado 33</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Valor OK</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon loading"><i class="fas fa-spinner"></i></div>
+                                    <span style="font-size: 11px;">Billy...</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-warning">Verificando...</span></td>
+                        <td><span class="badge badge-warning">EN PROCESO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit" title="Revalidar">
+                                    <i class="fas fa-sync"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="background: #fff3cd;">
+                        <td>2</td>
+                        <td>MNE-0470124</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td>YENNY PAOLA GOMEZ</td>
+                        <td>$3,215,960</td>
+                        <td>2/18/2026</td>
+                        <td>
+                            <div class="validation-list">
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">A crédito</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">No vencida</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Estado 34</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Valor OK</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon loading"><i class="fas fa-spinner"></i></div>
+                                    <span style="font-size: 11px;">Billy...</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-warning">Verificando...</span></td>
+                        <td><span class="badge badge-warning">EN PROCESO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-sync"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="background: #fff3cd;">
+                        <td>3</td>
+                        <td>MNE-0476101</td>
+                        <td>ROSERO BENAVIDES CARLOS</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td>$1,276,870</td>
+                        <td>2/28/2026</td>
+                        <td>
+                            <div class="validation-list">
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">A crédito</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">No vencida</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Estado 33</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Valor OK</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon loading"><i class="fas fa-spinner"></i></div>
+                                    <span style="font-size: 11px;">Billy...</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-warning">Verificando...</span></td>
+                        <td><span class="badge badge-warning">EN PROCESO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon btn-icon-edit">
+                                    <i class="fas fa-sync"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="background: #d4edda;">
+                        <td>4</td>
+                        <td>MNE-0470033</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td>HELEER LEON</td>
+                        <td>$5,432,140</td>
+                        <td>2/15/2026</td>
+                        <td>
+                            <div class="validation-list">
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">A crédito</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">No vencida</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Estado 33</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Valor OK</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Billy OK</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-success">Verificada</span></td>
+                        <td><span class="badge badge-success">APROBADO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="background: #d4edda;">
+                        <td>5</td>
+                        <td>MNE-0470177</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td>TRANSPORTES TIERRA ADENTRO</td>
+                        <td>$7,414,910</td>
+                        <td>2/20/2026</td>
+                        <td>
+                            <div class="validation-list">
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">A crédito</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">No vencida</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Estado 33</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Valor OK</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">Billy OK</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-success">Verificada</span></td>
+                        <td><span class="badge badge-success">APROBADO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr style="background: #f8d7da;">
+                        <td>6</td>
+                        <td>MNE-0476134</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td>JOSE SANCHEZ</td>
+                        <td>$1,898,050</td>
+                        <td>1/5/2026</td>
+                        <td>
+                            <div class="validation-list">
+                                <div class="validation-item">
+                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
+                                    <span style="font-size: 11px;">A crédito</span>
+                                </div>
+                                <div class="validation-item">
+                                    <div style="width: 18px; height: 18px; border-radius: 50%; background: var(--color-danger); color: white; display: flex; align-items: center; justify-content: center; font-size: 10px;">
+                                        <i class="fas fa-times"></i>
+                                    </div>
+                                    <span style="font-size: 11px;">Vencida</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="badge badge-danger">Rechazada</span></td>
+                        <td><span class="badge badge-danger">RECHAZADO</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon btn-icon-view">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid" style="margin-top: 30px;">
+            <div class="stat-card">
+                <div class="stat-label">Facturas Verificadas Hoy</div>
+                <div class="stat-value">42</div>
+                <div class="progress-bar" style="margin-top: 15px;">
+                    <div class="progress-fill success" style="width: 85%;"></div>
+                </div>
+                <div style="text-align: center; font-size: 12px; color: #666; margin-top: 10px;">85% Tasa de aprobación</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Tiempo Promedio Verificación</div>
+                <div class="stat-value">2.5min</div>
+                <div style="color: var(--color-success); font-size: 14px; margin-top: 10px;">
+                    <i class="fas fa-arrow-down"></i> -15% vs ayer
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">En Proceso Billy</div>
+                <div class="stat-value">3</div>
+                <div style="color: var(--color-warning); font-size: 14px; margin-top: 10px;">
+                    <i class="fas fa-clock"></i> Promedio 1.2min
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">Rechazadas Billy Hoy</div>
+                <div class="stat-value">2</div>
+                <div class="progress-bar" style="margin-top: 15px;">
+                    <div class="progress-fill danger" style="width: 4.8%;"></div>
+                </div>
+                <div style="text-align: center; font-size: 12px; color: #666; margin-top: 10px;">4.8% Tasa de rechazo</div>
+            </div>
+        </div>
+
+        <!-- Info Alert -->
+        <div class="alert alert-info" style="margin-top: 20px;">
+            <strong><i class="fas fa-info-circle"></i> Información:</strong> Las facturas en proceso están siendo verificadas automáticamente con Billy (CUFE). El tiempo promedio de respuesta es de 1-2 minutos. Las facturas rechazadas por Billy no pueden ser procesadas.
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">Calle 72A # 22 - 07</p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">+57 310 375 4945</p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">info@carmen.com.co</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simulate loading animation for Billy verification
+        setInterval(() => {
+            const spinners = document.querySelectorAll('.fa-spinner');
+            spinners.forEach(spinner => {
+                spinner.style.animation = 'spin 1s linear infinite';
+            });
+        }, 100);
+
+        // Add CSS animation for spinner
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes spin {
+                from { transform: rotate(0deg); }
+                to { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

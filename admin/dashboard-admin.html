@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Admin - Carmen Factoring</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">cärmen</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <span style="color: #666; font-weight: 500;">Panel Administrativo</span>
+                <a href="#" class="btn-secondary">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <span class="breadcrumb-title">CARMEN ADMIN - FACTORING</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Icon Menu -->
+        <div class="icon-menu">
+            <a href="dashboard-admin.html" class="icon-card active">
+                <div class="icon-card-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <div class="icon-card-label">Inicio</div>
+            </a>
+
+            <a href="facturas-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="icon-card-label">Facturas</div>
+            </a>
+
+            <a href="liquidaciones-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="icon-card-label">Liquidaciones</div>
+            </a>
+
+            <a href="operaciones-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-exchange-alt"></i>
+                </div>
+                <div class="icon-card-label">Operaciones</div>
+            </a>
+
+            <a href="cupos-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="icon-card-label">Cupos</div>
+            </a>
+
+            <a href="reportes-admin.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-file-alt"></i>
+                </div>
+                <div class="icon-card-label">Reportes</div>
+            </a>
+        </div>
+
+        <!-- Metrics Dashboard -->
+        <div class="card">
+            <h2 class="card-header">
+                <i class="fas fa-chart-bar"></i> Métricas en Tiempo Real
+            </h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                    <div class="stat-label" style="opacity: 0.9;">Facturas Hoy</div>
+                    <div class="stat-value" style="color: white;">127</div>
+                    <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">
+                        <i class="fas fa-arrow-up"></i> +15% vs ayer
+                    </div>
+                </div>
+
+                <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white;">
+                    <div class="stat-label" style="opacity: 0.9;">En Verificación</div>
+                    <div class="stat-value" style="color: white;">8</div>
+                    <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">
+                        <i class="fas fa-clock"></i> Pendientes
+                    </div>
+                </div>
+
+                <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); color: white;">
+                    <div class="stat-label" style="opacity: 0.9;">Volumen Hoy</div>
+                    <div class="stat-value" style="color: white; font-size: 32px;">$850M</div>
+                    <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">
+                        <i class="fas fa-dollar-sign"></i> Total negociado
+                    </div>
+                </div>
+
+                <div class="stat-card" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); color: white;">
+                    <div class="stat-label" style="opacity: 0.9;">Rechazadas Hoy</div>
+                    <div class="stat-value" style="color: white;">3</div>
+                    <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">
+                        <i class="fas fa-times-circle"></i> 2.4% tasa rechazo
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+            <div class="card">
+                <h3 class="card-header">
+                    <i class="fas fa-chart-line"></i> Volumen Mensual
+                </h3>
+                <div style="text-align: center; padding: 40px;">
+                    <div style="font-size: 48px; font-weight: 700; color: var(--color-primary);">$2.8B</div>
+                    <div style="color: #666; margin-top: 10px;">Total Enero 2026</div>
+                    <div style="margin-top: 20px;">
+                        <span class="badge badge-success" style="font-size: 16px; padding: 8px 16px;">
+                            <i class="fas fa-arrow-up"></i> +28% vs Diciembre
+                        </span>
+                    </div>
+                    <div style="margin-top: 30px; height: 150px; background: linear-gradient(to top, var(--color-primary) 0%, transparent 100%); opacity: 0.2; border-radius: 8px;"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-header">
+                    <i class="fas fa-users"></i> Top Clientes del Mes
+                </h3>
+                <div style="padding: 20px 0;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--color-border);">
+                        <div>
+                            <div style="font-weight: 600;">TRANS JAPAGO PARDO</div>
+                            <div style="font-size: 13px; color: #666;">42 operaciones</div>
+                        </div>
+                        <div style="font-weight: 700; color: var(--color-primary);">$450M</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--color-border);">
+                        <div>
+                            <div style="font-weight: 600;">TRANSPORTES TIERRA ADENTRO</div>
+                            <div style="font-size: 13px; color: #666;">38 operaciones</div>
+                        </div>
+                        <div style="font-weight: 700; color: var(--color-primary);">$380M</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; border-bottom: 1px solid var(--color-border);">
+                        <div>
+                            <div style="font-weight: 600;">ROSERO BENAVIDES CARLOS</div>
+                            <div style="font-size: 13px; color: #666;">28 operaciones</div>
+                        </div>
+                        <div style="font-weight: 700; color: var(--color-primary);">$290M</div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px;">
+                        <div>
+                            <div style="font-weight: 600;">YENNY PAOLA GOMEZ</div>
+                            <div style="font-size: 13px; color: #666;">22 operaciones</div>
+                        </div>
+                        <div style="font-weight: 700; color: var(--color-primary);">$220M</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="card">
+            <h3 class="card-header">
+                <i class="fas fa-bell"></i> Actividad Reciente
+            </h3>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker completed"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Operación #21007 - Completada</div>
+                        <div class="timeline-time">Hace 5 min - TRANS JAPAGO PARDO - $5,150,000 desembolsado</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker in-progress"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Nueva factura recibida - En verificación</div>
+                        <div class="timeline-time">Hace 12 min - MNE-0470089 - Jenny Savedra</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker completed"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Liquidación #1456 - Aprobada por cliente</div>
+                        <div class="timeline-time">Hace 25 min - Procesando compra en Billy</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker pending"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Factura rechazada por Billy</div>
+                        <div class="timeline-time">Hace 1 hora - MNE-0476134 - Factura vencida</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker completed"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-title">Liquidación #1453 - Generada</div>
+                        <div class="timeline-time">Hace 2 horas - Enviada a cliente para aprobación</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="card">
+            <h3 class="card-header">
+                <i class="fas fa-bolt"></i> Acciones Rápidas
+            </h3>
+            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <a href="facturas-admin.html" class="btn-primary" style="padding: 15px 30px;">
+                    <i class="fas fa-list"></i> Ver Facturas en Verificación
+                </a>
+                <a href="liquidaciones-admin.html" class="btn-primary" style="padding: 15px 30px;">
+                    <i class="fas fa-calculator"></i> Liquidaciones Pendientes
+                </a>
+                <a href="cupos-admin.html" class="btn-primary" style="padding: 15px 30px;">
+                    <i class="fas fa-chart-line"></i> Gestionar Cupos
+                </a>
+                <a href="reportes-admin.html" class="btn-primary" style="padding: 15px 30px;">
+                    <i class="fas fa-download"></i> Generar Reporte
+                </a>
+            </div>
+        </div>
+
+        <!-- Alerts -->
+        <div class="card">
+            <h3 class="card-header">
+                <i class="fas fa-exclamation-triangle"></i> Alertas del Sistema
+            </h3>
+            
+            <div class="alert alert-warning">
+                <strong><i class="fas fa-clock"></i> Atención:</strong> 2 operaciones estancadas por más de 30 minutos. <a href="operaciones-admin.html" style="color: inherit; text-decoration: underline;">Ver detalles</a>
+            </div>
+            
+            <div class="alert alert-info">
+                <strong><i class="fas fa-chart-line"></i> Información:</strong> El cupo de ROSERO BENAVIDES está al 85% de uso. Considere ajustar límites.
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">Calle 72A # 22 - 07</p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">+57 310 375 4945</p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">info@carmen.com.co</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vender Factura - Paso 2 - Carmen Factoring</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">cärmen</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <a href="#" class="btn-primary">SOLICITA UN CRÉDITO</a>
+                <a href="#" class="btn-secondary">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="mis-facturas.html"><i class="fas fa-arrow-left"></i> Volver</a>
+        <span>TRANS JAPAGO PARDO</span>
+        <span>/</span>
+        <span>MIS FACTURAS</span>
+        <span>/</span>
+        <span class="breadcrumb-title">VENDER FACTURA</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Progress Steps -->
+        <div class="card" style="margin-bottom: 30px;">
+            <div style="display: flex; justify-content: space-around; align-items: center; position: relative;">
+                <div style="position: absolute; top: 20px; left: 20%; right: 20%; height: 2px; background: var(--color-primary); z-index: 0;"></div>
+                
+                <div style="text-align: center; position: relative; z-index: 1;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-success); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div style="font-weight: 600; color: var(--color-success);">Confirmar Datos</div>
+                </div>
+                
+                <div style="text-align: center; position: relative; z-index: 1;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">2</div>
+                    <div style="font-weight: 600; color: var(--color-primary);">Seleccionar Destino</div>
+                </div>
+                
+                <div style="text-align: center; position: relative; z-index: 1;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-border); color: #666; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">3</div>
+                    <div style="font-weight: 500; color: #666;">Revisar Liquidación</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Summary -->
+        <div class="card">
+            <h3 style="font-size: 16px; color: #666; margin-bottom: 10px;">Factura seleccionada:</h3>
+            <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
+                <div>
+                    <strong>CUFE:</strong> MNE-0470033 | <strong>N° Factura:</strong> 19917
+                </div>
+                <div style="font-size: 20px; font-weight: 700; color: var(--color-primary);">
+                    $5,432,140
+                </div>
+            </div>
+        </div>
+
+        <!-- Destination Selection -->
+        <div class="card">
+            <h2 class="card-header">
+                <i class="fas fa-hand-holding-usd"></i> Seleccione el Destino del Dinero
+            </h2>
+            
+            <div class="alert alert-warning">
+                <strong><i class="fas fa-info-circle"></i> Importante:</strong> No se permiten abonos parciales. Debe seleccionar un único destino para el total del valor a desembolsar.
+            </div>
+
+            <div class="destination-grid">
+                <!-- Cupo de Crédito -->
+                <div class="destination-card" onclick="selectDestination('cupo')">
+                    <div class="destination-icon">💳</div>
+                    <div class="destination-title">Cupo de Crédito</div>
+                    <div class="destination-info">
+                        <p style="font-size: 14px; color: #666; margin: 10px 0;">El valor será agregado a su cupo de crédito disponible en Carmen</p>
+                        <hr style="border: none; border-top: 1px solid #ddd; margin: 15px 0;">
+                        <div style="font-size: 13px; color: #666; margin-bottom: 5px;">Cupo actual disponible:</div>
+                        <div class="destination-value">$5,000,000</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 10px;">Después del desembolso:</div>
+                        <div style="font-size: 18px; font-weight: 600; color: var(--color-primary); margin-top: 5px;">
+                            ~$10,150,000
+                        </div>
+                    </div>
+                    <button class="btn-primary" style="margin-top: 15px; width: 100%;">
+                        Seleccionar
+                    </button>
+                </div>
+
+                <!-- My Cash -->
+                <div class="destination-card" onclick="selectDestination('mycash')">
+                    <div class="destination-icon">💰</div>
+                    <div class="destination-title">My Cash</div>
+                    <div class="destination-info">
+                        <p style="font-size: 14px; color: #666; margin: 10px 0;">El valor será agregado a su saldo My Cash disponible en Carmen</p>
+                        <hr style="border: none; border-top: 1px solid #ddd; margin: 15px 0;">
+                        <div style="font-size: 13px; color: #666; margin-bottom: 5px;">Saldo actual My Cash:</div>
+                        <div class="destination-value">$1,200,000</div>
+                        <div style="font-size: 13px; color: #666; margin-top: 10px;">Después del desembolso:</div>
+                        <div style="font-size: 18px; font-weight: 600; color: var(--color-primary); margin-top: 5px;">
+                            ~$6,350,000
+                        </div>
+                    </div>
+                    <button class="btn-primary" style="margin-top: 15px; width: 100%;">
+                        Seleccionar
+                    </button>
+                </div>
+
+                <!-- Cuenta Propia -->
+                <div class="destination-card" onclick="selectDestination('cuenta')">
+                    <div class="destination-icon">🏦</div>
+                    <div class="destination-title">Abono a Cuenta Propia</div>
+                    <div class="destination-info">
+                        <p style="font-size: 14px; color: #666; margin: 10px 0;">El valor será transferido directamente a su cuenta bancaria registrada</p>
+                        <hr style="border: none; border-top: 1px solid #ddd; margin: 15px 0;">
+                        <div style="font-size: 13px; color: #666; margin-bottom: 5px;">Cuenta registrada:</div>
+                        <div style="font-size: 16px; font-weight: 600; margin-top: 5px;">
+                            Banco de Bogotá
+                        </div>
+                        <div style="font-size: 14px; color: #666; margin-top: 5px;">
+                            **** **** **** 1234
+                        </div>
+                        <div style="font-size: 13px; color: var(--color-info); margin-top: 10px;">
+                            <i class="fas fa-clock"></i> Desembolso en 1-2 días hábiles
+                        </div>
+                    </div>
+                    <button class="btn-primary" style="margin-top: 15px; width: 100%;">
+                        Seleccionar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Comparison -->
+        <div class="card">
+            <h3 class="card-header">
+                <i class="fas fa-balance-scale"></i> Comparación de Destinos
+            </h3>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Característica</th>
+                            <th>Cupo de Crédito</th>
+                            <th>My Cash</th>
+                            <th>Cuenta Propia</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Disponibilidad inmediata</strong></td>
+                            <td><span class="badge badge-success">Sí</span></td>
+                            <td><span class="badge badge-success">Sí</span></td>
+                            <td><span class="badge badge-warning">1-2 días</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Aplicación de intereses</strong></td>
+                            <td>Solo al usar el cupo</td>
+                            <td>No aplica</td>
+                            <td>No aplica</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Uso del dinero</strong></td>
+                            <td>Para operaciones Carmen</td>
+                            <td>Aplicable 4x100</td>
+                            <td>Libre uso</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Retiros</strong></td>
+                            <td>No aplica</td>
+                            <td>Posible a cuenta</td>
+                            <td>Ya en su cuenta</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="card">
+            <div style="display: flex; gap: 15px; justify-content: space-between;">
+                <a href="vender-factura-paso1.html" class="btn-secondary" style="padding: 12px 30px;">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </a>
+                <div id="nextButtonContainer" style="opacity: 0.5; pointer-events: none;">
+                    <a href="mis-liquidaciones.html" class="btn-primary" style="padding: 12px 30px;" id="btnSolicitar">
+                        Solicitar Liquidación <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">Calle 72A # 22 - 07</p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">+57 310 375 4945</p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">info@carmen.com.co</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let selectedDestination = null;
+
+        function selectDestination(destination) {
+            // Remove selected class from all cards
+            document.querySelectorAll('.destination-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked card
+            event.currentTarget.classList.add('selected');
+            
+            // Store selection
+            selectedDestination = destination;
+            
+            // Enable next button
+            document.getElementById('nextButtonContainer').style.opacity = '1';
+            document.getElementById('nextButtonContainer').style.pointerEvents = 'auto';
+        }
+    </script>
+</body>
+</html>

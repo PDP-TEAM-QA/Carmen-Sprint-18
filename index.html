@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carmen Factoring - Acceso al Sistema</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">cärmen</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <a href="#" class="btn-primary">SOLICITA UN CRÉDITO</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-container" style="min-height: calc(100vh - 200px); display: flex; align-items: center; justify-content: center; padding: 60px 20px;">
+        <div style="max-width: 1200px; width: 100%; text-align: center;">
+            <h1 style="font-size: 42px; color: var(--color-primary); margin-bottom: 15px;">
+                <i class="fas fa-coins"></i> Sistema de Factoring Carmen
+            </h1>
+            <p style="font-size: 18px; color: #666; margin-bottom: 50px;">
+                Seleccione su tipo de acceso al sistema
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: 900px; margin: 0 auto;">
+                <!-- Acceso Cliente -->
+                <a href="cliente/dashboard-cliente.html" style="text-decoration: none;">
+                    <div class="card" style="padding: 60px 40px; text-align: center; transition: all 0.3s; cursor: pointer; border: 3px solid transparent; height: 100%;" onmouseover="this.style.borderColor='var(--color-primary)'; this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 35px rgba(0,169,224,0.3)'" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'">
+                        <div style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-user-tie" style="font-size: 60px; color: white;"></i>
+                        </div>
+                        <h2 style="font-size: 28px; color: var(--color-primary); margin-bottom: 15px;">
+                            Acceso Cliente
+                        </h2>
+                        <p style="font-size: 16px; color: #666; margin-bottom: 25px; line-height: 1.6;">
+                            Gestione sus facturas, liquidaciones y operaciones de factoring
+                        </p>
+                        <div style="display: flex; flex-direction: column; gap: 10px; text-align: left; margin-bottom: 25px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                                <span style="color: #555;">Cargar facturas</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                                <span style="color: #555;">Vender facturas</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                                <span style="color: #555;">Revisar liquidaciones</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                                <span style="color: #555;">Historial de operaciones</span>
+                            </div>
+                        </div>
+                        <button class="btn-primary" style="width: 100%; padding: 15px; font-size: 16px; pointer-events: none;">
+                            <i class="fas fa-sign-in-alt"></i> Ingresar como Cliente
+                        </button>
+                    </div>
+                </a>
+
+                <!-- Acceso Administrador -->
+                <a href="admin/dashboard-admin.html" style="text-decoration: none;">
+                    <div class="card" style="padding: 60px 40px; text-align: center; transition: all 0.3s; cursor: pointer; border: 3px solid transparent; height: 100%;" onmouseover="this.style.borderColor='var(--color-danger)'; this.style.transform='translateY(-10px)'; this.style.boxShadow='0 15px 35px rgba(244,67,54,0.3)'" onmouseout="this.style.borderColor='transparent'; this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.1)'">
+                        <div style="width: 120px; height: 120px; border-radius: 50%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); margin: 0 auto 30px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-user-shield" style="font-size: 60px; color: white;"></i>
+                        </div>
+                        <h2 style="font-size: 28px; color: var(--color-danger); margin-bottom: 15px;">
+                            Acceso Administrador
+                        </h2>
+                        <p style="font-size: 16px; color: #666; margin-bottom: 25px; line-height: 1.6;">
+                            Supervise y gestione todo el sistema de factoring
+                        </p>
+                        <div style="display: flex; flex-direction: column; gap: 10px; text-align: left; margin-bottom: 25px;">
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                                <span style="color: #555;">Verificar facturas</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                                <span style="color: #555;">Gestionar liquidaciones</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                                <span style="color: #555;">Administrar cupos</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                                <span style="color: #555;">Reportes y auditoría</span>
+                            </div>
+                        </div>
+                        <button class="btn-danger" style="width: 100%; padding: 15px; font-size: 16px; pointer-events: none;">
+                            <i class="fas fa-shield-alt"></i> Ingresar como Admin
+                        </button>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Info adicional -->
+            <div class="alert alert-info" style="max-width: 900px; margin: 50px auto 0; text-align: left;">
+                <strong><i class="fas fa-info-circle"></i> Mockups de Sistema:</strong> Esta es una representación visual del sistema de factoring Carmen. Los mockups muestran las funcionalidades completas para ambos roles (Cliente y Administrador) incluyendo carga de facturas, verificación con Billy, liquidaciones, operaciones y gestión de cupos.
+            </div>
+
+            <!-- Stats Section -->
+            <div style="margin-top: 60px; padding: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 15px; max-width: 900px; margin-left: auto; margin-right: auto;">
+                <h3 style="color: white; font-size: 24px; margin-bottom: 30px;">
+                    Sistema Completo de Factoring
+                </h3>
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 36px; font-weight: 700; color: white; margin-bottom: 5px;">13</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.9);">Pantallas</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 36px; font-weight: 700; color: white; margin-bottom: 5px;">2</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.9);">Roles</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 36px; font-weight: 700; color: white; margin-bottom: 5px;">7</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.9);">Pasos de Flujo</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 36px; font-weight: 700; color: white; margin-bottom: 5px;">100%</div>
+                        <div style="font-size: 14px; color: rgba(255,255,255,0.9);">Funcional</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">Calle 72A # 22 - 07</p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">+57 310 375 4945</p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">info@carmen.com.co</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

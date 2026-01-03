@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vender Factura - Paso 1 - Carmen Factoring</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">cärmen</div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <a href="#" class="btn-primary">SOLICITA UN CRÉDITO</a>
+                <a href="#" class="btn-secondary">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="mis-facturas.html"><i class="fas fa-arrow-left"></i> Volver</a>
+        <span>TRANS JAPAGO PARDO</span>
+        <span>/</span>
+        <span>MIS FACTURAS</span>
+        <span>/</span>
+        <span class="breadcrumb-title">VENDER FACTURA</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Progress Steps -->
+        <div class="card" style="margin-bottom: 30px;">
+            <div style="display: flex; justify-content: space-around; align-items: center; position: relative;">
+                <div style="position: absolute; top: 20px; left: 20%; right: 20%; height: 2px; background: var(--color-border); z-index: 0;"></div>
+                
+                <div style="text-align: center; position: relative; z-index: 1;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">1</div>
+                    <div style="font-weight: 600; color: var(--color-primary);">Confirmar Datos</div>
+                </div>
+                
+                <div style="text-align: center; position: relative; z-index: 1;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-border); color: #666; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">2</div>
+                    <div style="font-weight: 500; color: #666;">Seleccionar Destino</div>
+                </div>
+                
+                <div style="text-align: center; position: relative; z-index: 1;">
+                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-border); color: #666; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">3</div>
+                    <div style="font-weight: 500; color: #666;">Revisar Liquidación</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Invoice Details Card -->
+        <div class="card">
+            <h2 class="card-header">
+                <i class="fas fa-file-invoice"></i> Datos de la Factura
+            </h2>
+            
+            <div style="background: #f8f9fa; padding: 30px; border-radius: 10px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">CUFE</label>
+                            <div style="font-size: 18px; font-weight: 500;">MNE-0470033</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Número de Factura</label>
+                            <div style="font-size: 18px; font-weight: 500;">19917</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Fecha de Emisión</label>
+                            <div style="font-size: 18px; font-weight: 500;">8 de Enero de 2025</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Estado DTE</label>
+                            <div>
+                                <span class="badge badge-success" style="font-size: 14px; padding: 8px 16px;">33 - Aceptada Expresamente</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Gran Pagador</label>
+                            <div style="font-size: 18px; font-weight: 500;">TRANS JAPAGO PARDO</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Valor de la Factura</label>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--color-primary);">$5,432,140</div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Fecha de Vencimiento</label>
+                            <div style="font-size: 18px; font-weight: 500;">15 de Febrero de 2026</div>
+                            <div style="font-size: 14px; color: var(--color-success); margin-top: 5px;">
+                                <i class="fas fa-check-circle"></i> Vigente (44 días restantes)
+                            </div>
+                        </div>
+                        
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Cupo Disponible</label>
+                            <div style="font-size: 18px; font-weight: 500; color: var(--color-success);">
+                                <i class="fas fa-check-circle"></i> $5,000,000 disponibles
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Verification Card -->
+        <div class="card">
+            <h3 class="card-header">
+                <i class="fas fa-check-circle"></i> Verificación de Condiciones
+            </h3>
+            
+            <div class="validation-list" style="font-size: 16px;">
+                <div class="validation-item">
+                    <div class="validation-icon success">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span><strong>A crédito:</strong> La factura está emitida a crédito</span>
+                </div>
+                
+                <div class="validation-item">
+                    <div class="validation-icon success">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span><strong>Fecha válida:</strong> La factura no está vencida</span>
+                </div>
+                
+                <div class="validation-item">
+                    <div class="validation-icon success">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span><strong>Estado aceptado:</strong> La factura está en estado 33 (Aceptada)</span>
+                </div>
+                
+                <div class="validation-item">
+                    <div class="validation-icon success">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span><strong>Valor correcto:</strong> El valor incluye impuestos calculados</span>
+                </div>
+                
+                <div class="validation-item">
+                    <div class="validation-icon success">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <span><strong>Cupo disponible:</strong> El gran pagador tiene cupo suficiente en Carmen</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Confirmation Card -->
+        <div class="card">
+            <div style="background: #fff3cd; padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107; margin-bottom: 20px;">
+                <strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong> 
+                <p style="margin: 10px 0 0 0;">Al continuar, esta factura será enviada a Carmen para verificación con Billy (CUFE). Una vez aprobada, recibirá una liquidación que deberá aprobar o rechazar.</p>
+            </div>
+            
+            <div style="margin: 20px 0;">
+                <label style="display: flex; align-items: center; font-size: 16px; cursor: pointer;">
+                    <input type="checkbox" id="confirmData" style="width: 20px; height: 20px; margin-right: 10px; cursor: pointer;">
+                    <span>Confirmo que los datos de la factura son correctos y deseo continuar con el proceso de venta</span>
+                </label>
+            </div>
+            
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+                <a href="mis-facturas.html" class="btn-secondary" style="padding: 12px 30px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </a>
+                <a href="vender-factura-paso2.html" class="btn-primary" style="padding: 12px 30px;" id="btnContinuar">
+                    Continuar <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">Calle 72A # 22 - 07</p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">+57 310 375 4945</p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">info@carmen.com.co</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Enable/disable continue button based on checkbox
+        document.getElementById('confirmData').addEventListener('change', function() {
+            const btnContinuar = document.getElementById('btnContinuar');
+            if (this.checked) {
+                btnContinuar.style.opacity = '1';
+                btnContinuar.style.pointerEvents = 'auto';
+            } else {
+                btnContinuar.style.opacity = '0.5';
+                btnContinuar.style.pointerEvents = 'none';
+            }
+        });
+        
+        // Initial state
+        document.getElementById('btnContinuar').style.opacity = '0.5';
+        document.getElementById('btnContinuar').style.pointerEvents = 'none';
+    </script>
+</body>
+</html>
