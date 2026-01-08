@@ -11,7 +11,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-container">
-            <div class="logo">cärmen</div>
+            <a href="../index.html" class="logo" style="text-decoration: none;">cärmen</a>
             <nav>
                 <ul class="nav-menu">
                     <li><a href="#inicio">Inicio</a></li>
@@ -42,34 +42,18 @@
 
     <!-- Main Content -->
     <main class="main-container">
-        <!-- Icon Menu -->
-        <div class="icon-menu">
-            <a href="dashboard-cliente.html" class="icon-card">
+        <!-- Icon Menu with Navigation Arrows -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 30px; width: 100%;">
+            <button class="nav-arrow" onclick="scrollMenu('left')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div style="flex: 1; max-width: 1200px; overflow: hidden;">
+                <div class="icon-menu" id="iconMenu" style="scroll-behavior: smooth;">
+                    <a href="dashboard-cliente.html" class="icon-card">
                 <div class="icon-card-icon">
                     <i class="fas fa-home"></i>
                 </div>
                 <div class="icon-card-label">Inicio</div>
-            </a>
-
-            <a href="#" class="icon-card">
-                <div class="icon-card-icon">
-                    <i class="fas fa-file-alt"></i>
-                </div>
-                <div class="icon-card-label">Mis documentos</div>
-            </a>
-
-            <a href="#" class="icon-card">
-                <div class="icon-card-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="icon-card-label">Mis teneros</div>
-            </a>
-
-            <a href="#" class="icon-card">
-                <div class="icon-card-icon">
-                    <i class="fas fa-clipboard-list"></i>
-                </div>
-                <div class="icon-card-label">Mis solicitudes</div>
             </a>
 
             <a href="mis-facturas.html" class="icon-card active">
@@ -90,8 +74,13 @@
                 <div class="icon-card-icon">
                     <i class="fas fa-exchange-alt"></i>
                 </div>
-                <div class="icon-card-label">Mis operaciones</div>
-            </a>
+                    <div class="icon-card-label">Mis operaciones</div>
+                </a>
+            </div>
+            </div>
+            <button class="nav-arrow" onclick="scrollMenu('right')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
 
         <!-- Tabs System -->
@@ -109,195 +98,98 @@
         <!-- Tab Content: Cargar Factura -->
         <div id="content-cargar" class="tab-content">
             <div class="alert alert-info">
-                <strong><i class="fas fa-info-circle"></i> Requisitos:</strong> Para cargar una factura debe adjuntar el archivo XML (obligatorio) y el PDF (obligatorio). El sistema extraerá automáticamente los datos del XML y validará con Billy.
+                <strong><i class="fas fa-info-circle"></i> Carga unificada:</strong> Puedes cargar facturas arrastrando/seleccionando archivos (<b>XML</b> o <b>PDF</b>), digitando/pegando <b>CUFEs</b> o cargando un <b>Excel</b> con CUFEs. El sistema validará automáticamente con Billy.
             </div>
 
-            <!-- Modo de Carga Selector -->
-            <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 25px;">
-                <button type="button" class="btn-primary" id="btn-modo-individual" onclick="cambiarModo('individual')" style="min-width: 200px;">
-                    <i class="fas fa-file"></i> Carga Individual
-                </button>
-                <button type="button" class="btn-secondary" id="btn-modo-masiva" onclick="cambiarModo('masiva')" style="min-width: 200px;">
-                    <i class="fas fa-files"></i> Carga Masiva
-                </button>
-            </div>
-
-            <!-- MODO INDIVIDUAL -->
-            <div id="modo-individual" class="card" style="max-width: 900px; margin: 0 auto;">
+            <!-- Panel de carga unificada -->
+            <div class="card" style="max-width: 1100px; margin: 0 auto;">
                 <h3 class="card-header">
-                    <i class="fas fa-cloud-upload-alt"></i> Nueva Factura al Sistema
+                    <i class="fas fa-cloud-upload-alt"></i> Cargar facturas al sistema
                 </h3>
-                <div style="padding: 30px;">
-                    <form id="form-cargar-factura">
-                        <div style="margin-bottom: 25px;">
-                            <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                                <i class="fas fa-hashtag"></i> CUFE (Código Único de Factura Electrónica)
-                            </label>
-                            <input type="text" placeholder="Opcional - Se extraerá automáticamente del XML" style="width: 100%; padding: 12px; border: 2px solid var(--color-border); border-radius: 8px; font-size: 14px;">
-                            <small style="color: #666; display: block; margin-top: 5px;">Si no lo proporciona, el sistema lo extraerá del archivo XML</small>
+                <div style="padding: 24px;">
+                    <!-- Zona drag & drop + selector -->
+                    <div id="dropzone" style="border: 2px dashed var(--color-primary); border-radius: 10px; padding: 28px; background:#f8fbff; text-align:center; transition: .2s ease; cursor: pointer;">
+                        <i class="fas fa-cloud-arrow-up" style="font-size:42px; color:var(--color-primary)"></i>
+                        <div style="margin-top:8px; font-weight:600; color:#333">Arrastra aquí tus archivos o haz clic para seleccionarlos</div>
+                        <div style="font-size:13px; color:#666; margin-top:4px">
+                            Tipos soportados: XML, PDF y Excel (.xlsx/.xls) con CUFEs
                         </div>
-
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
-                            <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                                    <i class="fas fa-file-code"></i> Archivo XML <span style="color: var(--color-danger);">*</span>
-                                </label>
-                                <div style="border: 2px dashed var(--color-primary); border-radius: 8px; padding: 30px; text-align: center; background: #f8f9fa; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#e3f2fd'" onmouseout="this.style.background='#f8f9fa'">
-                                    <input type="file" id="file-xml" accept=".xml" style="display: none;" onchange="updateFileName('xml')">
-                                    <label for="file-xml" style="cursor: pointer; display: block;">
-                                        <i class="fas fa-file-code" style="font-size: 48px; color: var(--color-primary); margin-bottom: 10px;"></i>
-                                        <div style="font-weight: 600; color: #333; margin-bottom: 5px;">Click para seleccionar XML</div>
-                                        <div style="font-size: 13px; color: #666;">Factura electrónica DIAN</div>
-                                    </label>
-                                    <div id="filename-xml" style="margin-top: 10px; font-size: 13px; color: var(--color-success); font-weight: 600;"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                                    <i class="fas fa-file-pdf"></i> Archivo PDF <span style="color: var(--color-danger);">*</span>
-                                </label>
-                                <div style="border: 2px dashed var(--color-danger); border-radius: 8px; padding: 30px; text-align: center; background: #f8f9fa; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#ffebee'" onmouseout="this.style.background='#f8f9fa'">
-                                    <input type="file" id="file-pdf" accept=".pdf" style="display: none;" onchange="updateFileName('pdf')">
-                                    <label for="file-pdf" style="cursor: pointer; display: block;">
-                                        <i class="fas fa-file-pdf" style="font-size: 48px; color: var(--color-danger); margin-bottom: 10px;"></i>
-                                        <div style="font-weight: 600; color: #333; margin-bottom: 5px;">Click para seleccionar PDF</div>
-                                        <div style="font-size: 13px; color: #666;">Representación gráfica</div>
-                                    </label>
-                                    <div id="filename-pdf" style="margin-top: 10px; font-size: 13px; color: var(--color-success); font-weight: 600;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
-                            <button type="button" class="btn-secondary" onclick="resetForm()">
-                                <i class="fas fa-times"></i> Cancelar
+                        <input id="filePicker" type="file" multiple accept=".xml,.pdf,.xlsx,.xls" style="display:none">
+                        <div style="margin-top:14px">
+                            <button type="button" class="btn-primary" id="btn-browse">
+                                <i class="fas fa-folder-open"></i> Seleccionar archivos
                             </button>
-                            <button type="button" class="btn-success" onclick="cargarFactura()" id="btn-cargar" disabled>
-                                <i class="fas fa-cloud-upload-alt"></i> Cargar al Sistema
-                            </button>
+                            <a href="#" class="btn-secondary" style="margin-left:8px" onclick="alert('Descargando plantilla Excel...'); return false;">
+                                <i class="fas fa-file-excel"></i> Descargar plantilla Excel
+                            </a>
                         </div>
-                    </form>
-                </div>
-            </div> <!-- End Modo Individual -->
-
-            <!-- MODO MASIVA -->
-            <div id="modo-masiva" class="card" style="max-width: 1200px; margin: 0 auto; display: none;">
-                <h3 class="card-header">
-                    <i class="fas fa-files"></i> Carga Masiva de Facturas
-                </h3>
-                <div style="padding: 30px;">
-                    <div class="alert alert-warning" style="margin-bottom: 25px;">
-                        <strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong> Debe seleccionar el mismo número de archivos XML y PDF. El sistema emparejará los archivos automáticamente por nombre.
                     </div>
 
-                    <form id="form-cargar-masiva">
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px;">
-                            <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                                    <i class="fas fa-file-code"></i> Archivos XML (Múltiples) <span style="color: var(--color-danger);">*</span>
-                                </label>
-                                <div style="border: 2px dashed var(--color-primary); border-radius: 8px; padding: 40px; text-align: center; background: #f8f9fa; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#e3f2fd'" onmouseout="this.style.background='#f8f9fa'">
-                                    <input type="file" id="files-xml-masiva" accept=".xml" multiple style="display: none;" onchange="updateFilesMasiva('xml')">
-                                    <label for="files-xml-masiva" style="cursor: pointer; display: block;">
-                                        <i class="fas fa-file-code" style="font-size: 48px; color: var(--color-primary); margin-bottom: 10px;"></i>
-                                        <div style="font-weight: 600; color: #333; margin-bottom: 5px;">Click para seleccionar múltiples XML</div>
-                                        <div style="font-size: 13px; color: #666;">Puede seleccionar varios archivos</div>
-                                    </label>
-                                    <div id="count-xml-masiva" style="margin-top: 15px; font-size: 14px; color: var(--color-success); font-weight: 600;"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
-                                    <i class="fas fa-file-pdf"></i> Archivos PDF (Múltiples) <span style="color: var(--color-danger);">*</span>
-                                </label>
-                                <div style="border: 2px dashed var(--color-danger); border-radius: 8px; padding: 40px; text-align: center; background: #f8f9fa; cursor: pointer; transition: all 0.3s;" onmouseover="this.style.background='#ffebee'" onmouseout="this.style.background='#f8f9fa'">
-                                    <input type="file" id="files-pdf-masiva" accept=".pdf" multiple style="display: none;" onchange="updateFilesMasiva('pdf')">
-                                    <label for="files-pdf-masiva" style="cursor: pointer; display: block;">
-                                        <i class="fas fa-file-pdf" style="font-size: 48px; color: var(--color-danger); margin-bottom: 10px;"></i>
-                                        <div style="font-weight: 600; color: #333; margin-bottom: 5px;">Click para seleccionar múltiples PDF</div>
-                                        <div style="font-size: 13px; color: #666;">Puede seleccionar varios archivos</div>
-                                    </label>
-                                    <div id="count-pdf-masiva" style="margin-top: 15px; font-size: 14px; color: var(--color-success); font-weight: 600;"></div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Lista de archivos seleccionados -->
-                        <div id="lista-archivos-masiva" style="display: none; margin-bottom: 25px;">
-                            <h4 style="color: var(--color-primary); margin-bottom: 15px;">
-                                <i class="fas fa-list"></i> Archivos Seleccionados para Carga
-                            </h4>
-                            <div class="table-container">
-                                <table id="tabla-archivos-masiva">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 50px;">#</th>
-                                            <th>Archivo XML</th>
-                                            <th>Archivo PDF</th>
-                                            <th style="width: 80px;">Estado</th>
-                                            <th style="width: 80px;">Acción</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="tbody-archivos-masiva">
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <div id="alert-mismatch" class="alert alert-danger" style="display: none; margin-bottom: 20px;">
-                            <strong><i class="fas fa-times-circle"></i> Error:</strong> <span id="mensaje-mismatch"></span>
-                        </div>
-
-                        <div style="display: flex; gap: 15px; justify-content: center; margin-top: 30px;">
-                            <button type="button" class="btn-secondary" onclick="resetFormMasiva()">
-                                <i class="fas fa-times"></i> Cancelar
+                    <!-- Ingreso manual de CUFEs -->
+                    <div style="margin-top:22px">
+                        <label style="display:block; font-weight:600; margin-bottom:6px; color:#333">
+                            <i class="fas fa-hashtag"></i> O ingresa CUFEs (uno o varios)
+                        </label>
+                        <textarea id="txtCufes" rows="3" placeholder="Pega uno o varios CUFEs, separados por coma o salto de línea" 
+                                  style="width:100%; padding:12px; border:2px solid var(--color-border); border-radius:8px; font-size:14px;"></textarea>
+                        <div style="display:flex; gap:10px; margin-top:10px">
+                            <button type="button" class="btn-secondary" id="btn-limpiar-cufes">
+                                <i class="fas fa-eraser"></i> Limpiar
                             </button>
-                            <button type="button" class="btn-success" onclick="cargarFacturasMasivas()" id="btn-cargar-masiva" disabled>
-                                <i class="fas fa-cloud-upload-alt"></i> Cargar Todo el Lote
+                            <button type="button" class="btn-success" id="btn-agregar-cufes">
+                                <i class="fas fa-plus"></i> Agregar a la cola
                             </button>
                         </div>
-                    </form>
-                </div>
-            </div> <!-- End Modo Masiva -->
+                        <div style="margin-top:12px; padding:12px; background:#fff3cd; border-left:4px solid #ff9800; border-radius:4px;">
+                            <div style="font-weight:600; color:#856404; margin-bottom:8px;">
+                                <i class="fas fa-flask" style="color: #ff9800;"></i> CUFEs de Prueba para el Mock:
+                            </div>
+                            <div style="font-size:13px; color:#856404;">
+                                1. <code style="background:#fff; padding:2px 6px; border-radius:3px; font-weight:600;">CUFE_DUPLICADO_MOCK</code> → Mostrará error de duplicado<br>
+                                2. <code style="background:#fff; padding:2px 6px; border-radius:3px; font-weight:600;">CUFE_NO_ENCONTRADO_MOCK</code> → No encontrado en Billy<br>
+                                3. Cualquier otro CUFE → Se validará correctamente
+                            </div>
+                        </div>
+                    </div>
 
-            <!-- Últimas Cargas -->
-            <div class="card" style="margin-top: 30px;">
-                <h3 class="card-header">
-                    <i class="fas fa-history"></i> Últimas Cargas (Hoy)
-                </h3>
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Hora</th>
-                                <th>CUFE</th>
-                                <th>Archivos</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>14:32</strong></td>
-                                <td style="font-size: 12px;">e93f47c2b8a5...</td>
-                                <td>
-                                    <i class="fas fa-file-code" style="color: var(--color-primary); margin-right: 5px;"></i>
-                                    <i class="fas fa-file-pdf" style="color: var(--color-danger);"></i>
-                                </td>
-                                <td><span class="badge badge-success">Cargada - Verificando</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>14:18</strong></td>
-                                <td style="font-size: 12px;">a1b2c3d4e5f6...</td>
-                                <td>
-                                    <i class="fas fa-file-code" style="color: var(--color-primary); margin-right: 5px;"></i>
-                                    <i class="fas fa-file-pdf" style="color: var(--color-danger);"></i>
-                                </td>
-                                <td><span class="badge badge-warning">Rechazada - DTE inválido</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <!-- Lista dinámica de elementos en carga -->
+                    <div class="card" style="margin-top:24px; border:2px solid var(--color-border)">
+                        <h3 class="card-header" style="background: #f5f5f5;">
+                            <i class="fas fa-list"></i> Cola de carga y validación en tiempo real
+                        </h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th style="width:50px">#</th>
+                                        <th style="width:120px">Tipo</th>
+                                        <th>Identificador</th>
+                                        <th>Detalle</th>
+                                        <th style="width:180px">Estado</th>
+                                        <th style="width:140px">Fecha de Pago</th>
+                                        <th style="width:100px">Acción</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tbody-cargas">
+                                    <tr>
+                                        <td colspan="7" style="text-align:center; color:#999; padding:30px">
+                                            <i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>
+                                            No hay elementos en la cola. Arrastra archivos o ingresa CUFEs para comenzar.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div style="display:flex; justify-content:center; gap:12px; padding:16px; border-top:1px solid var(--color-border)">
+                            <button type="button" class="btn-secondary" id="btn-limpiar-lista" disabled>
+                                <i class="fas fa-trash"></i> Limpiar cola
+                            </button>
+                            <button type="button" class="btn-success" id="btn-completar-carga" disabled>
+                                <i class="fas fa-check-circle"></i> Completar carga
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -328,8 +220,8 @@
                     <label>Elegibilidad</label>
                     <select>
                         <option value="">Todas</option>
-                        <option value="si">Elegibles</option>
-                        <option value="no">No elegibles</option>
+                        <option value="si">Negociables</option>
+                        <option value="no">No Negociables</option>
                     </select>
                 </div>
                 <div class="filter-group">
@@ -352,8 +244,8 @@
                         <th>Gran Pagador</th>
                         <th>Valor Factura</th>
                         <th>Fecha Vencimiento</th>
-                        <th>Estado DTE</th>
-                        <th>Elegible</th>
+                        <th>Estado</th>
+                        <th>Negociable</th>
                         <th>Acción</th>
                     </tr>
                 </thead>
@@ -502,7 +394,7 @@
 
         <!-- Info Alert -->
         <div class="alert alert-info" style="margin-top: 20px;">
-            <strong><i class="fas fa-info-circle"></i> Información:</strong> Solo las facturas con estado "Elegible: SÍ" pueden ser vendidas. Las facturas deben estar a crédito (Estado 30), aceptadas (Estado 33 o 34), no vencidas y con cupo disponible del gran pagador.
+            <strong><i class="fas fa-info-circle"></i> Información:</strong> Solo las facturas con estado "Negociable: SÍ" pueden ser vendidas. Las facturas deben estar a crédito (Estado 30 - Crédito), aceptadas (Estado 33 - Aceptada o Estado 34 - Tácita), no vencidas y con cupo disponible del gran pagador.
         </div>
     </main>
 
@@ -543,240 +435,283 @@
     </footer>
 
     <script>
+        // Menu scroll functionality
+        function scrollMenu(direction) {
+            const menu = document.getElementById('iconMenu');
+            const scrollAmount = 250;
+            if (direction === 'left') {
+                menu.scrollLeft -= scrollAmount;
+            } else {
+                menu.scrollLeft += scrollAmount;
+            }
+        }
+
         // Tab switching functionality
         function switchTab(tabName) {
-            // Hide all tab contents
             const contents = document.querySelectorAll('.tab-content');
-            contents.forEach(content => {
-                content.style.display = 'none';
-            });
+            contents.forEach(c => c.style.display = 'none');
 
-            // Remove active class from all tab buttons
             const buttons = document.querySelectorAll('.tab-button');
-            buttons.forEach(button => {
-                button.style.color = '#666';
-                button.style.borderBottom = '3px solid transparent';
-                button.classList.remove('active');
+            buttons.forEach(b => {
+                b.style.color = '#666';
+                b.style.borderBottom = '3px solid transparent';
+                b.classList.remove('active');
             });
 
-            // Show selected tab content
             document.getElementById('content-' + tabName).style.display = 'block';
-
-            // Add active class to selected tab button
             const activeButton = document.getElementById('tab-' + tabName);
             activeButton.style.color = 'var(--color-primary)';
             activeButton.style.borderBottom = '3px solid var(--color-primary)';
             activeButton.classList.add('active');
         }
 
-        // Initialize first tab as active
-        document.addEventListener('DOMContentLoaded', function() {
+        // Mock: CUFEs que ya existen / no encontrados
+        const CUFES_DUPLICADOS = new Set(['CUFE_DUPLICADO_MOCK']);
+        const CUFES_NO_ENCONTRADOS = new Set(['CUFE_NO_ENCONTRADO_MOCK']);
+
+        // Cola visual
+        let queue = [];
+
+        document.addEventListener('DOMContentLoaded', () => {
             switchTab('cargar');
+
+            // Drag & drop + selector
+            const dropzone = document.getElementById('dropzone');
+            const picker = document.getElementById('filePicker');
+            const btnBrowse = document.getElementById('btn-browse');
+
+            ['dragenter','dragover','dragleave'].forEach(evt =>
+                dropzone.addEventListener(evt, e => e.preventDefault())
+            );
+            ['dragenter','dragover'].forEach(evt =>
+                dropzone.addEventListener(evt, () => { 
+                    dropzone.style.background = '#e6f3ff'; 
+                    dropzone.style.borderColor = '#0088b8'; 
+                })
+            );
+            ['dragleave','drop'].forEach(evt =>
+                dropzone.addEventListener(evt, () => { 
+                    dropzone.style.background = '#f8fbff'; 
+                    dropzone.style.borderColor = 'var(--color-primary)'; 
+                })
+            );
+            dropzone.addEventListener('drop', e => {
+                e.preventDefault();
+                handleFiles(e.dataTransfer.files);
+            });
+            dropzone.addEventListener('click', () => picker.click());
+            btnBrowse.addEventListener('click', (e) => { e.stopPropagation(); picker.click(); });
+            picker.addEventListener('change', e => handleFiles(e.target.files));
+
+            // CUFEs
+            document.getElementById('btn-agregar-cufes').addEventListener('click', addCufesFromTextarea);
+            document.getElementById('btn-limpiar-cufes').addEventListener('click', () => document.getElementById('txtCufes').value = '');
+
+            // Acciones lista
+            document.getElementById('btn-limpiar-lista').addEventListener('click', clearQueue);
+            document.getElementById('btn-completar-carga').addEventListener('click', completarCarga);
         });
 
-        // File name update functionality
-        function updateFileName(type) {
-            const fileInput = document.getElementById('file-' + type);
-            const filenameDiv = document.getElementById('filename-' + type);
+        function refreshButtonsState() {
+            const hasItems = queue.length > 0;
+            document.getElementById('btn-limpiar-lista').disabled = !hasItems;
+            document.getElementById('btn-completar-carga').disabled = !hasItems;
+        }
+
+        function addRow(item) {
+            queue.push(item);
+            const tbody = document.getElementById('tbody-cargas');
             
-            if (fileInput.files.length > 0) {
-                const fileName = fileInput.files[0].name;
-                filenameDiv.innerHTML = '<i class="fas fa-check-circle"></i> ' + fileName;
-                
-                // Check if both files are selected to enable button
-                checkFilesReady();
+            // Eliminar mensaje de vacío si existe
+            if (tbody.querySelector('td[colspan]')) {
+                tbody.innerHTML = '';
             }
+
+            const row = document.createElement('tr');
+            item._row = row;
+
+            row.innerHTML = `
+                <td><strong>${queue.length}</strong></td>
+                <td>${formatOrigen(item.tipo)}</td>
+                <td style="font-size:12px">${escapeHtml(item.identificador)}</td>
+                <td class="detalle-cell" style="font-size:13px">${escapeHtml(item.detalle || '')}</td>
+                <td class="estado-cell">${renderBadge('Pendiente','secondary')}</td>
+                <td class="fecha-pago-cell">
+                    <input type="date" class="fecha-pago-input" style="width:100%; padding:6px; border:1px solid var(--color-border); border-radius:4px; font-size:13px;" disabled>
+                </td>
+                <td>
+                    <button type="button" class="btn-icon btn-icon-delete" title="Eliminar">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </td>
+            `;
+            row.querySelector('.btn-icon-delete').addEventListener('click', () => {
+                tbody.removeChild(row);
+                queue = queue.filter(q => q !== item);
+                reindexRows();
+                refreshButtonsState();
+                if (queue.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#999; padding:30px"><i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>No hay elementos en la cola.</td></tr>';
+                }
+            });
+            
+            // Fecha de pago
+            const dateInput = row.querySelector('.fecha-pago-input');
+            item._fechaPago = null;
+            
+            dateInput.addEventListener('change', (e) => {
+                if (e.target.value) {
+                    item._fechaPago = e.target.value;
+                    dateInput.style.borderColor = 'var(--color-success)';
+                    dateInput.style.background = '#d4edda';
+                }
+            });
+
+            tbody.appendChild(row);
+            refreshButtonsState();
+            simulateProcess(item);
         }
 
-        function checkFilesReady() {
-            const xmlFile = document.getElementById('file-xml');
-            const pdfFile = document.getElementById('file-pdf');
-            const btnCargar = document.getElementById('btn-cargar');
+        function reindexRows() {
+            Array.from(document.querySelectorAll('#tbody-cargas tr')).forEach((tr, i) => {
+                if (tr.children[0]) tr.children[0].innerHTML = `<strong>${i+1}</strong>`;
+            });
+        }
 
-            if (xmlFile.files.length > 0 && pdfFile.files.length > 0) {
-                btnCargar.disabled = false;
-                btnCargar.style.opacity = '1';
-                btnCargar.style.cursor = 'pointer';
-            } else {
-                btnCargar.disabled = true;
-                btnCargar.style.opacity = '0.6';
-                btnCargar.style.cursor = 'not-allowed';
+        function formatOrigen(tipo) {
+            const map = { 
+                XML:'<i class="fas fa-file-code" style="color:var(--color-primary)"></i> XML',
+                PDF:'<i class="fas fa-file-pdf" style="color:var(--color-danger)"></i> PDF',
+                EXCEL:'<i class="fas fa-file-excel" style="color:#2e7d32"></i> Excel',
+                CUFE:'<i class="fas fa-hashtag" style="color:#6a1b9a"></i> CUFE' 
+            };
+            return map[tipo] || tipo;
+        }
+
+        function renderBadge(text, type) {
+            const cls = {
+                success:'badge badge-success',
+                warning:'badge badge-warning',
+                danger:'badge badge-danger',
+                info:'badge badge-info',
+                secondary:'badge badge-secondary'
+            }[type] || 'badge badge-secondary';
+            return `<span class="${cls}">${text}</span>`;
+        }
+
+        function escapeHtml(s){ 
+            return (s||'').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); 
+        }
+
+        function handleFiles(fileList) {
+            const files = Array.from(fileList || []);
+            files.forEach(file => {
+                const ext = (file.name.split('.').pop() || '').toLowerCase();
+                if (ext === 'xml') {
+                    addRow({ tipo:'XML', identificador:file.name, detalle:'Lectura de XML y extracción de CUFE' });
+                } else if (ext === 'pdf') {
+                    addRow({ tipo:'PDF', identificador:file.name, detalle:'Lectura de PDF' });
+                } else if (ext === 'xlsx' || ext === 'xls') {
+                    addRow({ tipo:'EXCEL', identificador:file.name, detalle:'Importando CUFEs desde plantilla' });
+                }
+            });
+        }
+
+        function addCufesFromTextarea() {
+            const raw = document.getElementById('txtCufes').value || '';
+            const items = raw.split(/[\n,;]+/).map(s => s.trim()).filter(Boolean);
+            if (items.length === 0) {
+                alert('Por favor ingresa al menos un CUFE');
+                return;
             }
+            items.forEach(cufe => addRow({ tipo:'CUFE', identificador:cufe, detalle:'Ingresado manual' }));
+            document.getElementById('txtCufes').value = '';
         }
 
-        function resetForm() {
-            document.getElementById('form-cargar-factura').reset();
-            document.getElementById('filename-xml').innerHTML = '';
-            document.getElementById('filename-pdf').innerHTML = '';
-            document.getElementById('btn-cargar').disabled = true;
-            document.getElementById('btn-cargar').style.opacity = '0.6';
-        }
+        function simulateProcess(item) {
+            const estadoCell = () => item._row.querySelector('.estado-cell');
+            const detalleCell = () => item._row.querySelector('.detalle-cell');
 
-        function cargarFactura() {
-            // Simulate upload
-            const btnCargar = document.getElementById('btn-cargar');
-            btnCargar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cargando...';
-            btnCargar.disabled = true;
+            setTimeout(() => { estadoCell().innerHTML = renderBadge('Procesando','info'); }, 200);
 
             setTimeout(() => {
-                alert('✅ Factura cargada exitosamente\n\nLa factura está siendo verificada por Billy.\nPodrá verla en la pestaña "FACTURAS CARGADAS" en unos segundos.');
-                resetForm();
-                btnCargar.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Cargar al Sistema';
-                
-                // Switch to facturas cargadas tab
+                if (item.tipo === 'CUFE') {
+                    console.log('Validando CUFE:', item.identificador);
+                    console.log('Es duplicado?', CUFES_DUPLICADOS.has(item.identificador));
+                    console.log('No encontrado?', CUFES_NO_ENCONTRADOS.has(item.identificador));
+                    
+                    if (CUFES_DUPLICADOS.has(item.identificador)) {
+                        estadoCell().innerHTML = renderBadge('⚠️ Duplicado','warning');
+                        detalleCell().innerHTML = '<strong style="color:var(--color-warning)">Ya existe una factura con este CUFE en el sistema</strong>';
+                        item._row.style.background = '#fff3cd';
+                        return;
+                    }
+                    if (CUFES_NO_ENCONTRADOS.has(item.identificador)) {
+                        estadoCell().innerHTML = renderBadge('❌ No encontrado','danger');
+                        detalleCell().innerHTML = '<strong style="color:var(--color-danger)">Billy no pudo encontrar este CUFE en la DIAN</strong>';
+                        item._row.style.background = '#f8d7da';
+                        return;
+                    }
+                    estadoCell().innerHTML = renderBadge('✅ OK - Validado','success');
+                    detalleCell().textContent = 'Validado con Billy - Factura encontrada (mock)';
+                    item._row.style.background = '#d4edda';
+                    
+                    // Habilitar fecha de pago
+                    const dateInput = item._row.querySelector('.fecha-pago-input');
+                    dateInput.disabled = false;
+                    
+                    return;
+                }
+
+                if (item.tipo === 'EXCEL') {
+                    estadoCell().innerHTML = renderBadge('Cargado (5 CUFEs)','success');
+                    detalleCell().textContent = 'Se importaron 5 CUFEs desde la plantilla (mock)';
+                    ['CUFE_EXCEL_001','CUFE_EXCEL_002','CUFE_EXCEL_003','CUFE_EXCEL_004','CUFE_EXCEL_005']
+                        .forEach(code => addRow({ tipo:'CUFE', identificador:code, detalle:`Importado de ${item.identificador}` }));
+                    return;
+                }
+
+                estadoCell().innerHTML = renderBadge('OK - Cargado','success');
+                detalleCell().textContent = item.tipo === 'XML'
+                    ? 'CUFE detectado y enviado a validación (mock)'
+                    : 'PDF cargado y en proceso de asociación (mock)';
+            }, 1000 + Math.random()*800);
+        }
+
+        function clearQueue() {
+            if (!confirm('¿Seguro que deseas limpiar toda la cola?')) return;
+            queue = [];
+            document.getElementById('tbody-cargas').innerHTML = '<tr><td colspan="6" style="text-align:center; color:#999; padding:30px"><i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>No hay elementos en la cola.</td></tr>';
+            refreshButtonsState();
+        }
+
+        function completarCarga() {
+            // Validar que facturas validadas tengan fecha de pago
+            const sinFecha = queue.filter(q => {
+                const estado = q._row.querySelector('.estado-cell').textContent;
+                return estado.includes('OK - Validado') && !q._fechaPago;
+            });
+            
+            if (sinFecha.length > 0) {
+                alert(`⚠️ Atención:\n\n${sinFecha.length} factura(s) validada(s) no tienen fecha de pago seleccionada.\nPor favor selecciona la fecha de pago para todas las facturas antes de completar la carga.`);
+                return;
+            }
+            
+            queue.forEach(q => {
+                if (q._row) {
+                    const fechaInfo = q._fechaPago ? ` - Fecha pago: ${q._fechaPago}` : '';
+                    q._row.querySelector('.estado-cell').innerHTML = renderBadge('Carga completada','info');
+                    if (q._fechaPago) {
+                        q._row.querySelector('.detalle-cell').textContent += fechaInfo;
+                    }
+                }
+            });
+
+            setTimeout(() => {
+                alert(`✅ ${queue.length} elemento(s) enviados a liquidación.\nPodrás revisar las liquidaciones generadas en la sección "Mis Liquidaciones".`);
+                clearQueue();
                 switchTab('cargadas');
-            }, 2000);
-        }
-
-        // ========== FUNCIONES CARGA MASIVA ==========
-        function cambiarModo(modo) {
-            const modoIndividual = document.getElementById('modo-individual');
-            const modoMasiva = document.getElementById('modo-masiva');
-            const btnIndividual = document.getElementById('btn-modo-individual');
-            const btnMasiva = document.getElementById('btn-modo-masiva');
-
-            if (modo === 'individual') {
-                modoIndividual.style.display = 'block';
-                modoMasiva.style.display = 'none';
-                btnIndividual.className = 'btn-primary';
-                btnMasiva.className = 'btn-secondary';
-            } else {
-                modoIndividual.style.display = 'none';
-                modoMasiva.style.display = 'block';
-                btnIndividual.className = 'btn-secondary';
-                btnMasiva.className = 'btn-primary';
-            }
-        }
-
-        let archivosXmlMasiva = [];
-        let archivosPdfMasiva = [];
-
-        function updateFilesMasiva(type) {
-            const fileInput = document.getElementById('files-' + type + '-masiva');
-            const countDiv = document.getElementById('count-' + type + '-masiva');
-            
-            if (type === 'xml') {
-                archivosXmlMasiva = Array.from(fileInput.files);
-                if (archivosXmlMasiva.length > 0) {
-                    countDiv.innerHTML = '<i class="fas fa-check-circle"></i> ' + archivosXmlMasiva.length + ' archivos XML seleccionados';
-                }
-            } else {
-                archivosPdfMasiva = Array.from(fileInput.files);
-                if (archivosPdfMasiva.length > 0) {
-                    countDiv.innerHTML = '<i class="fas fa-check-circle"></i> ' + archivosPdfMasiva.length + ' archivos PDF seleccionados';
-                }
-            }
-            
-            validarArchivosMasiva();
-        }
-
-        function validarArchivosMasiva() {
-            const alertMismatch = document.getElementById('alert-mismatch');
-            const mensajeMismatch = document.getElementById('mensaje-mismatch');
-            const listaArchivos = document.getElementById('lista-archivos-masiva');
-            const btnCargar = document.getElementById('btn-cargar-masiva');
-
-            // Reset
-            alertMismatch.style.display = 'none';
-            listaArchivos.style.display = 'none';
-            btnCargar.disabled = true;
-            btnCargar.style.opacity = '0.6';
-
-            if (archivosXmlMasiva.length === 0 && archivosPdfMasiva.length === 0) {
-                return;
-            }
-
-            // Validar que haya la misma cantidad
-            if (archivosXmlMasiva.length !== archivosPdfMasiva.length) {
-                alertMismatch.style.display = 'block';
-                mensajeMismatch.textContent = `Debe seleccionar la misma cantidad de archivos XML (${archivosXmlMasiva.length}) y PDF (${archivosPdfMasiva.length})`;
-                return;
-            }
-
-            if (archivosXmlMasiva.length === 0) {
-                return;
-            }
-
-            // Mostrar tabla de archivos
-            listaArchivos.style.display = 'block';
-            btnCargar.disabled = false;
-            btnCargar.style.opacity = '1';
-            btnCargar.style.cursor = 'pointer';
-
-            // Llenar tabla
-            const tbody = document.getElementById('tbody-archivos-masiva');
-            tbody.innerHTML = '';
-
-            // Ordenar archivos por nombre
-            archivosXmlMasiva.sort((a, b) => a.name.localeCompare(b.name));
-            archivosPdfMasiva.sort((a, b) => a.name.localeCompare(b.name));
-
-            for (let i = 0; i < archivosXmlMasiva.length; i++) {
-                const row = tbody.insertRow();
-                row.innerHTML = `
-                    <td><strong>${i + 1}</strong></td>
-                    <td style="font-size: 13px;"><i class="fas fa-file-code" style="color: var(--color-primary); margin-right: 5px;"></i>${archivosXmlMasiva[i].name}</td>
-                    <td style="font-size: 13px;"><i class="fas fa-file-pdf" style="color: var(--color-danger); margin-right: 5px;"></i>${archivosPdfMasiva[i].name}</td>
-                    <td><span class="badge badge-secondary">Pendiente</span></td>
-                    <td>
-                        <button type="button" class="btn-icon btn-icon-delete" onclick="eliminarFilaMasiva(${i})" title="Eliminar">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </td>
-                `;
-            }
-        }
-
-        function eliminarFilaMasiva(index) {
-            archivosXmlMasiva.splice(index, 1);
-            archivosPdfMasiva.splice(index, 1);
-            validarArchivosMasiva();
-
-            // Actualizar contadores
-            document.getElementById('count-xml-masiva').innerHTML = archivosXmlMasiva.length > 0 ? 
-                '<i class="fas fa-check-circle"></i> ' + archivosXmlMasiva.length + ' archivos XML seleccionados' : '';
-            document.getElementById('count-pdf-masiva').innerHTML = archivosPdfMasiva.length > 0 ? 
-                '<i class="fas fa-check-circle"></i> ' + archivosPdfMasiva.length + ' archivos PDF seleccionados' : '';
-        }
-
-        function resetFormMasiva() {
-            document.getElementById('form-cargar-masiva').reset();
-            archivosXmlMasiva = [];
-            archivosPdfMasiva = [];
-            document.getElementById('count-xml-masiva').innerHTML = '';
-            document.getElementById('count-pdf-masiva').innerHTML = '';
-            document.getElementById('lista-archivos-masiva').style.display = 'none';
-            document.getElementById('alert-mismatch').style.display = 'none';
-            document.getElementById('btn-cargar-masiva').disabled = true;
-            document.getElementById('btn-cargar-masiva').style.opacity = '0.6';
-        }
-
-        function cargarFacturasMasivas() {
-            const btnCargar = document.getElementById('btn-cargar-masiva');
-            const tbody = document.getElementById('tbody-archivos-masiva');
-            
-            btnCargar.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Procesando...';
-            btnCargar.disabled = true;
-
-            // Simular carga progresiva
-            let processed = 0;
-            const rows = tbody.getElementsByTagName('tr');
-            
-            const interval = setInterval(() => {
-                if (processed < rows.length) {
-                    const statusCell = rows[processed].cells[3];
-                    statusCell.innerHTML = '<span class="badge badge-success">Cargada</span>';
-                    processed++;
-                } else {
-                    clearInterval(interval);
-                    setTimeout(() => {
-                        alert(`✅ Carga masiva completada exitosamente\n\n${archivosXmlMasiva.length} facturas cargadas y enviadas a verificación con Billy.\nPodrá verlas en la pestaña "FACTURAS CARGADAS" en unos momentos.`);
-                        resetFormMasiva();
-                        btnCargar.innerHTML = '<i class="fas fa-cloud-upload-alt"></i> Cargar Todo el Lote';
-                        switchTab('cargadas');
-                    }, 500);
-                }
-            }, 300);
+            }, 800);
         }
     </script>
 </body>

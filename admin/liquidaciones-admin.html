@@ -11,7 +11,7 @@
     <!-- Header -->
     <header class="header">
         <div class="header-container">
-            <div class="logo">cärmen</div>
+            <a href="../index.html" class="logo" style="text-decoration: none;">cärmen</a>
             <nav>
                 <ul class="nav-menu">
                     <li><a href="#inicio">Inicio</a></li>
@@ -41,9 +41,14 @@
 
     <!-- Main Content -->
     <main class="main-container">
-        <!-- Icon Menu -->
-        <div class="icon-menu">
-            <a href="dashboard-admin.html" class="icon-card">
+        <!-- Icon Menu with Navigation Arrows -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 30px; width: 100%;">
+            <button class="nav-arrow" onclick="scrollMenu('left')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div style="flex: 1; max-width: 1200px; overflow: hidden;">
+                <div class="icon-menu" id="iconMenu" style="scroll-behavior: smooth;">
+                    <a href="dashboard-admin.html" class="icon-card">
                 <div class="icon-card-icon">
                     <i class="fas fa-home"></i>
                 </div>
@@ -82,8 +87,13 @@
                 <div class="icon-card-icon">
                     <i class="fas fa-file-alt"></i>
                 </div>
-                <div class="icon-card-label">Reportes</div>
-            </a>
+                    <div class="icon-card-label">Reportes</div>
+                </a>
+            </div>
+            </div>
+            <button class="nav-arrow" onclick="scrollMenu('right')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-chevron-right"></i>
+            </button>
         </div>
 
         <!-- Alert -->
@@ -147,7 +157,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr style="background: #fff3cd;">
+                    <tr>
                         <td><strong>LIQ-001456</strong></td>
                         <td>TRANS JAPAGO PARDO</td>
                         <td>MNE-0470033</td>
@@ -171,7 +181,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr style="background: #fff3cd;">
+                    <tr>
                         <td><strong>LIQ-001457</strong></td>
                         <td>JENNY SAVEDRA</td>
                         <td>MNE-0470089</td>
@@ -195,7 +205,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr style="background: #d4edda;">
+                    <tr>
                         <td>LIQ-001455</td>
                         <td>TRANS JAPAGO PARDO</td>
                         <td>MNE-0470177</td>
@@ -214,7 +224,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr style="background: #d4edda;">
+                    <tr>
                         <td>LIQ-001450</td>
                         <td>TRANS JAPAGO PARDO</td>
                         <td>MNE-0470124</td>
@@ -233,7 +243,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr style="background: #f8d7da;">
+                    <tr>
                         <td>LIQ-001442</td>
                         <td>ROSERO BENAVIDES CARLOS</td>
                         <td>MNE-0476101</td>
@@ -252,7 +262,7 @@
                             </div>
                         </td>
                     </tr>
-                    <tr style="background: #d4edda;">
+                    <tr>
                         <td>LIQ-001438</td>
                         <td>YENNY PAOLA GOMEZ</td>
                         <td>MNE-0476067</td>
@@ -386,5 +396,18 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Menu scroll functionality
+        function scrollMenu(direction) {
+            const menu = document.getElementById('iconMenu');
+            const scrollAmount = 250;
+            if (direction === 'left') {
+                menu.scrollLeft -= scrollAmount;
+            } else {
+                menu.scrollLeft += scrollAmount;
+            }
+        }
+    </script>
 </body>
 </html>

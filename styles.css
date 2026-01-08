@@ -285,8 +285,12 @@ tbody tr {
     transition: background 0.2s;
 }
 
+tbody tr:nth-child(even) {
+    background: #f9f9f9;
+}
+
 tbody tr:hover {
-    background: #f8f9fa;
+    background: #f0f0f0 !important;
 }
 
 tbody td {
