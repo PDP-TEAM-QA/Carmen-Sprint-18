@@ -643,18 +643,15 @@
                     if (CUFES_DUPLICADOS.has(item.identificador)) {
                         estadoCell().innerHTML = renderBadge('⚠️ Duplicado','warning');
                         detalleCell().innerHTML = '<strong style="color:var(--color-warning)">Ya existe una factura con este CUFE en el sistema</strong>';
-                        item._row.style.background = '#fff3cd';
                         return;
                     }
                     if (CUFES_NO_ENCONTRADOS.has(item.identificador)) {
                         estadoCell().innerHTML = renderBadge('❌ No encontrado','danger');
                         detalleCell().innerHTML = '<strong style="color:var(--color-danger)">Billy no pudo encontrar este CUFE en la DIAN</strong>';
-                        item._row.style.background = '#f8d7da';
                         return;
                     }
                     estadoCell().innerHTML = renderBadge('✅ OK - Validado','success');
                     detalleCell().textContent = 'Validado con Billy - Factura encontrada (mock)';
-                    item._row.style.background = '#d4edda';
                     
                     // Habilitar fecha de pago
                     const dateInput = item._row.querySelector('.fecha-pago-input');
