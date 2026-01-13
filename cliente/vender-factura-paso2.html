@@ -47,35 +47,30 @@
         <!-- Progress Steps -->
         <div class="card" style="margin-bottom: 30px;">
             <div style="display: flex; justify-content: space-around; align-items: center; position: relative;">
-                <div style="position: absolute; top: 20px; left: 20%; right: 20%; height: 2px; background: var(--color-primary); z-index: 0;"></div>
+                <div style="position: absolute; top: 20px; left: 25%; right: 25%; height: 2px; background: var(--color-primary); z-index: 0;"></div>
                 
                 <div style="text-align: center; position: relative; z-index: 1;">
                     <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-success); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">
                         <i class="fas fa-check"></i>
                     </div>
-                    <div style="font-weight: 600; color: var(--color-success);">Confirmar Datos</div>
+                    <div style="font-weight: 600; color: var(--color-success);">Confirmar y Elegir Destino</div>
                 </div>
                 
                 <div style="text-align: center; position: relative; z-index: 1;">
                     <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">2</div>
-                    <div style="font-weight: 600; color: var(--color-primary);">Seleccionar Destino</div>
-                </div>
-                
-                <div style="text-align: center; position: relative; z-index: 1;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-border); color: #666; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">3</div>
-                    <div style="font-weight: 500; color: #666;">Revisar Liquidación</div>
+                    <div style="font-weight: 600; color: var(--color-primary);">Revisar Liquidación</div>
                 </div>
             </div>
         </div>
 
         <!-- Invoice Summary -->
         <div class="card">
-            <h3 style="font-size: 16px; color: #666; margin-bottom: 10px;">Factura seleccionada:</h3>
+            <h3 style="font-size: 16px; color: #666; margin-bottom: 10px;"><span id="invoice-summary-label">Factura(s) seleccionada(s):</span></h3>
             <div style="display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #f8f9fa; border-radius: 8px;">
-                <div>
+                <div id="invoice-summary">
                     <strong>CUFE:</strong> MNE-0470033 | <strong>N° Factura:</strong> 19917
                 </div>
-                <div style="font-size: 20px; font-weight: 700; color: var(--color-primary);">
+                <div id="invoice-total-value" style="font-size: 20px; font-weight: 700; color: var(--color-primary);">
                     $5,432,140
                 </div>
             </div>
@@ -87,131 +82,84 @@
                 <i class="fas fa-hand-holding-usd"></i> Seleccione el Destino del Dinero
             </h2>
             
-            <div class="alert alert-warning">
-                <strong><i class="fas fa-info-circle"></i> Importante:</strong> No se permiten abonos parciales. Debe seleccionar un único destino para el total del valor a desembolsar.
-            </div>
-
-            <div class="destination-grid">
-                <!-- Cupo de Crédito -->
-                <div class="destination-card" onclick="selectDestination('cupo')">
-                    <div class="destination-icon">💳</div>
-                    <div class="destination-title">Cupo de Crédito</div>
-                    <div class="destination-info">
-                        <p style="font-size: 14px; color: #666; margin: 10px 0;">El valor será agregado a su cupo de crédito disponible en Carmen</p>
-                        <hr style="border: none; border-top: 1px solid #ddd; margin: 15px 0;">
-                        <div style="font-size: 13px; color: #666; margin-bottom: 5px;">Cupo actual disponible:</div>
-                        <div class="destination-value">$5,000,000</div>
-                        <div style="font-size: 13px; color: #666; margin-top: 10px;">Después del desembolso:</div>
-                        <div style="font-size: 18px; font-weight: 600; color: var(--color-primary); margin-top: 5px;">
-                            ~$10,150,000
-                        </div>
-                    </div>
-                    <button class="btn-primary" style="margin-top: 15px; width: 100%;">
-                        Seleccionar
-                    </button>
-                </div>
-
-                <!-- My Cash -->
-                <div class="destination-card" onclick="selectDestination('mycash')">
-                    <div class="destination-icon">💰</div>
-                    <div class="destination-title">My Cash</div>
-                    <div class="destination-info">
-                        <p style="font-size: 14px; color: #666; margin: 10px 0;">El valor será agregado a su saldo My Cash disponible en Carmen</p>
-                        <hr style="border: none; border-top: 1px solid #ddd; margin: 15px 0;">
-                        <div style="font-size: 13px; color: #666; margin-bottom: 5px;">Saldo actual My Cash:</div>
-                        <div class="destination-value">$1,200,000</div>
-                        <div style="font-size: 13px; color: #666; margin-top: 10px;">Después del desembolso:</div>
-                        <div style="font-size: 18px; font-weight: 600; color: var(--color-primary); margin-top: 5px;">
-                            ~$6,350,000
-                        </div>
-                    </div>
-                    <button class="btn-primary" style="margin-top: 15px; width: 100%;">
-                        Seleccionar
-                    </button>
-                </div>
-
-                <!-- Cuenta Propia -->
-                <div class="destination-card" onclick="selectDestination('cuenta')">
-                    <div class="destination-icon">🏦</div>
-                    <div class="destination-title">Abono a Cuenta Propia</div>
-                    <div class="destination-info">
-                        <p style="font-size: 14px; color: #666; margin: 10px 0;">El valor será transferido directamente a su cuenta bancaria registrada</p>
-                        <hr style="border: none; border-top: 1px solid #ddd; margin: 15px 0;">
-                        <div style="font-size: 13px; color: #666; margin-bottom: 5px;">Cuenta registrada:</div>
-                        <div style="font-size: 16px; font-weight: 600; margin-top: 5px;">
-                            Banco de Bogotá
-                        </div>
-                        <div style="font-size: 14px; color: #666; margin-top: 5px;">
-                            **** **** **** 1234
-                        </div>
-                        <div style="font-size: 13px; color: var(--color-info); margin-top: 10px;">
-                            <i class="fas fa-clock"></i> Desembolso en 1-2 días hábiles
-                        </div>
-                    </div>
-                    <button class="btn-primary" style="margin-top: 15px; width: 100%;">
-                        Seleccionar
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Benefits Comparison -->
+        <!-- Liquidation Card -->
         <div class="card">
-            <h3 class="card-header">
-                <i class="fas fa-balance-scale"></i> Comparación de Destinos
-            </h3>
+            <h2 class="card-header">
+                <i class="fas fa-file-invoice-dollar"></i> Detalle de la Liquidación
+            </h2>
             
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Característica</th>
-                            <th>Cupo de Crédito</th>
-                            <th>My Cash</th>
-                            <th>Cuenta Propia</th>
-                        </tr>
-                    </thead>
+            <!-- Destination Selected Info -->
+            <div id="destination-info" style="background: #e8f5e9; border-left: 4px solid var(--color-success); padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <i class="fas fa-check-circle" style="font-size: 32px; color: var(--color-success);"></i>
+                    <div>
+                        <div style="font-weight: 600; font-size: 18px; margin-bottom: 5px;">Destino seleccionado:</div>
+                        <div id="destination-name" style="font-size: 20px; font-weight: 700; color: var(--color-success);"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #f8f9fa; padding: 30px; border-radius: 10px;">
+                <table style="width: 100%; border-collapse: collapse;">
                     <tbody>
-                        <tr>
-                            <td><strong>Disponibilidad inmediata</strong></td>
-                            <td><span class="badge badge-success">Sí</span></td>
-                            <td><span class="badge badge-success">Sí</span></td>
-                            <td><span class="badge badge-warning">1-2 días</span></td>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Valor de la Factura</td>
+                            <td style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600;">$5,432,140</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">
+                                Comisión Carmen <span id="comision-porcentaje" style="font-size: 14px;"></span>
+                            </td>
+                            <td id="comision-valor" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;"></td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">IVA sobre Comisión (19%)</td>
+                            <td id="iva-valor" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;"></td>
+                        </tr>
+                        <tr style="border-bottom: 2px solid var(--color-primary);">
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Descuento Total</td>
+                            <td id="descuento-total" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;"></td>
                         </tr>
                         <tr>
-                            <td><strong>Aplicación de intereses</strong></td>
-                            <td>Solo al usar el cupo</td>
-                            <td>No aplica</td>
-                            <td>No aplica</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Uso del dinero</strong></td>
-                            <td>Para operaciones Carmen</td>
-                            <td>Aplicable 4x100</td>
-                            <td>Libre uso</td>
-                        </tr>
-                        <tr>
-                            <td><strong>Retiros</strong></td>
-                            <td>No aplica</td>
-                            <td>Posible a cuenta</td>
-                            <td>Ya en su cuenta</td>
+                            <td style="padding: 20px 0 0 0; font-size: 20px; font-weight: 700;">Valor a Desembolsar</td>
+                            <td id="valor-desembolsar" style="padding: 20px 0 0 0; text-align: right; font-size: 28px; font-weight: 700; color: var(--color-primary);"></td>
                         </tr>
                     </tbody>
                 </table>
+
+                <div style="margin-top: 30px; padding: 20px; background: white; border-radius: 8px; border: 2px solid var(--color-success);">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <div style="font-size: 14px; color: #666; margin-bottom: 5px;">Recibirás en tu <span id="destination-type"></span>:</div>
+                            <div id="valor-recibir" style="font-size: 32px; font-weight: 700; color: var(--color-success);"></div>
+                        </div>
+                        <div id="availability-info" style="text-align: right;">
+                            <div style="font-size: 14px; color: #666; margin-bottom: 5px;">Disponibilidad:</div>
+                            <div id="availability-time" style="font-size: 18px; font-weight: 600;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: #fff3cd; padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107; margin-top: 30px;">
+                <strong><i class="fas fa-exclamation-triangle"></i> Atención:</strong>
+                <ul style="margin: 10px 0 0 20px; line-height: 1.8;">
+                    <li>Una vez confirmada la liquidación, la factura será procesada y no podrá cancelarse.</li>
+                    <li>El desembolso se realizará según el destino seleccionado.</li>
+                    <li>Recibirá un comprobante de la operación en su correo registrado.</li>
+                </ul>
             </div>
         </div>
 
         <!-- Navigation -->
         <div class="card">
-            <div style="display: flex; gap: 15px; justify-content: space-between;">
+            <div style="display: flex; gap: 15px; justify-content: flex-end;">
                 <a href="vender-factura-paso1.html" class="btn-secondary" style="padding: 12px 30px;">
                     <i class="fas fa-arrow-left"></i> Volver
                 </a>
-                <div id="nextButtonContainer" style="opacity: 0.5; pointer-events: none;">
-                    <a href="mis-liquidaciones.html" class="btn-primary" style="padding: 12px 30px;" id="btnSolicitar">
-                        Solicitar Liquidación <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                <button class="btn-primary" style="padding: 12px 30px;" onclick="confirmarLiquidacion()">
+                    <i class="fas fa-check"></i> Confirmar Liquidación
+                </button>
             </div>
         </div>
     </main>
@@ -253,24 +201,127 @@
     </footer>
 
     <script>
-        let selectedDestination = null;
+        // Get parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const destino = urlParams.get('destino');
+        const isMultiple = urlParams.get('multiple') === 'true';
+        
+        let facturas = [];
+        let valorTotalFacturas = 0;
 
-        function selectDestination(destination) {
-            // Remove selected class from all cards
-            document.querySelectorAll('.destination-card').forEach(card => {
-                card.classList.remove('selected');
-            });
+        // Load invoice data
+        if (isMultiple) {
+            const cufes = urlParams.get('cufes').split(',');
+            const fechas = urlParams.get('fechas').split(',');
             
-            // Add selected class to clicked card
-            event.currentTarget.classList.add('selected');
+            // Mock data for multiple invoices
+            facturas = cufes.map((cufe, idx) => ({
+                cufe: cufe,
+                numero: `1991${7 + idx}`,
+                valor: 5432140 + (idx * 100000),
+                fechaPago: fechas[idx]
+            }));
             
-            // Store selection
-            selectedDestination = destination;
+            valorTotalFacturas = facturas.reduce((sum, f) => sum + f.valor, 0);
+        } else {
+            const cufe = urlParams.get('cufe');
+            const fecha = urlParams.get('fecha');
             
-            // Enable next button
-            document.getElementById('nextButtonContainer').style.opacity = '1';
-            document.getElementById('nextButtonContainer').style.pointerEvents = 'auto';
+            // Mock data for single invoice (backward compatibility)
+            facturas = [{
+                cufe: cufe || 'MNE-0470033',
+                numero: '19917',
+                valor: 5432140,
+                fechaPago: fecha
+            }];
+            
+            valorTotalFacturas = facturas[0].valor;
         }
+
+        // Liquidation data
+        const comisiones = {
+            mycash: 0.025,  // 2.5%
+            cuenta: 0.018   // 1.8%
+        };
+
+        // Calculate liquidation
+        function calcularLiquidacion() {
+            if (!destino || !comisiones[destino]) {
+                alert('Error: No se pudo determinar el destino seleccionado');
+                window.location.href = 'vender-factura-paso1.html';
+                return;
+            }
+
+            const comisionPorcentaje = comisiones[destino];
+            const comisionValor = Math.round(valorTotalFacturas * comisionPorcentaje);
+            const ivaValor = Math.round(comisionValor * 0.19);
+            const descuentoTotal = comisionValor + ivaValor;
+            const valorDesembolsar = valorTotalFacturas - descuentoTotal;
+
+            // Update UI
+            const destinationNames = {
+                mycash: 'Mi Cash',
+                cuenta: 'Cuenta Bancaria'
+            };
+
+            const destinationTypes = {
+                mycash: 'billetera Mi Cash',
+                cuenta: 'cuenta bancaria'
+            };
+
+            const availabilityTimes = {
+                mycash: 'Inmediata',
+                cuenta: '1-2 días hábiles'
+            };
+
+            const availabilityColors = {
+                mycash: 'var(--color-success)',
+                cuenta: '#ffc107'
+            };
+
+            document.getElementById('destination-name').textContent = destinationNames[destino];
+            document.getElementById('comision-porcentaje').textContent = `(${(comisionPorcentaje * 100).toFixed(1)}%)`;
+            document.getElementById('comision-valor').textContent = `-$${comisionValor.toLocaleString('es-CO')}`;
+            document.getElementById('iva-valor').textContent = `-$${ivaValor.toLocaleString('es-CO')}`;
+            document.getElementById('descuento-total').textContent = `-$${descuentoTotal.toLocaleString('es-CO')}`;
+            document.getElementById('valor-desembolsar').textContent = `$${valorDesembolsar.toLocaleString('es-CO')}`;
+            document.getElementById('valor-recibir').textContent = `$${valorDesembolsar.toLocaleString('es-CO')}`;
+            document.getElementById('destination-type').textContent = destinationTypes[destino];
+            document.getElementById('availability-time').textContent = availabilityTimes[destino];
+            document.getElementById('availability-time').style.color = availabilityColors[destino];
+
+            // Update invoice summary
+            if (isMultiple) {
+                document.getElementById('invoice-summary').innerHTML = `
+                    <strong>Total de facturas:</strong> ${facturas.length} | 
+                    <strong>Valor total:</strong> $${valorTotalFacturas.toLocaleString('es-CO')}
+                    <div style="margin-top: 10px; font-size: 14px; color: #666;">
+                        ${facturas.map(f => `<div>• ${f.cufe} - N° ${f.numero}: $${f.valor.toLocaleString('es-CO')}</div>`).join('')}
+                    </div>
+                `;
+            } else {
+                document.getElementById('invoice-summary').innerHTML = `
+                    <strong>CUFE:</strong> ${facturas[0].cufe} | <strong>N° Factura:</strong> ${facturas[0].numero}
+                `;
+            }
+            
+            document.getElementById('invoice-total-value').textContent = `$${valorTotalFacturas.toLocaleString('es-CO')}`;
+        }
+
+        function confirmarLiquidacion() {
+            const facturaTexto = isMultiple 
+                ? `${facturas.length} facturas han sido vendidas` 
+                : 'Su factura ha sido vendida';
+            
+            alert(`✅ ¡Liquidación confirmada!\n\n${facturaTexto} exitosamente.\nRecibirá $${(valorTotalFacturas - Math.round(valorTotalFacturas * comisiones[destino]) - Math.round(Math.round(valorTotalFacturas * comisiones[destino]) * 0.19)).toLocaleString('es-CO')} en su ${destino === 'mycash' ? 'billetera Mi Cash' : 'cuenta bancaria'}.\n\nPuede revisar el estado en la sección "Mis Liquidaciones".`);
+            
+            setTimeout(() => {
+                window.location.href = 'mis-facturas.html';
+            }, 1000);
+        }
+
+        // Execute on load
+        calcularLiquidacion();
     </script>
 </body>
 </html>

@@ -47,20 +47,15 @@
         <!-- Progress Steps -->
         <div class="card" style="margin-bottom: 30px;">
             <div style="display: flex; justify-content: space-around; align-items: center; position: relative;">
-                <div style="position: absolute; top: 20px; left: 20%; right: 20%; height: 2px; background: var(--color-border); z-index: 0;"></div>
+                <div style="position: absolute; top: 20px; left: 25%; right: 25%; height: 2px; background: var(--color-border); z-index: 0;"></div>
                 
                 <div style="text-align: center; position: relative; z-index: 1;">
                     <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-primary); color: white; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">1</div>
-                    <div style="font-weight: 600; color: var(--color-primary);">Confirmar Datos</div>
+                    <div style="font-weight: 600; color: var(--color-primary);">Confirmar y Elegir Destino</div>
                 </div>
                 
                 <div style="text-align: center; position: relative; z-index: 1;">
                     <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-border); color: #666; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">2</div>
-                    <div style="font-weight: 500; color: #666;">Seleccionar Destino</div>
-                </div>
-                
-                <div style="text-align: center; position: relative; z-index: 1;">
-                    <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--color-border); color: #666; display: flex; align-items: center; justify-content: center; margin: 0 auto 10px; font-weight: bold;">3</div>
                     <div style="font-weight: 500; color: #666;">Revisar Liquidación</div>
                 </div>
             </div>
@@ -69,62 +64,11 @@
         <!-- Invoice Details Card -->
         <div class="card">
             <h2 class="card-header">
-                <i class="fas fa-file-invoice"></i> Datos de la Factura
+                <i class="fas fa-file-invoice"></i> <span id="invoice-title">Datos de la Factura</span>
             </h2>
             
-            <div style="background: #f8f9fa; padding: 30px; border-radius: 10px;">
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                    <div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">CUFE</label>
-                            <div style="font-size: 18px; font-weight: 500;">MNE-0470033</div>
-                        </div>
-                        
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Número de Factura</label>
-                            <div style="font-size: 18px; font-weight: 500;">19917</div>
-                        </div>
-                        
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Fecha de Emisión</label>
-                            <div style="font-size: 18px; font-weight: 500;">8 de Enero de 2025</div>
-                        </div>
-                        
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Estado DTE</label>
-                            <div>
-                                <span class="badge badge-success" style="font-size: 14px; padding: 8px 16px;">33 - Aceptada Expresamente</span>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Gran Pagador</label>
-                            <div style="font-size: 18px; font-weight: 500;">TRANS JAPAGO PARDO</div>
-                        </div>
-                        
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Valor de la Factura</label>
-                            <div style="font-size: 24px; font-weight: 700; color: var(--color-primary);">$5,432,140</div>
-                        </div>
-                        
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Fecha de Vencimiento</label>
-                            <div style="font-size: 18px; font-weight: 500;">15 de Febrero de 2026</div>
-                            <div style="font-size: 14px; color: var(--color-success); margin-top: 5px;">
-                                <i class="fas fa-check-circle"></i> Vigente (44 días restantes)
-                            </div>
-                        </div>
-                        
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Cupo Disponible</label>
-                            <div style="font-size: 18px; font-weight: 500; color: var(--color-success);">
-                                <i class="fas fa-check-circle"></i> $5,000,000 disponibles
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="invoice-details-container" style="background: #f8f9fa; padding: 30px; border-radius: 10px;">
+                <!-- Content will be generated by JavaScript -->
             </div>
         </div>
 
@@ -185,7 +129,68 @@
                     <span>Confirmo que los datos de la factura son correctos y deseo continuar con el proceso de venta</span>
                 </label>
             </div>
+        </div>
+
+        <!-- Destination Selection Card -->
+        <div class="card">
+            <h3 class="card-header">
+                <i class="fas fa-money-check-alt"></i> Elige el Destino del Pago
+            </h3>
             
+            <p style="color: #666; margin-bottom: 30px;">Selecciona dónde deseas recibir el dinero de tu factura:</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+                <!-- Mi Cash Card -->
+                <div class="destination-card" data-destination="mycash" onclick="selectDestination('mycash')" style="border: 2px solid var(--color-border); border-radius: 12px; padding: 30px; cursor: pointer; transition: all 0.3s;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <i class="fas fa-wallet" style="font-size: 48px; color: var(--color-primary);"></i>
+                    </div>
+                    <h4 style="text-align: center; color: var(--color-primary); margin-bottom: 15px;">Mi Cash</h4>
+                    <p style="text-align: center; color: #666; font-size: 14px; line-height: 1.6;">
+                        Recibe el dinero instantáneamente en tu billetera digital Mi Cash. Disponible de inmediato para transferencias o pagos.
+                    </p>
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-border);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: #666; font-size: 14px;">Comisión:</span>
+                            <span style="font-weight: 600; color: var(--color-primary);">2.5%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: #666; font-size: 14px;">Disponibilidad:</span>
+                            <span style="font-weight: 600; color: var(--color-success);">Inmediata</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #666; font-size: 14px;">Recibirás:</span>
+                            <span style="font-weight: 700; color: var(--color-primary); font-size: 18px;" id="mycash-amount">$5,296,336</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cuenta Propia Card -->
+                <div class="destination-card" data-destination="cuenta" onclick="selectDestination('cuenta')" style="border: 2px solid var(--color-border); border-radius: 12px; padding: 30px; cursor: pointer; transition: all 0.3s;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <i class="fas fa-university" style="font-size: 48px; color: var(--color-success);"></i>
+                    </div>
+                    <h4 style="text-align: center; color: var(--color-success); margin-bottom: 15px;">Cuenta Bancaria</h4>
+                    <p style="text-align: center; color: #666; font-size: 14px; line-height: 1.6;">
+                        Recibe el dinero mediante transferencia bancaria a tu cuenta registrada. Proceso estándar de 1-2 días hábiles.
+                    </p>
+                    <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--color-border);">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: #666; font-size: 14px;">Comisión:</span>
+                            <span style="font-weight: 600; color: var(--color-success);">1.8%</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: #666; font-size: 14px;">Disponibilidad:</span>
+                            <span style="font-weight: 600; color: #ffc107;">1-2 días</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="color: #666; font-size: 14px;">Recibirás:</span>
+                            <span style="font-weight: 700; color: var(--color-success); font-size: 18px;" id="cuenta-amount">$5,334,361</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
                 <a href="mis-facturas.html" class="btn-secondary" style="padding: 12px 30px;">
                     <i class="fas fa-times"></i> Cancelar
@@ -234,21 +239,204 @@
     </footer>
 
     <script>
-        // Enable/disable continue button based on checkbox
-        document.getElementById('confirmData').addEventListener('change', function() {
+        let selectedDestination = null;
+        let isMultiple = false;
+        let facturas = [];
+        let totalValor = 0;
+
+        // Get parameters from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        isMultiple = urlParams.get('multiple') === 'true';
+
+        // Load invoice data
+        if (isMultiple) {
+            const cufes = urlParams.get('cufes').split(',');
+            const fechas = urlParams.get('fechas').split(',');
+            
+            // Mock data for multiple invoices
+            facturas = cufes.map((cufe, idx) => ({
+                cufe: cufe,
+                numero: `1991${7 + idx}`,
+                fechaEmision: '8 de Enero de 2025',
+                granPagador: 'TRANS JAPAGO PARDO',
+                valor: 5432140 + (idx * 100000),
+                fechaPago: fechas[idx]
+            }));
+            
+            totalValor = facturas.reduce((sum, f) => sum + f.valor, 0);
+            renderMultipleInvoices();
+        } else {
+            const cufe = urlParams.get('cufe');
+            const fecha = urlParams.get('fecha');
+            
+            // Mock data for single invoice
+            facturas = [{
+                cufe: cufe || 'MNE-0470033',
+                numero: '19917',
+                fechaEmision: '8 de Enero de 2025',
+                granPagador: 'TRANS JAPAGO PARDO',
+                valor: 5432140,
+                fechaPago: fecha
+            }];
+            
+            totalValor = facturas[0].valor;
+            renderSingleInvoice();
+        }
+
+        // Update amounts in destination cards
+        updateDestinationAmounts();
+
+        function renderSingleInvoice() {
+            const factura = facturas[0];
+            document.getElementById('invoice-title').textContent = 'Datos de la Factura';
+            document.getElementById('invoice-details-container').innerHTML = `
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                    <div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">CUFE</label>
+                            <div style="font-size: 18px; font-weight: 500;">${factura.cufe}</div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Número de Factura</label>
+                            <div style="font-size: 18px; font-weight: 500;">${factura.numero}</div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Fecha de Emisión</label>
+                            <div style="font-size: 18px; font-weight: 500;">${factura.fechaEmision}</div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Estado DTE</label>
+                            <div><span class="badge badge-success" style="font-size: 14px; padding: 8px 16px;">33 - Aceptada Expresamente</span></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Gran Pagador</label>
+                            <div style="font-size: 18px; font-weight: 500;">${factura.granPagador}</div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Valor de la Factura</label>
+                            <div style="font-size: 24px; font-weight: 700; color: var(--color-primary);">$${factura.valor.toLocaleString('es-CO')}</div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Fecha de Vencimiento</label>
+                            <div style="font-size: 18px; font-weight: 500;">15 de Febrero de 2026</div>
+                            <div style="font-size: 14px; color: var(--color-success); margin-top: 5px;">
+                                <i class="fas fa-check-circle"></i> Vigente (33 días restantes)
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Fecha de Pago Seleccionada</label>
+                            <div style="font-size: 16px; font-weight: 600; color: var(--color-info);">
+                                <i class="fas fa-calendar-alt"></i> ${factura.fechaPago}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderMultipleInvoices() {
+            document.getElementById('invoice-title').textContent = `Datos de las Facturas (${facturas.length})`;
+            
+            let rows = facturas.map((f, idx) => `
+                <tr${idx % 2 === 0 ? '' : ' style="background: #f9f9f9;"'}>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd;">${idx + 1}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 13px;">${f.cufe}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd;">${f.numero}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd;">${f.granPagador}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 600;">$${f.valor.toLocaleString('es-CO')}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: center;">${f.fechaPago}</td>
+                </tr>
+            `).join('');
+            
+            document.getElementById('invoice-details-container').innerHTML = `
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: white; border-bottom: 2px solid var(--color-primary);">
+                                <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">#</th>
+                                <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">CUFE</th>
+                                <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">N° Factura</th>
+                                <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">Gran Pagador</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Valor</th>
+                                <th style="padding: 12px; text-align: center; font-weight: 600; color: #666;">Fecha Pago</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${rows}
+                        </tbody>
+                        <tfoot>
+                            <tr style="background: #e3f2fd; border-top: 2px solid var(--color-primary);">
+                                <td colspan="4" style="padding: 15px; font-weight: 700; font-size: 18px;">TOTAL</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 20px; color: var(--color-primary);">$${totalValor.toLocaleString('es-CO')}</td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            `;
+        }
+
+        function updateDestinationAmounts() {
+            const comisionMyCash = Math.round(totalValor * 0.025);
+            const ivaMyCash = Math.round(comisionMyCash * 0.19);
+            const recibirMyCash = totalValor - comisionMyCash - ivaMyCash;
+            
+            const comisionCuenta = Math.round(totalValor * 0.018);
+            const ivaCuenta = Math.round(comisionCuenta * 0.19);
+            const recibirCuenta = totalValor - comisionCuenta - ivaCuenta;
+            
+            document.getElementById('mycash-amount').textContent = `$${recibirMyCash.toLocaleString('es-CO')}`;
+            document.getElementById('cuenta-amount').textContent = `$${recibirCuenta.toLocaleString('es-CO')}`;
+        }
+        
+        // Enable/disable continue button based on checkbox and destination
+        function updateContinueButton() {
             const btnContinuar = document.getElementById('btnContinuar');
-            if (this.checked) {
+            const confirmChecked = document.getElementById('confirmData').checked;
+            
+            if (confirmChecked && selectedDestination) {
                 btnContinuar.style.opacity = '1';
                 btnContinuar.style.pointerEvents = 'auto';
+                // Add destination parameter to URL
+                const cufesParam = facturas.map(f => f.cufe).join(',');
+                const fechasParam = facturas.map(f => f.fechaPago).join(',');
+                btnContinuar.href = `vender-factura-paso2.html?destino=${selectedDestination}&cufes=${encodeURIComponent(cufesParam)}&fechas=${encodeURIComponent(fechasParam)}&multiple=${isMultiple}`;
             } else {
                 btnContinuar.style.opacity = '0.5';
                 btnContinuar.style.pointerEvents = 'none';
             }
-        });
+        }
+        
+        // Handle destination selection
+        function selectDestination(destination) {
+            selectedDestination = destination;
+            
+            // Update card styles
+            const cards = document.querySelectorAll('.destination-card');
+            cards.forEach(card => {
+                if (card.dataset.destination === destination) {
+                    card.style.borderColor = destination === 'mycash' ? 'var(--color-primary)' : 'var(--color-success)';
+                    card.style.borderWidth = '3px';
+                    card.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                    card.style.transform = 'translateY(-5px)';
+                } else {
+                    card.style.borderColor = 'var(--color-border)';
+                    card.style.borderWidth = '2px';
+                    card.style.boxShadow = 'none';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+            
+            updateContinueButton();
+        }
+        
+        // Checkbox listener
+        document.getElementById('confirmData').addEventListener('change', updateContinueButton);
         
         // Initial state
-        document.getElementById('btnContinuar').style.opacity = '0.5';
-        document.getElementById('btnContinuar').style.pointerEvents = 'none';
+        updateContinueButton();
     </script>
 </body>
 </html>

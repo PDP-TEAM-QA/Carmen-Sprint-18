@@ -90,7 +90,7 @@
                     CARGAR FACTURA
                 </button>
                 <button class="tab-button" onclick="switchTab('cargadas')" id="tab-cargadas" style="padding: 15px 30px; border: none; background: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s;">
-                    FACTURAS CARGADAS
+                    HISTORIAL FACTURAS CARGADAS
                 </button>
             </div>
         </div>
@@ -183,10 +183,10 @@
 
                         <div style="display:flex; justify-content:center; gap:12px; padding:16px; border-top:1px solid var(--color-border)">
                             <button type="button" class="btn-secondary" id="btn-limpiar-lista" disabled>
-                                <i class="fas fa-trash"></i> Limpiar cola
+                                <i class="fas fa-eraser"></i> Limpiar
                             </button>
-                            <button type="button" class="btn-success" id="btn-completar-carga" disabled>
-                                <i class="fas fa-check-circle"></i> Completar carga
+                            <button type="button" class="btn-primary" id="btn-vender-todas" disabled>
+                                <i class="fas fa-dollar-sign"></i> Vender todas (<span id="count-vendibles">0</span>)
                             </button>
                         </div>
                     </div>
@@ -265,9 +265,6 @@
                                 <button class="btn-icon btn-icon-view" title="Ver detalle">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <a href="vender-factura-paso1.html" class="btn-icon btn-icon-success" title="Vender factura" style="text-decoration: none;">
-                                    <i class="fas fa-dollar-sign"></i>
-                                </a>
                             </div>
                         </td>
                     </tr>
@@ -286,9 +283,6 @@
                                 <button class="btn-icon btn-icon-view">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <a href="vender-factura-paso1.html" class="btn-icon btn-icon-success" style="text-decoration: none;">
-                                    <i class="fas fa-dollar-sign"></i>
-                                </a>
                             </div>
                         </td>
                     </tr>
@@ -307,9 +301,6 @@
                                 <button class="btn-icon btn-icon-view">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <a href="vender-factura-paso1.html" class="btn-icon btn-icon-success" style="text-decoration: none;">
-                                    <i class="fas fa-dollar-sign"></i>
-                                </a>
                             </div>
                         </td>
                     </tr>
@@ -382,9 +373,6 @@
                                 <button class="btn-icon btn-icon-view">
                                     <i class="fas fa-eye"></i>
                                 </button>
-                                <a href="vender-factura-paso1.html" class="btn-icon btn-icon-success" style="text-decoration: none;">
-                                    <i class="fas fa-dollar-sign"></i>
-                                </a>
                             </div>
                         </td>
                     </tr>
@@ -509,13 +497,35 @@
 
             // Acciones lista
             document.getElementById('btn-limpiar-lista').addEventListener('click', clearQueue);
-            document.getElementById('btn-completar-carga').addEventListener('click', completarCarga);
+            document.getElementById('btn-vender-todas').addEventListener('click', venderTodas);
         });
 
         function refreshButtonsState() {
             const hasItems = queue.length > 0;
+            const vendibles = getVendibles();
             document.getElementById('btn-limpiar-lista').disabled = !hasItems;
-            document.getElementById('btn-completar-carga').disabled = !hasItems;
+            document.getElementById('btn-vender-todas').disabled = vendibles.length === 0;
+            document.getElementById('count-vendibles').textContent = vendibles.length;
+        }
+
+        function getVendibles() {
+            return queue.filter(q => {
+                const estadoCell = q._row.querySelector('.estado-cell');
+                const estadoText = estadoCell ? estadoCell.textContent : '';
+                return estadoText.includes('OK - Validado') && q._fechaPago;
+            });
+        }
+
+        function venderTodas() {
+            const vendibles = getVendibles();
+            if (vendibles.length === 0) {
+                alert('No hay facturas listas para vender. Asegúrate de que estén validadas y tengan fecha de pago.');
+                return;
+            }
+            
+            const cufes = vendibles.map(v => v.identificador).join(',');
+            const fechas = vendibles.map(v => v._fechaPago).join(',');
+            window.location.href = `vender-factura-paso1.html?cufes=${encodeURIComponent(cufes)}&fechas=${encodeURIComponent(fechas)}&multiple=true`;
         }
 
         function addRow(item) {
@@ -539,10 +549,15 @@
                 <td class="fecha-pago-cell">
                     <input type="date" class="fecha-pago-input" style="width:100%; padding:6px; border:1px solid var(--color-border); border-radius:4px; font-size:13px;" disabled>
                 </td>
-                <td>
-                    <button type="button" class="btn-icon btn-icon-delete" title="Eliminar">
-                        <i class="fas fa-trash"></i>
-                    </button>
+                <td class="accion-cell" style="text-align: center;">
+                    <div style="display: inline-flex; gap: 8px; align-items: center; justify-content: center;">
+                        <button type="button" class="btn-icon btn-icon-success btn-vender-individual" title="Vender factura" disabled style="opacity: 0.5; cursor: not-allowed;">
+                            <i class="fas fa-dollar-sign"></i>
+                        </button>
+                        <button type="button" class="btn-icon btn-icon-delete" title="Eliminar">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
                 </td>
             `;
             row.querySelector('.btn-icon-delete').addEventListener('click', () => {
@@ -657,6 +672,15 @@
                     const dateInput = item._row.querySelector('.fecha-pago-input');
                     dateInput.disabled = false;
                     
+                    // Habilitar botón de vender cuando se seleccione fecha de pago
+                    dateInput.addEventListener('change', () => {
+                        if (dateInput.value) {
+                            item._fechaPago = dateInput.value;
+                            enableSellButton(item);
+                            refreshButtonsState();
+                        }
+                    });
+                    
                     return;
                 }
 
@@ -678,37 +702,20 @@
         function clearQueue() {
             if (!confirm('¿Seguro que deseas limpiar toda la cola?')) return;
             queue = [];
-            document.getElementById('tbody-cargas').innerHTML = '<tr><td colspan="6" style="text-align:center; color:#999; padding:30px"><i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>No hay elementos en la cola.</td></tr>';
+            document.getElementById('tbody-cargas').innerHTML = '<tr><td colspan="7" style="text-align:center; color:#999; padding:30px"><i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>No hay elementos en la cola.</td></tr>';
             refreshButtonsState();
         }
 
-        function completarCarga() {
-            // Validar que facturas validadas tengan fecha de pago
-            const sinFecha = queue.filter(q => {
-                const estado = q._row.querySelector('.estado-cell').textContent;
-                return estado.includes('OK - Validado') && !q._fechaPago;
-            });
-            
-            if (sinFecha.length > 0) {
-                alert(`⚠️ Atención:\n\n${sinFecha.length} factura(s) validada(s) no tienen fecha de pago seleccionada.\nPor favor selecciona la fecha de pago para todas las facturas antes de completar la carga.`);
-                return;
+        function enableSellButton(item) {
+            const btnVender = item._row.querySelector('.btn-vender-individual');
+            if (btnVender) {
+                btnVender.disabled = false;
+                btnVender.style.opacity = '1';
+                btnVender.style.cursor = 'pointer';
+                btnVender.onclick = () => {
+                    window.location.href = `vender-factura-paso1.html?cufe=${encodeURIComponent(item.identificador)}&fecha=${item._fechaPago}`;
+                };
             }
-            
-            queue.forEach(q => {
-                if (q._row) {
-                    const fechaInfo = q._fechaPago ? ` - Fecha pago: ${q._fechaPago}` : '';
-                    q._row.querySelector('.estado-cell').innerHTML = renderBadge('Carga completada','info');
-                    if (q._fechaPago) {
-                        q._row.querySelector('.detalle-cell').textContent += fechaInfo;
-                    }
-                }
-            });
-
-            setTimeout(() => {
-                alert(`✅ ${queue.length} elemento(s) enviados a liquidación.\nPodrás revisar las liquidaciones generadas en la sección "Mis Liquidaciones".`);
-                clearQueue();
-                switchTab('cargadas');
-            }, 800);
         }
     </script>
 </body>
