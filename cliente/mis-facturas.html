@@ -525,7 +525,7 @@
             
             const cufes = vendibles.map(v => v.identificador).join(',');
             const fechas = vendibles.map(v => v._fechaPago).join(',');
-            window.location.href = `vender-factura-paso1.html?cufes=${encodeURIComponent(cufes)}&fechas=${encodeURIComponent(fechas)}&multiple=true`;
+            window.location.href = `vender-factura.html?cufes=${encodeURIComponent(cufes)}&fechas=${encodeURIComponent(fechas)}&multiple=true`;
         }
 
         function addRow(item) {
@@ -713,7 +713,7 @@
                 btnVender.style.opacity = '1';
                 btnVender.style.cursor = 'pointer';
                 btnVender.onclick = () => {
-                    window.location.href = `vender-factura-paso1.html?cufe=${encodeURIComponent(item.identificador)}&fecha=${item._fechaPago}`;
+                    window.location.href = `vender-factura.html?cufe=${encodeURIComponent(item.identificador)}&fecha=${item._fechaPago}`;
                 };
             }
         }
