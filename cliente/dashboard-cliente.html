@@ -74,6 +74,13 @@
                 </div>
                     <div class="icon-card-label">Mis operaciones</div>
                 </a>
+
+            <a href="mis-pagos-carmen.html" class="icon-card">
+                <div class="icon-card-icon">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div class="icon-card-label">Mis pagos</div>
+            </a>
             </div>
             </div>
             <button class="nav-arrow" onclick="scrollMenu('right')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
@@ -117,6 +124,15 @@
             </div>
         </div>
 
+        <!-- Pagos Pendientes Alert -->
+        <div class="alert alert-warning">
+            <strong><i class="fas fa-exclamation-triangle"></i> Atención:</strong>
+            Tienes <strong>3 pagos pendientes</strong> a Carmen por un total de <strong>$18,614,637</strong>.
+            <a href="mis-pagos-carmen.html" style="color: var(--color-primary); text-decoration: underline; margin-left: 10px;">
+                <i class="fas fa-arrow-right"></i> Ir a Mis Pagos
+            </a>
+        </div>
+
         <!-- Quick Actions -->
         <div class="card">
             <h3 class="card-header">Acciones Rápidas</h3>
@@ -129,6 +145,9 @@
                 </a>
                 <a href="mis-operaciones.html" class="btn-secondary" style="padding: 15px 30px;">
                     <i class="fas fa-history"></i> Historial de Operaciones
+                </a>
+                <a href="mis-pagos-carmen.html" class="btn-secondary" style="padding: 15px 30px; background: #ffc107; border-color: #ffc107; color: #333;">
+                    <i class="fas fa-hand-holding-usd"></i> Mis Pagos a Carmen
                 </a>
             </div>
         </div>

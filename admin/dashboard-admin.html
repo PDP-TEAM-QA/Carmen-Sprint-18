@@ -81,12 +81,12 @@
                 <div class="icon-card-label">Cupos</div>
             </a>
 
-            <a href="reportes-admin.html" class="icon-card">
+            <a href="pagos-pendientes-admin.html" class="icon-card">
                 <div class="icon-card-icon">
-                    <i class="fas fa-file-alt"></i>
+                    <i class="fas fa-money-check-alt"></i>
                 </div>
-                    <div class="icon-card-label">Reportes</div>
-                </a>
+                <div class="icon-card-label">Pagos</div>
+            </a>
             </div>
             </div>
             <button class="nav-arrow" onclick="scrollMenu('right')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
@@ -130,6 +130,14 @@
                     <div class="stat-value" style="color: white;">3</div>
                     <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">
                         <i class="fas fa-times-circle"></i> 2.4% tasa rechazo
+                    </div>
+                </div>
+
+                <div class="stat-card" style="background: linear-gradient(135deg, #ffa751 0%, #ffe259 100%); color: white;">
+                    <div class="stat-label" style="opacity: 0.9;">Pagos Pendientes</div>
+                    <div class="stat-value" style="color: white;">8</div>
+                    <div style="font-size: 14px; margin-top: 10px; opacity: 0.9;">
+                        <i class="fas fa-dollar-sign"></i> $24.5M a verificar
                     </div>
                 </div>
             </div>
@@ -207,6 +215,13 @@
                 <div class="timeline-item">
                     <div class="timeline-marker in-progress"></div>
                     <div class="timeline-content">
+                        <div class="timeline-title">Pago recibido - En verificación</div>
+                        <div class="timeline-time">Hace 8 min - TRANS JAPAGO PARDO - $5,150,000 por transferencia</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-marker in-progress"></div>
+                    <div class="timeline-content">
                         <div class="timeline-title">Nueva factura recibida - En verificación</div>
                         <div class="timeline-time">Hace 12 min - MNE-0470089 - Jenny Savedra</div>
                     </div>
@@ -241,6 +256,9 @@
                 <i class="fas fa-bolt"></i> Acciones Rápidas
             </h3>
             <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                <a href="pagos-pendientes-admin.html" class="btn-primary" style="padding: 15px 30px; background: #ffa751;">
+                    <i class="fas fa-money-check-alt"></i> Verificar Pagos
+                </a>
                 <a href="facturas-admin.html" class="btn-primary" style="padding: 15px 30px;">
                     <i class="fas fa-list"></i> Ver Facturas en Verificación
                 </a>
@@ -250,9 +268,6 @@
                 <a href="cupos-admin.html" class="btn-primary" style="padding: 15px 30px;">
                     <i class="fas fa-chart-line"></i> Gestionar Cupos
                 </a>
-                <a href="reportes-admin.html" class="btn-primary" style="padding: 15px 30px;">
-                    <i class="fas fa-download"></i> Generar Reporte
-                </a>
             </div>
         </div>
 
@@ -261,6 +276,10 @@
             <h3 class="card-header">
                 <i class="fas fa-exclamation-triangle"></i> Alertas del Sistema
             </h3>
+            
+            <div class="alert alert-warning">
+                <strong><i class="fas fa-money-check-alt"></i> Pagos Pendientes:</strong> 8 pagos esperando verificación por $24,500,000. <a href="pagos-pendientes-admin.html" style="color: inherit; text-decoration: underline;">Verificar ahora</a>
+            </div>
             
             <div class="alert alert-warning">
                 <strong><i class="fas fa-clock"></i> Atención:</strong> 2 operaciones estancadas por más de 30 minutos. <a href="operaciones-admin.html" style="color: inherit; text-decoration: underline;">Ver detalles</a>

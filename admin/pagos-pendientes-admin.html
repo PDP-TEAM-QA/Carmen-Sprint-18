@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagos Pendientes - Admin Carmen</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo" style="text-decoration: none;">cärmen</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <a href="#" class="btn-primary">Panel Admin</a>
+                <a href="#" class="btn-secondary">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="dashboard-admin.html"><i class="fas fa-arrow-left"></i> Volver</a>
+        <span>ADMIN</span>
+        <span>/</span>
+        <span class="breadcrumb-title">PAGOS PENDIENTES DE VERIFICACIÓN</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Icon Menu with Navigation Arrows -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 30px; width: 100%;">
+            <button class="nav-arrow" onclick="scrollMenu('left')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div style="flex: 1; max-width: 1200px; overflow: hidden;">
+                <div class="icon-menu" id="iconMenu" style="scroll-behavior: smooth;">
+                    <a href="dashboard-admin.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="icon-card-label">Inicio</div>
+                    </a>
+
+                    <a href="facturas-admin.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="icon-card-label">Facturas</div>
+                    </a>
+
+                    <a href="liquidaciones-admin.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="icon-card-label">Liquidaciones</div>
+                    </a>
+
+                    <a href="operaciones-admin.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="icon-card-label">Operaciones</div>
+                    </a>
+
+                    <a href="cupos-admin.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="icon-card-label">Cupos</div>
+                    </a>
+
+                    <a href="pagos-pendientes-admin.html" class="icon-card active">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-money-check-alt"></i>
+                        </div>
+                        <div class="icon-card-label">Pagos</div>
+                    </a>
+                </div>
+            </div>
+            <button class="nav-arrow" onclick="scrollMenu('right')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Alert -->
+        <div class="alert alert-warning">
+            <strong><i class="fas fa-exclamation-triangle"></i> Atención:</strong>
+            Tienes <strong><span id="count-pendientes">5</span> pagos esperando verificación</strong> por un total de <strong><span id="total-pendientes">$28,814,637</span></strong>.
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Cliente</label>
+                    <select id="filter-cliente" onchange="filterTable()">
+                        <option value="">Todos</option>
+                        <option>TRANS JAPAGO PARDO</option>
+                        <option>YENNY PAOLA GOMEZ</option>
+                        <option>EDGAR OSORIO</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Método de Pago</label>
+                    <select id="filter-metodo" onchange="filterTable()">
+                        <option value="">Todos</option>
+                        <option value="transferencia">Transferencia</option>
+                        <option value="pse">PSE</option>
+                        <option value="link">Link de pago</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Buscar</label>
+                    <input type="text" id="filter-search" placeholder="Cliente, CUFE..." onkeyup="filterTable()">
+                </div>
+                <div class="filter-group">
+                    <button class="btn-secondary" onclick="clearFilters()" style="width: 100%;">
+                        <i class="fas fa-undo"></i> Limpiar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#Pago</th>
+                        <th>Fecha Recepción</th>
+                        <th>Cliente</th>
+                        <th>N° Facturas</th>
+                        <th>Monto Esperado</th>
+                        <th>Monto Declarado</th>
+                        <th>Diferencia</th>
+                        <th>Método</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-pagos">
+                    <!-- Pago 1: Alta prioridad, diferencia aceptable -->
+                    <tr data-prioridad="alta" data-cliente="TRANS JAPAGO PARDO" data-metodo="transferencia">
+                        <td><strong>PAG-00123</strong></td>
+                        <td>
+                            <div>10/Ene/2026</div>
+                            <div style="font-size: 12px; color: #666;">10:45 AM</div>
+                        </td>
+                        <td>
+                            <strong>TRANS JAPAGO PARDO</strong>
+                            <div style="font-size: 12px; color: #666;">
+                                CUFEs: MNE-0470033, MNE-0470177
+                            </div>
+                        </td>
+                        <td style="text-align: center;"><span class="badge badge-info">2</span></td>
+                        <td style="font-weight: 700;">$12,482,140</td>
+                        <td style="font-weight: 700; color: #ffc107;">$12,232,497</td>
+                        <td>
+                            <span class="badge badge-success">-$249,643 (2%)</span>
+                            <div style="font-size: 12px; color: #666; margin-top: 3px;">
+                                ✅ Dentro del rango
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge badge-info">
+                                <i class="fas fa-university"></i> Transferencia
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge badge-warning">🟡 Pendiente de verificación</span>
+                        </td>
+                        <td>
+                            <button class="btn-primary" onclick="verDetalle('PAG-00123')" style="padding: 8px 16px; font-size: 14px;">
+                                <i class="fas fa-check-circle"></i> Verificar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Pago 2: Media prioridad, PSE automático -->
+                    <tr data-prioridad="media" data-cliente="YENNY PAOLA GOMEZ" data-metodo="pse">
+                        <td><strong>PAG-00124</strong></td>
+                        <td>
+                            <div>11/Ene/2026</div>
+                            <div style="font-size: 12px; color: #666;">14:20 PM</div>
+                        </td>
+                        <td>
+                            <strong>YENNY PAOLA GOMEZ</strong>
+                            <div style="font-size: 12px; color: #666;">
+                                CUFE: MNE-0470089
+                            </div>
+                        </td>
+                        <td style="text-align: center;"><span class="badge badge-info">1</span></td>
+                        <td style="font-weight: 700;">$7,050,000</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$7,050,000</td>
+                        <td>
+                            <span class="badge badge-success">$0 (0%)</span>
+                            <div style="font-size: 12px; color: var(--color-success); margin-top: 3px;">
+                                ✅ Coincide exactamente
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge badge-success">
+                                <i class="fas fa-credit-card"></i> PSE
+                            </span>
+                            <div style="font-size: 11px; color: var(--color-success); margin-top: 3px;">
+                                ✓ Auto-verificado
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge badge-warning">🟡 Pendiente de verificación</span>
+                        </td>
+                        <td>
+                            <button class="btn-primary" onclick="verDetalle('PAG-00124')" style="padding: 8px 16px; font-size: 14px;">
+                                <i class="fas fa-check-circle"></i> Verificar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Pago 3: Alta prioridad, sin diferencia -->
+                    <tr data-prioridad="alta" data-cliente="TRANS JAPAGO PARDO" data-metodo="transferencia">
+                        <td><strong>PAG-00125</strong></td>
+                        <td>
+                            <div>12/Ene/2026</div>
+                            <div style="font-size: 12px; color: #666;">09:15 AM</div>
+                        </td>
+                        <td>
+                            <strong>TRANS JAPAGO PARDO</strong>
+                            <div style="font-size: 12px; color: #666;">
+                                CUFE: MNE-0476134
+                            </div>
+                        </td>
+                        <td style="text-align: center;"><span class="badge badge-info">1</span></td>
+                        <td style="font-weight: 700;">$5,432,000</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$5,432,000</td>
+                        <td>
+                            <span class="badge badge-success">$0 (0%)</span>
+                            <div style="font-size: 12px; color: var(--color-success); margin-top: 3px;">
+                                ✅ Coincide exactamente
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge badge-info">
+                                <i class="fas fa-university"></i> Transferencia
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge badge-success">🟢 Verificado</span>
+                        </td>
+                        <td>
+                            <button class="btn-primary" onclick="verDetalle('PAG-00125')" style="padding: 8px 16px; font-size: 14px;">
+                                <i class="fas fa-check-circle"></i> Verificar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Pago 4: Baja prioridad, link de pago -->
+                    <tr data-prioridad="baja" data-cliente="EDGAR OSORIO" data-metodo="link">
+                        <td><strong>PAG-00126</strong></td>
+                        <td>
+                            <div>12/Ene/2026</div>
+                            <div style="font-size: 12px; color: #666;">16:30 PM</div>
+                        </td>
+                        <td>
+                            <strong>EDGAR OSORIO</strong>
+                            <div style="font-size: 12px; color: #666;">
+                                CUFE: MNE-0476101
+                            </div>
+                        </td>
+                        <td style="text-align: center;"><span class="badge badge-info">1</span></td>
+                        <td style="font-weight: 700;">$1,750,000</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$1,750,000</td>
+                        <td>
+                            <span class="badge badge-success">$0 (0%)</span>
+                            <div style="font-size: 12px; color: var(--color-success); margin-top: 3px;">
+                                ✅ Coincide exactamente
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge" style="background: #9c27b0; color: white;">
+                                <i class="fas fa-link"></i> Link de pago
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge badge-warning">🟡 Pendiente de verificación</span>
+                        </td>
+                        <td>
+                            <button class="btn-primary" onclick="verDetalle('PAG-00126')" style="padding: 8px 16px; font-size: 14px;">
+                                <i class="fas fa-check-circle"></i> Verificar
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Pago 5: Baja prioridad, diferencia mínima -->
+                    <tr data-prioridad="baja" data-cliente="YENNY PAOLA GOMEZ" data-metodo="transferencia">
+                        <td><strong>PAG-00127</strong></td>
+                        <td>
+                            <div>13/Ene/2026</div>
+                            <div style="font-size: 12px; color: #666;">11:00 AM</div>
+                        </td>
+                        <td>
+                            <strong>YENNY PAOLA GOMEZ</strong>
+                            <div style="font-size: 12px; color: #666;">
+                                CUFE: MNE-0470089
+                            </div>
+                        </td>
+                        <td style="text-align: center;"><span class="badge badge-info">1</span></td>
+                        <td style="font-weight: 700;">$2,100,500</td>
+                        <td style="font-weight: 700; color: #ffc107;">$2,079,490</td>
+                        <td>
+                            <span class="badge badge-success">-$21,010 (1%)</span>
+                            <div style="font-size: 12px; color: #666; margin-top: 3px;">
+                                ✅ Dentro del rango
+                            </div>
+                        </td>
+                        <td>
+                            <span class="badge badge-info">
+                                <i class="fas fa-university"></i> Transferencia
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge badge-success">🟢 Verificado</span>
+                        </td>
+                        <td>
+                            <button class="btn-primary" onclick="verDetalle('PAG-00127')" style="padding: 8px 16px; font-size: 14px;">
+                                <i class="fas fa-check-circle"></i> Verificar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Info Alert -->
+        <div class="alert alert-info" style="margin-top: 20px;">
+            <strong><i class="fas fa-info-circle"></i> Criterios de verificación:</strong>
+            <ul style="margin: 10px 0 0 20px; line-height: 1.8;">
+                <li><strong>Diferencia aceptable:</strong> Hasta 2% del monto esperado (por retenciones: ICA, Rtefuente, etc.)</li>
+                <li><strong>PSE:</strong> Verificación automática. Solo requiere confirmación visual</li>
+                <li><strong>Transferencia:</strong> Validar comprobante y referencia bancaria</li>
+                <li><strong>Otro método:</strong> Coordinar con comercial antes de aprobar</li>
+            </ul>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">Calle 72A # 22 - 07</p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">+57 310 375 4945</p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">info@carmen.com.co</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu scroll functionality
+        function scrollMenu(direction) {
+            const menu = document.getElementById('iconMenu');
+            const scrollAmount = 250;
+            if (direction === 'left') {
+                menu.scrollLeft -= scrollAmount;
+            } else {
+                menu.scrollLeft += scrollAmount;
+            }
+        }
+
+        function verDetalle(pagoId) {
+            window.location.href = `verificar-pago-admin.html?pago=${pagoId}`;
+        }
+
+        function filterTable() {
+            const prioridad = document.getElementById('filter-prioridad').value.toLowerCase();
+            const cliente = document.getElementById('filter-cliente').value.toLowerCase();
+            const metodo = document.getElementById('filter-metodo').value.toLowerCase();
+            const search = document.getElementById('filter-search').value.toLowerCase();
+
+            const rows = document.querySelectorAll('#tbody-pagos tr');
+            rows.forEach(row => {
+                const rowPrioridad = row.dataset.prioridad;
+                const rowCliente = row.dataset.cliente.toLowerCase();
+                const rowMetodo = row.dataset.metodo;
+                const rowText = row.textContent.toLowerCase();
+
+                const matchPrioridad = !prioridad || rowPrioridad === prioridad;
+                const matchCliente = !cliente || rowCliente.includes(cliente);
+                const matchMetodo = !metodo || rowMetodo === metodo;
+                const matchSearch = !search || rowText.includes(search);
+
+                if (matchPrioridad && matchCliente && matchMetodo && matchSearch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function clearFilters() {
+            document.getElementById('filter-prioridad').value = '';
+            document.getElementById('filter-cliente').value = '';
+            document.getElementById('filter-metodo').value = '';
+            document.getElementById('filter-search').value = '';
+            filterTable();
+        }
+    </script>
+</body>
+</html>

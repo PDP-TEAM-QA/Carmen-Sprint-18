@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pagos a Carmen - Carmen Factoring</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo" style="text-decoration: none;">cärmen</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <a href="#" class="btn-primary">SOLICITA UN CRÉDITO</a>
+                <a href="#" class="btn-secondary">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="dashboard-cliente.html"><i class="fas fa-arrow-left"></i> Volver</a>
+        <span>TRANS JAPAGO PARDO</span>
+        <span>/</span>
+        <span class="breadcrumb-title">MIS PAGOS A CARMEN</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Icon Menu with Navigation Arrows -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 30px; width: 100%;">
+            <button class="nav-arrow" onclick="scrollMenu('left')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div style="flex: 1; max-width: 1200px; overflow: hidden;">
+                <div class="icon-menu" id="iconMenu" style="scroll-behavior: smooth;">
+                    <a href="dashboard-cliente.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="icon-card-label">Inicio</div>
+                    </a>
+
+                    <a href="mis-facturas.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="icon-card-label">Mis facturas</div>
+                    </a>
+
+                    <a href="mis-liquidaciones.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="icon-card-label">Mis liquidaciones</div>
+                    </a>
+
+                    <a href="mis-operaciones.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="icon-card-label">Mis operaciones</div>
+                    </a>
+
+                    <a href="mis-pagos-carmen.html" class="icon-card active">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="icon-card-label">Mis pagos</div>
+                    </a>
+                </div>
+            </div>
+            <button class="nav-arrow" onclick="scrollMenu('right')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <!-- Alert -->
+        <div class="alert alert-warning" id="alert-pendientes" style="display: none;">
+            <strong><i class="fas fa-exclamation-triangle"></i> Atención:</strong>
+            Tienes <strong><span id="count-pendientes">0</span> facturas pendientes de pago</strong> por un total de <strong><span id="total-pendientes">$0</span></strong>.
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Estado</label>
+                    <select id="filter-estado" onchange="filterTable()">
+                        <option value="">Todos</option>
+                        <option value="pendiente">Pendiente de pago</option>
+                        <option value="verificacion">En verificación</option>
+                        <option value="justificacion">Requiere justificación</option>
+                        <option value="cerrada">Cerrada</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Gran Pagador</label>
+                    <select id="filter-pagador" onchange="filterTable()">
+                        <option value="">Todos</option>
+                        <option>TRANS JAPAGO PARDO</option>
+                        <option>TRANSPORTES TIERRA ADENTRO SAS</option>
+                        <option>YENNY PAOLA GOMEZ</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Buscar CUFE</label>
+                    <input type="text" id="filter-search" placeholder="Buscar..." onkeyup="filterTable()">
+                </div>
+                <div class="filter-group">
+                    <button class="btn-secondary" onclick="clearFilters()" style="width: 100%;">
+                        <i class="fas fa-undo"></i> Limpiar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">
+                            <input type="checkbox" id="select-all" onchange="toggleSelectAll()" style="width: 18px; height: 18px; cursor: pointer;">
+                        </th>
+                        <th>CUFE</th>
+                        <th>N° Factura</th>
+                        <th>Gran Pagador</th>
+                        <th>Valor a Pagar</th>
+                        <th>Vencimiento</th>
+                        <th>Estado</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-pagos">
+                    <!-- Mock data -->
+                    <tr data-estado="pendiente" data-pagador="TRANS JAPAGO PARDO" data-cufe="MNE-0470033">
+                        <td>
+                            <input type="checkbox" class="row-checkbox" data-valor="5432140" onchange="updateSelection()" style="width: 18px; height: 18px; cursor: pointer;">
+                        </td>
+                        <td style="font-size: 12px;">MNE-0470033</td>
+                        <td><strong>19917</strong></td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$5,432,140</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <i class="fas fa-calendar-alt" style="color: #ffc107;"></i>
+                                <span>15/Feb/2026</span>
+                            </div>
+                            <div style="font-size: 12px; color: #ffc107; margin-top: 3px;">
+                                ⏰ Vence en 27 días
+                            </div>
+                        </td>
+                        <td><span class="badge badge-warning">🟡 Pendiente de pago</span></td>
+                        <td>
+                            <div style="display: flex; gap: 5px;">
+                                <button class="btn-icon" onclick="verDetalle('MNE-0470033')" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" onclick="pagarIndividual('MNE-0470033')" title="Pagar ahora" style="background: var(--color-success); color: white;">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr data-estado="pendiente" data-pagador="TRANS JAPAGO PARDO" data-cufe="MNE-0470177">
+                        <td>
+                            <input type="checkbox" class="row-checkbox" data-valor="7050000" onchange="updateSelection()" style="width: 18px; height: 18px; cursor: pointer;">
+                        </td>
+                        <td style="font-size: 12px;">MNE-0470177</td>
+                        <td><strong>19918</strong></td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$7,050,000</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <i class="fas fa-calendar-alt" style="color: #ffc107;"></i>
+                                <span>20/Feb/2026</span>
+                            </div>
+                            <div style="font-size: 12px; color: #ffc107; margin-top: 3px;">
+                                ⏰ Vence en 32 días
+                            </div>
+                        </td>
+                        <td><span class="badge badge-warning">🟡 Pendiente de pago</span></td>
+                        <td>
+                            <div style="display: flex; gap: 5px;">
+                                <button class="btn-icon" onclick="verDetalle('MNE-0470177')" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" onclick="pagarIndividual('MNE-0470177')" title="Pagar ahora" style="background: var(--color-success); color: white;">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr data-estado="verificacion" data-pagador="TRANS JAPAGO PARDO" data-cufe="MNE-0470124">
+                        <td>
+                            <input type="checkbox" class="row-checkbox" disabled style="width: 18px; height: 18px; opacity: 0.3;">
+                        </td>
+                        <td style="font-size: 12px;">MNE-0470124</td>
+                        <td><strong>19916</strong></td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td style="font-weight: 700; color: #666;">$3,050,000</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <i class="fas fa-calendar-alt" style="color: #666;"></i>
+                                <span>10/Feb/2026</span>
+                            </div>
+                            <div style="font-size: 12px; color: #666; margin-top: 3px;">
+                                💸 Pagado: 10/Ene/2026
+                            </div>
+                        </td>
+                        <td><span class="badge badge-info">🟠 En verificación</span></td>
+                        <td>
+                            <div style="display: flex; gap: 5px;">
+                                <button class="btn-icon" onclick="verDetalle('MNE-0470124')" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" onclick="verComprobante('MNE-0470124')" title="Ver comprobante">
+                                    <i class="fas fa-file-pdf"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr data-estado="cerrada" data-pagador="EDGAR OSORIO" data-cufe="MNE-0476101">
+                        <td>
+                            <input type="checkbox" class="row-checkbox" disabled style="width: 18px; height: 18px; opacity: 0.3;">
+                        </td>
+                        <td style="font-size: 12px;">MNE-0476101</td>
+                        <td><strong>19915</strong></td>
+                        <td>EDGAR OSORIO</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$1,200,000</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <i class="fas fa-check-circle" style="color: var(--color-success);"></i>
+                                <span style="color: var(--color-success);">Cerrada</span>
+                            </div>
+                            <div style="font-size: 12px; color: #666; margin-top: 3px;">
+                                ✅ 08/Ene/2026
+                            </div>
+                        </td>
+                        <td><span class="badge badge-success">🟢 Cerrada</span></td>
+                        <td>
+                            <div style="display: flex; gap: 5px;">
+                                <button class="btn-icon" onclick="verDetalle('MNE-0476101')" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" onclick="descargarComprobante('MNE-0476101')" title="Descargar comprobante">
+                                    <i class="fas fa-download"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr data-estado="pendiente" data-pagador="YENNY PAOLA GOMEZ" data-cufe="MNE-0470089">
+                        <td>
+                            <input type="checkbox" class="row-checkbox" data-valor="2100000" onchange="updateSelection()" style="width: 18px; height: 18px; cursor: pointer;">
+                        </td>
+                        <td style="font-size: 12px;">MNE-0470089</td>
+                        <td><strong>19914</strong></td>
+                        <td>YENNY PAOLA GOMEZ</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$2,100,000</td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 5px;">
+                                <i class="fas fa-calendar-alt" style="color: #dc3545;"></i>
+                                <span style="color: #dc3545;">05/Feb/2026</span>
+                            </div>
+                            <div style="font-size: 12px; color: #dc3545; margin-top: 3px;">
+                                ⚠️ Vence en 17 días
+                            </div>
+                        </td>
+                        <td><span class="badge badge-warning">🟡 Pendiente de pago</span></td>
+                        <td>
+                            <div style="display: flex; gap: 5px;">
+                                <button class="btn-icon" onclick="verDetalle('MNE-0470089')" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                                <button class="btn-icon" onclick="pagarIndividual('MNE-0470089')" title="Pagar ahora" style="background: var(--color-success); color: white;">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Actions Footer -->
+        <div class="card" style="margin-top: 20px; background: #f8f9fa;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <div style="font-size: 14px; color: #666; margin-bottom: 5px;">
+                        <span id="selected-count">0</span> facturas seleccionadas
+                    </div>
+                    <div style="font-size: 24px; font-weight: 700; color: var(--color-primary);">
+                        Total: <span id="selected-total">$0</span>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 15px;">
+                    <button class="btn-secondary" onclick="clearSelection()">
+                        <i class="fas fa-times"></i> Limpiar selección
+                    </button>
+                    <button class="btn-primary" id="btn-pagar-seleccionadas" onclick="pagarSeleccionadas()" disabled style="opacity: 0.5;">
+                        <i class="fas fa-dollar-sign"></i> Pagar seleccionadas
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Alert -->
+        <div class="alert alert-info" style="margin-top: 20px;">
+            <strong><i class="fas fa-info-circle"></i> Información:</strong> 
+            Después de vender tus facturas a Carmen, debes pagar el valor de las mismas cuando el gran pagador te pague. Puedes pagar individualmente o seleccionar múltiples facturas para un pago conjunto.
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">Calle 72A # 22 - 07</p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">+57 310 375 4945</p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">info@carmen.com.co</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu scroll functionality
+        function scrollMenu(direction) {
+            const menu = document.getElementById('iconMenu');
+            const scrollAmount = 250;
+            if (direction === 'left') {
+                menu.scrollLeft -= scrollAmount;
+            } else {
+                menu.scrollLeft += scrollAmount;
+            }
+        }
+
+        // Update alert with pending count
+        document.addEventListener('DOMContentLoaded', () => {
+            updatePendingAlert();
+            updateSelection();
+        });
+
+        function updatePendingAlert() {
+            const rows = document.querySelectorAll('tr[data-estado="pendiente"]');
+            let total = 0;
+            rows.forEach(row => {
+                const checkbox = row.querySelector('.row-checkbox');
+                if (checkbox && !checkbox.disabled) {
+                    total += parseFloat(checkbox.dataset.valor);
+                }
+            });
+
+            if (rows.length > 0) {
+                document.getElementById('alert-pendientes').style.display = 'block';
+                document.getElementById('count-pendientes').textContent = rows.length;
+                document.getElementById('total-pendientes').textContent = `$${total.toLocaleString('es-CO')}`;
+            }
+        }
+
+        function toggleSelectAll() {
+            const selectAll = document.getElementById('select-all');
+            const checkboxes = document.querySelectorAll('.row-checkbox:not([disabled])');
+            checkboxes.forEach(cb => cb.checked = selectAll.checked);
+            updateSelection();
+        }
+
+        function updateSelection() {
+            const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+            let total = 0;
+            checkboxes.forEach(cb => {
+                total += parseFloat(cb.dataset.valor || 0);
+            });
+
+            document.getElementById('selected-count').textContent = checkboxes.length;
+            document.getElementById('selected-total').textContent = `$${total.toLocaleString('es-CO')}`;
+
+            const btnPagar = document.getElementById('btn-pagar-seleccionadas');
+            if (checkboxes.length > 0) {
+                btnPagar.disabled = false;
+                btnPagar.style.opacity = '1';
+            } else {
+                btnPagar.disabled = true;
+                btnPagar.style.opacity = '0.5';
+            }
+        }
+
+        function clearSelection() {
+            document.querySelectorAll('.row-checkbox').forEach(cb => cb.checked = false);
+            document.getElementById('select-all').checked = false;
+            updateSelection();
+        }
+
+        function pagarSeleccionadas() {
+            const checkboxes = document.querySelectorAll('.row-checkbox:checked');
+            if (checkboxes.length === 0) {
+                alert('Selecciona al menos una factura para pagar');
+                return;
+            }
+
+            const cufes = Array.from(checkboxes).map(cb => {
+                return cb.closest('tr').dataset.cufe;
+            }).join(',');
+
+            window.location.href = `pagar-factura.html?cufes=${encodeURIComponent(cufes)}`;
+        }
+
+        function pagarIndividual(cufe) {
+            window.location.href = `pagar-factura.html?cufes=${encodeURIComponent(cufe)}`;
+        }
+
+        function verDetalle(cufe) {
+            alert(`Ver detalle de factura ${cufe}\n(Modal por implementar)`);
+        }
+
+        function verComprobante(cufe) {
+            alert(`Ver comprobante de pago de factura ${cufe}\n(Modal por implementar)`);
+        }
+
+        function descargarComprobante(cufe) {
+            alert(`Descargando comprobante de factura ${cufe}...`);
+        }
+
+        function filterTable() {
+            const estado = document.getElementById('filter-estado').value.toLowerCase();
+            const pagador = document.getElementById('filter-pagador').value.toLowerCase();
+            const search = document.getElementById('filter-search').value.toLowerCase();
+
+            const rows = document.querySelectorAll('#tbody-pagos tr');
+            rows.forEach(row => {
+                const rowEstado = row.dataset.estado;
+                const rowPagador = row.dataset.pagador.toLowerCase();
+                const rowCufe = row.dataset.cufe.toLowerCase();
+
+                const matchEstado = !estado || rowEstado === estado;
+                const matchPagador = !pagador || rowPagador.includes(pagador);
+                const matchSearch = !search || rowCufe.includes(search);
+
+                if (matchEstado && matchPagador && matchSearch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function clearFilters() {
+            document.getElementById('filter-estado').value = '';
+            document.getElementById('filter-pagador').value = '';
+            document.getElementById('filter-search').value = '';
+            filterTable();
+        }
+    </script>
+</body>
+</html>
