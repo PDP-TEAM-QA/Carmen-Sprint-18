@@ -63,13 +63,6 @@
                 <div class="icon-card-label">Mis facturas</div>
             </a>
 
-            <a href="mis-liquidaciones.html" class="icon-card">
-                <div class="icon-card-icon">
-                    <i class="fas fa-calculator"></i>
-                </div>
-                <div class="icon-card-label">Mis liquidaciones</div>
-            </a>
-
             <a href="mis-operaciones.html" class="icon-card">
                 <div class="icon-card-icon">
                     <i class="fas fa-exchange-alt"></i>
@@ -99,13 +92,16 @@
                 <button class="tab-button" onclick="switchTab('cargadas')" id="tab-cargadas" style="padding: 15px 30px; border: none; background: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s;">
                     HISTORIAL FACTURAS CARGADAS
                 </button>
+                <button class="tab-button" onclick="switchTab('liquidaciones')" id="tab-liquidaciones" style="padding: 15px 30px; border: none; background: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s;">
+                    MIS LIQUIDACIONES
+                </button>
             </div>
         </div>
 
         <!-- Tab Content: Cargar Factura -->
         <div id="content-cargar" class="tab-content">
             <div class="alert alert-info">
-                <strong><i class="fas fa-info-circle"></i> Carga unificada:</strong> Puedes cargar facturas arrastrando/seleccionando archivos (<b>XML</b> o <b>PDF</b>), digitando/pegando <b>CUFEs</b> o cargando un <b>Excel</b> con CUFEs. El sistema validará automáticamente con Billy.
+                <strong><i class="fas fa-info-circle"></i> Carga unificada:</strong> Puedes cargar facturas arrastrando/seleccionando archivos (<b>XML</b>, <b>ZIP con XMLs</b> o <b>Excel</b> .xlsx/.xls), digitando/pegando <b>CUFEs</b>. El sistema validará automáticamente con Billy.
             </div>
 
             <!-- Panel de carga unificada -->
@@ -119,9 +115,9 @@
                         <i class="fas fa-cloud-arrow-up" style="font-size:42px; color:var(--color-primary)"></i>
                         <div style="margin-top:8px; font-weight:600; color:#333">Arrastra aquí tus archivos o haz clic para seleccionarlos</div>
                         <div style="font-size:13px; color:#666; margin-top:4px">
-                            Tipos soportados: XML, PDF y Excel (.xlsx/.xls) con CUFEs
+                            Tipos soportados: XML, ZIP (con XMLs) y Excel (.xlsx/.xls) con CUFEs
                         </div>
-                        <input id="filePicker" type="file" multiple accept=".xml,.pdf,.xlsx,.xls" style="display:none">
+                        <input id="filePicker" type="file" multiple accept=".xml,.zip,.xlsx,.xls" style="display:none">
                         <div style="margin-top:14px">
                             <button type="button" class="btn-primary" id="btn-browse">
                                 <i class="fas fa-folder-open"></i> Seleccionar archivos
@@ -169,17 +165,18 @@
                                 <thead>
                                     <tr>
                                         <th style="width:50px">#</th>
-                                        <th style="width:120px">Tipo</th>
-                                        <th>Identificador</th>
+                                        <th>Nombre / CUFE</th>
                                         <th>Detalle</th>
-                                        <th style="width:180px">Estado</th>
-                                        <th style="width:140px">Fecha de Pago</th>
+                                        <th style="width:150px">Estado</th>
+                                        <th style="width:120px">Valor Factura</th>
+                                        <th style="width:130px">Fecha de Pago</th>
+                                        <th style="width:100px">Días Fondear</th>
                                         <th style="width:100px">Acción</th>
                                     </tr>
                                 </thead>
                                 <tbody id="tbody-cargas">
                                     <tr>
-                                        <td colspan="7" style="text-align:center; color:#999; padding:30px">
+                                        <td colspan="8" style="text-align:center; color:#999; padding:30px">
                                             <i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>
                                             No hay elementos en la cola. Arrastra archivos o ingresa CUFEs para comenzar.
                                         </td>
@@ -391,7 +388,295 @@
         <div class="alert alert-info" style="margin-top: 20px;">
             <strong><i class="fas fa-info-circle"></i> Información:</strong> Solo las facturas con estado "Negociable: SÍ" pueden ser vendidas. Las facturas deben estar a crédito (Estado 30 - Crédito), aceptadas (Estado 33 - Aceptada o Estado 34 - Tácita), no vencidas y con cupo disponible del gran pagador.
         </div>
+        </div>
+
+        <!-- Tab Content: Mis Liquidaciones -->
+        <div id="content-liquidaciones" class="tab-content" style="display: none;">
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label>Fecha Inicio</label>
+                        <input type="date" value="2026-01-01">
+                    </div>
+                    <div class="filter-group">
+                        <label>Fecha Fin</label>
+                        <input type="date" value="2026-01-31">
+                    </div>
+                    <div class="filter-group">
+                        <label>Estado</label>
+                        <select>
+                            <option value="">Todos</option>
+                            <option value="pendiente">Pendiente aprobación</option>
+                            <option value="aprobada">Aprobada</option>
+                            <option value="rechazada">Rechazada</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn-primary" style="width: 100%;">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#Liquidación</th>
+                            <th>CUFE</th>
+                            <th>Gran Pagador</th>
+                            <th>Valor Factura</th>
+                            <th>Descuento</th>
+                            <th>Valor a Recibir</th>
+                            <th>Destino</th>
+                            <th>Estado</th>
+                            <th>Estado Pago</th>
+                            <th>Tiempo</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>LIQ-001456</strong></td>
+                            <td>MNE-0470033</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>$5,432,140</td>
+                            <td style="color: var(--color-danger);">-$282,140</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$5,150,000</td>
+                            <td>
+                                <span class="badge badge-info">💳 Cupo crédito</span>
+                            </td>
+                            <td><span class="badge badge-success">Aprobada</span></td>
+                            <td>
+                                <span class="badge badge-warning">🟡 Pendiente</span>
+                                <div style="font-size: 11px; color: #666; margin-top: 3px;">Vence en 27 días</div>
+                            </td>
+                            <td>Hace 2 horas</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-icon-view" onclick="openModal('modal-1456')" title="Ver detalle">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>LIQ-001455</td>
+                            <td>MNE-0470177</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>$7,414,910</td>
+                            <td style="color: var(--color-danger);">-$364,910</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$7,050,000</td>
+                            <td>
+                                <span class="badge badge-info">💰 Mi cash</span>
+                            </td>
+                            <td><span class="badge badge-success">Aprobada</span></td>
+                            <td>
+                                <span class="badge badge-warning">🟡 Pendiente</span>
+                                <div style="font-size: 11px; color: #666; margin-top: 3px;">Vence en 32 días</div>
+                            </td>
+                            <td>Hace 3 días</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-icon-view" onclick="openModal('modal-1455')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>LIQ-001450</td>
+                            <td>MNE-0470124</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>$3,215,960</td>
+                            <td style="color: var(--color-danger);">-$165,960</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$3,050,000</td>
+                            <td>
+                                <span class="badge badge-info">🏦 Cuenta propia</span>
+                            </td>
+                            <td><span class="badge badge-success">Aprobada</span></td>
+                            <td>
+                                <span class="badge" style="background: #ff9800; color: white;">🟠 En verificación</span>
+                                <div style="font-size: 11px; color: #666; margin-top: 3px;">Pagado el 10/Ene</div>
+                            </td>
+                            <td>Hace 5 días</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-icon-view" onclick="openModal('modal-1450')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>LIQ-001442</td>
+                            <td>MNE-0476101</td>
+                            <td>ROSERO BENAVIDES CARLOS</td>
+                            <td>$1,276,870</td>
+                            <td style="color: var(--color-danger);">-$76,870</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$1,200,000</td>
+                            <td>
+                                <span class="badge badge-info">💰 Mi cash</span>
+                            </td>
+                            <td><span class="badge badge-danger">Rechazada</span></td>
+                            <td>
+                                <span class="badge badge-success">🟢 Cerrada</span>
+                                <div style="font-size: 11px; color: var(--color-success); margin-top: 3px;">Cupo liberado</div>
+                            </td>
+                            <td>Hace 1 semana</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-icon-view" onclick="openModal('modal-1442')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Info Alert -->
+            <div class="alert alert-info" style="margin-top: 20px;">
+                <strong><i class="fas fa-info-circle"></i> Información:</strong> Este es el historial de todas las liquidaciones generadas. Las liquidaciones ya han sido confirmadas durante el proceso de venta de facturas.
+            </div>
+        </div>
     </main>
+
+    <!-- Modal Detalle Liquidación -->
+    <div id="modal-1456" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal-1456')">&times;</span>
+            <h2 class="modal-header">
+                <i class="fas fa-file-invoice-dollar"></i> Detalle de Liquidación LIQ-001456
+            </h2>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                    <div>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 5px;">CUFE</div>
+                        <div style="font-weight: 600;">MNE-0470033</div>
+                    </div>
+                    <div>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 5px;">N° Factura</div>
+                        <div style="font-weight: 600;">19917</div>
+                    </div>
+                    <div>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 5px;">Gran Pagador</div>
+                        <div style="font-weight: 600;">TRANS JAPAGO PARDO</div>
+                    </div>
+                    <div>
+                        <div style="color: #666; font-size: 14px; margin-bottom: 5px;">Fecha Vencimiento</div>
+                        <div style="font-weight: 600;">15 de Febrero de 2026</div>
+                    </div>
+                </div>
+
+                <hr style="border: none; border-top: 2px solid #ddd; margin: 20px 0;">
+
+                <div style="font-size: 16px;">
+                    <div style="display: flex; justify-content: space-between; margin: 15px 0;">
+                        <span>Valor de la factura:</span>
+                        <strong>$5,432,140</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 15px 0; color: var(--color-danger);">
+                        <span>(-) Descuento por adelanto (3.5%):</span>
+                        <strong>-$190,125</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 15px 0; color: var(--color-danger);">
+                        <span>(-) Intereses (1.2%):</span>
+                        <strong>-$65,186</strong>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin: 15px 0; color: var(--color-danger);">
+                        <span>(-) Comisión Carmen (0.5%):</span>
+                        <strong>-$26,829</strong>
+                    </div>
+                    
+                    <hr style="border: none; border-top: 2px solid var(--color-primary); margin: 20px 0;">
+                    
+                    <div style="display: flex; justify-content: space-between; margin: 15px 0; font-size: 20px;">
+                        <strong>Valor neto a recibir:</strong>
+                        <strong style="color: var(--color-success);">$5,150,000</strong>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: white; border-radius: 8px;">
+                    <div style="color: #666; font-size: 14px; margin-bottom: 5px;">Destino seleccionado:</div>
+                    <div style="font-size: 18px; font-weight: 600; color: var(--color-primary);">
+                        💳 Cupo de Crédito
+                    </div>
+                    <div style="color: #666; font-size: 14px; margin-top: 10px;">
+                        El valor será agregado inmediatamente a su cupo disponible en Carmen
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin: 20px 0; padding: 15px; background: #e8f5e9; border-radius: 8px; border-left: 4px solid var(--color-success);">
+                <strong><i class="fas fa-info-circle"></i> Información:</strong>
+                <p style="margin: 10px 0 0 0;">Esta liquidación fue confirmada durante el proceso de venta. El dinero será desembolsado según el destino seleccionado.</p>
+            </div>
+
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <button class="btn-secondary" onclick="closeModal('modal-1456')" style="padding: 12px 40px;">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modales adicionales para otras liquidaciones -->
+    <div id="modal-1455" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal-1455')">&times;</span>
+            <h2 class="modal-header">
+                <i class="fas fa-file-invoice-dollar"></i> Detalle de Liquidación LIQ-001455
+            </h2>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p style="text-align: center; color: #666;">Detalle de liquidación LIQ-001455</p>
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <button class="btn-secondary" onclick="closeModal('modal-1455')" style="padding: 12px 40px;">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-1450" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal-1450')">&times;</span>
+            <h2 class="modal-header">
+                <i class="fas fa-file-invoice-dollar"></i> Detalle de Liquidación LIQ-001450
+            </h2>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p style="text-align: center; color: #666;">Detalle de liquidación LIQ-001450</p>
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <button class="btn-secondary" onclick="closeModal('modal-1450')" style="padding: 12px 40px;">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-1442" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal('modal-1442')">&times;</span>
+            <h2 class="modal-header">
+                <i class="fas fa-file-invoice-dollar"></i> Detalle de Liquidación LIQ-001442
+            </h2>
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <p style="text-align: center; color: #666;">Detalle de liquidación LIQ-001442</p>
+            </div>
+            <div style="display: flex; justify-content: center; margin-top: 20px;">
+                <button class="btn-secondary" onclick="closeModal('modal-1442')" style="padding: 12px 40px;">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -532,10 +817,11 @@
             
             const cufes = vendibles.map(v => v.identificador).join(',');
             const fechas = vendibles.map(v => v._fechaPago).join(',');
-            window.location.href = `vender-factura.html?cufes=${encodeURIComponent(cufes)}&fechas=${encodeURIComponent(fechas)}&multiple=true`;
+            const valores = vendibles.map(v => v._valor || 0).join(',');
+            window.location.href = `vender-factura.html?cufes=${encodeURIComponent(cufes)}&fechas=${encodeURIComponent(fechas)}&valores=${encodeURIComponent(valores)}&multiple=true`;
         }
 
-        function addRow(item) {
+        function addRow(item, isChild = false, parentItem = null) {
             queue.push(item);
             const tbody = document.getElementById('tbody-cargas');
             
@@ -546,15 +832,42 @@
 
             const row = document.createElement('tr');
             item._row = row;
+            item._isChild = isChild;
+            item._children = [];
+            
+            // Determinar si es un contenedor (ZIP o Excel)
+            const isContainer = item.tipo === 'ZIP' || item.tipo === 'EXCEL';
+            
+            // Estilo para filas hijas
+            const childStyle = isChild ? 'background: #f8f9fa; border-left: 4px solid var(--color-primary);' : '';
+            row.style.cssText = childStyle;
+            
+            // Columna de número: vacía para contenedores, indentada para hijos
+            let numberCell = '';
+            if (isContainer) {
+                numberCell = `<td>
+                    <button class="btn-expand" style="background: none; border: none; cursor: pointer; font-size: 16px; color: var(--color-primary); padding: 4px 8px;" title="Expandir/Colapsar">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </td>`;
+            } else if (isChild) {
+                numberCell = `<td style="padding-left: 30px; color: #666;"><i class="fas fa-level-up-alt" style="transform: rotate(90deg); font-size: 12px; opacity: 0.5;"></i></td>`;
+            } else {
+                const num = queue.filter(q => !q._isChild && q.tipo !== 'ZIP' && q.tipo !== 'EXCEL').length;
+                numberCell = `<td><strong>${num}</strong></td>`;
+            }
 
             row.innerHTML = `
-                <td><strong>${queue.length}</strong></td>
-                <td>${formatOrigen(item.tipo)}</td>
-                <td style="font-size:12px">${escapeHtml(item.identificador)}</td>
+                ${numberCell}
+                <td style="font-size:12px">${formatNombreConIcono(item)}</td>
                 <td class="detalle-cell" style="font-size:13px">${escapeHtml(item.detalle || '')}</td>
                 <td class="estado-cell">${renderBadge('Pendiente','secondary')}</td>
+                <td class="valor-cell" style="font-weight:600; color:#333;">-</td>
                 <td class="fecha-pago-cell">
                     <input type="date" class="fecha-pago-input" style="width:100%; padding:6px; border:1px solid var(--color-border); border-radius:4px; font-size:13px;" disabled>
+                </td>
+                <td class="dias-fondear-cell">
+                    <input type="number" class="dias-fondear-input" min="1" max="365" placeholder="Días" style="width:100%; padding:6px; border:1px solid var(--color-border); border-radius:4px; font-size:13px;" disabled>
                 </td>
                 <td class="accion-cell" style="text-align: center;">
                     <div style="display: inline-flex; gap: 8px; align-items: center; justify-content: center;">
@@ -567,47 +880,214 @@
                     </div>
                 </td>
             `;
+            
+            // Evento expandir/colapsar para contenedores
+            if (isContainer) {
+                const btnExpand = row.querySelector('.btn-expand');
+                item._expanded = true;
+                btnExpand.addEventListener('click', () => {
+                    item._expanded = !item._expanded;
+                    const icon = btnExpand.querySelector('i');
+                    icon.className = item._expanded ? 'fas fa-chevron-down' : 'fas fa-chevron-right';
+                    
+                    // Mostrar/ocultar filas hijas
+                    item._children.forEach(child => {
+                        child._row.style.display = item._expanded ? '' : 'none';
+                    });
+                });
+            }
+            
             row.querySelector('.btn-icon-delete').addEventListener('click', () => {
+                // Si es contenedor, eliminar también sus hijos
+                if (isContainer && item._children) {
+                    item._children.forEach(child => {
+                        tbody.removeChild(child._row);
+                        queue = queue.filter(q => q !== child);
+                    });
+                }
+                
                 tbody.removeChild(row);
                 queue = queue.filter(q => q !== item);
+                
+                // Si es hijo, quitarlo de la lista del padre
+                if (parentItem) {
+                    parentItem._children = parentItem._children.filter(c => c !== item);
+                }
+                
                 reindexRows();
                 refreshButtonsState();
                 if (queue.length === 0) {
-                    tbody.innerHTML = '<tr><td colspan="7" style="text-align:center; color:#999; padding:30px"><i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>No hay elementos en la cola.</td></tr>';
+                    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#999; padding:30px"><i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>No hay elementos en la cola.</td></tr>';
                 }
             });
             
-            // Fecha de pago
+            // Fecha de pago y días a fondear (cálculo bidireccional)
             const dateInput = row.querySelector('.fecha-pago-input');
+            const diasInput = row.querySelector('.dias-fondear-input');
             item._fechaPago = null;
+            item._diasFondear = null;
             
+            // Cambio en fecha de pago -> calcular días
             dateInput.addEventListener('change', (e) => {
                 if (e.target.value) {
                     item._fechaPago = e.target.value;
                     dateInput.style.borderColor = 'var(--color-success)';
                     dateInput.style.background = '#d4edda';
+                    
+                    // Calcular días desde hoy hasta fecha de pago
+                    const hoy = new Date();
+                    const fechaPago = new Date(e.target.value);
+                    const diffTime = fechaPago - hoy;
+                    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+                    
+                    if (diffDays > 0) {
+                        diasInput.value = diffDays;
+                        item._diasFondear = diffDays;
+                        diasInput.style.borderColor = 'var(--color-success)';
+                        diasInput.style.background = '#d4edda';
+                    }
+                    
+                    // Si es padre, propagar a hijos
+                    if (isContainer && item._children) {
+                        item._children.forEach(child => {
+                            const childDateInput = child._row.querySelector('.fecha-pago-input');
+                            const childDiasInput = child._row.querySelector('.dias-fondear-input');
+                            if (childDateInput && !childDateInput.disabled) {
+                                childDateInput.value = e.target.value;
+                                childDiasInput.value = diffDays > 0 ? diffDays : '';
+                                child._fechaPago = e.target.value;
+                                child._diasFondear = diffDays > 0 ? diffDays : null;
+                                childDateInput.style.borderColor = 'var(--color-success)';
+                                childDateInput.style.background = '#d4edda';
+                                childDiasInput.style.borderColor = 'var(--color-success)';
+                                childDiasInput.style.background = '#d4edda';
+                                enableSellButton(child);
+                            }
+                        });
+                    }
+                    
+                    // Si es hijo, limpiar campos del padre
+                    if (isChild && parentItem) {
+                        const parentDateInput = parentItem._row.querySelector('.fecha-pago-input');
+                        const parentDiasInput = parentItem._row.querySelector('.dias-fondear-input');
+                        if (parentDateInput) {
+                            parentDateInput.value = '';
+                            parentDiasInput.value = '';
+                            parentItem._fechaPago = null;
+                            parentItem._diasFondear = null;
+                            parentDateInput.style.borderColor = 'var(--color-border)';
+                            parentDateInput.style.background = 'white';
+                            parentDiasInput.style.borderColor = 'var(--color-border)';
+                            parentDiasInput.style.background = 'white';
+                        }
+                    }
+                    
+                    enableSellButton(item);
+                    refreshButtonsState();
+                }
+            });
+            
+            // Cambio en días -> calcular fecha de pago
+            diasInput.addEventListener('input', (e) => {
+                const dias = parseInt(e.target.value);
+                if (dias && dias > 0) {
+                    item._diasFondear = dias;
+                    diasInput.style.borderColor = 'var(--color-success)';
+                    diasInput.style.background = '#d4edda';
+                    
+                    // Calcular fecha de pago sumando días a hoy
+                    const hoy = new Date();
+                    const fechaPago = new Date(hoy);
+                    fechaPago.setDate(hoy.getDate() + dias);
+                    
+                    const fechaStr = fechaPago.toISOString().split('T')[0];
+                    dateInput.value = fechaStr;
+                    item._fechaPago = fechaStr;
+                    dateInput.style.borderColor = 'var(--color-success)';
+                    dateInput.style.background = '#d4edda';
+                    
+                    // Si es padre, propagar a hijos
+                    if (isContainer && item._children) {
+                        item._children.forEach(child => {
+                            const childDateInput = child._row.querySelector('.fecha-pago-input');
+                            const childDiasInput = child._row.querySelector('.dias-fondear-input');
+                            if (childDateInput && !childDateInput.disabled) {
+                                childDateInput.value = fechaStr;
+                                childDiasInput.value = dias;
+                                child._fechaPago = fechaStr;
+                                child._diasFondear = dias;
+                                childDateInput.style.borderColor = 'var(--color-success)';
+                                childDateInput.style.background = '#d4edda';
+                                childDiasInput.style.borderColor = 'var(--color-success)';
+                                childDiasInput.style.background = '#d4edda';
+                                enableSellButton(child);
+                            }
+                        });
+                    }
+                    
+                    // Si es hijo, limpiar campos del padre
+                    if (isChild && parentItem) {
+                        const parentDateInput = parentItem._row.querySelector('.fecha-pago-input');
+                        const parentDiasInput = parentItem._row.querySelector('.dias-fondear-input');
+                        if (parentDateInput) {
+                            parentDateInput.value = '';
+                            parentDiasInput.value = '';
+                            parentItem._fechaPago = null;
+                            parentItem._diasFondear = null;
+                            parentDateInput.style.borderColor = 'var(--color-border)';
+                            parentDateInput.style.background = 'white';
+                            parentDiasInput.style.borderColor = 'var(--color-border)';
+                            parentDiasInput.style.background = 'white';
+                        }
+                    }
+                    
+                    enableSellButton(item);
+                    refreshButtonsState();
                 }
             });
 
             tbody.appendChild(row);
+            
+            // Si es hijo, agregarlo a la lista del padre
+            if (parentItem) {
+                parentItem._children.push(item);
+            }
+            
             refreshButtonsState();
             simulateProcess(item);
         }
 
         function reindexRows() {
-            Array.from(document.querySelectorAll('#tbody-cargas tr')).forEach((tr, i) => {
-                if (tr.children[0]) tr.children[0].innerHTML = `<strong>${i+1}</strong>`;
+            let num = 1;
+            Array.from(document.querySelectorAll('#tbody-cargas tr')).forEach((tr) => {
+                const item = queue.find(q => q._row === tr);
+                if (item && !item._isChild && item.tipo !== 'ZIP' && item.tipo !== 'EXCEL') {
+                    if (tr.children[0]) tr.children[0].innerHTML = `<strong>${num}</strong>`;
+                    num++;
+                }
             });
         }
 
-        function formatOrigen(tipo) {
-            const map = { 
-                XML:'<i class="fas fa-file-code" style="color:var(--color-primary)"></i> XML',
-                PDF:'<i class="fas fa-file-pdf" style="color:var(--color-danger)"></i> PDF',
-                EXCEL:'<i class="fas fa-file-excel" style="color:#2e7d32"></i> Excel',
-                CUFE:'<i class="fas fa-hashtag" style="color:#6a1b9a"></i> CUFE' 
-            };
-            return map[tipo] || tipo;
+        function formatNombreConIcono(item) {
+            const identificador = escapeHtml(item.identificador);
+            
+            if (item.tipo === 'CUFE') {
+                return `<i class="fas fa-hashtag" style="color:#6a1b9a"></i> ${identificador}`;
+            }
+            
+            // Detectar extensión
+            const ext = (item.identificador.split('.').pop() || '').toLowerCase();
+            let icon = '<i class="fas fa-file" style="color:#999"></i>';
+            
+            if (ext === 'xml') {
+                icon = '<i class="fas fa-file-code" style="color:var(--color-primary)"></i>';
+            } else if (ext === 'xlsx' || ext === 'xls') {
+                icon = '<i class="fas fa-file-excel" style="color:#2e7d32"></i>';
+            } else if (ext === 'zip') {
+                icon = '<i class="fas fa-file-archive" style="color:#ff9800"></i>';
+            }
+            
+            return `${icon} ${identificador}`;
         }
 
         function renderBadge(text, type) {
@@ -631,10 +1111,12 @@
                 const ext = (file.name.split('.').pop() || '').toLowerCase();
                 if (ext === 'xml') {
                     addRow({ tipo:'XML', identificador:file.name, detalle:'Lectura de XML y extracción de CUFE' });
-                } else if (ext === 'pdf') {
-                    addRow({ tipo:'PDF', identificador:file.name, detalle:'Lectura de PDF' });
+                } else if (ext === 'zip') {
+                    addRow({ tipo:'ZIP', identificador:file.name, detalle:'Descomprimiendo archivo ZIP y extrayendo XMLs' });
                 } else if (ext === 'xlsx' || ext === 'xls') {
                     addRow({ tipo:'EXCEL', identificador:file.name, detalle:'Importando CUFEs desde plantilla' });
+                } else {
+                    alert(`Archivo no soportado: ${file.name}\nSolo se aceptan archivos XML, ZIP y Excel (.xlsx/.xls)`);
                 }
             });
         }
@@ -657,6 +1139,26 @@
             setTimeout(() => { estadoCell().innerHTML = renderBadge('Procesando','info'); }, 200);
 
             setTimeout(() => {
+                // Procesar XML igual que CUFE (simular extracción de CUFE y validación)
+                if (item.tipo === 'XML') {
+                    estadoCell().innerHTML = renderBadge('✅ OK - Validado','success');
+                    detalleCell().textContent = 'XML procesado, CUFE extraído y validado con Billy (mock)';
+                    
+                    // Generar valor aleatorio de factura
+                    const valor = Math.floor(Math.random() * 9000000) + 1000000; // $1M - $10M
+                    const valorCell = item._row.querySelector('.valor-cell');
+                    valorCell.textContent = '$' + valor.toLocaleString('es-CO');
+                    item._valorFactura = valor;
+                    
+                    // Habilitar fecha de pago y días
+                    const dateInput = item._row.querySelector('.fecha-pago-input');
+                    const diasInput = item._row.querySelector('.dias-fondear-input');
+                    dateInput.disabled = false;
+                    diasInput.disabled = false;
+                    return;
+                }
+                
+                // Procesar CUFE manual
                 if (item.tipo === 'CUFE') {
                     console.log('Validando CUFE:', item.identificador);
                     console.log('Es duplicado?', CUFES_DUPLICADOS.has(item.identificador));
@@ -675,41 +1177,109 @@
                     estadoCell().innerHTML = renderBadge('✅ OK - Validado','success');
                     detalleCell().textContent = 'Validado con Billy - Factura encontrada (mock)';
                     
-                    // Habilitar fecha de pago
+                    // Generar valor aleatorio de factura
+                    const valor = Math.floor(Math.random() * 9000000) + 1000000; // $1M - $10M
+                    const valorCell = item._row.querySelector('.valor-cell');
+                    valorCell.textContent = '$' + valor.toLocaleString('es-CO');
+                    item._valorFactura = valor;
+                    
+                    // Habilitar fecha de pago y días
                     const dateInput = item._row.querySelector('.fecha-pago-input');
+                    const diasInput = item._row.querySelector('.dias-fondear-input');
                     dateInput.disabled = false;
-                    
-                    // Habilitar botón de vender cuando se seleccione fecha de pago
-                    dateInput.addEventListener('change', () => {
-                        if (dateInput.value) {
-                            item._fechaPago = dateInput.value;
-                            enableSellButton(item);
-                            refreshButtonsState();
-                        }
-                    });
-                    
+                    diasInput.disabled = false;
                     return;
                 }
 
                 if (item.tipo === 'EXCEL') {
-                    estadoCell().innerHTML = renderBadge('Cargado (5 CUFEs)','success');
-                    detalleCell().textContent = 'Se importaron 5 CUFEs desde la plantilla (mock)';
+                    const numCUFEs = 5;
+                    estadoCell().innerHTML = renderBadge(`✅ ${numCUFEs} CUFEs importados`,'success');
+                    detalleCell().textContent = `Se importaron ${numCUFEs} CUFEs desde la plantilla`;
+                    
+                    // Habilitar fecha de pago y días en el padre Excel
+                    const dateInput = item._row.querySelector('.fecha-pago-input');
+                    const diasInput = item._row.querySelector('.dias-fondear-input');
+                    dateInput.disabled = false;
+                    diasInput.disabled = false;
+                    
+                    // Agregar CUFEs como hijos
                     ['CUFE_EXCEL_001','CUFE_EXCEL_002','CUFE_EXCEL_003','CUFE_EXCEL_004','CUFE_EXCEL_005']
-                        .forEach(code => addRow({ tipo:'CUFE', identificador:code, detalle:`Importado de ${item.identificador}` }));
+                        .forEach(code => addRow({ 
+                            tipo:'CUFE', 
+                            identificador:code, 
+                            detalle:`Importado de ${item.identificador}` 
+                        }, true, item));
+                    
+                    // Esperar a que los hijos se validen y calcular suma total
+                    setTimeout(() => {
+                        let totalValor = 0;
+                        item._children.forEach(child => {
+                            if (child._valorFactura) {
+                                totalValor += child._valorFactura;
+                            }
+                        });
+                        
+                        if (totalValor > 0) {
+                            const valorCell = item._row.querySelector('.valor-cell');
+                            valorCell.textContent = '$' + totalValor.toLocaleString('es-CO');
+                            valorCell.style.fontWeight = '700';
+                            valorCell.style.color = 'var(--color-primary)';
+                            item._valorFactura = totalValor;
+                        }
+                    }, 2000); // Esperar a que todos los hijos se validen
+                    
                     return;
                 }
 
-                estadoCell().innerHTML = renderBadge('OK - Cargado','success');
-                detalleCell().textContent = item.tipo === 'XML'
-                    ? 'CUFE detectado y enviado a validación (mock)'
-                    : 'PDF cargado y en proceso de asociación (mock)';
+                if (item.tipo === 'ZIP') {
+                    estadoCell().innerHTML = renderBadge('Extrayendo XMLs...','info');
+                    setTimeout(() => {
+                        const numXMLs = Math.floor(Math.random() * 5) + 3; // 3-7 XMLs
+                        estadoCell().innerHTML = renderBadge(`✅ ${numXMLs} XMLs extraídos`,'success');
+                        detalleCell().textContent = `Se extrajeron ${numXMLs} archivos XML del ZIP`;
+                        
+                        // Habilitar fecha de pago y días en el padre ZIP
+                        const dateInput = item._row.querySelector('.fecha-pago-input');
+                        const diasInput = item._row.querySelector('.dias-fondear-input');
+                        dateInput.disabled = false;
+                        diasInput.disabled = false;
+                        
+                        // Agregar los XMLs extraídos como hijos
+                        for (let i = 1; i <= numXMLs; i++) {
+                            addRow({ 
+                                tipo:'XML', 
+                                identificador:`factura_${i}.xml`, 
+                                detalle:`Extraído de ${item.identificador}` 
+                            }, true, item);
+                        }
+                        
+                        // Esperar a que los hijos se validen y calcular suma total
+                        setTimeout(() => {
+                            let totalValor = 0;
+                            item._children.forEach(child => {
+                                if (child._valorFactura) {
+                                    totalValor += child._valorFactura;
+                                }
+                            });
+                            
+                            if (totalValor > 0) {
+                                const valorCell = item._row.querySelector('.valor-cell');
+                                valorCell.textContent = '$' + totalValor.toLocaleString('es-CO');
+                                valorCell.style.fontWeight = '700';
+                                valorCell.style.color = 'var(--color-primary)';
+                                item._valorFactura = totalValor;
+                            }
+                        }, 2000); // Esperar a que todos los hijos se validen
+                    }, 1500);
+                    return;
+                }
             }, 1000 + Math.random()*800);
         }
 
         function clearQueue() {
             if (!confirm('¿Seguro que deseas limpiar toda la cola?')) return;
             queue = [];
-            document.getElementById('tbody-cargas').innerHTML = '<tr><td colspan="7" style="text-align:center; color:#999; padding:30px"><i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>No hay elementos en la cola.</td></tr>';
+            document.getElementById('tbody-cargas').innerHTML = '<tr><td colspan="8" style="text-align:center; color:#999; padding:30px"><i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>No hay elementos en la cola.</td></tr>';
             refreshButtonsState();
         }
 
@@ -720,8 +1290,24 @@
                 btnVender.style.opacity = '1';
                 btnVender.style.cursor = 'pointer';
                 btnVender.onclick = () => {
-                    window.location.href = `vender-factura.html?cufe=${encodeURIComponent(item.identificador)}&fecha=${item._fechaPago}`;
+                    window.location.href = `vender-factura.html?cufe=${encodeURIComponent(item.identificador)}&fecha=${item._fechaPago}&valor=${item._valor || 0}`;
                 };
+            }
+        }
+
+        // Funciones para modales de liquidaciones
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.add('active');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.classList.remove('active');
             }
         }
     </script>
