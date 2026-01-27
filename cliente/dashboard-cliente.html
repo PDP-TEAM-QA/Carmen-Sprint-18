@@ -81,49 +81,17 @@
             </button>
         </div>
 
-        <!-- Welcome Section -->
-        <div class="card">
-            <h2 class="card-header">Bienvenido al Sistema de Factoring</h2>
-            <div class="card-body">
-                <p style="margin-bottom: 20px;">Administre sus facturas, solicite liquidaciones y consulte el estado de sus operaciones de factoring.</p>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-label">Cupo Disponible</div>
-                        <div class="stat-value">$5,000,000</div>
-                        <div class="progress-bar" style="margin-top: 15px;">
-                            <div class="progress-fill success" style="width: 75%;"></div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-label">Facturas Disponibles</div>
-                        <div class="stat-value">12</div>
-                        <p style="color: #666; font-size: 12px; margin-top: 10px;">Elegibles para vender</p>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-label">Operaciones en Proceso</div>
-                        <div class="stat-value">3</div>
-                        <p style="color: #666; font-size: 12px; margin-top: 10px;">Pendientes de aprobación</p>
-                    </div>
-
-                    <div class="stat-card">
-                        <div class="stat-label">Total Negociado (Mes)</div>
-                        <div class="stat-value">$28M</div>
-                        <p style="color: #666; font-size: 12px; margin-top: 10px;">Enero 2026</p>
-                    </div>
-                </div>
+        <!-- Welcome Message -->
+        <div class="card" style="background: linear-gradient(135deg, var(--color-primary) 0%, #1a5490 100%); color: white; border: none;">
+            <div style="padding: 30px; text-align: center;">
+                <h2 style="color: white; margin-bottom: 15px; font-size: 28px;">
+                    <i class="fas fa-hand-sparkles" style="margin-right: 10px;"></i>
+                    ¡Bienvenido a Carmen Factoring!
+                </h2>
+                <p style="color: rgba(255,255,255,0.95); font-size: 16px; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+                    Convierte tus facturas en liquidez inmediata. Obtén financiamiento sobre tus cuentas por cobrar y mejora el flujo de caja de tu empresa sin esperar a que tus clientes paguen. Con Carmen, tu capital de trabajo siempre disponible.
+                </p>
             </div>
-        </div>
-
-        <!-- Pagos Pendientes Alert -->
-        <div class="alert alert-warning">
-            <strong><i class="fas fa-exclamation-triangle"></i> Atención:</strong>
-            Tienes <strong>3 pagos pendientes</strong> a Carmen por un total de <strong>$18,614,637</strong>.
-            <a href="mis-pagos-carmen.html" style="color: var(--color-primary); text-decoration: underline; margin-left: 10px;">
-                <i class="fas fa-arrow-right"></i> Ir a Mis Pagos
-            </a>
         </div>
 
         <!-- Quick Actions -->
@@ -133,39 +101,179 @@
                 <a href="mis-facturas.html" class="btn-primary" style="padding: 15px 30px;">
                     <i class="fas fa-plus"></i> Vender Nueva Factura
                 </a>
-                <a href="mis-operaciones.html" class="btn-secondary" style="padding: 15px 30px;">
-                    <i class="fas fa-history"></i> Historial de Operaciones
+                <a href="pagar-facturas.html" class="btn-secondary" style="padding: 15px 30px;">
+                    <i class="fas fa-money-bill-wave"></i> Pagar Facturas
                 </a>
-                <a href="mis-pagos-carmen.html" class="btn-secondary" style="padding: 15px 30px; background: #ffc107; border-color: #ffc107; color: #333;">
-                    <i class="fas fa-hand-holding-usd"></i> Mis Pagos a Carmen
+                <a href="crear-pagador.html" class="btn-secondary" style="padding: 15px 30px;">
+                    <i class="fas fa-user-plus"></i> Crear Pagador
                 </a>
             </div>
         </div>
 
-        <!-- Recent Activity -->
+        <!-- Dashboard Stats -->
         <div class="card">
-            <h3 class="card-header">Actividad Reciente</h3>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-marker completed"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">Operación #21007 Completada</div>
-                        <div class="timeline-time">Hace 2 horas - $5,200,000 desembolsado a Mi cash</div>
+            <h2 class="card-header">Resumen de Operaciones</h2>
+            <div class="card-body">
+                <!-- Saldos Row -->
+                <div style="margin-bottom: 40px;">
+                    <h3 style="color: var(--color-primary); margin-bottom: 20px; font-size: 18px; font-weight: 600;">
+                        <i class="fas fa-dollar-sign"></i> Saldos
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                        <div onclick="mostrarDetalle('saldos', 'vigentes')" style="background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.12); border-left: 4px solid #28a745; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(40, 167, 69, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(40, 167, 69, 0.12)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(40, 167, 69, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-check-circle" style="color: #28a745; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: #666; font-weight: 500;">Saldos Vigentes</div>
+                            </div>
+                            <div style="font-size: 28px; font-weight: 700; color: #28a745; margin-bottom: 8px;">$15,450,000</div>
+                            <p style="color: #28a745; font-size: 12px; margin: 0; font-weight: 500;">Al día</p>
+                        </div>
+                        <div onclick="mostrarDetalle('saldos', 'mora')" style="background: linear-gradient(135deg, #ffebee 0%, #ffffff 100%); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.12); border-left: 4px solid #dc3545; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(220, 53, 69, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.12)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(220, 53, 69, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-exclamation-circle" style="color: #dc3545; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: #666; font-weight: 500;">Saldos en Mora</div>
+                            </div>
+                            <div style="font-size: 28px; font-weight: 700; color: #dc3545; margin-bottom: 8px;">$2,890,000</div>
+                            <p style="color: #dc3545; font-size: 12px; margin: 0; font-weight: 500;">Vencidos</p>
+                        </div>
+                        <div onclick="mostrarDetalle('saldos', 'cobranza')" style="background: linear-gradient(135deg, #fff8e1 0%, #ffffff 100%); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.12); border-left: 4px solid #ffc107; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(255, 193, 7, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 193, 7, 0.12)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(255, 193, 7, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-clock" style="color: #ffc107; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: #666; font-weight: 500;">Saldos en Cobranza</div>
+                            </div>
+                            <div style="font-size: 28px; font-weight: 700; color: #ffc107; margin-bottom: 8px;">$1,250,000</div>
+                            <p style="color: #ffc107; font-size: 12px; margin: 0; font-weight: 500;">En gestión</p>
+                        </div>
+                        <div onclick="mostrarDetalle('saldos', 'total')" style="background: linear-gradient(135deg, var(--color-primary) 0%, #1a5490 100%); padding: 25px; border-radius: 16px; box-shadow: 0 6px 20px rgba(34, 82, 147, 0.25); border: none; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'; this.style.boxShadow='0 10px 30px rgba(34, 82, 147, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 6px 20px rgba(34, 82, 147, 0.25)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(255, 255, 255, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-chart-line" style="color: white; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: rgba(255,255,255,0.95); font-weight: 600;">Total Saldos</div>
+                            </div>
+                            <div style="font-size: 32px; font-weight: 800; color: white; margin-bottom: 8px;">$19,590,000</div>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 12px; margin: 0; font-weight: 500;">Acumulado</p>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker in-progress"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">Liquidación #1456 Pendiente de Aprobación</div>
-                        <div class="timeline-time">Hace 4 horas - CUFE: MNE-0470033</div>
+
+                <!-- Facturas Row -->
+                <div style="margin-bottom: 40px;">
+                    <h3 style="color: var(--color-primary); margin-bottom: 20px; font-size: 18px; font-weight: 600;">
+                        <i class="fas fa-file-invoice"></i> Facturas
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                        <div onclick="mostrarDetalle('facturas', 'vigentes')" style="background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.12); border-left: 4px solid #28a745; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(40, 167, 69, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(40, 167, 69, 0.12)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(40, 167, 69, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-file-check" style="color: #28a745; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: #666; font-weight: 500;">Facturas Vigentes</div>
+                            </div>
+                            <div style="font-size: 32px; font-weight: 700; color: #28a745; margin-bottom: 8px;">18</div>
+                            <p style="color: #28a745; font-size: 12px; margin: 0; font-weight: 500;">Sin vencer</p>
+                        </div>
+                        <div onclick="mostrarDetalle('facturas', 'mora')" style="background: linear-gradient(135deg, #ffebee 0%, #ffffff 100%); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.12); border-left: 4px solid #dc3545; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(220, 53, 69, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.12)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(220, 53, 69, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-file-times" style="color: #dc3545; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: #666; font-weight: 500;">Facturas en Mora</div>
+                            </div>
+                            <div style="font-size: 32px; font-weight: 700; color: #dc3545; margin-bottom: 8px;">5</div>
+                            <p style="color: #dc3545; font-size: 12px; margin: 0; font-weight: 500;">Vencidas</p>
+                        </div>
+                        <div onclick="mostrarDetalle('facturas', 'cobranza')" style="background: linear-gradient(135deg, #fff8e1 0%, #ffffff 100%); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.12); border-left: 4px solid #ffc107; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(255, 193, 7, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 193, 7, 0.12)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(255, 193, 7, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-file-contract" style="color: #ffc107; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: #666; font-weight: 500;">Facturas en Cobranza</div>
+                            </div>
+                            <div style="font-size: 32px; font-weight: 700; color: #ffc107; margin-bottom: 8px;">2</div>
+                            <p style="color: #ffc107; font-size: 12px; margin: 0; font-weight: 500;">Proceso legal</p>
+                        </div>
+                        <div onclick="mostrarDetalle('facturas', 'total')" style="background: linear-gradient(135deg, var(--color-primary) 0%, #1a5490 100%); padding: 25px; border-radius: 16px; box-shadow: 0 6px 20px rgba(34, 82, 147, 0.25); border: none; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'; this.style.boxShadow='0 10px 30px rgba(34, 82, 147, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 6px 20px rgba(34, 82, 147, 0.25)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(255, 255, 255, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-file-invoice-dollar" style="color: white; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: rgba(255,255,255,0.95); font-weight: 600;">Total Facturas</div>
+                            </div>
+                            <div style="font-size: 36px; font-weight: 800; color: white; margin-bottom: 8px;">25</div>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 12px; margin: 0; font-weight: 500;">Negociadas</p>
+                        </div>
                     </div>
                 </div>
-                <div class="timeline-item">
-                    <div class="timeline-marker completed"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-title">Nueva Factura Elegible</div>
-                        <div class="timeline-time">Hace 1 día - Gran Pagador: TRANS JAPAGO PARDO</div>
+
+                <!-- Pagadores Row -->
+                <div>
+                    <h3 style="color: var(--color-primary); margin-bottom: 20px; font-size: 18px; font-weight: 600;">
+                        <i class="fas fa-users"></i> Pagadores
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                        <div onclick="mostrarDetalle('pagadores', 'vigentes')" style="background: linear-gradient(135deg, #e8f5e9 0%, #ffffff 100%); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(40, 167, 69, 0.12); border-left: 4px solid #28a745; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(40, 167, 69, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(40, 167, 69, 0.12)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(40, 167, 69, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user-check" style="color: #28a745; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: #666; font-weight: 500;">Pagadores Vigentes</div>
+                            </div>
+                            <div style="font-size: 32px; font-weight: 700; color: #28a745; margin-bottom: 8px;">8</div>
+                            <p style="color: #28a745; font-size: 12px; margin: 0; font-weight: 500;">Al día</p>
+                        </div>
+                        <div onclick="mostrarDetalle('pagadores', 'mora')" style="background: linear-gradient(135deg, #ffebee 0%, #ffffff 100%); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.12); border-left: 4px solid #dc3545; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(220, 53, 69, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(220, 53, 69, 0.12)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(220, 53, 69, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user-times" style="color: #dc3545; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: #666; font-weight: 500;">Pagadores en Mora</div>
+                            </div>
+                            <div style="font-size: 32px; font-weight: 700; color: #dc3545; margin-bottom: 8px;">3</div>
+                            <p style="color: #dc3545; font-size: 12px; margin: 0; font-weight: 500;">Con atraso</p>
+                        </div>
+                        <div onclick="mostrarDetalle('pagadores', 'cobranza')" style="background: linear-gradient(135deg, #fff8e1 0%, #ffffff 100%); padding: 25px; border-radius: 16px; box-shadow: 0 4px 15px rgba(255, 193, 7, 0.12); border-left: 4px solid #ffc107; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(255, 193, 7, 0.2)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(255, 193, 7, 0.12)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(255, 193, 7, 0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-user-clock" style="color: #ffc107; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: #666; font-weight: 500;">Pagadores en Cobranza</div>
+                            </div>
+                            <div style="font-size: 32px; font-weight: 700; color: #ffc107; margin-bottom: 8px;">1</div>
+                            <p style="color: #ffc107; font-size: 12px; margin: 0; font-weight: 500;">Gestión legal</p>
+                        </div>
+                        <div onclick="mostrarDetalle('pagadores', 'total')" style="background: linear-gradient(135deg, var(--color-primary) 0%, #1a5490 100%); padding: 25px; border-radius: 16px; box-shadow: 0 6px 20px rgba(34, 82, 147, 0.25); border: none; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px) scale(1.02)'; this.style.boxShadow='0 10px 30px rgba(34, 82, 147, 0.35)'" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 6px 20px rgba(34, 82, 147, 0.25)'">
+                            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 15px;">
+                                <div style="width: 48px; height: 48px; background: rgba(255, 255, 255, 0.2); border-radius: 12px; display: flex; align-items: center; justify-content: center;">
+                                    <i class="fas fa-users-cog" style="color: white; font-size: 24px;"></i>
+                                </div>
+                                <div style="font-size: 13px; color: rgba(255,255,255,0.95); font-weight: 600;">Total Pagadores</div>
+                            </div>
+                            <div style="font-size: 36px; font-weight: 800; color: white; margin-bottom: 8px;">12</div>
+                            <p style="color: rgba(255,255,255,0.9); font-size: 12px; margin: 0; font-weight: 500;">Activos</p>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para Detalles -->
+        <div id="modalDetalles" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 9999; align-items: center; justify-content: center;">
+            <div style="background: white; border-radius: 20px; width: 90%; max-width: 900px; max-height: 85vh; overflow-y: auto; box-shadow: 0 10px 50px rgba(0,0,0,0.3);">
+                <div style="padding: 25px; border-bottom: 2px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(135deg, var(--color-primary) 0%, #1a5490 100%);">
+                    <h3 id="modalTitulo" style="margin: 0; color: white; font-size: 22px;"></h3>
+                    <button onclick="cerrarModal()" style="background: rgba(255,255,255,0.2); border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; color: white; font-size: 24px; display: flex; align-items: center; justify-content: center; transition: all 0.3s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div style="padding: 30px;">
+                    <div id="modalContenido"></div>
                 </div>
             </div>
         </div>
@@ -224,6 +332,115 @@
                 menu.scrollLeft += scrollAmount;
             }
         }
+
+        // Datos mock para el modal
+        const datosMock = {
+            'saldos-vigentes': [
+                { id: 'FAC-19917', pagador: 'TRANS JAPAGO PARDO', valor: '$5,432,140', vencimiento: '15/02/2026', dias: 23 },
+                { id: 'FAC-19916', pagador: 'TRANS JAPAGO PARDO', valor: '$7,414,910', vencimiento: '20/02/2026', dias: 28 },
+                { id: 'FAC-19669', pagador: 'TRANS JAPAGO PARDO', valor: '$3,215,960', vencimiento: '18/02/2026', dias: 26 }
+            ],
+            'saldos-mora': [
+                { id: 'FAC-19542', pagador: 'TRANS JAPAGO PARDO', valor: '$1,450,000', vencimiento: '10/01/2026', dias: -13 },
+                { id: 'FAC-19501', pagador: 'CARGA EXPRES S.A.S', valor: '$1,440,000', vencimiento: '08/01/2026', dias: -15 }
+            ],
+            'saldos-cobranza': [
+                { id: 'FAC-19321', pagador: 'LOGISTICA TOTAL', valor: '$1,250,000', vencimiento: '20/12/2025', dias: -34 }
+            ],
+            'facturas-vigentes': [
+                { id: 'FAC-19917', cufe: 'MNE-0470033', valor: '$5,432,140', pagador: 'TRANS JAPAGO PARDO', fecha: '10/01/2026' },
+                { id: 'FAC-19916', cufe: 'MNE-0470177', valor: '$7,414,910', pagador: 'TRANS JAPAGO PARDO', fecha: '18/01/2026' },
+                { id: 'FAC-19669', cufe: 'MNE-0470124', valor: '$3,215,960', pagador: 'TRANS JAPAGO PARDO', fecha: '08/01/2026' }
+            ],
+            'facturas-mora': [
+                { id: 'FAC-19542', cufe: 'MNE-0469988', valor: '$1,450,000', pagador: 'TRANS JAPAGO PARDO', fecha: '01/12/2025' },
+                { id: 'FAC-19501', cufe: 'MNE-0469745', valor: '$1,440,000', pagador: 'CARGA EXPRES S.A.S', fecha: '28/11/2025' }
+            ],
+            'facturas-cobranza': [
+                { id: 'FAC-19321', cufe: 'MNE-0468912', valor: '$1,250,000', pagador: 'LOGISTICA TOTAL', fecha: '15/11/2025' }
+            ],
+            'pagadores-vigentes': [
+                { nit: '900.123.456-7', nombre: 'TRANS JAPAGO PARDO', facturas: 8, saldo: '$12,500,000' },
+                { nit: '800.234.567-8', nombre: 'CARGA EXPRES S.A.S', facturas: 5, saldo: '$8,200,000' },
+                { nit: '700.345.678-9', nombre: 'LOGISTICA RAPIDA', facturas: 3, saldo: '$4,100,000' }
+            ],
+            'pagadores-mora': [
+                { nit: '900.456.789-0', nombre: 'TRANSPORTE DEL SUR', facturas: 2, saldo: '$2,100,000' },
+                { nit: '800.567.890-1', nombre: 'ENVIOS NACIONALES', facturas: 1, saldo: '$790,000' }
+            ],
+            'pagadores-cobranza': [
+                { nit: '700.678.901-2', nombre: 'LOGISTICA TOTAL', facturas: 1, saldo: '$1,250,000' }
+            ]
+        };
+
+        function mostrarDetalle(tipo, categoria) {
+            const modal = document.getElementById('modalDetalles');
+            const titulo = document.getElementById('modalTitulo');
+            const contenido = document.getElementById('modalContenido');
+            
+            const titulos = {
+                'saldos-vigentes': '<i class="fas fa-check-circle"></i> Saldos Vigentes',
+                'saldos-mora': '<i class="fas fa-exclamation-circle"></i> Saldos en Mora',
+                'saldos-cobranza': '<i class="fas fa-clock"></i> Saldos en Cobranza',
+                'saldos-total': '<i class="fas fa-chart-line"></i> Total de Saldos',
+                'facturas-vigentes': '<i class="fas fa-file-check"></i> Facturas Vigentes',
+                'facturas-mora': '<i class="fas fa-file-times"></i> Facturas en Mora',
+                'facturas-cobranza': '<i class="fas fa-file-contract"></i> Facturas en Cobranza',
+                'facturas-total': '<i class="fas fa-file-invoice-dollar"></i> Total de Facturas',
+                'pagadores-vigentes': '<i class="fas fa-user-check"></i> Pagadores Vigentes',
+                'pagadores-mora': '<i class="fas fa-user-times"></i> Pagadores en Mora',
+                'pagadores-cobranza': '<i class="fas fa-user-clock"></i> Pagadores en Cobranza',
+                'pagadores-total': '<i class="fas fa-users-cog"></i> Total de Pagadores'
+            };
+            
+            titulo.innerHTML = titulos[tipo + '-' + categoria] || 'Detalles';
+            
+            let html = '';
+            const clave = tipo + '-' + categoria;
+            const datos = datosMock[clave] || [];
+            
+            if (categoria === 'total') {
+                html = '<div style="text-align: center; padding: 40px;"><i class="fas fa-info-circle" style="font-size: 48px; color: var(--color-primary); margin-bottom: 20px;"></i><p style="font-size: 18px; color: #666;">Esta vista muestra el resumen consolidado de todos los ' + tipo + '.</p><p style="color: #999; margin-top: 15px;">Seleccione una categoría específica para ver el detalle.</p></div>';
+            } else if (tipo === 'saldos') {
+                html = '<table style="width: 100%; border-collapse: collapse;"><thead><tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;"><th style="padding: 12px; text-align: left; font-weight: 600;">Factura</th><th style="padding: 12px; text-align: left; font-weight: 600;">Pagador</th><th style="padding: 12px; text-align: right; font-weight: 600;">Valor</th><th style="padding: 12px; text-align: center; font-weight: 600;">Vencimiento</th><th style="padding: 12px; text-align: center; font-weight: 600;">Días</th></tr></thead><tbody>';
+                datos.forEach((item, index) => {
+                    const colorDias = item.dias > 0 ? '#28a745' : '#dc3545';
+                    html += `<tr style="border-bottom: 1px solid #f0f0f0; ${index % 2 === 0 ? 'background: #fafafa;' : ''}"><td style="padding: 12px; font-weight: 500;">${item.id}</td><td style="padding: 12px;">${item.pagador}</td><td style="padding: 12px; text-align: right; font-weight: 600;">${item.valor}</td><td style="padding: 12px; text-align: center;">${item.vencimiento}</td><td style="padding: 12px; text-align: center; color: ${colorDias}; font-weight: 600;">${item.dias} días</td></tr>`;
+                });
+                html += '</tbody></table>';
+            } else if (tipo === 'facturas') {
+                html = '<table style="width: 100%; border-collapse: collapse;"><thead><tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;"><th style="padding: 12px; text-align: left; font-weight: 600;">Factura</th><th style="padding: 12px; text-align: left; font-weight: 600;">CUFE</th><th style="padding: 12px; text-align: left; font-weight: 600;">Pagador</th><th style="padding: 12px; text-align: right; font-weight: 600;">Valor</th><th style="padding: 12px; text-align: center; font-weight: 600;">Fecha</th></tr></thead><tbody>';
+                datos.forEach((item, index) => {
+                    html += `<tr style="border-bottom: 1px solid #f0f0f0; ${index % 2 === 0 ? 'background: #fafafa;' : ''}"><td style="padding: 12px; font-weight: 500;">${item.id}</td><td style="padding: 12px; font-size: 11px; color: #666;">${item.cufe}</td><td style="padding: 12px;">${item.pagador}</td><td style="padding: 12px; text-align: right; font-weight: 600;">${item.valor}</td><td style="padding: 12px; text-align: center;">${item.fecha}</td></tr>`;
+                });
+                html += '</tbody></table>';
+            } else if (tipo === 'pagadores') {
+                html = '<table style="width: 100%; border-collapse: collapse;"><thead><tr style="background: #f8f9fa; border-bottom: 2px solid #dee2e6;"><th style="padding: 12px; text-align: left; font-weight: 600;">NIT</th><th style="padding: 12px; text-align: left; font-weight: 600;">Nombre</th><th style="padding: 12px; text-align: center; font-weight: 600;">Facturas</th><th style="padding: 12px; text-align: right; font-weight: 600;">Saldo Total</th></tr></thead><tbody>';
+                datos.forEach((item, index) => {
+                    html += `<tr style="border-bottom: 1px solid #f0f0f0; ${index % 2 === 0 ? 'background: #fafafa;' : ''}"><td style="padding: 12px; font-weight: 500;">${item.nit}</td><td style="padding: 12px;">${item.nombre}</td><td style="padding: 12px; text-align: center;">${item.facturas}</td><td style="padding: 12px; text-align: right; font-weight: 600;">${item.saldo}</td></tr>`;
+                });
+                html += '</tbody></table>';
+            }
+            
+            if (datos.length === 0 && categoria !== 'total') {
+                html = '<div style="text-align: center; padding: 40px;"><i class="fas fa-inbox" style="font-size: 48px; color: #ccc; margin-bottom: 20px;"></i><p style="font-size: 16px; color: #999;">No hay datos disponibles en esta categoría</p></div>';
+            }
+            
+            contenido.innerHTML = html;
+            modal.style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalDetalles').style.display = 'none';
+        }
+
+        // Cerrar modal al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            const modal = document.getElementById('modalDetalles');
+            if (e.target === modal) {
+                cerrarModal();
+            }
+        });
     </script>
 </body>
 </html>
