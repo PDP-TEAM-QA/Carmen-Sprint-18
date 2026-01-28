@@ -74,41 +74,36 @@
 
             <div style="background: #fff3cd; padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107; margin-bottom: 20px;">
                 <strong><i class="fas fa-info-circle"></i> Información:</strong>
-                <p style="margin: 10px 0 0 0;">Si tu cliente te aplicó retenciones (ICA, Rtefuente, u otras), puedes declarar hasta un <strong>2% del valor total</strong>. Carmen acepta esta diferencia sin necesidad de justificación adicional.</p>
+                <p style="margin: 10px 0 0 0;">Si tu cliente te aplicó retenciones (ICA, Rtefuente, u otras), puedes declarar hasta un <strong>2% del valor total</strong>. Carmen acepta esta diferencia sin necesidad de justificación adicional. Puedes agregar múltiples conceptos de retención.</p>
             </div>
 
-            <div style="background: #f8f9fa; padding: 30px; border-radius: 10px;">
-                <div style="display: grid; grid-template-columns: 150px 1fr 200px; gap: 20px; align-items: end;">
-                    <div>
-                        <label style="display: block; font-weight: 600; color: #666; margin-bottom: 10px;">
-                            Porcentaje (%)
-                        </label>
-                        <input type="number" id="retencion-percent" min="0" max="2" step="0.1" value="0" 
-                               style="width: 100%; padding: 12px; border: 2px solid var(--color-border); border-radius: 8px; font-size: 16px;"
-                               oninput="calcularRetencion()">
-                        <div style="font-size: 12px; color: #666; margin-top: 5px;">Máximo: 2%</div>
-                    </div>
+            <div id="retenciones-container" style="background: #f8f9fa; padding: 30px; border-radius: 10px; margin-bottom: 20px;">
+                <!-- Las retenciones se agregarán dinámicamente aquí -->
+            </div>
 
-                    <div>
-                        <label style="display: block; font-weight: 600; color: #666; margin-bottom: 10px;">
-                            Concepto
-                        </label>
-                        <input type="text" id="retencion-concepto" placeholder="Ej: ICA, Rtefuente, Retención en la fuente..." 
-                               style="width: 100%; padding: 12px; border: 2px solid var(--color-border); border-radius: 8px; font-size: 16px;">
-                    </div>
+            <div style="margin-bottom: 20px;">
+                <button onclick="agregarRetencion()" class="btn-secondary" style="padding: 12px 25px;">
+                    <i class="fas fa-plus"></i> Agregar Retención
+                </button>
+            </div>
 
-                    <div>
-                        <label style="display: block; font-weight: 600; color: #666; margin-bottom: 10px;">
-                            Valor Retención
-                        </label>
-                        <div id="retencion-valor" style="font-size: 20px; font-weight: 700; color: #dc3545; padding: 12px; background: white; border-radius: 8px; border: 2px solid #dc3545;">
+            <div style="padding: 20px; background: white; border-radius: 8px; border: 2px solid #dc3545; margin-bottom: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="font-size: 18px; font-weight: 600; color: #666;">
+                        Total Retenciones:
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <div id="porcentaje-total" style="font-size: 16px; font-weight: 600; color: #666;">
+                            0%
+                        </div>
+                        <div id="retencion-total" style="font-size: 24px; font-weight: 700; color: #dc3545;">
                             -$0
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div style="margin-top: 20px; padding: 20px; background: #e8f5e9; border-radius: 8px; border: 2px solid var(--color-success);">
+            <div style="padding: 20px; background: #e8f5e9; border-radius: 8px; border: 2px solid var(--color-success);">
                 <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="font-size: 22px; font-weight: 700; color: #666;">
                         Total a pagar:
@@ -139,10 +134,6 @@
                     <p style="color: #666; font-size: 14px; line-height: 1.6;">
                         Realiza una transferencia desde tu banco y sube el comprobante de pago.
                     </p>
-                    <div style="margin-top: 15px; padding: 10px; background: #e3f2fd; border-radius: 6px;">
-                        <i class="fas fa-clock" style="color: var(--color-info);"></i>
-                        <span style="font-size: 13px; color: var(--color-info); font-weight: 600;">Verificación: 1-2 días</span>
-                    </div>
                 </div>
 
                 <!-- PSE -->
@@ -155,10 +146,6 @@
                     <p style="color: #666; font-size: 14px; line-height: 1.6;">
                         Pago electrónico directo desde tu banco. Verificación automática inmediata.
                     </p>
-                    <div style="margin-top: 15px; padding: 10px; background: #e8f5e9; border-radius: 6px;">
-                        <i class="fas fa-bolt" style="color: var(--color-success);"></i>
-                        <span style="font-size: 13px; color: var(--color-success); font-weight: 600;">Verificación: Inmediata</span>
-                    </div>
                 </div>
 
                 <!-- Link de Pago -->
@@ -171,20 +158,27 @@
                     <p style="color: #666; font-size: 14px; line-height: 1.6;">
                         Genera un link compartible para que otra persona realice el pago por ti.
                     </p>
-                    <div style="margin-top: 15px; padding: 10px; background: #f3e5f5; border-radius: 6px;">
-                        <i class="fas fa-share-alt" style="color: #9c27b0;"></i>
-                        <span style="font-size: 13px; color: #9c27b0; font-weight: 600;">Compartible • 8 días</span>
+                    <div style="margin-top: 15px; padding: 12px; background: #f8f9fa; border-radius: 6px; border: 1px solid #ddd;">
+                        <label style="display: block; font-size: 11px; font-weight: 500; color: #666; margin-bottom: 6px; text-align: left;">
+                            Días de vigencia:
+                        </label>
+                        <input type="number" 
+                               id="dias-vigencia-input" 
+                               min="1" 
+                               max="30" 
+                               step="1" 
+                               value="8"
+                               onclick="event.stopPropagation()"
+                               oninput="actualizarDiasVigencia(this.value)"
+                               style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; font-weight: 500; color: #333; text-align: center;">
+                        <div style="font-size: 10px; color: #999; margin-top: 4px; text-align: left;">1 a 30 días</div>
                     </div>
                 </div>
             </div>
 
-            <div style="background: #fff3cd; padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107;">
-                <strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong>
-                <ul style="margin: 10px 0 0 20px; line-height: 1.8;">
-                    <li>El link de pago tiene una vigencia de <strong>8 días</strong> desde su generación.</li>
-                    <li>Puedes compartir el link para que otra persona realice el pago.</li>
-                    <li>Una vez enviado el pago, Carmen lo verificará en un máximo de 48 horas hábiles.</li>
-                </ul>
+            <!-- Área dinámica según método seleccionado -->
+            <div id="metodo-opciones" style="display: none; margin-bottom: 30px;">
+                <!-- Se llenará dinámicamente según el método -->
             </div>
 
             <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
@@ -238,6 +232,18 @@
         let facturas = [];
         let subtotal = 0;
         let metodoSeleccionado = null;
+        let retenciones = [];
+        let retencionCounter = 0;
+        let diasVigenciaLink = 8;
+        let comprobanteArchivo = null;
+        let fechaComprobante = '';
+        let bancoSeleccionado = '';
+        let metodoComunicacion = null;
+        let datosComunicacion = '';
+        let linkPagoGenerado = '';
+        let pseNombre = '';
+        let pseDocumento = '';
+        let pseBanco = '';
 
         // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -249,6 +255,22 @@
             'MNE-0470177': { cufe: 'MNE-0470177', numero: '19918', granPagador: 'TRANS JAPAGO PARDO', valor: 7050000 },
             'MNE-0470089': { cufe: 'MNE-0470089', numero: '19914', granPagador: 'YENNY PAOLA GOMEZ', valor: 2100000 }
         };
+
+        function actualizarDiasVigencia(dias) {
+            let valor = parseInt(dias) || 1;
+            
+            // Validar límites
+            if (valor < 1) valor = 1;
+            if (valor > 30) valor = 30;
+            
+            diasVigenciaLink = valor;
+            
+            // Actualizar el input si fue corregido
+            const input = document.getElementById('dias-vigencia-input');
+            if (input && input.value != valor) {
+                input.value = valor;
+            }
+        }
 
         // Load facturas
         if (cufesParam) {
@@ -377,29 +399,156 @@
             }
             
             // Recalcular retenciones
-            calcularRetencion();
+            calcularRetenciones();
+        }
+
+        function agregarRetencion() {
+            const id = retencionCounter++;
+            retenciones.push({ id, porcentaje: 0, concepto: '', valor: 0 });
+            renderRetenciones();
+        }
+
+        function eliminarRetencion(id) {
+            retenciones = retenciones.filter(r => r.id !== id);
+            renderRetenciones();
+            calcularRetenciones();
+        }
+
+        function renderRetenciones() {
+            const container = document.getElementById('retenciones-container');
+            
+            if (retenciones.length === 0) {
+                container.innerHTML = '<div style="text-align: center; padding: 40px; color: #999;"><i class="fas fa-inbox" style="font-size: 48px; margin-bottom: 15px; display: block;"></i>No hay retenciones agregadas. Haz clic en "Agregar Retención" para comenzar.</div>';
+                return;
+            }
+
+            const html = retenciones.map((ret, index) => `
+                <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px; border: 2px solid ${ret.porcentaje > 0 ? '#dc3545' : 'var(--color-border)'};">
+                    <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 15px;">
+                        <h4 style="color: var(--color-primary); margin: 0; font-size: 16px;">
+                            <i class="fas fa-receipt"></i> Retención #${index + 1}
+                        </h4>
+                        <button onclick="eliminarRetencion(${ret.id})" style="background: #dc3545; color: white; border: none; padding: 8px 15px; border-radius: 6px; cursor: pointer; font-size: 14px; transition: all 0.3s;" onmouseover="this.style.background='#c82333'" onmouseout="this.style.background='#dc3545'">
+                            <i class="fas fa-trash"></i> Eliminar
+                        </button>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 150px 1fr 200px; gap: 20px; align-items: end;">
+                        <div>
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 10px;">
+                                Porcentaje (%)
+                            </label>
+                            <input type="number" 
+                                   id="ret-percent-${ret.id}" 
+                                   min="0" 
+                                   max="2" 
+                                   step="0.01" 
+                                   value="${ret.porcentaje}" 
+                                   style="width: 100%; padding: 12px; border: 2px solid var(--color-border); border-radius: 8px; font-size: 16px;"
+                                   oninput="updateRetencion(${ret.id}, 'porcentaje', this.value)">
+                        </div>
+
+                        <div>
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 10px;">
+                                Concepto
+                            </label>
+                            <input type="text" 
+                                   id="ret-concepto-${ret.id}" 
+                                   value="${ret.concepto}" 
+                                   placeholder="Ej: ICA, Rtefuente, Retención en la fuente..." 
+                                   style="width: 100%; padding: 12px; border: 2px solid var(--color-border); border-radius: 8px; font-size: 16px;"
+                                   oninput="updateRetencion(${ret.id}, 'concepto', this.value)">
+                        </div>
+
+                        <div>
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 10px;">
+                                Valor Retención
+                            </label>
+                            <div id="ret-valor-${ret.id}" style="font-size: 20px; font-weight: 700; color: #dc3545; padding: 12px; background: #f8f9fa; border-radius: 8px; border: 2px solid #dc3545;">
+                                -$${ret.valor.toLocaleString('es-CO')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            container.innerHTML = html;
+        }
+
+        function updateRetencion(id, campo, valor) {
+            const retencion = retenciones.find(r => r.id === id);
+            if (!retencion) return;
+
+            if (campo === 'porcentaje') {
+                retencion.porcentaje = parseFloat(valor) || 0;
+            } else if (campo === 'concepto') {
+                retencion.concepto = valor;
+            }
+
+            calcularRetenciones();
+        }
+
+        function calcularRetenciones() {
+            let totalPorcentaje = 0;
+            let totalValor = 0;
+
+            retenciones.forEach(ret => {
+                const valor = Math.round(subtotal * (ret.porcentaje / 100));
+                ret.valor = valor;
+                totalPorcentaje += ret.porcentaje;
+                totalValor += valor;
+
+                // Actualizar el valor mostrado
+                const valorEl = document.getElementById(`ret-valor-${ret.id}`);
+                if (valorEl) {
+                    valorEl.textContent = `-$${valor.toLocaleString('es-CO')}`;
+                }
+
+                // Actualizar estilo del campo porcentaje si excede
+                const percentEl = document.getElementById(`ret-percent-${ret.id}`);
+                if (percentEl) {
+                    if (totalPorcentaje > 2) {
+                        percentEl.style.borderColor = '#dc3545';
+                        percentEl.style.background = '#fff5f5';
+                    } else {
+                        percentEl.style.borderColor = 'var(--color-border)';
+                        percentEl.style.background = 'white';
+                    }
+                }
+            });
+
+            // Validar que no exceda el 2%
+            if (totalPorcentaje > 2) {
+                document.getElementById('porcentaje-total').textContent = `${totalPorcentaje.toFixed(2)}% (Excede el límite)`;
+                document.getElementById('porcentaje-total').style.color = '#dc3545';
+                document.getElementById('porcentaje-total').style.fontWeight = '700';
+            } else {
+                document.getElementById('porcentaje-total').textContent = `${totalPorcentaje.toFixed(2)}%`;
+                document.getElementById('porcentaje-total').style.color = totalPorcentaje > 0 ? '#dc3545' : '#666';
+                document.getElementById('porcentaje-total').style.fontWeight = '600';
+            }
+
+            document.getElementById('retencion-total').textContent = `-$${totalValor.toLocaleString('es-CO')}`;
+
+            const total = subtotal - totalValor;
+            document.getElementById('total-pagar').textContent = `$${total.toLocaleString('es-CO')}`;
         }
 
         function calcularRetencion() {
-            const percent = parseFloat(document.getElementById('retencion-percent').value) || 0;
-            
-            // Validar máximo 2%
-            if (percent > 2) {
-                document.getElementById('retencion-percent').value = 2;
-                return calcularRetencion();
-            }
-
-            const retencion = Math.round(subtotal * (percent / 100));
-            const total = subtotal - retencion;
-
-            document.getElementById('retencion-valor').textContent = `-$${retencion.toLocaleString('es-CO')}`;
-            document.getElementById('total-pagar').textContent = `$${total.toLocaleString('es-CO')}`;
+            // Función legacy mantenida por compatibilidad
+            calcularRetenciones();
         }
 
         function selectMetodo(metodo) {
             metodoSeleccionado = metodo;
+            comprobanteArchivo = null;
+            fechaComprobante = '';
+            bancoSeleccionado = '';
+            metodoComunicacion = null;
+            datosComunicacion = '';
+            pseNombre = '';
+            pseDocumento = '';
+            pseBanco = '';
 
-            // Update card styles
             const cards = document.querySelectorAll('.metodo-card');
             cards.forEach(card => {
                 if (card.dataset.metodo === metodo) {
@@ -416,9 +565,328 @@
                 }
             });
 
-            // Enable continue button
-            document.getElementById('btn-continuar').disabled = false;
-            document.getElementById('btn-continuar').style.opacity = '1';
+            mostrarOpcionesMetodo(metodo);
+        }
+
+        function mostrarOpcionesMetodo(metodo) {
+            const contenedor = document.getElementById('metodo-opciones');
+            const btnContinuar = document.getElementById('btn-continuar');
+
+            if (metodo === 'transferencia') {
+                contenedor.style.display = 'block';
+                contenedor.innerHTML = `
+                    <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 8px;">
+                                    <i class="fas fa-calendar"></i> Fecha del comprobante
+                                </label>
+                                <input type="date" id="fecha-comprobante" onchange="handleFechaComprobante(this.value)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 8px;">
+                                    <i class="fas fa-university"></i> Banco
+                                </label>
+                                <select id="banco-select" onchange="handleBancoSelect(this.value)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
+                                    <option value="">Selecciona un banco</option>
+                                    <option value="av-villas">AV Villas</option>
+                                    <option value="davivienda">Davivienda</option>
+                                </select>
+                            </div>
+                        </div>
+                        <label style="display: block; font-weight: 600; color: #666; margin-bottom: 10px;">
+                            <i class="fas fa-upload"></i> Subir comprobante de pago
+                        </label>
+                        <input type="file" id="comprobante-input" accept=".pdf,.jpg,.jpeg,.png" onchange="handleComprobanteUpload(this)" style="display: none;">
+                        <button onclick="document.getElementById('comprobante-input').click()" class="btn-secondary" style="padding: 10px 20px;">
+                            <i class="fas fa-file-upload"></i> Seleccionar archivo
+                        </button>
+                        <div id="archivo-nombre" style="font-size: 14px; color: #666; margin-top: 10px;"></div>
+                    </div>
+                `;
+                btnContinuar.disabled = true;
+                btnContinuar.style.opacity = '0.5';
+            } else if (metodo === 'pse') {
+                contenedor.style.display = 'block';
+                contenedor.innerHTML = `
+                    <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd;">
+                        <h4 style="color: var(--color-success); margin-bottom: 20px;">
+                            <i class="fas fa-user-check"></i> Datos para PSE
+                        </h4>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 8px;">
+                                    <i class="fas fa-user"></i> Nombre completo
+                                </label>
+                                <input type="text" id="pse-nombre" placeholder="Ej: Juan Pérez" oninput="handlePSEData()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 8px;">
+                                    <i class="fas fa-id-card"></i> Número de documento
+                                </label>
+                                <input type="text" id="pse-documento" placeholder="Ej: 1234567890" oninput="handlePSEData()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 8px;">
+                                    <i class="fas fa-university"></i> Banco
+                                </label>
+                                <select id="pse-banco" onchange="handlePSEData()" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
+                                    <option value="">Selecciona tu banco</option>
+                                    <option value="bancolombia">Bancolombia</option>
+                                    <option value="davivienda">Davivienda</option>
+                                    <option value="av-villas">AV Villas</option>
+                                    <option value="bbva">BBVA</option>
+                                    <option value="banco-bogota">Banco de Bogotá</option>
+                                    <option value="nequi">Nequi</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                btnContinuar.disabled = true;
+                btnContinuar.style.opacity = '0.5';
+                btnContinuar.innerHTML = 'Continuar <i class="fas fa-arrow-right"></i>';
+            } else if (metodo === 'link') {
+                // Generar link de pago inmediatamente
+                const codigoUnico = 'CP-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+                linkPagoGenerado = `https://carmen.com.co/pago/${codigoUnico}`;
+                
+                contenedor.style.display = 'block';
+                contenedor.innerHTML = `
+                    <div style="padding: 20px; background: #f8f9fa; border-radius: 8px; border: 1px solid #ddd;">
+                        <h4 style="color: #9c27b0; margin-bottom: 15px;">
+                            <i class="fas fa-qrcode"></i> Link de Pago Generado
+                        </h4>
+                        
+                        <div style="padding: 20px; background: white; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
+                            <div style="display: grid; grid-template-columns: 150px 1fr; gap: 20px; align-items: center;">
+                                <div style="text-align: center;">
+                                    <div style="padding: 10px; background: white; border: 2px solid #9c27b0; border-radius: 8px; display: inline-block;">
+                                        <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(linkPagoGenerado)}" alt="QR Code" style="width: 120px; height: 120px; display: block;">
+                                    </div>
+                                    <button onclick="copiarQR(event)" class="btn-secondary" style="padding: 8px 15px; margin-top: 10px; font-size: 12px; white-space: nowrap;">
+                                        <i class="fas fa-qrcode"></i> Copiar QR
+                                    </button>
+                                </div>
+                                <div>
+                                    <label style="display: block; font-weight: 600; color: #666; margin-bottom: 8px;">
+                                        <i class="fas fa-link"></i> Link de pago
+                                    </label>
+                                    <div style="display: flex; gap: 10px;">
+                                        <input type="text" id="link-pago-input" value="${linkPagoGenerado}" readonly style="flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 13px; background: #f8f9fa; color: #333;">
+                                        <button onclick="copiarLink(event)" class="btn-secondary" style="padding: 10px 20px; white-space: nowrap;">
+                                            <i class="fas fa-copy"></i> Copiar
+                                        </button>
+                                    </div>
+                                    <div style="font-size: 12px; color: #666; margin-top: 8px;">
+                                        <i class="fas fa-info-circle"></i> Puedes compartir este link o código QR directamente
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div style="border-top: 1px solid #ddd; padding-top: 20px;">
+                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 15px;">
+                                <i class="fas fa-share-alt"></i> ¿Deseas compartirlo automáticamente? (Opcional)
+                            </label>
+                            <div style="display: flex; gap: 20px; margin-bottom: 15px;">
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="radio" name="metodo-comunicacion" value="whatsapp" onchange="handleMetodoComunicacion('whatsapp')" style="cursor: pointer;">
+                                    <i class="fab fa-whatsapp" style="color: #25D366; font-size: 20px;"></i>
+                                    <span style="font-weight: 500;">WhatsApp</span>
+                                </label>
+                                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                                    <input type="radio" name="metodo-comunicacion" value="email" onchange="handleMetodoComunicacion('email')" style="cursor: pointer;">
+                                    <i class="fas fa-envelope" style="color: #0066cc; font-size: 18px;"></i>
+                                    <span style="font-weight: 500;">Email</span>
+                                </label>
+                            </div>
+                            <div id="datos-comunicacion" style="display: none;"></div>
+                        </div>
+                    </div>
+`;
+                btnContinuar.disabled = false;
+                btnContinuar.style.opacity = '1';
+                btnContinuar.innerHTML = 'Enviar Link <i class="fas fa-paper-plane"></i>';
+            }
+        }
+
+        function handleComprobanteUpload(input) {
+            if (input.files && input.files[0]) {
+                comprobanteArchivo = input.files[0];
+                document.getElementById('archivo-nombre').innerHTML = `<i class="fas fa-check-circle" style="color: var(--color-success);"></i> <strong>${comprobanteArchivo.name}</strong> <span style="color: #999; margin-left: 10px;">(${(comprobanteArchivo.size / 1024).toFixed(2)} KB)</span>`;
+                validarTransferencia();
+            }
+        }
+
+        function handleFechaComprobante(fecha) {
+            fechaComprobante = fecha;
+            validarTransferencia();
+        }
+
+        function handleBancoSelect(banco) {
+            bancoSeleccionado = banco;
+            validarTransferencia();
+        }
+
+        function validarTransferencia() {
+            const esValido = comprobanteArchivo && fechaComprobante && bancoSeleccionado;
+            document.getElementById('btn-continuar').disabled = !esValido;
+            document.getElementById('btn-continuar').style.opacity = esValido ? '1' : '0.5';
+        }
+
+        function handlePSEData() {
+            const nombre = document.getElementById('pse-nombre')?.value.trim() || '';
+            const documento = document.getElementById('pse-documento')?.value.trim() || '';
+            const banco = document.getElementById('pse-banco')?.value || '';
+            
+            pseNombre = nombre;
+            pseDocumento = documento;
+            pseBanco = banco;
+            
+            const esValido = nombre.length > 0 && documento.length > 0 && banco.length > 0;
+            document.getElementById('btn-continuar').disabled = !esValido;
+            document.getElementById('btn-continuar').style.opacity = esValido ? '1' : '0.5';
+        }
+
+        function handleMetodoComunicacion(metodo) {
+            metodoComunicacion = metodo;
+            datosComunicacion = '';
+            
+            const contenedor = document.getElementById('datos-comunicacion');
+            
+            if (metodo === 'whatsapp') {
+                contenedor.style.display = 'block';
+                contenedor.innerHTML = `
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px;">Número de WhatsApp</label>
+                    <input type="tel" id="input-comunicacion" placeholder="Ej: 3001234567" oninput="handleDatosComunicacion(this.value)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">Ingresa el número sin espacios ni guiones</div>
+                `;
+            } else if (metodo === 'email') {
+                contenedor.style.display = 'block';
+                contenedor.innerHTML = `
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px;">Correo electrónico</label>
+                    <input type="email" id="input-comunicacion" placeholder="ejemplo@correo.com" oninput="handleDatosComunicacion(this.value)" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px;">
+                    <div style="font-size: 12px; color: #999; margin-top: 5px;">Se enviará el link a este correo</div>
+                `;
+            }
+        }
+
+        function handleDatosComunicacion(valor) {
+            datosComunicacion = valor.trim();
+            // No validamos porque es opcional para el link de pago
+        }
+
+        function copiarLink(event) {
+            const linkInput = document.getElementById('link-pago-input');
+            const btn = event.target.closest('button');
+            const originalHTML = btn.innerHTML;
+            
+            // Seleccionar el texto del input
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999);
+            
+            // Intentar copiar usando el API moderno
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(linkPagoGenerado).then(() => {
+                    btn.innerHTML = '<i class="fas fa-check"></i> Link copiado exitosamente';
+                    btn.style.background = 'var(--color-success)';
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.background = '';
+                    }, 2000);
+                }).catch(err => {
+                    // Fallback al método antiguo
+                    try {
+                        document.execCommand('copy');
+                        btn.innerHTML = '<i class="fas fa-check"></i> Link copiado exitosamente';
+                        btn.style.background = 'var(--color-success)';
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = originalHTML;
+                            btn.style.background = '';
+                        }, 2000);
+                    } catch (e) {
+                        alert('No se pudo copiar. Por favor, copia el link manualmente.');
+                    }
+                });
+            } else {
+                // Método antiguo para navegadores que no soportan clipboard API
+                try {
+                    document.execCommand('copy');
+                    btn.innerHTML = '<i class="fas fa-check"></i> Link copiado exitosamente';
+                    btn.style.background = 'var(--color-success)';
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.background = '';
+                    }, 2000);
+                } catch (err) {
+                    alert('No se pudo copiar. Por favor, copia el link manualmente.');
+                }
+            }
+        }
+
+        function copiarQR(event) {
+            const qrUrl = document.getElementById('qr-code-img').src;
+            const btn = event.target.closest('button');
+            const originalHTML = btn.innerHTML;
+            
+            // Crear un input temporal para copiar la URL
+            const tempInput = document.createElement('input');
+            tempInput.value = qrUrl;
+            tempInput.style.position = 'absolute';
+            tempInput.style.left = '-9999px';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999);
+            
+            // Intentar copiar usando el API moderno
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(qrUrl).then(() => {
+                    document.body.removeChild(tempInput);
+                    btn.innerHTML = '<i class="fas fa-check"></i> QR copiado exitosamente';
+                    btn.style.background = 'var(--color-success)';
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.background = '';
+                    }, 2000);
+                }).catch(err => {
+                    // Fallback al método antiguo
+                    try {
+                        document.execCommand('copy');
+                        document.body.removeChild(tempInput);
+                        btn.innerHTML = '<i class="fas fa-check"></i> QR copiado exitosamente';
+                        btn.style.background = 'var(--color-success)';
+                        
+                        setTimeout(() => {
+                            btn.innerHTML = originalHTML;
+                            btn.style.background = '';
+                        }, 2000);
+                    } catch (e) {
+                        document.body.removeChild(tempInput);
+                        alert('No se pudo copiar. Por favor, copia el QR manualmente.');
+                    }
+                });
+            } else {
+                // Método antiguo para navegadores que no soportan clipboard API
+                try {
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                    btn.innerHTML = '<i class="fas fa-check"></i> QR copiado exitosamente';
+                    btn.style.background = 'var(--color-success)';
+                    
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.background = '';
+                    }, 2000);
+                } catch (err) {
+                    document.body.removeChild(tempInput);
+                    alert('No se pudo copiar. Por favor, copia el QR manualmente.');
+                }
+            }
         }
 
         function continuar() {
@@ -427,7 +895,34 @@
                 return;
             }
 
-            // Actualizar valores desde los inputs (por si no se disparó oninput)
+            if (metodoSeleccionado === 'transferencia') {
+                if (!comprobanteArchivo) {
+                    alert('Por favor sube el comprobante de pago');
+                    return;
+                }
+                if (!fechaComprobante) {
+                    alert('Por favor selecciona la fecha del comprobante');
+                    return;
+                }
+                if (!bancoSeleccionado) {
+                    alert('Por favor selecciona el banco');
+                    return;
+                }
+            }
+
+            if (metodoSeleccionado === 'pse') {
+                if (!pseNombre || !pseDocumento || !pseBanco) {
+                    alert('Por favor completa todos los datos de PSE');
+                    return;
+                }
+            }
+
+            const totalPorcentaje = retenciones.reduce((sum, r) => sum + r.porcentaje, 0);
+            if (totalPorcentaje > 2) {
+                alert('El porcentaje total de retenciones no puede exceder el 2%');
+                return;
+            }
+
             facturas.forEach((f, idx) => {
                 const input = document.getElementById(`valor-${idx}`);
                 if (input) {
@@ -435,25 +930,13 @@
                 }
             });
 
-            // Recalcular subtotal final
             subtotal = facturas.reduce((sum, f) => sum + f.valor, 0);
-
-            const retencionPercent = parseFloat(document.getElementById('retencion-percent').value) || 0;
-            const retencionConcepto = document.getElementById('retencion-concepto').value;
-            const retencionValor = Math.round(subtotal * (retencionPercent / 100));
+            const retencionValor = retenciones.reduce((sum, r) => sum + r.valor, 0);
             const total = subtotal - retencionValor;
 
-            // Build URL params
-            const params = new URLSearchParams();
-            params.set('cufes', facturas.map(f => f.cufe).join(','));
-            params.set('metodo', metodoSeleccionado);
-            params.set('subtotal', subtotal);
-            params.set('retencionPercent', retencionPercent);
-            params.set('retencionConcepto', retencionConcepto);
-            params.set('retencionValor', retencionValor);
-            params.set('total', total);
-
-            window.location.href = `pagar-factura-confirmar.html?${params.toString()}`;
+            // Mostrar mensaje de éxito y redirigir al dashboard
+            alert('Pago satisfactorio, siguiente acción en el paso de la confirmación');
+            window.location.href = 'mis-pagos-carmen.html';
         }
     </script>
 </body>

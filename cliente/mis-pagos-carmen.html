@@ -34,7 +34,7 @@
 
     <!-- Breadcrumb -->
     <div class="breadcrumb">
-        <a href="dashboard-cliente.html"><i class="fas fa-arrow-left"></i> Volver</a>
+        <a href="mis-pagos.html"><i class="fas fa-arrow-left"></i> Volver</a>
         <span>TRANS JAPAGO PARDO</span>
         <span>/</span>
         <span class="breadcrumb-title">MIS PAGOS A CARMEN</span>
@@ -70,7 +70,7 @@
                         <div class="icon-card-label">Mis operaciones</div>
                     </a>
 
-                    <a href="mis-pagos-carmen.html" class="icon-card active">
+                    <a href="mis-pagos.html" class="icon-card">
                         <div class="icon-card-icon">
                             <i class="fas fa-hand-holding-usd"></i>
                         </div>
@@ -83,12 +83,20 @@
             </button>
         </div>
 
-        <!-- Alert -->
-        <div class="alert alert-warning" id="alert-pendientes" style="display: none;">
-            <strong><i class="fas fa-exclamation-triangle"></i> Atención:</strong>
-            Tienes <strong><span id="count-pendientes">0</span> facturas pendientes de pago</strong> por un total de <strong><span id="total-pendientes">$0</span></strong>.
+        <!-- Tabs System -->
+        <div class="tabs-container" style="margin-bottom: 30px;">
+            <div class="tabs-header" style="display: flex; border-bottom: 3px solid var(--color-border); margin-bottom: 0;">
+                <button class="tab-button active" onclick="cambiarTab('sin-pago')" id="tab-sin-pago" style="padding: 15px 30px; border: none; background: none; font-size: 16px; font-weight: 600; color: var(--color-primary); cursor: pointer; border-bottom: 3px solid var(--color-primary); margin-bottom: -3px; transition: all 0.3s;">
+                    FACTURAS SIN PAGO
+                </button>
+                <button class="tab-button" onclick="cambiarTab('ver-pagos')" id="tab-ver-pagos" style="padding: 15px 30px; border: none; background: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s;">
+                    VER PAGOS
+                </button>
+            </div>
         </div>
 
+        <!-- Tab Content: Facturas sin pago -->
+        <div id="content-sin-pago" class="tab-content">
         <!-- Filters -->
         <div class="filters-section">
             <div class="filters-row">
@@ -316,12 +324,250 @@
                 </div>
             </div>
         </div>
-
-        <!-- Info Alert -->
-        <div class="alert alert-info" style="margin-top: 20px;">
-            <strong><i class="fas fa-info-circle"></i> Información:</strong> 
-            Después de vender tus facturas a Carmen, debes pagar el valor de las mismas cuando el gran pagador te pague. Puedes pagar individualmente o seleccionar múltiples facturas para un pago conjunto.
         </div>
+        <!-- End Tab Content: Facturas sin pago -->
+
+        <!-- Tab Content: Ver Pagos -->
+        <div id="content-ver-pagos" class="tab-content" style="display: none;">
+        <!-- Filters -->
+        <div class="filters-section">
+            <div class="filters-row">
+                <div class="filter-group">
+                    <label>Estado</label>
+                    <select id="filter-pagos-estado" onchange="filterTablePagos()">
+                        <option value="">Todos</option>
+                        <option value="aprobado">Aprobado</option>
+                        <option value="verificacion">En verificación</option>
+                        <option value="rechazado">Rechazado</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Método de Pago</label>
+                    <select id="filter-pagos-metodo" onchange="filterTablePagos()">
+                        <option value="">Todos</option>
+                        <option value="transferencia">Transferencia</option>
+                        <option value="pse">PSE</option>
+                        <option value="link">Link de Pago</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Buscar N° de Pago</label>
+                    <input type="text" id="filter-pagos-search" placeholder="Buscar..." onkeyup="filterTablePagos()">
+                </div>
+                <div class="filter-group">
+                    <button class="btn-secondary" onclick="clearFiltersPagos()" style="width: 100%;">
+                        <i class="fas fa-undo"></i> Limpiar
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">
+                            <i class="fas fa-filter"></i>
+                        </th>
+                        <th>N° de Pago</th>
+                        <th>Fecha de Registro</th>
+                        <th>Fecha Pago Recibido</th>
+                        <th>Monto</th>
+                        <th>Nombre</th>
+                        <th>Estado</th>
+                        <th>Método de Pago</th>
+                        <th>Ver Detalle</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody-pagos-realizados">
+                    <!-- Pago 1 -->
+                    <tr data-estado="aprobado" data-metodo="transferencia" data-numero="PAG-001234">
+                        <td style="text-align: center;">
+                            <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                        </td>
+                        <td><strong>PAG-001234</strong></td>
+                        <td>20/Ene/2026</td>
+                        <td>21/Ene/2026</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$5,432,140</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td>
+                            <span class="badge badge-success">Aprobado</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-university" style="color: var(--color-primary);"></i>
+                                <span>Transferencia</span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn-action" onclick="verDetallePago('PAG-001234')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Pago 2 -->
+                    <tr data-estado="verificacion" data-metodo="pse" data-numero="PAG-001235">
+                        <td style="text-align: center;">
+                            <i class="fas fa-clock" style="color: #ffc107; font-size: 18px;"></i>
+                        </td>
+                        <td><strong>PAG-001235</strong></td>
+                        <td>22/Ene/2026</td>
+                        <td>-</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$2,100,000</td>
+                        <td>YENNY PAOLA GOMEZ</td>
+                        <td>
+                            <span class="badge badge-warning">En verificación</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-credit-card" style="color: var(--color-success);"></i>
+                                <span>PSE</span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn-action" onclick="verDetallePago('PAG-001235')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Pago 3 -->
+                    <tr data-estado="aprobado" data-metodo="link" data-numero="PAG-001236">
+                        <td style="text-align: center;">
+                            <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                        </td>
+                        <td><strong>PAG-001236</strong></td>
+                        <td>23/Ene/2026</td>
+                        <td>23/Ene/2026</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$7,050,000</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td>
+                            <span class="badge badge-success">Aprobado</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-link" style="color: #9c27b0;"></i>
+                                <span>Link de Pago</span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn-action" onclick="verDetallePago('PAG-001236')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Pago 4 -->
+                    <tr data-estado="aprobado" data-metodo="transferencia" data-numero="PAG-001237">
+                        <td style="text-align: center;">
+                            <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                        </td>
+                        <td><strong>PAG-001237</strong></td>
+                        <td>24/Ene/2026</td>
+                        <td>25/Ene/2026</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$3,200,000</td>
+                        <td>TRANSPORTES TIERRA ADENTRO SAS</td>
+                        <td>
+                            <span class="badge badge-success">Aprobado</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-university" style="color: var(--color-primary);"></i>
+                                <span>Transferencia</span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn-action" onclick="verDetallePago('PAG-001237')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Pago 5 -->
+                    <tr data-estado="rechazado" data-metodo="pse" data-numero="PAG-001238">
+                        <td style="text-align: center;">
+                            <i class="fas fa-times-circle" style="color: #dc3545; font-size: 18px;"></i>
+                        </td>
+                        <td><strong>PAG-001238</strong></td>
+                        <td>25/Ene/2026</td>
+                        <td>-</td>
+                        <td style="font-weight: 700; color: #dc3545;">$1,500,000</td>
+                        <td>YENNY PAOLA GOMEZ</td>
+                        <td>
+                            <span class="badge badge-danger">Rechazado</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-credit-card" style="color: var(--color-success);"></i>
+                                <span>PSE</span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn-action" onclick="verDetallePago('PAG-001238')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Pago 6 -->
+                    <tr data-estado="aprobado" data-metodo="transferencia" data-numero="PAG-001239">
+                        <td style="text-align: center;">
+                            <i class="fas fa-check-circle" style="color: var(--color-success); font-size: 18px;"></i>
+                        </td>
+                        <td><strong>PAG-001239</strong></td>
+                        <td>26/Ene/2026</td>
+                        <td>27/Ene/2026</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$4,800,000</td>
+                        <td>TRANS JAPAGO PARDO</td>
+                        <td>
+                            <span class="badge badge-success">Aprobado</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-university" style="color: var(--color-primary);"></i>
+                                <span>Transferencia</span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn-action" onclick="verDetallePago('PAG-001239')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Pago 7 -->
+                    <tr data-estado="verificacion" data-metodo="link" data-numero="PAG-001240">
+                        <td style="text-align: center;">
+                            <i class="fas fa-clock" style="color: #ffc107; font-size: 18px;"></i>
+                        </td>
+                        <td><strong>PAG-001240</strong></td>
+                        <td>27/Ene/2026</td>
+                        <td>-</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$6,300,000</td>
+                        <td>TRANSPORTES TIERRA ADENTRO SAS</td>
+                        <td>
+                            <span class="badge badge-warning">En verificación</span>
+                        </td>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <i class="fas fa-link" style="color: #9c27b0;"></i>
+                                <span>Link de Pago</span>
+                            </div>
+                        </td>
+                        <td>
+                            <button class="btn-action" onclick="verDetallePago('PAG-001240')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        </div>
+        <!-- End Tab Content: Ver Pagos -->
+
     </main>
 
     <!-- Footer -->
@@ -486,6 +732,66 @@
             document.getElementById('filter-pagador').value = '';
             document.getElementById('filter-search').value = '';
             filterTable();
+        }
+
+        // Tab functionality
+        function cambiarTab(tab) {
+            // Update tab buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(btn => {
+                btn.style.color = '#666';
+                btn.style.borderBottom = '3px solid transparent';
+                btn.classList.remove('active');
+            });
+
+            if (tab === 'sin-pago') {
+                document.getElementById('tab-sin-pago').style.color = 'var(--color-primary)';
+                document.getElementById('tab-sin-pago').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('tab-sin-pago').classList.add('active');
+                document.getElementById('content-sin-pago').style.display = 'block';
+                document.getElementById('content-ver-pagos').style.display = 'none';
+            } else if (tab === 'ver-pagos') {
+                document.getElementById('tab-ver-pagos').style.color = 'var(--color-primary)';
+                document.getElementById('tab-ver-pagos').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('tab-ver-pagos').classList.add('active');
+                document.getElementById('content-sin-pago').style.display = 'none';
+                document.getElementById('content-ver-pagos').style.display = 'block';
+            }
+        }
+
+        // Filter functionality for Ver Pagos tab
+        function filterTablePagos() {
+            const estado = document.getElementById('filter-pagos-estado').value.toLowerCase();
+            const metodo = document.getElementById('filter-pagos-metodo').value.toLowerCase();
+            const search = document.getElementById('filter-pagos-search').value.toLowerCase();
+
+            const rows = document.querySelectorAll('#tbody-pagos-realizados tr');
+            rows.forEach(row => {
+                const rowEstado = row.dataset.estado;
+                const rowMetodo = row.dataset.metodo;
+                const rowNumero = row.dataset.numero.toLowerCase();
+
+                const matchEstado = !estado || rowEstado === estado;
+                const matchMetodo = !metodo || rowMetodo === metodo;
+                const matchSearch = !search || rowNumero.includes(search);
+
+                if (matchEstado && matchMetodo && matchSearch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function clearFiltersPagos() {
+            document.getElementById('filter-pagos-estado').value = '';
+            document.getElementById('filter-pagos-metodo').value = '';
+            document.getElementById('filter-pagos-search').value = '';
+            filterTablePagos();
+        }
+
+        function verDetallePago(numeroPago) {
+            alert(`Ver detalle del pago ${numeroPago}\n(Modal por implementar)`);
         }
     </script>
 </body>

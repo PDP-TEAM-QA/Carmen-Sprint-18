@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Pagos - Carmen Factoring</title>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo" style="text-decoration: none;">cärmen</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#ahorro">Ahorro</a></li>
+                    <li><a href="#contactanos">Contáctanos</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="phone-number">
+                    <i class="fas fa-phone"></i>
+                    <span>1 443.819.821</span>
+                </div>
+                <a href="#" class="btn-primary">SOLICITA UN CRÉDITO</a>
+                <a href="#" class="btn-secondary">Cerrar sesión</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="dashboard-cliente.html"><i class="fas fa-arrow-left"></i> Volver</a>
+        <span>TRANS JAPAGO PARDO</span>
+        <span>/</span>
+        <span class="breadcrumb-title">MIS PAGOS</span>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        <!-- Icon Menu with Navigation Arrows -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 30px; width: 100%;">
+            <button class="nav-arrow" onclick="scrollMenu('left')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <div style="flex: 1; max-width: 1200px; overflow: hidden;">
+                <div class="icon-menu" id="iconMenu" style="scroll-behavior: smooth;">
+                    <a href="dashboard-cliente.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="icon-card-label">Inicio</div>
+                    </a>
+
+                    <a href="mis-facturas.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="icon-card-label">Mis facturas</div>
+                    </a>
+
+                    <a href="mis-operaciones.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <div class="icon-card-label">Mis operaciones</div>
+                    </a>
+
+                    <a href="mis-pagos.html" class="icon-card active">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="icon-card-label">Mis pagos</div>
+                    </a>
+                </div>
+            </div>
+            <button class="nav-arrow" onclick="scrollMenu('right')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="card">
+            <h2 class="card-header">
+                <i class="fas fa-wallet"></i> Selecciona el Tipo de Pago
+            </h2>
+            
+            <p style="color: #666; margin-bottom: 40px; font-size: 16px;">Elige el tipo de pago que deseas realizar:</p>
+
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; max-width: 900px; margin: 0 auto;">
+                <!-- Card Factoring -->
+                <div onclick="irAFactoring()" 
+                     style="border: 2px solid var(--color-border); border-radius: 12px; padding: 40px; cursor: pointer; transition: all 0.3s; text-align: center; background: white;"
+                     onmouseover="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 8px 20px rgba(0,61,130,0.15)'; this.style.transform='translateY(-5px)'"
+                     onmouseout="this.style.borderColor='var(--color-border)'; this.style.boxShadow='none'; this.style.transform='translateY(0)'">
+                    <div style="font-size: 64px; color: var(--color-primary); margin-bottom: 20px;">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 style="color: var(--color-primary); margin-bottom: 15px; font-size: 24px;">Factoring</h3>
+                    <p style="color: #666; font-size: 15px; line-height: 1.6;">
+                        Gestiona y realiza pagos de tus facturas de factoring con Carmen.
+                    </p>
+                </div>
+
+                <!-- Card Otros Pagos -->
+                <div onclick="mostrarOtrosPagos()" 
+                     style="border: 2px solid var(--color-border); border-radius: 12px; padding: 40px; cursor: pointer; transition: all 0.3s; text-align: center; background: white;"
+                     onmouseover="this.style.borderColor='var(--color-primary)'; this.style.boxShadow='0 8px 20px rgba(0,61,130,0.15)'; this.style.transform='translateY(-5px)'"
+                     onmouseout="this.style.borderColor='var(--color-border)'; this.style.boxShadow='none'; this.style.transform='translateY(0)'">
+                    <div style="font-size: 64px; color: var(--color-primary); margin-bottom: 20px;">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3 style="color: var(--color-primary); margin-bottom: 15px; font-size: 24px;">Otros Pagos</h3>
+                    <p style="color: #666; font-size: 15px; line-height: 1.6;">
+                        Realiza otros tipos de pagos y gestiona tus transacciones adicionales.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div>
+                <div class="footer-logo">cärmen</div>
+                <p class="footer-description">
+                    Desde un principio, Carmen pensó solucionar, optimizar, un problema detectado en los transportadores que estaba generando un estancamiento en los proyectos emprendidos por Carmen y Josecito.
+                </p>
+                <div class="footer-social">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Inicio</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Servicios</a></li>
+                    <li><a href="#">Ahorro</a></li>
+                    <li><a href="#">Contáctanos</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Dirección</h4>
+                <p style="opacity: 0.9; font-size: 14px;">Calle 72A # 22 - 07</p>
+                <h4 style="margin-top: 20px;">Teléfono</h4>
+                <p style="opacity: 0.9; font-size: 14px;">+57 310 375 4945</p>
+            </div>
+            <div class="footer-section">
+                <h4>Email</h4>
+                <p style="opacity: 0.9; font-size: 14px;">info@carmen.com.co</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function scrollMenu(direction) {
+            const menu = document.getElementById('iconMenu');
+            const scrollAmount = 200;
+            if (direction === 'left') {
+                menu.scrollLeft -= scrollAmount;
+            } else {
+                menu.scrollLeft += scrollAmount;
+            }
+        }
+
+        function irAFactoring() {
+            window.location.href = 'mis-pagos-carmen.html';
+        }
+
+        function mostrarOtrosPagos() {
+            alert('Redirección a la actual página de Carmen de pagos');
+        }
+    </script>
+</body>
+</html>
