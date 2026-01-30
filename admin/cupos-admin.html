@@ -142,8 +142,8 @@
                         <th>Cartera en Cobranza</th>
                         <th># Facturas</th>
                         <th>Cupo Disponible</th>
-                        <th>Días Pactados</th>
-                        <th>Días Reales</th>
+                        <th>Días Promedio Pactados</th>
+                        <th>Días Promedio Reales</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
@@ -163,10 +163,10 @@
                         <td>28</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo">
+                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo" onclick="abrirModalCupo('900.123.456-7', 'ROSERO BENAVIDES CARLOS', '$ 1.000.000.000,00', '$ 100.000.000,00', '30')">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn-icon btn-icon-view" title="Cargar Documentos">
+                                <button class="btn-icon btn-icon-view" title="Carga de anexos" onclick="abrirModalAnexos('900.123.456-7', 'ROSERO BENAVIDES CARLOS')">
                                     <i class="fas fa-file-upload"></i>
                                 </button>
                             </div>
@@ -187,10 +187,10 @@
                         <td>42</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo">
+                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo" onclick="abrirModalCupo('800.234.567-8', 'TRANS JAPAGO PARDO', '$ 500.000.000,00', '$ 50.000.000,00', '45')">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn-icon btn-icon-view" title="Cargar Documentos">
+                                <button class="btn-icon btn-icon-view" title="Carga de anexos" onclick="abrirModalAnexos('800.234.567-8', 'TRANS JAPAGO PARDO')">
                                     <i class="fas fa-file-upload"></i>
                                 </button>
                             </div>
@@ -211,10 +211,10 @@
                         <td>65</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo">
+                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo" onclick="abrirModalCupo('900.345.678-9', 'TRANSPORTES TIERRA ADENTRO SAS', '$ 750.000.000,00', '$ 75.000.000,00', '60')">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn-icon btn-icon-view" title="Cargar Documentos">
+                                <button class="btn-icon btn-icon-view" title="Carga de anexos" onclick="abrirModalAnexos('900.345.678-9', 'TRANSPORTES TIERRA ADENTRO SAS')">
                                     <i class="fas fa-file-upload"></i>
                                 </button>
                             </div>
@@ -235,10 +235,10 @@
                         <td>25</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo">
+                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo" onclick="abrirModalCupo('52.123.456-7', 'YENNY PAOLA GOMEZ', '$ 250.000.000,00', '$ 25.000.000,00', '30')">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn-icon btn-icon-view" title="Cargar Documentos">
+                                <button class="btn-icon btn-icon-view" title="Carga de anexos" onclick="abrirModalAnexos('52.123.456-7', 'YENNY PAOLA GOMEZ')">
                                     <i class="fas fa-file-upload"></i>
                                 </button>
                             </div>
@@ -259,10 +259,10 @@
                         <td>48</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo">
+                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo" onclick="abrirModalCupo('80.456.789-0', 'JOSE SANCHEZ', '$ 300.000.000,00', '$ 30.000.000,00', '45')">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn-icon btn-icon-view" title="Cargar Documentos">
+                                <button class="btn-icon btn-icon-view" title="Carga de anexos" onclick="abrirModalAnexos('80.456.789-0', 'JOSE SANCHEZ')">
                                     <i class="fas fa-file-upload"></i>
                                 </button>
                             </div>
@@ -283,10 +283,10 @@
                         <td>22</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo">
+                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo" onclick="abrirModalCupo('79.234.567-1', 'EDGAR OSORIO', '$ 150.000.000,00', '$ 15.000.000,00', '30')">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn-icon btn-icon-view" title="Cargar Documentos">
+                                <button class="btn-icon btn-icon-view" title="Carga de anexos" onclick="abrirModalAnexos('79.234.567-1', 'EDGAR OSORIO')">
                                     <i class="fas fa-file-upload"></i>
                                 </button>
                             </div>
@@ -307,10 +307,10 @@
                         <td>-</td>
                         <td>
                             <div class="action-buttons">
-                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo">
+                                <button class="btn-icon btn-icon-edit" title="Modificar Cupo" onclick="abrirModalCupo('52.987.654-3', 'JENNY SAVEDRA', '$ 200.000.000,00', '$ 20.000.000,00', '30')">
                                     <i class="fas fa-edit"></i>
                                 </button>
-                                <button class="btn-icon btn-icon-view" title="Cargar Documentos">
+                                <button class="btn-icon btn-icon-view" title="Carga de anexos" onclick="abrirModalAnexos('52.987.654-3', 'JENNY SAVEDRA')">
                                     <i class="fas fa-file-upload"></i>
                                 </button>
                             </div>
@@ -431,6 +431,188 @@
         </div>
     </footer>
 
+    <!-- Modal Modificar Cupo -->
+    <div id="modal-modificar-cupo" class="modal">
+        <div class="modal-content" style="max-width: 750px;">
+            <span class="modal-close" onclick="cerrarModalCupo()">&times;</span>
+            
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div style="font-size: 36px; font-weight: 700; color: #00A9E0; font-family: Arial, sans-serif; letter-spacing: -1px;">
+                    cärmen
+                </div>
+            </div>
+
+            <h2 style="font-size: 24px; color: #FF9800; margin-bottom: 30px; text-align: left;">
+                Asignación de cupo crédito
+            </h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <!-- Tipo de documento -->
+                <div>
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px; font-size: 14px;">
+                        Tipo de documento
+                    </label>
+                    <input type="text" id="modal-tipo-doc" readonly style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; background: #f8f9fa; font-size: 14px; text-align: center; font-weight: 500;">
+                </div>
+
+                <!-- Número de documento -->
+                <div>
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px; font-size: 14px;">
+                        Número de documento
+                    </label>
+                    <input type="text" id="modal-num-doc" readonly style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; background: #f8f9fa; font-size: 14px; text-align: center; font-weight: 500;">
+                </div>
+
+                <!-- Nombre entidad -->
+                <div>
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px; font-size: 14px;">
+                        Nombre entidad
+                    </label>
+                    <input type="text" id="modal-nombre" readonly style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; background: #f8f9fa; font-size: 14px; text-align: center; font-weight: 500;">
+                </div>
+
+                <!-- Cupo actual -->
+                <div>
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px; font-size: 14px;">
+                        Cupo actual
+                    </label>
+                    <input type="text" id="modal-cupo-actual" readonly style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; background: #f8f9fa; font-size: 14px; text-align: center; font-weight: 500;">
+                </div>
+
+                <!-- Monto máximo por solicitud actual -->
+                <div>
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px; font-size: 14px;">
+                        Monto máximo por solicitud actual
+                    </label>
+                    <input type="text" id="modal-monto-actual" readonly style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; background: #f8f9fa; font-size: 14px; text-align: center; font-weight: 500;">
+                </div>
+
+                <!-- Plazo para pagos actual -->
+                <div>
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px; font-size: 14px;">
+                        Plazo para pagos actual
+                    </label>
+                    <input type="text" id="modal-plazo-actual" readonly style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; background: #f8f9fa; font-size: 14px; text-align: center; font-weight: 500;">
+                </div>
+
+                <!-- Valor nuevo cupo -->
+                <div>
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px; font-size: 14px;">
+                        Valor nuevo cupo
+                    </label>
+                    <input type="text" id="modal-nuevo-cupo" placeholder="$" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; text-align: center;">
+                </div>
+
+                <!-- Nuevo monto máximo por solicitud -->
+                <div>
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px; font-size: 14px;">
+                        Nuevo monto máximo por solicitud
+                    </label>
+                    <input type="text" id="modal-nuevo-monto" placeholder="$" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; text-align: center;">
+                </div>
+
+                <!-- Nuevo plazo para pagos -->
+                <div style="grid-column: 1 / -1;">
+                    <label style="display: block; font-weight: 500; color: #666; margin-bottom: 8px; font-size: 14px;">
+                        Nuevo plazo para pagos
+                    </label>
+                    <input type="text" id="modal-nuevo-plazo" placeholder="Días" style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; text-align: center;">
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: center; margin-top: 30px;">
+                <button class="btn-primary" onclick="asignarCupo()" style="padding: 15px 60px; font-size: 16px; border-radius: 30px; background: #00BCD4; border: none;">
+                    Asignar cupo
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Carga de Anexos -->
+    <div id="modal-carga-anexos" class="modal">
+        <div class="modal-content" style="max-width: 700px; max-height: 90vh; overflow-y: auto;">
+            
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div style="font-size: 36px; font-weight: 700; color: #00A9E0; font-family: Arial, sans-serif; letter-spacing: -1px;">
+                    cärmen
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+                <h2 style="font-size: 24px; color: #FF9800; margin: 0;">
+                    Carga de anexos
+                </h2>
+                <button onclick="cerrarModalAnexos()" style="background: none; border: none; font-size: 28px; color: #999; cursor: pointer; padding: 0; line-height: 1;">&times;</button>
+            </div>
+
+            <!-- Información del cliente -->
+            <div style="background: #f8f9fa; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div>
+                        <strong style="color: #666; font-size: 12px;">NIT:</strong>
+                        <div id="anexo-nit" style="color: #333; font-weight: 600;"></div>
+                    </div>
+                    <div>
+                        <strong style="color: #666; font-size: 12px;">Cliente:</strong>
+                        <div id="anexo-nombre" style="color: #333; font-weight: 600;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs de opciones -->
+            <div style="display: flex; gap: 10px; border-bottom: 2px solid #e0e0e0; margin-bottom: 20px;">
+                <button id="tab-documento-anexo" onclick="cambiarTabAnexo('documento')" style="flex: 1; padding: 12px; background: none; border: none; border-bottom: 3px solid var(--color-primary); color: var(--color-primary); font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 14px;">
+                    Documentos
+                </button>
+                <button id="tab-nota-anexo" onclick="cambiarTabAnexo('nota')" style="flex: 1; padding: 12px; background: none; border: none; border-bottom: 3px solid transparent; color: #666; font-weight: 600; cursor: pointer; text-transform: uppercase; font-size: 14px;">
+                    Notas
+                </button>
+            </div>
+
+            <!-- Sección de carga de documentos -->
+            <div id="seccion-documento-anexo">
+                <div style="border: 2px dashed #00A9E0; border-radius: 8px; padding: 30px; text-align: center; background: #f0f9ff; margin-bottom: 20px; cursor: pointer;" onclick="document.getElementById('file-input-anexo').click()">
+                    <i class="fas fa-cloud-upload-alt" style="font-size: 48px; color: #00A9E0; margin-bottom: 15px;"></i>
+                    <p style="margin: 0; color: #666; font-size: 14px;">Haz clic o arrastra archivos aquí</p>
+                    <p style="margin: 5px 0 0 0; color: #999; font-size: 12px;">PDF, DOCX, XLSX, PNG, JPG (Max 10MB)</p>
+                    <input type="file" id="file-input-anexo" style="display: none;" accept=".pdf,.doc,.docx,.xls,.xlsx,.png,.jpg,.jpeg" onchange="agregarDocumento(this)">
+                </div>
+            </div>
+
+            <!-- Sección de notas -->
+            <div id="seccion-nota-anexo" style="display: none;">
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-weight: 600; color: #666; margin-bottom: 8px; font-size: 14px;">
+                        Agregar nota
+                    </label>
+                    <textarea id="textarea-nota-anexo" rows="4" placeholder="Escribe una nota aquí..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; resize: vertical; font-family: inherit;"></textarea>
+                </div>
+                <button onclick="agregarNota()" class="btn-primary" style="padding: 10px 30px; font-size: 14px; border-radius: 20px; background: #00BCD4; border: none;">
+                    <i class="fas fa-plus"></i> Agregar nota
+                </button>
+            </div>
+
+            <!-- Lista de anexos cargados -->
+            <div style="margin-top: 30px;">
+                <h3 style="font-size: 16px; color: #333; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-list"></i> Anexos cargados
+                    <span id="contador-anexos" style="background: #00BCD4; color: white; border-radius: 50%; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; font-size: 12px;">0</span>
+                </h3>
+                <div id="lista-anexos" style="max-height: 300px; overflow-y: auto;">
+                    <p style="text-align: center; color: #999; padding: 20px; font-style: italic;">
+                        No hay anexos cargados aún
+                    </p>
+                </div>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 30px; padding-top: 20px; border-top: 1px solid #e0e0e0;">
+                <button onclick="cerrarModalAnexos()" class="btn-secondary" style="padding: 12px 40px; font-size: 14px; border-radius: 20px; background: #f5f5f5; color: #666; border: none;">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Menu scroll functionality
         function scrollMenu(direction) {
@@ -441,6 +623,266 @@
             } else {
                 menu.scrollLeft += scrollAmount;
             }
+        }
+
+        // Modal functions
+        function abrirModalCupo(nit, nombre, cupoActual, montoMaximo, plazo) {
+            document.getElementById('modal-tipo-doc').value = 'NIT';
+            document.getElementById('modal-num-doc').value = nit;
+            document.getElementById('modal-nombre').value = nombre;
+            document.getElementById('modal-cupo-actual').value = cupoActual;
+            document.getElementById('modal-monto-actual').value = montoMaximo || '-';
+            document.getElementById('modal-plazo-actual').value = plazo || '-';
+            document.getElementById('modal-nuevo-cupo').value = '';
+            document.getElementById('modal-nuevo-monto').value = '';
+            document.getElementById('modal-nuevo-plazo').value = '';
+            
+            document.getElementById('modal-modificar-cupo').classList.add('active');
+        }
+
+        function cerrarModalCupo() {
+            document.getElementById('modal-modificar-cupo').classList.remove('active');
+        }
+
+        function asignarCupo() {
+            const nuevoCupo = document.getElementById('modal-nuevo-cupo').value;
+            const nuevoMonto = document.getElementById('modal-nuevo-monto').value;
+            const nuevoPlazo = document.getElementById('modal-nuevo-plazo').value;
+            
+            if (!nuevoCupo && !nuevoMonto && !nuevoPlazo) {
+                alert('Por favor ingresa al menos un valor nuevo');
+                return;
+            }
+            
+            alert('Cupo modificado exitosamente\n\n' + 
+                  (nuevoCupo ? 'Nuevo cupo: ' + nuevoCupo + '\n' : '') +
+                  (nuevoMonto ? 'Nuevo monto máximo: ' + nuevoMonto + '\n' : '') +
+                  (nuevoPlazo ? 'Nuevo plazo: ' + nuevoPlazo + ' días' : ''));
+            
+            cerrarModalCupo();
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal-modificar-cupo');
+            if (event.target === modal) {
+                cerrarModalCupo();
+            }
+            const modalAnexos = document.getElementById('modal-carga-anexos');
+            if (event.target === modalAnexos) {
+                cerrarModalAnexos();
+            }
+        }
+
+        // Variables globales para anexos
+        let anexosCliente = [];
+        let contadorAnexos = 0;
+
+        // Modal de anexos
+        function abrirModalAnexos(nit, nombre) {
+            document.getElementById('anexo-nit').textContent = nit;
+            document.getElementById('anexo-nombre').textContent = nombre;
+            
+            // Limpiar lista de anexos
+            anexosCliente = [];
+            contadorAnexos = 0;
+            actualizarListaAnexos();
+            
+            // Reset form
+            document.getElementById('textarea-nota-anexo').value = '';
+            
+            // Activar tab de documentos por defecto
+            cambiarTabAnexo('documento');
+            
+            document.getElementById('modal-carga-anexos').classList.add('active');
+        }
+
+        function cerrarModalAnexos() {
+            document.getElementById('modal-carga-anexos').classList.remove('active');
+        }
+
+        function cambiarTabAnexo(tab) {
+            const tabDocumento = document.getElementById('tab-documento-anexo');
+            const tabNota = document.getElementById('tab-nota-anexo');
+            const seccionDocumento = document.getElementById('seccion-documento-anexo');
+            const seccionNota = document.getElementById('seccion-nota-anexo');
+
+            if (tab === 'documento') {
+                tabDocumento.style.borderBottom = '3px solid var(--color-primary)';
+                tabDocumento.style.color = 'var(--color-primary)';
+                tabNota.style.borderBottom = '3px solid transparent';
+                tabNota.style.color = '#666';
+                seccionDocumento.style.display = 'block';
+                seccionNota.style.display = 'none';
+            } else {
+                tabNota.style.borderBottom = '3px solid var(--color-primary)';
+                tabNota.style.color = 'var(--color-primary)';
+                tabDocumento.style.borderBottom = '3px solid transparent';
+                tabDocumento.style.color = '#666';
+                seccionNota.style.display = 'block';
+                seccionDocumento.style.display = 'none';
+            }
+        }
+
+        function agregarDocumento(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            // Validar tamaño (10MB)
+            if (file.size > 10 * 1024 * 1024) {
+                alert('El archivo excede el tamaño máximo de 10MB');
+                input.value = '';
+                return;
+            }
+
+            contadorAnexos++;
+            const fechaActual = new Date().toLocaleString('es-CO', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const anexo = {
+                id: contadorAnexos,
+                tipo: 'documento',
+                nombre: file.name,
+                tamano: formatearTamano(file.size),
+                fecha: fechaActual,
+                extension: file.name.split('.').pop().toUpperCase()
+            };
+
+            anexosCliente.push(anexo);
+            actualizarListaAnexos();
+            
+            // Reset input
+            input.value = '';
+            
+            alert('Documento agregado exitosamente');
+        }
+
+        function agregarNota() {
+            const textarea = document.getElementById('textarea-nota-anexo');
+            const nota = textarea.value.trim();
+
+            if (!nota) {
+                alert('Por favor escribe una nota');
+                return;
+            }
+
+            contadorAnexos++;
+            const fechaActual = new Date().toLocaleString('es-CO', { 
+                year: 'numeric', 
+                month: '2-digit', 
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const anexo = {
+                id: contadorAnexos,
+                tipo: 'nota',
+                contenido: nota.substring(0, 100) + (nota.length > 100 ? '...' : ''),
+                contenidoCompleto: nota,
+                fecha: fechaActual
+            };
+
+            anexosCliente.push(anexo);
+            actualizarListaAnexos();
+            
+            // Reset textarea
+            textarea.value = '';
+            
+            alert('Nota agregada exitosamente');
+        }
+
+        function actualizarListaAnexos() {
+            const lista = document.getElementById('lista-anexos');
+            const contador = document.getElementById('contador-anexos');
+            
+            contador.textContent = anexosCliente.length;
+
+            if (anexosCliente.length === 0) {
+                lista.innerHTML = '<p style="text-align: center; color: #999; padding: 20px; font-style: italic;">No hay anexos cargados aún</p>';
+                return;
+            }
+
+            let html = '<div style="display: flex; flex-direction: column; gap: 10px;">';
+            
+            anexosCliente.forEach((anexo, index) => {
+                if (anexo.tipo === 'documento') {
+                    const iconColor = getIconColor(anexo.extension);
+                    html += `
+                        <div style="background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 40px; height: 40px; background: ${iconColor}; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; font-size: 11px; flex-shrink: 0;">
+                                ${anexo.extension}
+                            </div>
+                            <div style="flex: 1; min-width: 0;">
+                                <div style="font-weight: 600; color: #333; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${anexo.nombre}</div>
+                                <div style="color: #999; font-size: 12px; margin-top: 2px;">${anexo.tamano} • ${anexo.fecha}</div>
+                            </div>
+                            <button onclick="eliminarAnexo(${index})" style="background: none; border: none; color: #dc3545; cursor: pointer; padding: 8px; font-size: 18px;" title="Eliminar">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div style="background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; padding: 12px; display: flex; align-items: center; gap: 12px;">
+                            <div style="width: 40px; height: 40px; background: #FFC107; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: white; font-size: 20px; flex-shrink: 0;">
+                                <i class="fas fa-sticky-note"></i>
+                            </div>
+                            <div style="flex: 1; min-width: 0;">
+                                <div style="font-weight: 600; color: #333; font-size: 14px;">Nota ${anexo.id}</div>
+                                <div style="color: #666; font-size: 13px; margin-top: 4px; line-height: 1.4;">${anexo.contenido}</div>
+                                <div style="color: #999; font-size: 12px; margin-top: 4px;">${anexo.fecha}</div>
+                            </div>
+                            <button onclick="verNotaCompleta(${index})" style="background: none; border: none; color: #00A9E0; cursor: pointer; padding: 8px; font-size: 16px; margin-right: 8px;" title="Ver completa">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button onclick="eliminarAnexo(${index})" style="background: none; border: none; color: #dc3545; cursor: pointer; padding: 8px; font-size: 18px;" title="Eliminar">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </div>
+                    `;
+                }
+            });
+            
+            html += '</div>';
+            lista.innerHTML = html;
+        }
+
+        function eliminarAnexo(index) {
+            if (confirm('¿Estás seguro de eliminar este anexo?')) {
+                anexosCliente.splice(index, 1);
+                actualizarListaAnexos();
+            }
+        }
+
+        function verNotaCompleta(index) {
+            const nota = anexosCliente[index];
+            alert('Nota completa:\n\n' + nota.contenidoCompleto + '\n\nFecha: ' + nota.fecha);
+        }
+
+        function formatearTamano(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        function getIconColor(extension) {
+            const colores = {
+                'PDF': '#dc3545',
+                'DOC': '#2b5797',
+                'DOCX': '#2b5797',
+                'XLS': '#217346',
+                'XLSX': '#217346',
+                'PNG': '#9c27b0',
+                'JPG': '#9c27b0',
+                'JPEG': '#9c27b0'
+            };
+            return colores[extension] || '#6c757d';
         }
     </script>
 </body>

@@ -916,6 +916,9 @@
                         <button type="button" class="btn-icon btn-icon-success btn-vender-individual" title="Vender factura" disabled style="opacity: 0.5; cursor: not-allowed;">
                             <i class="fas fa-dollar-sign"></i>
                         </button>
+                        <button type="button" class="btn-icon btn-ver-detalle" title="Ver detalle" style="background: white; border: 2px solid #17a2b8; color: #17a2b8;">
+                            <i class="fas fa-eye"></i>
+                        </button>
                         <button type="button" class="btn-icon btn-icon-delete" title="Eliminar">
                             <i class="fas fa-trash"></i>
                         </button>
@@ -961,6 +964,15 @@
                 if (queue.length === 0) {
                     tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; color:#999; padding:30px"><i class="fas fa-inbox" style="font-size:48px; margin-bottom:10px; display:block; opacity:0.3"></i>No hay elementos en la cola.</td></tr>';
                 }
+            });
+            
+            // Ver detalle
+            row.querySelector('.btn-ver-detalle').addEventListener('click', () => {
+                const estadoCell = item._row.querySelector('.estado-cell');
+                const estadoText = estadoCell ? estadoCell.textContent.trim() : 'Pendiente';
+                const detalleText = item.detalle || 'Sin detalle disponible';
+                
+                alert('Detalle de la factura:\n\nIdentificador: ' + item.identificador + '\nTipo: ' + item.tipo + '\nEstado: ' + estadoText + '\nDetalle: ' + detalleText);
             });
             
             // Fecha de pago y días a fondear (cálculo bidireccional)
