@@ -74,7 +74,7 @@
                 <div class="icon-card-icon">
                     <i class="fas fa-chart-line"></i>
                 </div>
-                <div class="icon-card-label">Cupos</div>
+                <div class="icon-card-label">Terceros</div>
             </a>
 
             <a href="pagos-pendientes-admin.html" class="icon-card">
@@ -89,6 +89,66 @@
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
+
+        <!-- Tabs System -->
+        <div class="tabs-container" style="margin: 30px 0 20px 0;">
+            <div class="tabs-header" style="display: flex; border-bottom: 3px solid var(--color-border); margin-bottom: 0;">
+                <button class="tab-button active" onclick="cambiarTabTerceros('entidades')" id="tab-entidades" style="padding: 15px 30px; border: none; background: none; font-size: 14px; font-weight: 600; color: var(--color-primary); cursor: pointer; border-bottom: 3px solid var(--color-primary); margin-bottom: -3px; transition: all 0.3s; text-transform: uppercase;">
+                    ENTIDADES
+                </button>
+                <button class="tab-button" onclick="cambiarTabTerceros('usuarios')" id="tab-usuarios" style="padding: 15px 30px; border: none; background: none; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s; text-transform: uppercase;">
+                    USUARIOS
+                </button>
+                <button class="tab-button" onclick="cambiarTabTerceros('beneficiarios')" id="tab-beneficiarios" style="padding: 15px 30px; border: none; background: none; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s; text-transform: uppercase;">
+                    BENEFICIARIOS
+                </button>
+                <button class="tab-button" onclick="cambiarTabTerceros('comerciales')" id="tab-comerciales" style="padding: 15px 30px; border: none; background: none; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s; text-transform: uppercase;">
+                    COMERCIALES
+                </button>
+                <button class="tab-button" onclick="cambiarTabTerceros('grandes-pagadores')" id="tab-grandes-pagadores" style="padding: 15px 30px; border: none; background: none; font-size: 14px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s; text-transform: uppercase;">
+                    GRANDES PAGADORES
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Content: Entidades -->
+        <div id="content-entidades" class="tab-content">
+            <div class="alert alert-info" style="margin: 50px auto; max-width: 600px; text-align: center; padding: 40px;">
+                <i class="fas fa-info-circle" style="font-size: 48px; color: var(--color-primary); margin-bottom: 20px;"></i>
+                <h3 style="color: #333; margin-bottom: 15px;">Comportamiento Actual</h3>
+                <p style="color: #666; font-size: 16px;">Esta sección está en desarrollo. Próximamente podrás gestionar las entidades desde aquí.</p>
+            </div>
+        </div>
+
+        <!-- Tab Content: Usuarios -->
+        <div id="content-usuarios" class="tab-content" style="display: none;">
+            <div class="alert alert-info" style="margin: 50px auto; max-width: 600px; text-align: center; padding: 40px;">
+                <i class="fas fa-info-circle" style="font-size: 48px; color: var(--color-primary); margin-bottom: 20px;"></i>
+                <h3 style="color: #333; margin-bottom: 15px;">Comportamiento Actual</h3>
+                <p style="color: #666; font-size: 16px;">Esta sección está en desarrollo. Próximamente podrás gestionar los usuarios desde aquí.</p>
+            </div>
+        </div>
+
+        <!-- Tab Content: Beneficiarios -->
+        <div id="content-beneficiarios" class="tab-content" style="display: none;">
+            <div class="alert alert-info" style="margin: 50px auto; max-width: 600px; text-align: center; padding: 40px;">
+                <i class="fas fa-info-circle" style="font-size: 48px; color: var(--color-primary); margin-bottom: 20px;"></i>
+                <h3 style="color: #333; margin-bottom: 15px;">Comportamiento Actual</h3>
+                <p style="color: #666; font-size: 16px;">Esta sección está en desarrollo. Próximamente podrás gestionar los beneficiarios desde aquí.</p>
+            </div>
+        </div>
+
+        <!-- Tab Content: Comerciales -->
+        <div id="content-comerciales" class="tab-content" style="display: none;">
+            <div class="alert alert-info" style="margin: 50px auto; max-width: 600px; text-align: center; padding: 40px;">
+                <i class="fas fa-info-circle" style="font-size: 48px; color: var(--color-primary); margin-bottom: 20px;"></i>
+                <h3 style="color: #333; margin-bottom: 15px;">Comportamiento Actual</h3>
+                <p style="color: #666; font-size: 16px;">Esta sección está en desarrollo. Próximamente podrás gestionar los comerciales desde aquí.</p>
+            </div>
+        </div>
+
+        <!-- Tab Content: Grandes Pagadores -->
+        <div id="content-grandes-pagadores" class="tab-content" style="display: none;">
 
         <!-- Filters -->
         <div class="filters-section" style="margin-top: 30px;">
@@ -393,6 +453,45 @@
             </div>
         </div>
 
+        </div>
+        <!-- End Tab Content: Grandes Pagadores -->
+
+        <!-- Tab Content: Entidades -->
+        <div id="content-entidades" class="tab-content" style="display: none;">
+            <div class="alert alert-info" style="margin: 50px auto; max-width: 600px; text-align: center; padding: 40px;">
+                <i class="fas fa-info-circle" style="font-size: 48px; color: var(--color-primary); margin-bottom: 20px;"></i>
+                <h3 style="color: #333; margin-bottom: 15px;">Comportamiento Actual</h3>
+                <p style="color: #666; font-size: 16px;">Esta sección está en desarrollo. Próximamente podrás gestionar las entidades desde aquí.</p>
+            </div>
+        </div>
+
+        <!-- Tab Content: Usuarios -->
+        <div id="content-usuarios" class="tab-content" style="display: none;">
+            <div class="alert alert-info" style="margin: 50px auto; max-width: 600px; text-align: center; padding: 40px;">
+                <i class="fas fa-info-circle" style="font-size: 48px; color: var(--color-primary); margin-bottom: 20px;"></i>
+                <h3 style="color: #333; margin-bottom: 15px;">Comportamiento Actual</h3>
+                <p style="color: #666; font-size: 16px;">Esta sección está en desarrollo. Próximamente podrás gestionar los usuarios desde aquí.</p>
+            </div>
+        </div>
+
+        <!-- Tab Content: Beneficiarios -->
+        <div id="content-beneficiarios" class="tab-content" style="display: none;">
+            <div class="alert alert-info" style="margin: 50px auto; max-width: 600px; text-align: center; padding: 40px;">
+                <i class="fas fa-info-circle" style="font-size: 48px; color: var(--color-primary); margin-bottom: 20px;"></i>
+                <h3 style="color: #333; margin-bottom: 15px;">Comportamiento Actual</h3>
+                <p style="color: #666; font-size: 16px;">Esta sección está en desarrollo. Próximamente podrás gestionar los beneficiarios desde aquí.</p>
+            </div>
+        </div>
+
+        <!-- Tab Content: Comerciales -->
+        <div id="content-comerciales" class="tab-content" style="display: none;">
+            <div class="alert alert-info" style="margin: 50px auto; max-width: 600px; text-align: center; padding: 40px;">
+                <i class="fas fa-info-circle" style="font-size: 48px; color: var(--color-primary); margin-bottom: 20px;"></i>
+                <h3 style="color: #333; margin-bottom: 15px;">Comportamiento Actual</h3>
+                <p style="color: #666; font-size: 16px;">Esta sección está en desarrollo. Próximamente podrás gestionar los comerciales desde aquí.</p>
+            </div>
+        </div>
+
     </main>
 
     <!-- Footer -->
@@ -622,6 +721,47 @@
                 menu.scrollLeft -= scrollAmount;
             } else {
                 menu.scrollLeft += scrollAmount;
+            }
+        }
+
+        // Tab functionality
+        function cambiarTabTerceros(tab) {
+            // Update tab buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabButtons.forEach(btn => {
+                btn.style.color = '#666';
+                btn.style.borderBottom = '3px solid transparent';
+                btn.classList.remove('active');
+            });
+
+            // Hide all content
+            document.getElementById('content-grandes-pagadores').style.display = 'none';
+            document.getElementById('content-entidades').style.display = 'none';
+            document.getElementById('content-usuarios').style.display = 'none';
+            document.getElementById('content-beneficiarios').style.display = 'none';
+            document.getElementById('content-comerciales').style.display = 'none';
+
+            // Show selected content and update button
+            if (tab === 'grandes-pagadores') {
+                document.getElementById('tab-grandes-pagadores').style.color = 'var(--color-primary)';
+                document.getElementById('tab-grandes-pagadores').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('content-grandes-pagadores').style.display = 'block';
+            } else if (tab === 'entidades') {
+                document.getElementById('tab-entidades').style.color = 'var(--color-primary)';
+                document.getElementById('tab-entidades').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('content-entidades').style.display = 'block';
+            } else if (tab === 'usuarios') {
+                document.getElementById('tab-usuarios').style.color = 'var(--color-primary)';
+                document.getElementById('tab-usuarios').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('content-usuarios').style.display = 'block';
+            } else if (tab === 'beneficiarios') {
+                document.getElementById('tab-beneficiarios').style.color = 'var(--color-primary)';
+                document.getElementById('tab-beneficiarios').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('content-beneficiarios').style.display = 'block';
+            } else if (tab === 'comerciales') {
+                document.getElementById('tab-comerciales').style.color = 'var(--color-primary)';
+                document.getElementById('tab-comerciales').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('content-comerciales').style.display = 'block';
             }
         }
 

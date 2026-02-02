@@ -136,6 +136,7 @@
                         <th>N° Factura</th>
                         <th>Gran Pagador</th>
                         <th>Valor a Pagar</th>
+                        <th>Saldo Pendiente</th>
                         <th>Vencimiento</th>
                         <th>Estado</th>
                         <th>Acción</th>
@@ -150,6 +151,7 @@
                         <td style="font-size: 12px;">MNE-0470033</td>
                         <td><strong>19917</strong></td>
                         <td>TRANS JAPAGO PARDO</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$5,432,140</td>
                         <td style="font-weight: 700; color: var(--color-primary);">$5,432,140</td>
                         <td>
                             <div style="display: flex; align-items: center; gap: 5px;">
@@ -181,6 +183,7 @@
                         <td><strong>19918</strong></td>
                         <td>TRANS JAPAGO PARDO</td>
                         <td style="font-weight: 700; color: var(--color-primary);">$7,050,000</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$3,525,000</td>
                         <td>
                             <div style="display: flex; align-items: center; gap: 5px;">
                                 <i class="fas fa-calendar-alt" style="color: #ffc107;"></i>
@@ -211,6 +214,7 @@
                         <td><strong>19916</strong></td>
                         <td>TRANS JAPAGO PARDO</td>
                         <td style="font-weight: 700; color: #666;">$3,050,000</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$500,000</td>
                         <td>
                             <div style="display: flex; align-items: center; gap: 5px;">
                                 <i class="fas fa-calendar-alt" style="color: #666;"></i>
@@ -241,6 +245,7 @@
                         <td><strong>19915</strong></td>
                         <td>EDGAR OSORIO</td>
                         <td style="font-weight: 700; color: var(--color-success);">$1,200,000</td>
+                        <td style="font-weight: 700; color: var(--color-success);">$0</td>
                         <td>
                             <div style="display: flex; align-items: center; gap: 5px;">
                                 <i class="fas fa-check-circle" style="color: var(--color-success);"></i>
@@ -270,6 +275,7 @@
                         <td style="font-size: 12px;">MNE-0470089</td>
                         <td><strong>19914</strong></td>
                         <td>YENNY PAOLA GOMEZ</td>
+                        <td style="font-weight: 700; color: var(--color-primary);">$2,100,000</td>
                         <td style="font-weight: 700; color: var(--color-primary);">$2,100,000</td>
                         <td>
                             <div style="display: flex; align-items: center; gap: 5px;">
@@ -599,6 +605,72 @@
         </div>
     </footer>
 
+    <!-- Modal Detalle de Pago -->
+    <div id="modal-detalle-pago" class="modal">
+        <div class="modal-content" style="max-width: 800px;">
+            <span class="modal-close" onclick="cerrarModalDetallePago()">&times;</span>
+            <h2 class="modal-header" style="color: var(--color-primary);">
+                <i class="fas fa-receipt"></i> Detalle del Pago
+            </h2>
+            
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <strong style="color: #666;">N° de Pago:</strong>
+                        <div id="detalle-numero-pago" style="font-size: 18px; font-weight: 600; margin-top: 5px;"></div>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">Monto Total:</strong>
+                        <div id="detalle-monto-pago" style="font-size: 18px; font-weight: 600; color: var(--color-success); margin-top: 5px;"></div>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">Fecha de Registro:</strong>
+                        <div id="detalle-fecha-registro" style="font-size: 16px; margin-top: 5px;"></div>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">Método de Pago:</strong>
+                        <div id="detalle-metodo-pago" style="font-size: 16px; margin-top: 5px;"></div>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">Estado:</strong>
+                        <div id="detalle-estado-pago" style="font-size: 16px; margin-top: 5px;"></div>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">Nombre:</strong>
+                        <div id="detalle-nombre-pago" style="font-size: 16px; margin-top: 5px;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="font-size: 18px; color: #333; margin: 25px 0 15px 0; display: flex; align-items: center; gap: 8px;">
+                <i class="fas fa-file-invoice"></i> Facturas Asociadas
+                <span id="contador-facturas" style="background: var(--color-primary); color: white; border-radius: 50%; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; font-size: 14px;"></span>
+            </h3>
+
+            <div class="table-container" style="max-height: 400px; overflow-y: auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>N° Factura</th>
+                            <th>CUFE</th>
+                            <th>Fecha de Pago</th>
+                            <th>Valor</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-facturas-pago">
+                    </tbody>
+                </table>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 15px; margin-top: 25px;">
+                <button onclick="cerrarModalDetallePago()" class="btn-secondary" style="padding: 12px 40px;">
+                    <i class="fas fa-times"></i> Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Menu scroll functionality
         function scrollMenu(direction) {
@@ -784,7 +856,148 @@
         }
 
         function verDetallePago(numeroPago) {
-            alert(`Ver detalle del pago ${numeroPago}\n(Modal por implementar)`);
+            // Mock data - Facturas asociadas a cada pago
+            const pagoData = {
+                'PAG-001234': {
+                    numero: 'PAG-001234',
+                    monto: '$5,432,140',
+                    fechaRegistro: '20/Ene/2026',
+                    metodo: 'Transferencia Bancaria',
+                    estado: '<span class="badge badge-success">Aprobado</span>',
+                    nombre: 'TRANS JAPAGO PARDO',
+                    facturas: [
+                        { numero: '19917', cufe: 'MNE-0470033', fechaPago: '21/Ene/2026', valor: '$5,432,140', estado: 'Pagada' }
+                    ]
+                },
+                'PAG-001235': {
+                    numero: 'PAG-001235',
+                    monto: '$7,414,910',
+                    fechaRegistro: '22/Ene/2026',
+                    metodo: 'PSE',
+                    estado: '<span class="badge badge-warning">En verificación</span>',
+                    nombre: 'TRANS JAPAGO PARDO',
+                    facturas: [
+                        { numero: '19916', cufe: 'MNE-0470177', fechaPago: '23/Ene/2026', valor: '$7,414,910', estado: 'En verificación' }
+                    ]
+                },
+                'PAG-001236': {
+                    numero: 'PAG-001236',
+                    monto: '$3,215,960',
+                    fechaRegistro: '23/Ene/2026',
+                    metodo: 'Transferencia Bancaria',
+                    estado: '<span class="badge badge-success">Aprobado</span>',
+                    nombre: 'TRANS JAPAGO PARDO',
+                    facturas: [
+                        { numero: '19669', cufe: 'MNE-0470124', fechaPago: '24/Ene/2026', valor: '$3,215,960', estado: 'Pagada' }
+                    ]
+                },
+                'PAG-001237': {
+                    numero: 'PAG-001237',
+                    monto: '$8,694,920',
+                    fechaRegistro: '24/Ene/2026',
+                    metodo: 'Link de Pago',
+                    estado: '<span class="badge badge-success">Aprobado</span>',
+                    nombre: 'ROSERO BENAVIDES CARLOS',
+                    facturas: [
+                        { numero: '21002', cufe: 'MNE-0476101', fechaPago: '25/Ene/2026', valor: '$1,276,870', estado: 'Pagada' },
+                        { numero: '19964', cufe: 'MNE-0470089', fechaPago: '25/Ene/2026', valor: '$2,220,864', estado: 'Pagada' },
+                        { numero: '21005', cufe: 'MNE-0476112', fechaPago: '25/Ene/2026', valor: '$5,197,186', estado: 'Pagada' }
+                    ]
+                },
+                'PAG-001238': {
+                    numero: 'PAG-001238',
+                    monto: '$4,890,120',
+                    fechaRegistro: '25/Ene/2026',
+                    metodo: 'PSE',
+                    estado: '<span class="badge badge-danger">Rechazado</span>',
+                    nombre: 'JENNY SAVEDRA',
+                    facturas: [
+                        { numero: '20145', cufe: 'MNE-0473088', fechaPago: '-', valor: '$4,890,120', estado: 'Rechazada' }
+                    ]
+                },
+                'PAG-001239': {
+                    numero: 'PAG-001239',
+                    monto: '$6,234,500',
+                    fechaRegistro: '26/Ene/2026',
+                    metodo: 'Transferencia Bancaria',
+                    estado: '<span class="badge badge-success">Aprobado</span>',
+                    nombre: 'EDGAR OSORIO',
+                    facturas: [
+                        { numero: '20234', cufe: 'MNE-0474201', fechaPago: '27/Ene/2026', valor: '$2,100,300', estado: 'Pagada' },
+                        { numero: '20235', cufe: 'MNE-0474202', fechaPago: '27/Ene/2026', valor: '$4,134,200', estado: 'Pagada' }
+                    ]
+                },
+                'PAG-001240': {
+                    numero: 'PAG-001240',
+                    monto: '$3,567,890',
+                    fechaRegistro: '27/Ene/2026',
+                    metodo: 'Link de Pago',
+                    estado: '<span class="badge badge-warning">En verificación</span>',
+                    nombre: 'DISTRIBUIDORA XYZ LTDA',
+                    facturas: [
+                        { numero: '20340', cufe: 'MNE-0475100', fechaPago: '28/Ene/2026', valor: '$3,567,890', estado: 'En verificación' }
+                    ]
+                }
+            };
+
+            const pago = pagoData[numeroPago];
+            
+            if (!pago) {
+                alert('No se encontró información del pago');
+                return;
+            }
+
+            // Llenar datos del pago
+            document.getElementById('detalle-numero-pago').textContent = pago.numero;
+            document.getElementById('detalle-monto-pago').textContent = pago.monto;
+            document.getElementById('detalle-fecha-registro').textContent = pago.fechaRegistro;
+            document.getElementById('detalle-metodo-pago').textContent = pago.metodo;
+            document.getElementById('detalle-estado-pago').innerHTML = pago.estado;
+            document.getElementById('detalle-nombre-pago').textContent = pago.nombre;
+            document.getElementById('contador-facturas').textContent = pago.facturas.length;
+
+            // Llenar tabla de facturas
+            const tbody = document.getElementById('tbody-facturas-pago');
+            tbody.innerHTML = '';
+            
+            pago.facturas.forEach(factura => {
+                let estadoBadge;
+                if (factura.estado === 'Pagada') {
+                    estadoBadge = '<span class="badge badge-success">Pagada</span>';
+                } else if (factura.estado === 'En verificación') {
+                    estadoBadge = '<span class="badge badge-warning">En verificación</span>';
+                } else if (factura.estado === 'Rechazada') {
+                    estadoBadge = '<span class="badge badge-danger">Rechazada</span>';
+                } else {
+                    estadoBadge = '<span class="badge badge-info">' + factura.estado + '</span>';
+                }
+
+                const row = `
+                    <tr>
+                        <td><strong>${factura.numero}</strong></td>
+                        <td style="font-size: 12px; color: #666;">${factura.cufe}</td>
+                        <td>${factura.fechaPago}</td>
+                        <td style="font-weight: 600; color: var(--color-success);">${factura.valor}</td>
+                        <td>${estadoBadge}</td>
+                    </tr>
+                `;
+                tbody.innerHTML += row;
+            });
+
+            // Abrir modal
+            document.getElementById('modal-detalle-pago').classList.add('active');
+        }
+
+        function cerrarModalDetallePago() {
+            document.getElementById('modal-detalle-pago').classList.remove('active');
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal-detalle-pago');
+            if (event.target === modal) {
+                cerrarModalDetallePago();
+            }
         }
     </script>
 </body>

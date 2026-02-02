@@ -36,7 +36,7 @@
     <div class="breadcrumb">
         <a href="dashboard-admin.html"><i class="fas fa-arrow-left"></i> Volver</a>
         <span>/</span>
-        <span class="breadcrumb-title">FACTURAS - VERIFICACIÓN</span>
+        <span class="breadcrumb-title">FACTURAS</span>
     </div>
 
     <!-- Main Content -->
@@ -49,393 +49,493 @@
             <div style="flex: 1; max-width: 1200px; overflow: hidden;">
                 <div class="icon-menu" id="iconMenu" style="scroll-behavior: smooth;">
                     <a href="dashboard-admin.html" class="icon-card">
-                <div class="icon-card-icon">
-                    <i class="fas fa-home"></i>
+                        <div class="icon-card-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="icon-card-label">Inicio</div>
+                    </a>
+                    <a href="facturas-admin.html" class="icon-card active">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                        </div>
+                        <div class="icon-card-label">Facturas</div>
+                    </a>
+                    <a href="liquidaciones-admin.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <div class="icon-card-label">Liquidaciones</div>
+                    </a>
+                    <a href="cupos-admin.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="icon-card-label">Terceros</div>
+                    </a>
+                    <a href="pagos-pendientes-admin.html" class="icon-card">
+                        <div class="icon-card-icon">
+                            <i class="fas fa-money-check-alt"></i>
+                        </div>
+                        <div class="icon-card-label">Pagos</div>
+                    </a>
                 </div>
-                <div class="icon-card-label">Inicio</div>
-            </a>
-
-            <a href="facturas-admin.html" class="icon-card active">
-                <div class="icon-card-icon">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                </div>
-                <div class="icon-card-label">Facturas</div>
-            </a>
-
-            <a href="liquidaciones-admin.html" class="icon-card">
-                <div class="icon-card-icon">
-                    <i class="fas fa-calculator"></i>
-                </div>
-                <div class="icon-card-label">Liquidaciones</div>
-            </a>
-
-
-            <a href="cupos-admin.html" class="icon-card">
-                <div class="icon-card-icon">
-                    <i class="fas fa-chart-line"></i>
-                </div>
-                <div class="icon-card-label">Cupos</div>
-            </a>
-
-            <a href="pagos-pendientes-admin.html" class="icon-card">
-                <div class="icon-card-icon">
-                    <i class="fas fa-money-check-alt"></i>
-                </div>
-                <div class="icon-card-label">Pagos</div>
-            </a>
-            </div>
             </div>
             <button class="nav-arrow" onclick="scrollMenu('right')" style="background: var(--color-primary); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 8px rgba(0,0,0,0.15); transition: all 0.3s; flex-shrink: 0;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
                 <i class="fas fa-chevron-right"></i>
             </button>
         </div>
 
-        <!-- Filters -->
-        <div class="filters-section">
-            <div class="filters-row">
-                <div class="filter-group">
-                    <label>Fecha Inicio</label>
-                    <input type="date" value="2026-01-01">
-                </div>
-                <div class="filter-group">
-                    <label>Fecha Fin</label>
-                    <input type="date" value="2026-01-31">
-                </div>
-                <div class="filter-group">
-                    <label>Cliente</label>
-                    <select>
-                        <option value="">Todos</option>
-                        <option>TRANS JAPAGO PARDO</option>
-                        <option>TRANSPORTES TIERRA ADENTRO SAS</option>
-                        <option>YENNY PAOLA GOMEZ</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>Estado Verificación</label>
-                    <select>
-                        <option value="">Todos</option>
-                        <option value="proceso">En proceso</option>
-                        <option value="aprobado">Aprobado</option>
-                        <option value="rechazado">Rechazado</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <button class="btn-primary" style="width: 100%;">
-                        <i class="fas fa-search"></i> Buscar
-                    </button>
-                </div>
+        <!-- Tabs -->
+        <div class="tabs-container" style="margin-bottom: 30px;">
+            <div class="tabs-header" style="display: flex; border-bottom: 3px solid var(--color-border); margin-bottom: 0;">
+                <button class="tab-button active" onclick="cambiarTabFacturas('cargues')" id="tab-cargues" style="padding: 15px 30px; border: none; background: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s;">
+                    HISTORIAL DE CARGUES
+                </button>
+                <button class="tab-button" onclick="cambiarTabFacturas('negociadas')" id="tab-negociadas" style="padding: 15px 30px; border: none; background: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s;">
+                    HISTORIAL DE FACTURAS NEGOCIADAS
+                </button>
             </div>
         </div>
 
-        <!-- Table -->
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>CUFE</th>
-                        <th>Cliente</th>
-                        <th>Gran Pagador</th>
-                        <th>Valor</th>
-                        <th>Vencimiento</th>
-                        <th>Validaciones</th>
-                        <th>Estado Billy</th>
-                        <th>Estado</th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>MNE-0470089</td>
-                        <td>JENNY SAVEDRA</td>
-                        <td>TRANS JAPAGO PARDO</td>
-                        <td>$2,220,864</td>
-                        <td>2/22/2026</td>
-                        <td>
-                            <div class="validation-list">
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">A crédito</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">No vencida</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Estado 33 - Aceptada</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Valor OK</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon loading"><i class="fas fa-spinner"></i></div>
-                                    <span style="font-size: 11px;">Billy...</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-warning">Verificando...</span></td>
-                        <td><span class="badge badge-warning">EN PROCESO</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn-icon btn-icon-view" title="Ver detalle">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn-icon btn-icon-edit" title="Revalidar">
-                                    <i class="fas fa-sync"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>MNE-0470124</td>
-                        <td>TRANS JAPAGO PARDO</td>
-                        <td>YENNY PAOLA GOMEZ</td>
-                        <td>$3,215,960</td>
-                        <td>2/18/2026</td>
-                        <td>
-                            <div class="validation-list">
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">A crédito</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">No vencida</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Estado 34 - Tácita</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Valor OK</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon loading"><i class="fas fa-spinner"></i></div>
-                                    <span style="font-size: 11px;">Billy...</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-warning">Verificando...</span></td>
-                        <td><span class="badge badge-warning">EN PROCESO</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn-icon btn-icon-view">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn-icon btn-icon-edit">
-                                    <i class="fas fa-sync"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>MNE-0476101</td>
-                        <td>ROSERO BENAVIDES CARLOS</td>
-                        <td>TRANS JAPAGO PARDO</td>
-                        <td>$1,276,870</td>
-                        <td>2/28/2026</td>
-                        <td>
-                            <div class="validation-list">
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">A crédito</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">No vencida</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Estado 33 - Aceptada</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Valor OK</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon loading"><i class="fas fa-spinner"></i></div>
-                                    <span style="font-size: 11px;">Billy...</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-warning">Verificando...</span></td>
-                        <td><span class="badge badge-warning">EN PROCESO</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn-icon btn-icon-view">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                                <button class="btn-icon btn-icon-edit">
-                                    <i class="fas fa-sync"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>MNE-0470033</td>
-                        <td>TRANS JAPAGO PARDO</td>
-                        <td>HELEER LEON</td>
-                        <td>$5,432,140</td>
-                        <td>2/15/2026</td>
-                        <td>
-                            <div class="validation-list">
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">A crédito</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">No vencida</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Estado 33 - Aceptada</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Valor OK</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Billy OK</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-success">Verificada</span></td>
-                        <td><span class="badge badge-success">APROBADO</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn-icon btn-icon-view">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>MNE-0470177</td>
-                        <td>TRANS JAPAGO PARDO</td>
-                        <td>TRANSPORTES TIERRA ADENTRO</td>
-                        <td>$7,414,910</td>
-                        <td>2/20/2026</td>
-                        <td>
-                            <div class="validation-list">
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">A crédito</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">No vencida</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Estado 33 - Aceptada</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Valor OK</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">Billy OK</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-success">Verificada</span></td>
-                        <td><span class="badge badge-success">APROBADO</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn-icon btn-icon-view">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>MNE-0476134</td>
-                        <td>TRANS JAPAGO PARDO</td>
-                        <td>JOSE SANCHEZ</td>
-                        <td>$1,898,050</td>
-                        <td>1/5/2026</td>
-                        <td>
-                            <div class="validation-list">
-                                <div class="validation-item">
-                                    <div class="validation-icon success"><i class="fas fa-check"></i></div>
-                                    <span style="font-size: 11px;">A crédito</span>
-                                </div>
-                                <div class="validation-item">
-                                    <div style="width: 18px; height: 18px; border-radius: 50%; background: var(--color-danger); color: white; display: flex; align-items: center; justify-content: center; font-size: 10px;">
-                                        <i class="fas fa-times"></i>
-                                    </div>
-                                    <span style="font-size: 11px;">Vencida</span>
-                                </div>
-                            </div>
-                        </td>
-                        <td><span class="badge badge-danger">Rechazada</span></td>
-                        <td><span class="badge badge-danger">RECHAZADO</span></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button class="btn-icon btn-icon-view">
-                                    <i class="fas fa-eye"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <!-- Stats -->
-        <div class="stats-grid" style="margin-top: 30px;">
-            <div class="stat-card">
-                <div class="stat-label">Facturas Verificadas Hoy</div>
-                <div class="stat-value">42</div>
-                <div class="progress-bar" style="margin-top: 15px;">
-                    <div class="progress-fill success" style="width: 85%;"></div>
-                </div>
-                <div style="text-align: center; font-size: 12px; color: #666; margin-top: 10px;">85% Tasa de aprobación</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-label">Tiempo Promedio Verificación</div>
-                <div class="stat-value">2.5min</div>
-                <div style="color: var(--color-success); font-size: 14px; margin-top: 10px;">
-                    <i class="fas fa-arrow-down"></i> -15% vs ayer
+        <!-- Tab Content: Historial de Cargues -->
+        <div id="content-cargues" class="tab-content">
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label>Fecha Inicio</label>
+                        <input type="date" value="2026-01-01">
+                    </div>
+                    <div class="filter-group">
+                        <label>Fecha Fin</label>
+                        <input type="date" value="2026-01-31">
+                    </div>
+                    <div class="filter-group">
+                        <label>Entidad/Emisor</label>
+                        <select>
+                            <option value="">Todos</option>
+                            <option>JENNY SAVEDRA</option>
+                            <option>TRANS JAPAGO PARDO</option>
+                            <option>ROSERO BENAVIDES CARLOS</option>
+                            <option>YENNY PAOLA GOMEZ</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Gran Pagador</label>
+                        <select>
+                            <option value="">Todos</option>
+                            <option>TRANS JAPAGO PARDO</option>
+                            <option>JOSE SANCHEZ</option>
+                            <option>TRANSPORTES TIERRA ADENTRO SAS</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Estado</label>
+                        <select>
+                            <option value="">Todos</option>
+                            <option value="pagada">Pagada</option>
+                            <option value="rechazada">Rechazada</option>
+                            <option value="en-espera">En Espera de Pago</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn-primary" style="width: 100%;">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="stat-card">
-                <div class="stat-label">En Proceso Billy</div>
-                <div class="stat-value">3</div>
-                <div style="color: var(--color-warning); font-size: 14px; margin-top: 10px;">
-                    <i class="fas fa-clock"></i> Promedio 1.2min
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-label">Rechazadas Billy Hoy</div>
-                <div class="stat-value">2</div>
-                <div class="progress-bar" style="margin-top: 15px;">
-                    <div class="progress-fill danger" style="width: 4.8%;"></div>
-                </div>
-                <div style="text-align: center; font-size: 12px; color: #666; margin-top: 10px;">4.8% Tasa de rechazo</div>
+            <!-- Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Factura</th>
+                            <th>Entidad/Emisor</th>
+                            <th>Fecha de Cargue</th>
+                            <th>Fecha de Pago</th>
+                            <th>Valor de la Factura</th>
+                            <th>Gran Pagador</th>
+                            <th>Estado de la Factura</th>
+                            <th style="width: 100px;">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>
+                                <div style="font-weight: 600;">19917</div>
+                                <div style="font-size: 11px; color: #666;">MNE-0470033</div>
+                            </td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>08/01/2026</td>
+                            <td>15/02/2026</td>
+                            <td style="font-weight: 600;">$5,432,140</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>
+                                <span class="badge badge-success" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
+                                    <i class="fas fa-check-circle"></i> Pagada
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-icon" style="border: 2px solid #17a2b8; color: #17a2b8;" 
+                                        onclick="verDetalleFactura('19917')" 
+                                        onmouseover="this.style.background='#17a2b8'; this.style.color='white';" 
+                                        onmouseout="this.style.background='transparent'; this.style.color='#17a2b8';"
+                                        title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <div style="font-weight: 600;">20654</div>
+                                <div style="font-size: 11px; color: #666;">MNE-0470089</div>
+                            </td>
+                            <td>JENNY SAVEDRA</td>
+                            <td>10/01/2026</td>
+                            <td>20/02/2026</td>
+                            <td style="font-weight: 600;">$2,220,864</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>
+                                <span class="badge badge-success" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
+                                    <i class="fas fa-check-circle"></i> Pagada
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-icon" style="border: 2px solid #17a2b8; color: #17a2b8;" 
+                                        onclick="verDetalleFactura('20654')" 
+                                        onmouseover="this.style.background='#17a2b8'; this.style.color='white';" 
+                                        onmouseout="this.style.background='transparent'; this.style.color='#17a2b8';"
+                                        title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>
+                                <div style="font-weight: 600;">20761</div>
+                                <div style="font-size: 11px; color: #666;">MNE-0470124</div>
+                            </td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>12/01/2026</td>
+                            <td>25/02/2026</td>
+                            <td style="font-weight: 600;">$3,215,960</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>
+                                <span class="badge badge-success" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
+                                    <i class="fas fa-check-circle"></i> Pagada
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-icon" style="border: 2px solid #17a2b8; color: #17a2b8;" 
+                                        onclick="verDetalleFactura('20761')" 
+                                        onmouseover="this.style.background='#17a2b8'; this.style.color='white';" 
+                                        onmouseout="this.style.background='transparent'; this.style.color='#17a2b8';"
+                                        title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>
+                                <div style="font-weight: 600;">20987</div>
+                                <div style="font-size: 11px; color: #666;">MNE-0476101</div>
+                            </td>
+                            <td>ROSERO BENAVIDES CARLOS</td>
+                            <td>15/01/2026</td>
+                            <td>28/02/2026</td>
+                            <td style="font-weight: 600;">$1,276,870</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>
+                                <span class="badge badge-warning" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
+                                    <i class="fas fa-clock"></i> En Espera de Pago
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-icon" style="border: 2px solid #17a2b8; color: #17a2b8;" 
+                                        onclick="verDetalleFactura('20987')" 
+                                        onmouseover="this.style.background='#17a2b8'; this.style.color='white';" 
+                                        onmouseout="this.style.background='transparent'; this.style.color='#17a2b8';"
+                                        title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>
+                                <div style="font-weight: 600;">21003</div>
+                                <div style="font-size: 11px; color: #666;">MNE-0476134</div>
+                            </td>
+                            <td>YENNY PAOLA GOMEZ</td>
+                            <td>18/01/2026</td>
+                            <td>-</td>
+                            <td style="font-weight: 600;">$1,898,050</td>
+                            <td>JOSE SANCHEZ</td>
+                            <td>
+                                <span class="badge badge-danger" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
+                                    <i class="fas fa-times-circle"></i> Rechazada
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-icon" style="border: 2px solid #dc3545; color: #dc3545;" 
+                                        onclick="verDetalleRechazo('21003')" 
+                                        onmouseover="this.style.background='#dc3545'; this.style.color='white';" 
+                                        onmouseout="this.style.background='transparent'; this.style.color='#dc3545';"
+                                        title="Ver motivo del rechazo">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>
+                                <div style="font-weight: 600;">21234</div>
+                                <div style="font-size: 11px; color: #666;">MNE-0470177</div>
+                            </td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>20/01/2026</td>
+                            <td>05/03/2026</td>
+                            <td style="font-weight: 600;">$7,414,910</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>
+                                <span class="badge badge-success" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
+                                    <i class="fas fa-check-circle"></i> Pagada
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-icon" style="border: 2px solid #17a2b8; color: #17a2b8;" 
+                                        onclick="verDetalleFactura('21234')" 
+                                        onmouseover="this.style.background='#17a2b8'; this.style.color='white';" 
+                                        onmouseout="this.style.background='transparent'; this.style.color='#17a2b8';"
+                                        title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <!-- Info Alert -->
-        <div class="alert alert-info" style="margin-top: 20px;">
-            <strong><i class="fas fa-info-circle"></i> Información:</strong> Las facturas en proceso están siendo verificadas automáticamente con Billy (CUFE). El tiempo promedio de respuesta es de 1-2 minutos. Las facturas rechazadas por Billy no pueden ser procesadas.
+        <!-- Tab Content: Historial de Facturas Negociadas -->
+        <div id="content-negociadas" class="tab-content" style="display: none;">
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label>Fecha Inicio</label>
+                        <input type="date" value="2025-12-01">
+                    </div>
+                    <div class="filter-group">
+                        <label>Fecha Fin</label>
+                        <input type="date" value="2026-01-31">
+                    </div>
+                    <div class="filter-group">
+                        <label>Entidad/Emisor</label>
+                        <select>
+                            <option value="">Todos</option>
+                            <option>TRANS JAPAGO PARDO</option>
+                            <option>JENNY SAVEDRA</option>
+                            <option>ROSERO BENAVIDES CARLOS</option>
+                            <option>YENNY PAOLA GOMEZ</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Estado</label>
+                        <select>
+                            <option value="">Todos</option>
+                            <option value="aprobada">Aprobada</option>
+                            <option value="vencida">Vencida</option>
+                            <option value="en-mora">En Mora</option>
+                            <option value="en-cobranza">En Cobranza</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn-primary" style="width: 100%;">
+                            <i class="fas fa-search"></i> Buscar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#Liquidación</th>
+                            <th>Entidad/Emisor</th>
+                            <th>Gran Pagador</th>
+                            <th>Valor Factura</th>
+                            <th>Descuento/Int/Com</th>
+                            <th>Valor a Desembolsar</th>
+                            <th>Fecha Generada</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>LIQ-001456</strong></td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>$5,432,140</td>
+                            <td style="color: var(--color-danger);">-$282,140</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$5,150,000</td>
+                            <td>02/01/2026 10:26</td>
+                            <td><span class="badge badge-success">Aprobada</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-icon-view" title="Ver detalle" onclick="verDetalleFactura('19917', 'MNE-0470033')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-icon-edit" title="Ver liquidación" onclick="verDetalleLiquidacion('LIQ-001456')">
+                                        <i class="fas fa-calculator"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>LIQ-001457</strong></td>
+                            <td>JENNY SAVEDRA</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>$2,220,864</td>
+                            <td style="color: var(--color-danger);">-$120,864</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$2,100,000</td>
+                            <td>02/01/2026 11:45</td>
+                            <td><span class="badge badge-warning">Vencida</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-icon-view" onclick="verDetalleFactura('20654', 'MNE-0470089')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-icon-edit" title="Ver liquidación" onclick="verDetalleLiquidacion('LIQ-001457')">
+                                        <i class="fas fa-calculator"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>LIQ-001455</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>$7,414,910</td>
+                            <td style="color: var(--color-danger);">-$364,910</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$7,050,000</td>
+                            <td>31/12/2025 14:22</td>
+                            <td><span class="badge badge-success">Aprobada</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-icon-view" onclick="verDetalleFactura('21234', 'MNE-0470177')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-icon-edit" title="Ver liquidación" onclick="verDetalleLiquidacion('LIQ-001455')">
+                                        <i class="fas fa-calculator"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>LIQ-001450</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>$3,215,960</td>
+                            <td style="color: var(--color-danger);">-$165,960</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$3,050,000</td>
+                            <td>28/12/2025 09:15</td>
+                            <td><span class="badge badge-danger">En Mora</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-icon-view" onclick="verDetalleFactura('20761', 'MNE-0470124')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-icon-edit" title="Ver liquidación" onclick="verDetalleLiquidacion('LIQ-001450')">
+                                        <i class="fas fa-calculator"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>LIQ-001442</td>
+                            <td>ROSERO BENAVIDES CARLOS</td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>$1,276,870</td>
+                            <td style="color: var(--color-danger);">-$76,870</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$1,200,000</td>
+                            <td>26/12/2025 16:30</td>
+                            <td><span class="badge badge-danger">En Cobranza</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-icon-view" onclick="verDetalleFactura('20987', 'MNE-0476101')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-icon-edit" title="Ver liquidación" onclick="verDetalleLiquidacion('LIQ-001442')">
+                                        <i class="fas fa-calculator"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>LIQ-001438</td>
+                            <td>YENNY PAOLA GOMEZ</td>
+                            <td>JOSE SANCHEZ</td>
+                            <td>$4,850,000</td>
+                            <td style="color: var(--color-danger);">-$250,000</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$4,600,000</td>
+                            <td>24/12/2025 11:20</td>
+                            <td><span class="badge badge-success">Aprobada</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon btn-icon-view" onclick="verDetalleFactura('21567', 'MNE-0476067')">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon btn-icon-edit" title="Ver liquidación" onclick="verDetalleLiquidacion('LIQ-001438')">
+                                        <i class="fas fa-calculator"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
+
+    <!-- Modal: Detalle de Rechazo -->
+    <div id="modalRechazo" class="modal">
+        <div class="modal-content" style="max-width: 600px;">
+            <span class="modal-close" onclick="cerrarModalRechazo()">&times;</span>
+            <h2 style="color: #dc3545; margin-bottom: 20px;">
+                <i class="fas fa-exclamation-triangle"></i> Factura Rechazada
+            </h2>
+            
+            <div style="background: #fff3cd; padding: 15px; border-left: 4px solid #ff9800; margin-bottom: 20px;">
+                <strong style="color: #856404;">Factura:</strong> <span id="rechazo-factura"></span><br>
+                <strong style="color: #856404;">Fecha de Rechazo:</strong> <span id="rechazo-fecha"></span>
+            </div>
+
+            <div style="background: #f8d7da; padding: 15px; border-left: 4px solid #dc3545; margin-bottom: 20px;">
+                <strong style="color: #721c24;">Motivo del Rechazo:</strong><br>
+                <p id="rechazo-motivo" style="margin-top: 10px; color: #721c24;"></p>
+            </div>
+
+            <div style="background: #d1ecf1; padding: 15px; border-left: 4px solid #17a2b8;">
+                <strong style="color: #0c5460;">Recomendación:</strong><br>
+                <p id="rechazo-recomendacion" style="margin-top: 10px; color: #0c5460;"></p>
+            </div>
+
+            <button onclick="cerrarModalRechazo()" class="btn-secondary" style="width: 100%; margin-top: 20px;">
+                Cerrar
+            </button>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
@@ -485,23 +585,169 @@
             }
         }
 
-        // Simulate loading animation for Billy verification
-        setInterval(() => {
-            const spinners = document.querySelectorAll('.fa-spinner');
-            spinners.forEach(spinner => {
-                spinner.style.animation = 'spin 1s linear infinite';
+        // Tab switching functionality
+        function cambiarTabFacturas(tab) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.color = '#666';
+                btn.style.borderBottom = '3px solid transparent';
             });
-        }, 100);
 
-        // Add CSS animation for spinner
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes spin {
-                from { transform: rotate(0deg); }
-                to { transform: rotate(360deg); }
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // Activate selected tab
+            if (tab === 'cargues') {
+                document.getElementById('tab-cargues').classList.add('active');
+                document.getElementById('tab-cargues').style.color = 'var(--color-primary)';
+                document.getElementById('tab-cargues').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('content-cargues').style.display = 'block';
+            } else if (tab === 'negociadas') {
+                document.getElementById('tab-negociadas').classList.add('active');
+                document.getElementById('tab-negociadas').style.color = 'var(--color-primary)';
+                document.getElementById('tab-negociadas').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('content-negociadas').style.display = 'block';
             }
-        `;
-        document.head.appendChild(style);
+        }
+
+        // Ver detalle de factura
+        function verDetalleFactura(facturaId, cufe) {
+            alert('DETALLE DE FACTURA\n\n' +
+                'Factura N°: ' + facturaId + '\n' +
+                'CUFE: ' + cufe + '\n' +
+                'Estado: Negociada\n' +
+                'Fecha de Emisión: Enero 2026\n' +
+                'Tipo: Electrónica');
+        }
+
+        // Ver detalle de liquidación
+        function verDetalleLiquidacion(liquidacionId) {
+            const liquidacionData = {
+                'LIQ-001456': {
+                    numero: 'LIQ-001456',
+                    factura: '19917 - MNE-0470033',
+                    entidad: 'TRANS JAPAGO PARDO',
+                    valorFactura: '$5,432,140',
+                    descuentos: '$282,140',
+                    valorDesembolsar: '$5,150,000',
+                    fechaGenerada: '02/01/2026 10:26',
+                    fechaAprobacion: '02/01/2026 15:42',
+                    aprobadoPor: 'TRANS JAPAGO PARDO (Cliente)',
+                    estado: 'Aprobada'
+                },
+                'LIQ-001457': {
+                    numero: 'LIQ-001457',
+                    factura: '20654 - MNE-0470089',
+                    entidad: 'JENNY SAVEDRA',
+                    valorFactura: '$2,220,864',
+                    descuentos: '$120,864',
+                    valorDesembolsar: '$2,100,000',
+                    fechaGenerada: '02/01/2026 11:45',
+                    fechaAprobacion: '03/01/2026 09:15',
+                    aprobadoPor: 'JENNY SAVEDRA (Cliente)',
+                    estado: 'Vencida'
+                },
+                'LIQ-001455': {
+                    numero: 'LIQ-001455',
+                    factura: '21234 - MNE-0470177',
+                    entidad: 'TRANS JAPAGO PARDO',
+                    valorFactura: '$7,414,910',
+                    descuentos: '$364,910',
+                    valorDesembolsar: '$7,050,000',
+                    fechaGenerada: '31/12/2025 14:22',
+                    fechaAprobacion: '31/12/2025 16:05',
+                    aprobadoPor: 'TRANS JAPAGO PARDO (Cliente)',
+                    estado: 'Aprobada'
+                },
+                'LIQ-001450': {
+                    numero: 'LIQ-001450',
+                    factura: '20761 - MNE-0470124',
+                    entidad: 'TRANS JAPAGO PARDO',
+                    valorFactura: '$3,215,960',
+                    descuentos: '$165,960',
+                    valorDesembolsar: '$3,050,000',
+                    fechaGenerada: '28/12/2025 09:15',
+                    fechaAprobacion: '28/12/2025 10:30',
+                    aprobadoPor: 'TRANS JAPAGO PARDO (Cliente)',
+                    estado: 'En Mora'
+                },
+                'LIQ-001442': {
+                    numero: 'LIQ-001442',
+                    factura: '20987 - MNE-0476101',
+                    entidad: 'ROSERO BENAVIDES CARLOS',
+                    valorFactura: '$1,276,870',
+                    descuentos: '$76,870',
+                    valorDesembolsar: '$1,200,000',
+                    fechaGenerada: '26/12/2025 16:30',
+                    fechaAprobacion: '27/12/2025 08:45',
+                    aprobadoPor: 'ROSERO BENAVIDES CARLOS (Cliente)',
+                    estado: 'En Cobranza'
+                },
+                'LIQ-001438': {
+                    numero: 'LIQ-001438',
+                    factura: '21567 - MNE-0476067',
+                    entidad: 'YENNY PAOLA GOMEZ',
+                    valorFactura: '$4,850,000',
+                    descuentos: '$250,000',
+                    valorDesembolsar: '$4,600,000',
+                    fechaGenerada: '24/12/2025 11:20',
+                    fechaAprobacion: '24/12/2025 13:10',
+                    aprobadoPor: 'YENNY PAOLA GOMEZ (Cliente)',
+                    estado: 'Aprobada'
+                }
+            };
+
+            const data = liquidacionData[liquidacionId];
+            if (data) {
+                alert('DETALLE DE LIQUIDACIÓN\n\n' +
+                    'N° Liquidación: ' + data.numero + '\n' +
+                    'Factura: ' + data.factura + '\n' +
+                    'Entidad/Emisor: ' + data.entidad + '\n' +
+                    'Valor Factura: ' + data.valorFactura + '\n' +
+                    'Descuentos/Int/Com: ' + data.descuentos + '\n' +
+                    'Valor a Desembolsar: ' + data.valorDesembolsar + '\n\n' +
+                    'Fecha Generada: ' + data.fechaGenerada + '\n' +
+                    'Fecha de Aprobación: ' + data.fechaAprobacion + '\n' +
+                    'Aprobada por: ' + data.aprobadoPor + '\n' +
+                    'Estado: ' + data.estado);
+            }
+        }
+
+        // Ver detalle de rechazo
+        function verDetalleRechazo(facturaId) {
+            const rechazoData = {
+                '21003': {
+                    factura: '21003 - MNE-0476134',
+                    fecha: '18/01/2026 14:35',
+                    motivo: 'La factura presenta inconsistencias en la validación con Billy. El CUFE no pudo ser verificado correctamente debido a que la factura está marcada como vencida y no cumple con los criterios de elegibilidad para negociación.',
+                    recomendacion: 'Contacte al Gran Pagador (JOSE SANCHEZ) para verificar el estado de la factura. Si la factura está correctamente emitida, solicite la actualización en el sistema DIAN para poder proceder con la validación.'
+                }
+            };
+
+            const data = rechazoData[facturaId];
+            if (data) {
+                document.getElementById('rechazo-factura').textContent = data.factura;
+                document.getElementById('rechazo-fecha').textContent = data.fecha;
+                document.getElementById('rechazo-motivo').textContent = data.motivo;
+                document.getElementById('rechazo-recomendacion').textContent = data.recomendacion;
+                document.getElementById('modalRechazo').classList.add('active');
+            }
+        }
+
+        function cerrarModalRechazo() {
+            document.getElementById('modalRechazo').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('modalRechazo');
+            if (event.target == modal) {
+                cerrarModalRechazo();
+            }
+        }
     </script>
 </body>
 </html>

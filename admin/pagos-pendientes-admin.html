@@ -75,7 +75,7 @@
                         <div class="icon-card-icon">
                             <i class="fas fa-chart-line"></i>
                         </div>
-                        <div class="icon-card-label">Cupos</div>
+                        <div class="icon-card-label">Terceros</div>
                     </a>
 
                     <a href="pagos-pendientes-admin.html" class="icon-card active">
@@ -91,6 +91,20 @@
             </button>
         </div>
 
+        <!-- Tabs System -->
+        <div class="tabs-container" style="margin-bottom: 30px;">
+            <div class="tabs-header" style="display: flex; border-bottom: 3px solid var(--color-border); margin-bottom: 0;">
+                <button class="tab-button active" onclick="cambiarTab('historial')" id="tab-historial" style="padding: 15px 30px; border: none; background: none; font-size: 16px; font-weight: 600; color: var(--color-primary); cursor: pointer; border-bottom: 3px solid var(--color-primary); margin-bottom: -3px; transition: all 0.3s;">
+                    HISTORIAL DE PAGOS
+                </button>
+                <button class="tab-button" onclick="cambiarTab('aprobar')" id="tab-aprobar" style="padding: 15px 30px; border: none; background: none; font-size: 16px; font-weight: 600; color: #666; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -3px; transition: all 0.3s;">
+                    APROBAR PAGOS
+                </button>
+            </div>
+        </div>
+
+        <!-- Tab Content: Historial de Pagos -->
+        <div id="content-historial" class="tab-content">
         <!-- Filters -->
         <div class="filters-section">
             <div class="filters-row">
@@ -132,13 +146,14 @@
                         <th>#Pago</th>
                         <th>Fecha Recepción</th>
                         <th>Entidad/Emisor</th>
+                        <th>Gran Pagador</th>
                         <th>N° Facturas</th>
                         <th>Monto Esperado</th>
                         <th>Monto Declarado</th>
                         <th>Diferencia</th>
                         <th>Método</th>
                         <th>Estado</th>
-                        <th>Acción</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody id="tbody-pagos">
@@ -151,10 +166,8 @@
                         </td>
                         <td>
                             <strong>TRANS JAPAGO PARDO</strong>
-                            <div style="font-size: 12px; color: #666;">
-                                CUFEs: MNE-0470033, MNE-0470177
-                            </div>
                         </td>
+                        <td>TRANS JAPAGO PARDO</td>
                         <td style="text-align: center;"><span class="badge badge-info">2</span></td>
                         <td style="font-weight: 700;">$12,482,140</td>
                         <td style="font-weight: 700; color: #ffc107;">$12,232,497</td>
@@ -172,9 +185,9 @@
                         <td>
                             <span class="badge badge-warning">🟡 Pendiente de verificación</span>
                         </td>
-                        <td>
-                            <button class="btn-primary" onclick="verDetalle('PAG-00123')" style="padding: 8px 16px; font-size: 14px;">
-                                <i class="fas fa-check-circle"></i> Verificar
+                        <td style="text-align: center;">
+                            <button class="btn-icon" onclick="verDetalleHistorial('PAG-00123')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
@@ -188,10 +201,8 @@
                         </td>
                         <td>
                             <strong>YENNY PAOLA GOMEZ</strong>
-                            <div style="font-size: 12px; color: #666;">
-                                CUFE: MNE-0470089
-                            </div>
                         </td>
+                        <td>TRANS JAPAGO PARDO</td>
                         <td style="text-align: center;"><span class="badge badge-info">1</span></td>
                         <td style="font-weight: 700;">$7,050,000</td>
                         <td style="font-weight: 700; color: var(--color-success);">$7,050,000</td>
@@ -212,9 +223,9 @@
                         <td>
                             <span class="badge badge-warning">🟡 Pendiente de verificación</span>
                         </td>
-                        <td>
-                            <button class="btn-primary" onclick="verDetalle('PAG-00124')" style="padding: 8px 16px; font-size: 14px;">
-                                <i class="fas fa-check-circle"></i> Verificar
+                        <td style="text-align: center;">
+                            <button class="btn-icon" onclick="verDetalleHistorial('PAG-00124')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
@@ -228,10 +239,8 @@
                         </td>
                         <td>
                             <strong>TRANS JAPAGO PARDO</strong>
-                            <div style="font-size: 12px; color: #666;">
-                                CUFE: MNE-0476134
-                            </div>
                         </td>
+                        <td>TRANS JAPAGO PARDO</td>
                         <td style="text-align: center;"><span class="badge badge-info">1</span></td>
                         <td style="font-weight: 700;">$5,432,000</td>
                         <td style="font-weight: 700; color: var(--color-success);">$5,432,000</td>
@@ -249,9 +258,9 @@
                         <td>
                             <span class="badge badge-success">🟢 Verificado</span>
                         </td>
-                        <td>
-                            <button class="btn-primary" onclick="verDetalle('PAG-00125')" style="padding: 8px 16px; font-size: 14px;">
-                                <i class="fas fa-check-circle"></i> Verificar
+                        <td style="text-align: center;">
+                            <button class="btn-icon" onclick="verDetalleHistorial('PAG-00125')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
@@ -265,10 +274,8 @@
                         </td>
                         <td>
                             <strong>EDGAR OSORIO</strong>
-                            <div style="font-size: 12px; color: #666;">
-                                CUFE: MNE-0476101
-                            </div>
                         </td>
+                        <td>JOSE SANCHEZ</td>
                         <td style="text-align: center;"><span class="badge badge-info">1</span></td>
                         <td style="font-weight: 700;">$1,750,000</td>
                         <td style="font-weight: 700; color: var(--color-success);">$1,750,000</td>
@@ -286,9 +293,9 @@
                         <td>
                             <span class="badge badge-warning">🟡 Pendiente de verificación</span>
                         </td>
-                        <td>
-                            <button class="btn-primary" onclick="verDetalle('PAG-00126')" style="padding: 8px 16px; font-size: 14px;">
-                                <i class="fas fa-check-circle"></i> Verificar
+                        <td style="text-align: center;">
+                            <button class="btn-icon" onclick="verDetalleHistorial('PAG-00126')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
@@ -302,10 +309,8 @@
                         </td>
                         <td>
                             <strong>YENNY PAOLA GOMEZ</strong>
-                            <div style="font-size: 12px; color: #666;">
-                                CUFE: MNE-0470089
-                            </div>
                         </td>
+                        <td>TRANSPORTES TIERRA ADENTRO SAS</td>
                         <td style="text-align: center;"><span class="badge badge-info">1</span></td>
                         <td style="font-weight: 700;">$2,100,500</td>
                         <td style="font-weight: 700; color: #ffc107;">$2,079,490</td>
@@ -323,9 +328,9 @@
                         <td>
                             <span class="badge badge-success">🟢 Verificado</span>
                         </td>
-                        <td>
-                            <button class="btn-primary" onclick="verDetalle('PAG-00127')" style="padding: 8px 16px; font-size: 14px;">
-                                <i class="fas fa-check-circle"></i> Verificar
+                        <td style="text-align: center;">
+                            <button class="btn-icon" onclick="verDetalleHistorial('PAG-00127')" title="Ver detalle">
+                                <i class="fas fa-eye"></i>
                             </button>
                         </td>
                     </tr>
@@ -343,6 +348,405 @@
                 <li><strong>Otro método:</strong> Coordinar con comercial antes de aprobar</li>
             </ul>
         </div>
+        </div>
+        <!-- End Tab Content: Historial de Pagos -->
+
+        <!-- Tab Content: Aprobar Pagos -->
+        <div id="content-aprobar" class="tab-content" style="display: none;">
+
+            <!-- Filters -->
+            <div class="filters-section">
+                <div class="filters-row">
+                    <div class="filter-group">
+                        <label>Cliente</label>
+                        <select id="filter-aprobar-cliente" onchange="filterTableAprobar()">
+                            <option value="">Todos</option>
+                            <option>TRANS JAPAGO PARDO</option>
+                            <option>YENNY PAOLA GOMEZ</option>
+                            <option>EDGAR OSORIO</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Método de Pago</label>
+                        <select id="filter-aprobar-metodo" onchange="filterTableAprobar()">
+                            <option value="">Todos</option>
+                            <option value="transferencia">Transferencia</option>
+                            <option value="pse">PSE</option>
+                            <option value="link">Link de pago</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Buscar</label>
+                        <input type="text" id="filter-aprobar-search" placeholder="#Pago, Cliente..." onkeyup="filterTableAprobar()">
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn-secondary" onclick="clearFiltersAprobar()" style="width: 100%;">
+                            <i class="fas fa-undo"></i> Limpiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table -->
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#Pago</th>
+                            <th>Fecha Recepción</th>
+                            <th>Entidad/Emisor</th>
+                            <th>Gran Pagador</th>
+                            <th>N° Facturas</th>
+                            <th>Monto Esperado</th>
+                            <th>Monto Declarado</th>
+                            <th>Diferencia</th>
+                            <th>Método</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody-aprobar">
+                        <!-- Pago 1: Pendiente -->
+                        <tr data-cliente="TRANS JAPAGO PARDO" data-metodo="transferencia">
+                            <td><strong>PAG-00123</strong></td>
+                            <td>
+                                <div>10/Ene/2026</div>
+                                <div style="font-size: 12px; color: #666;">10:45 AM</div>
+                            </td>
+                            <td><strong>TRANS JAPAGO PARDO</strong></td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td style="text-align: center;"><span class="badge badge-info">2</span></td>
+                            <td style="font-weight: 700;">$12,482,140</td>
+                            <td style="font-weight: 700; color: #ffc107;">$12,232,497</td>
+                            <td>
+                                <span class="badge badge-success">-$249,643 (2%)</span>
+                                <div style="font-size: 12px; color: #666; margin-top: 3px;">
+                                    ✅ Dentro del rango
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-info">
+                                    <i class="fas fa-university"></i> Transferencia
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-icon" onclick="verDetallePagoAprobar('PAG-00123')" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Pago 2: Pendiente PSE -->
+                        <tr data-cliente="YENNY PAOLA GOMEZ" data-metodo="pse">
+                            <td><strong>PAG-00124</strong></td>
+                            <td>
+                                <div>11/Ene/2026</div>
+                                <div style="font-size: 12px; color: #666;">14:20 PM</div>
+                            </td>
+                            <td><strong>YENNY PAOLA GOMEZ</strong></td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td style="text-align: center;"><span class="badge badge-info">1</span></td>
+                            <td style="font-weight: 700;">$7,050,000</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$7,050,000</td>
+                            <td>
+                                <span class="badge badge-success">$0 (0%)</span>
+                                <div style="font-size: 12px; color: var(--color-success); margin-top: 3px;">
+                                    ✅ Coincide exactamente
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge badge-success">
+                                    <i class="fas fa-credit-card"></i> PSE
+                                </span>
+                                <div style="font-size: 11px; color: var(--color-success); margin-top: 3px;">
+                                    ✓ Auto-verificado
+                                </div>
+                            </td>
+                            <td>
+                                <button class="btn-icon" onclick="verDetallePagoAprobar('PAG-00124')" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+
+                        <!-- Pago 3: Pendiente Link -->
+                        <tr data-cliente="EDGAR OSORIO" data-metodo="link">
+                            <td><strong>PAG-00126</strong></td>
+                            <td>
+                                <div>12/Ene/2026</div>
+                                <div style="font-size: 12px; color: #666;">16:30 PM</div>
+                            </td>
+                            <td><strong>EDGAR OSORIO</strong></td>
+                            <td>JOSE SANCHEZ</td>
+                            <td style="text-align: center;"><span class="badge badge-info">1</span></td>
+                            <td style="font-weight: 700;">$1,750,000</td>
+                            <td style="font-weight: 700; color: var(--color-success);">$1,750,000</td>
+                            <td>
+                                <span class="badge badge-success">$0 (0%)</span>
+                                <div style="font-size: 12px; color: var(--color-success); margin-top: 3px;">
+                                    ✅ Coincide exactamente
+                                </div>
+                            </td>
+                            <td>
+                                <span class="badge" style="background: #9c27b0; color: white;">
+                                    <i class="fas fa-link"></i> Link de pago
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn-icon" onclick="verDetallePagoAprobar('PAG-00126')" title="Ver detalle">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Stats -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 30px;">
+                <div class="card" style="text-align: center; padding: 20px;">
+                    <div style="font-size: 14px; color: #666; margin-bottom: 8px;">Pagos Pendientes</div>
+                    <div style="font-size: 32px; font-weight: 700; color: #ffc107;">3</div>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px;">
+                    <div style="font-size: 14px; color: #666; margin-bottom: 8px;">Monto Total Pendiente</div>
+                    <div style="font-size: 32px; font-weight: 700; color: var(--color-primary);">$21,032,497</div>
+                </div>
+                <div class="card" style="text-align: center; padding: 20px;">
+                    <div style="font-size: 14px; color: #666; margin-bottom: 8px;">Diferencia Total</div>
+                    <div style="font-size: 32px; font-weight: 700; color: var(--color-success);">-$249,643</div>
+                </div>
+            </div>
+        </div>
+        <!-- End Tab Content: Aprobar Pagos -->
+
+        <!-- Modal Detalle de Pago -->
+        <div id="modal-detalle-pago" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+            <div style="background: white; border-radius: 12px; max-width: 800px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                <!-- Header -->
+                <div style="padding: 25px; border-bottom: 2px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; background: #f8f9fa;">
+                    <h2 style="margin: 0; color: var(--color-primary);">
+                        <i class="fas fa-file-invoice-dollar"></i> Detalle del Pago
+                    </h2>
+                    <button onclick="cerrarModalDetalle()" style="background: none; border: none; font-size: 24px; color: #666; cursor: pointer; padding: 5px 10px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Content -->
+                <div style="padding: 30px;">
+                    <!-- Información del Pago -->
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
+                        <h3 style="margin: 0 0 20px 0; color: var(--color-primary); font-size: 18px;">
+                            <i class="fas fa-info-circle"></i> Información General
+                        </h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">N° de Pago</label>
+                                <div id="modal-pago-id" style="font-size: 18px; font-weight: 700; color: var(--color-primary);">PAG-00123</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Fecha de Recepción</label>
+                                <div id="modal-pago-fecha" style="font-size: 16px; font-weight: 500;">10/Ene/2026 10:45 AM</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Entidad/Emisor</label>
+                                <div id="modal-pago-entidad" style="font-size: 16px; font-weight: 500;">TRANS JAPAGO PARDO</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Gran Pagador</label>
+                                <div id="modal-pago-gran-pagador" style="font-size: 16px; font-weight: 500;">TRANS JAPAGO PARDO</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Método de Pago</label>
+                                <div id="modal-pago-metodo" style="font-size: 16px; font-weight: 500;">
+                                    <span class="badge badge-info"><i class="fas fa-university"></i> Transferencia</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">N° de Facturas</label>
+                                <div id="modal-pago-facturas" style="font-size: 16px; font-weight: 500;">
+                                    <span class="badge badge-info">2</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Montos -->
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #ffc107;">
+                        <h3 style="margin: 0 0 20px 0; color: #856404; font-size: 18px;">
+                            <i class="fas fa-dollar-sign"></i> Análisis de Montos
+                        </h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Monto Esperado</label>
+                                <div id="modal-pago-esperado" style="font-size: 24px; font-weight: 700; color: var(--color-primary);">$12,482,140</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Monto Declarado</label>
+                                <div id="modal-pago-declarado" style="font-size: 24px; font-weight: 700; color: #ffc107;">$12,232,497</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Diferencia</label>
+                                <div id="modal-pago-diferencia" style="font-size: 24px; font-weight: 700; color: var(--color-success);">-$249,643 (2%)</div>
+                            </div>
+                        </div>
+                        <div id="modal-pago-alerta" style="margin-top: 15px; padding: 12px; background: #d4edda; border: 1px solid #c3e6cb; border-radius: 6px; color: #155724;">
+                            <i class="fas fa-check-circle"></i> <strong>Diferencia dentro del rango aceptable</strong> (hasta 2%)
+                        </div>
+                    </div>
+
+                    <!-- Comprobante -->
+                    <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid var(--color-primary);">
+                        <h3 style="margin: 0 0 15px 0; color: var(--color-primary); font-size: 18px;">
+                            <i class="fas fa-file-pdf"></i> Comprobante de Pago
+                        </h3>
+                        <button class="btn-secondary" style="padding: 12px 20px;">
+                            <i class="fas fa-download"></i> Descargar Comprobante
+                        </button>
+                    </div>
+
+                    <!-- Observaciones -->
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; font-weight: 600; color: #666; margin-bottom: 10px; font-size: 14px;">
+                            <i class="fas fa-comment-alt"></i> Observaciones (Opcional)
+                        </label>
+                        <textarea id="modal-observaciones" placeholder="Agregar observaciones sobre este pago..." style="width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; min-height: 80px; resize: vertical;"></textarea>
+                    </div>
+                </div>
+
+                <!-- Footer con acciones -->
+                <div style="padding: 20px 30px; border-top: 2px solid var(--color-border); background: #f8f9fa; display: flex; justify-content: flex-end; gap: 15px;">
+                    <button class="btn-secondary" onclick="cerrarModalDetalle()" style="padding: 12px 25px;">
+                        <i class="fas fa-times"></i> Cancelar
+                    </button>
+                    <button class="btn-secondary" onclick="rechazarPagoDesdeModal()" style="padding: 12px 25px; background: #dc3545; color: white;">
+                        <i class="fas fa-ban"></i> Rechazar Pago
+                    </button>
+                    <button class="btn-primary" onclick="aprobarPagoDesdeModal()" style="padding: 12px 25px;">
+                        <i class="fas fa-check-circle"></i> Aprobar Pago
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal -->
+
+        <!-- Modal Detalle de Pago Historial -->
+        <div id="modal-historial-pago" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+            <div style="background: white; border-radius: 12px; max-width: 900px; width: 90%; max-height: 90vh; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                <!-- Header -->
+                <div style="padding: 25px; border-bottom: 2px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; background: #f8f9fa;">
+                    <h2 style="margin: 0; color: var(--color-primary);">
+                        <i class="fas fa-file-invoice-dollar"></i> Detalle del Pago
+                    </h2>
+                    <button onclick="cerrarModalHistorial()" style="background: none; border: none; font-size: 24px; color: #666; cursor: pointer; padding: 5px 10px;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
+                <!-- Content -->
+                <div style="padding: 30px;">
+                    <!-- Información del Pago -->
+                    <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin-bottom: 25px;">
+                        <h3 style="margin: 0 0 20px 0; color: var(--color-primary); font-size: 18px;">
+                            <i class="fas fa-info-circle"></i> Información del Pago
+                        </h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">N° de Pago</label>
+                                <div id="modal-hist-pago-id" style="font-size: 18px; font-weight: 700; color: var(--color-primary);">PAG-00123</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Fecha de Recepción</label>
+                                <div id="modal-hist-pago-fecha" style="font-size: 16px; font-weight: 500;">10/Ene/2026 10:45 AM</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Entidad/Emisor</label>
+                                <div id="modal-hist-pago-entidad" style="font-size: 16px; font-weight: 500;">TRANS JAPAGO PARDO</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Gran Pagador</label>
+                                <div id="modal-hist-pago-gran-pagador" style="font-size: 16px; font-weight: 500;">TRANS JAPAGO PARDO</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Método de Pago</label>
+                                <div id="modal-hist-pago-metodo" style="font-size: 16px; font-weight: 500;">
+                                    <span class="badge badge-info"><i class="fas fa-university"></i> Transferencia</span>
+                                </div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Estado</label>
+                                <div id="modal-hist-pago-estado" style="font-size: 16px; font-weight: 500;">
+                                    <span class="badge badge-success">🟢 Verificado</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Montos -->
+                    <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #ffc107;">
+                        <h3 style="margin: 0 0 20px 0; color: #856404; font-size: 18px;">
+                            <i class="fas fa-dollar-sign"></i> Resumen de Montos
+                        </h3>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Monto Esperado</label>
+                                <div id="modal-hist-pago-esperado" style="font-size: 24px; font-weight: 700; color: var(--color-primary);">$12,482,140</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Monto Declarado</label>
+                                <div id="modal-hist-pago-declarado" style="font-size: 24px; font-weight: 700; color: #ffc107;">$12,232,497</div>
+                            </div>
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px; font-size: 14px;">Diferencia</label>
+                                <div id="modal-hist-pago-diferencia" style="font-size: 24px; font-weight: 700; color: var(--color-success);">-$249,643 (2%)</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Facturas Asociadas -->
+                    <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 25px; border: 2px solid var(--color-border);">
+                        <h3 style="margin: 0 0 20px 0; color: var(--color-primary); font-size: 18px;">
+                            <i class="fas fa-file-invoice"></i> Facturas Asociadas
+                        </h3>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>N° Factura</th>
+                                        <th>CUFE</th>
+                                        <th>Fecha Emisión</th>
+                                        <th>Gran Pagador</th>
+                                        <th>Monto</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="modal-hist-facturas-list">
+                                    <!-- Se llenará dinámicamente -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Comprobante -->
+                    <div style="background: #e3f2fd; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid var(--color-primary);">
+                        <h3 style="margin: 0 0 15px 0; color: var(--color-primary); font-size: 18px;">
+                            <i class="fas fa-file-pdf"></i> Comprobante de Pago
+                        </h3>
+                        <button class="btn-secondary" style="padding: 12px 20px;">
+                            <i class="fas fa-download"></i> Descargar Comprobante
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Footer -->
+                <div style="padding: 20px 30px; border-top: 2px solid var(--color-border); background: #f8f9fa; display: flex; justify-content: flex-end; gap: 15px;">
+                    <button class="btn-primary" onclick="cerrarModalHistorial()" style="padding: 12px 25px;">
+                        <i class="fas fa-times"></i> Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- End Modal Historial -->
     </main>
 
     <!-- Footer -->
@@ -382,6 +786,34 @@
     </footer>
 
     <script>
+        // Tab functionality
+        function cambiarTab(tab) {
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.color = '#666';
+                btn.style.borderBottom = '3px solid transparent';
+            });
+
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.style.display = 'none';
+            });
+
+            // Activate selected tab
+            if (tab === 'historial') {
+                document.getElementById('tab-historial').classList.add('active');
+                document.getElementById('tab-historial').style.color = 'var(--color-primary)';
+                document.getElementById('tab-historial').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('content-historial').style.display = 'block';
+            } else if (tab === 'aprobar') {
+                document.getElementById('tab-aprobar').classList.add('active');
+                document.getElementById('tab-aprobar').style.color = 'var(--color-primary)';
+                document.getElementById('tab-aprobar').style.borderBottom = '3px solid var(--color-primary)';
+                document.getElementById('content-aprobar').style.display = 'block';
+            }
+        }
+
         // Menu scroll functionality
         function scrollMenu(direction) {
             const menu = document.getElementById('iconMenu');
@@ -398,24 +830,21 @@
         }
 
         function filterTable() {
-            const prioridad = document.getElementById('filter-prioridad').value.toLowerCase();
             const cliente = document.getElementById('filter-cliente').value.toLowerCase();
             const metodo = document.getElementById('filter-metodo').value.toLowerCase();
             const search = document.getElementById('filter-search').value.toLowerCase();
 
             const rows = document.querySelectorAll('#tbody-pagos tr');
             rows.forEach(row => {
-                const rowPrioridad = row.dataset.prioridad;
                 const rowCliente = row.dataset.cliente.toLowerCase();
                 const rowMetodo = row.dataset.metodo;
                 const rowText = row.textContent.toLowerCase();
 
-                const matchPrioridad = !prioridad || rowPrioridad === prioridad;
                 const matchCliente = !cliente || rowCliente.includes(cliente);
                 const matchMetodo = !metodo || rowMetodo === metodo;
                 const matchSearch = !search || rowText.includes(search);
 
-                if (matchPrioridad && matchCliente && matchMetodo && matchSearch) {
+                if (matchCliente && matchMetodo && matchSearch) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
@@ -424,11 +853,279 @@
         }
 
         function clearFilters() {
-            document.getElementById('filter-prioridad').value = '';
             document.getElementById('filter-cliente').value = '';
             document.getElementById('filter-metodo').value = '';
             document.getElementById('filter-search').value = '';
             filterTable();
+        }
+
+        function filterTableAprobar() {
+            const cliente = document.getElementById('filter-aprobar-cliente').value.toLowerCase();
+            const metodo = document.getElementById('filter-aprobar-metodo').value.toLowerCase();
+            const search = document.getElementById('filter-aprobar-search').value.toLowerCase();
+
+            const rows = document.querySelectorAll('#tbody-aprobar tr');
+            rows.forEach(row => {
+                const rowCliente = row.dataset.cliente.toLowerCase();
+                const rowMetodo = row.dataset.metodo;
+                const rowText = row.textContent.toLowerCase();
+
+                const matchCliente = !cliente || rowCliente.includes(cliente);
+                const matchMetodo = !metodo || rowMetodo === metodo;
+                const matchSearch = !search || rowText.includes(search);
+
+                if (matchCliente && matchMetodo && matchSearch) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function clearFiltersAprobar() {
+            document.getElementById('filter-aprobar-cliente').value = '';
+            document.getElementById('filter-aprobar-metodo').value = '';
+            document.getElementById('filter-aprobar-search').value = '';
+            filterTableAprobar();
+        }
+
+        function aprobarPago(pagoId) {
+            if (confirm(`¿Estás seguro de aprobar el pago ${pagoId}?`)) {
+                alert(`Pago ${pagoId} aprobado exitosamente.\n\nEl cliente será notificado y el estado se actualizará en el historial.`);
+                // Aquí iría la lógica para aprobar el pago
+            }
+        }
+
+        function rechazarPago(pagoId) {
+            const motivo = prompt(`Ingresa el motivo del rechazo para el pago ${pagoId}:`);
+            if (motivo && motivo.trim() !== '') {
+                alert(`Pago ${pagoId} rechazado.\n\nMotivo: ${motivo}\n\nEl cliente será notificado.`);
+                // Aquí iría la lógica para rechazar el pago
+            }
+        }
+
+        // Variables para el modal
+        let pagoSeleccionadoId = null;
+        const datosPagos = {
+            'PAG-00123': {
+                id: 'PAG-00123',
+                fecha: '10/Ene/2026 10:45 AM',
+                entidad: 'TRANS JAPAGO PARDO',
+                granPagador: 'TRANS JAPAGO PARDO',
+                metodo: '<span class="badge badge-info"><i class="fas fa-university"></i> Transferencia</span>',
+                facturas: '2',
+                esperado: '$12,482,140',
+                declarado: '$12,232,497',
+                diferencia: '-$249,643 (2%)',
+                diferenciaColor: 'var(--color-success)',
+                estado: '<span class="badge badge-warning">🟡 Pendiente de verificación</span>',
+                alerta: '<i class="fas fa-check-circle"></i> <strong>Diferencia dentro del rango aceptable</strong> (hasta 2%)',
+                alertaStyle: 'background: #d4edda; border: 1px solid #c3e6cb; color: #155724;',
+                facturasDetalle: [
+                    { numero: '19917', cufe: 'MNE-0470033', fecha: '05/Ene/2026', granPagador: 'TRANS JAPAGO PARDO', monto: '$7,050,000', estado: '<span class="badge badge-success">Pagada</span>' },
+                    { numero: '19918', cufe: 'MNE-0470177', fecha: '08/Ene/2026', granPagador: 'TRANS JAPAGO PARDO', monto: '$5,432,140', estado: '<span class="badge badge-success">Pagada</span>' }
+                ]
+            },
+            'PAG-00124': {
+                id: 'PAG-00124',
+                fecha: '11/Ene/2026 14:20 PM',
+                entidad: 'YENNY PAOLA GOMEZ',
+                granPagador: 'TRANS JAPAGO PARDO',
+                metodo: '<span class="badge badge-success"><i class="fas fa-credit-card"></i> PSE</span>',
+                facturas: '1',
+                esperado: '$7,050,000',
+                declarado: '$7,050,000',
+                diferencia: '$0 (0%)',
+                diferenciaColor: 'var(--color-success)',
+                estado: '<span class="badge badge-warning">🟡 Pendiente de verificación</span>',
+                alerta: '<i class="fas fa-check-circle"></i> <strong>Coincidencia exacta - PSE Auto-verificado</strong>',
+                alertaStyle: 'background: #d4edda; border: 1px solid #c3e6cb; color: #155724;',
+                facturasDetalle: [
+                    { numero: '19919', cufe: 'MNE-0470089', fecha: '09/Ene/2026', granPagador: 'TRANS JAPAGO PARDO', monto: '$7,050,000', estado: '<span class="badge badge-success">Pagada</span>' }
+                ]
+            },
+            'PAG-00125': {
+                id: 'PAG-00125',
+                fecha: '12/Ene/2026 09:15 AM',
+                entidad: 'TRANS JAPAGO PARDO',
+                granPagador: 'TRANS JAPAGO PARDO',
+                metodo: '<span class="badge badge-info"><i class="fas fa-university"></i> Transferencia</span>',
+                facturas: '1',
+                esperado: '$5,432,000',
+                declarado: '$5,432,000',
+                diferencia: '$0 (0%)',
+                diferenciaColor: 'var(--color-success)',
+                estado: '<span class="badge badge-success">🟢 Verificado</span>',
+                alerta: '<i class="fas fa-check-circle"></i> <strong>Coincidencia exacta - Verificado</strong>',
+                alertaStyle: 'background: #d4edda; border: 1px solid #c3e6cb; color: #155724;',
+                facturasDetalle: [
+                    { numero: '19920', cufe: 'MNE-0476134', fecha: '10/Ene/2026', granPagador: 'TRANS JAPAGO PARDO', monto: '$5,432,000', estado: '<span class="badge badge-success">Pagada</span>' }
+                ]
+            },
+            'PAG-00126': {
+                id: 'PAG-00126',
+                fecha: '12/Ene/2026 16:30 PM',
+                entidad: 'EDGAR OSORIO',
+                granPagador: 'JOSE SANCHEZ',
+                metodo: '<span class="badge" style="background: #9c27b0; color: white;"><i class="fas fa-link"></i> Link de pago</span>',
+                facturas: '1',
+                esperado: '$1,750,000',
+                declarado: '$1,750,000',
+                diferencia: '$0 (0%)',
+                diferenciaColor: 'var(--color-success)',
+                estado: '<span class="badge badge-warning">🟡 Pendiente de verificación</span>',
+                alerta: '<i class="fas fa-check-circle"></i> <strong>Coincidencia exacta</strong>',
+                alertaStyle: 'background: #d4edda; border: 1px solid #c3e6cb; color: #155724;',
+                facturasDetalle: [
+                    { numero: '19921', cufe: 'MNE-0476101', fecha: '11/Ene/2026', granPagador: 'JOSE SANCHEZ', monto: '$1,750,000', estado: '<span class="badge badge-success">Pagada</span>' }
+                ]
+            },
+            'PAG-00127': {
+                id: 'PAG-00127',
+                fecha: '13/Ene/2026 11:00 AM',
+                entidad: 'YENNY PAOLA GOMEZ',
+                granPagador: 'TRANSPORTES TIERRA ADENTRO SAS',
+                metodo: '<span class="badge badge-info"><i class="fas fa-university"></i> Transferencia</span>',
+                facturas: '1',
+                esperado: '$2,100,500',
+                declarado: '$2,079,490',
+                diferencia: '-$21,010 (1%)',
+                diferenciaColor: 'var(--color-success)',
+                estado: '<span class="badge badge-success">🟢 Verificado</span>',
+                alerta: '<i class="fas fa-check-circle"></i> <strong>Diferencia dentro del rango aceptable</strong> (hasta 2%)',
+                alertaStyle: 'background: #d4edda; border: 1px solid #c3e6cb; color: #155724;',
+                facturasDetalle: [
+                    { numero: '19922', cufe: 'MNE-0470089', fecha: '12/Ene/2026', granPagador: 'TRANSPORTES TIERRA ADENTRO SAS', monto: '$2,100,500', estado: '<span class="badge badge-success">Pagada</span>' }
+                ]
+            }
+        };
+
+        function verDetallePagoAprobar(pagoId) {
+            pagoSeleccionadoId = pagoId;
+            const datos = datosPagos[pagoId];
+            
+            if (!datos) {
+                alert('No se encontró información del pago');
+                return;
+            }
+
+            // Llenar el modal con los datos
+            document.getElementById('modal-pago-id').textContent = datos.id;
+            document.getElementById('modal-pago-fecha').textContent = datos.fecha;
+            document.getElementById('modal-pago-entidad').textContent = datos.entidad;
+            document.getElementById('modal-pago-gran-pagador').textContent = datos.granPagador;
+            document.getElementById('modal-pago-metodo').innerHTML = datos.metodo;
+            document.getElementById('modal-pago-facturas').innerHTML = '<span class="badge badge-info">' + datos.facturas + '</span>';
+            document.getElementById('modal-pago-esperado').textContent = datos.esperado;
+            document.getElementById('modal-pago-declarado').textContent = datos.declarado;
+            document.getElementById('modal-pago-diferencia').textContent = datos.diferencia;
+            document.getElementById('modal-pago-diferencia').style.color = datos.diferenciaColor;
+            document.getElementById('modal-pago-alerta').innerHTML = datos.alerta;
+            document.getElementById('modal-pago-alerta').style.cssText = datos.alertaStyle;
+            document.getElementById('modal-observaciones').value = '';
+
+            // Mostrar el modal
+            const modal = document.getElementById('modal-detalle-pago');
+            modal.style.display = 'flex';
+        }
+
+        function verDetalleHistorial(pagoId) {
+            const datos = datosPagos[pagoId];
+            
+            if (!datos) {
+                alert('No se encontró información del pago');
+                return;
+            }
+
+            // Llenar el modal con los datos del pago
+            document.getElementById('modal-hist-pago-id').textContent = datos.id;
+            document.getElementById('modal-hist-pago-fecha').textContent = datos.fecha;
+            document.getElementById('modal-hist-pago-entidad').textContent = datos.entidad;
+            document.getElementById('modal-hist-pago-gran-pagador').textContent = datos.granPagador;
+            document.getElementById('modal-hist-pago-metodo').innerHTML = datos.metodo;
+            document.getElementById('modal-hist-pago-estado').innerHTML = datos.estado;
+            document.getElementById('modal-hist-pago-esperado').textContent = datos.esperado;
+            document.getElementById('modal-hist-pago-declarado').textContent = datos.declarado;
+            document.getElementById('modal-hist-pago-diferencia').textContent = datos.diferencia;
+            document.getElementById('modal-hist-pago-diferencia').style.color = datos.diferenciaColor;
+
+            // Llenar la tabla de facturas
+            const facturasListElement = document.getElementById('modal-hist-facturas-list');
+            facturasListElement.innerHTML = '';
+            
+            if (datos.facturasDetalle && datos.facturasDetalle.length > 0) {
+                datos.facturasDetalle.forEach(factura => {
+                    const row = `
+                        <tr>
+                            <td><strong>${factura.numero}</strong></td>
+                            <td>${factura.cufe}</td>
+                            <td>${factura.fecha}</td>
+                            <td>${factura.granPagador}</td>
+                            <td style="font-weight: 700; color: var(--color-primary);">${factura.monto}</td>
+                            <td>${factura.estado}</td>
+                        </tr>
+                    `;
+                    facturasListElement.innerHTML += row;
+                });
+            } else {
+                facturasListElement.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #999;">No hay facturas asociadas</td></tr>';
+            }
+
+            // Mostrar el modal
+            const modal = document.getElementById('modal-historial-pago');
+            modal.style.display = 'flex';
+        }
+
+        function cerrarModalHistorial() {
+            document.getElementById('modal-historial-pago').style.display = 'none';
+        }
+
+        function cerrarModalDetalle() {
+            document.getElementById('modal-detalle-pago').style.display = 'none';
+            pagoSeleccionadoId = null;
+        }
+
+        function aprobarPagoDesdeModal() {
+            if (!pagoSeleccionadoId) return;
+            
+            const observaciones = document.getElementById('modal-observaciones').value.trim();
+            if (confirm(`¿Estás seguro de aprobar el pago ${pagoSeleccionadoId}?`)) {
+                let mensaje = `Pago ${pagoSeleccionadoId} aprobado exitosamente.\n\nEl cliente será notificado y el estado se actualizará en el historial.`;
+                if (observaciones) {
+                    mensaje += `\n\nObservaciones: ${observaciones}`;
+                }
+                alert(mensaje);
+                cerrarModalDetalle();
+                // Aquí iría la lógica para aprobar el pago
+            }
+        }
+
+        function rechazarPagoDesdeModal() {
+            if (!pagoSeleccionadoId) return;
+            
+            const motivo = prompt(`Ingresa el motivo del rechazo para el pago ${pagoSeleccionadoId}:`);
+            if (motivo && motivo.trim() !== '') {
+                const observaciones = document.getElementById('modal-observaciones').value.trim();
+                let mensaje = `Pago ${pagoSeleccionadoId} rechazado.\n\nMotivo: ${motivo}\n\nEl cliente será notificado.`;
+                if (observaciones) {
+                    mensaje += `\n\nObservaciones adicionales: ${observaciones}`;
+                }
+                alert(mensaje);
+                cerrarModalDetalle();
+                // Aquí iría la lógica para rechazar el pago
+            }
+        }
+
+        // Cerrar modal al hacer clic fuera
+        window.onclick = function(event) {
+            const modal = document.getElementById('modal-detalle-pago');
+            const modalHistorial = document.getElementById('modal-historial-pago');
+            if (event.target === modal) {
+                cerrarModalDetalle();
+            }
+            if (event.target === modalHistorial) {
+                cerrarModalHistorial();
+            }
         }
     </script>
 </body>
