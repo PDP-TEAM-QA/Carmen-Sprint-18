@@ -1,0 +1,2 @@
+# Ignorar archivos .md en la raíz (no en subcarpetas)
+/*.md

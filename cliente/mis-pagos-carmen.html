@@ -323,6 +323,14 @@
                 </div>
             </div>
         </div>
+
+        <!-- Excel Download Button -->
+        <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+            <button class="btn-secondary" onclick="descargarExcelFacturasSinPago()" style="padding: 12px 25px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-file-excel" style="color: #28a745; font-size: 18px;"></i>
+                <span>Descargar Excel - Facturas sin Pago</span>
+            </button>
+        </div>
         </div>
         <!-- End Tab Content: Facturas sin pago -->
 
@@ -564,6 +572,14 @@
                 </tbody>
             </table>
         </div>
+
+        <!-- Excel Download Button -->
+        <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+            <button class="btn-secondary" onclick="descargarExcelVerPagos()" style="padding: 12px 25px; display: flex; align-items: center; gap: 10px;">
+                <i class="fas fa-file-excel" style="color: #28a745; font-size: 18px;"></i>
+                <span>Descargar Excel - Ver Pagos</span>
+            </button>
+        </div>
         </div>
         <!-- End Tab Content: Ver Pagos -->
 
@@ -664,7 +680,10 @@
             </div>
 
             <div style="display: flex; justify-content: center; gap: 15px; margin-top: 25px;">
-                <button onclick="cerrarModalDetallePago()" class="btn-secondary" style="padding: 12px 40px;">
+                <button onclick="descargarComprobantePago()" class="btn-secondary" style="padding: 12px 30px;">
+                    <i class="fas fa-file-download"></i> Descargar Comprobante
+                </button>
+                <button onclick="cerrarModalDetallePago()" class="btn-primary" style="padding: 12px 40px;">
                     <i class="fas fa-times"></i> Cerrar
                 </button>
             </div>
@@ -992,12 +1011,82 @@
             document.getElementById('modal-detalle-pago').classList.remove('active');
         }
 
+        function descargarComprobantePago() {
+            const numeroPago = document.getElementById('detalle-numero-pago').textContent;
+            const monto = document.getElementById('detalle-monto-pago').textContent;
+            alert(`📄 Descargar Comprobante\n\nSe descargará el comprobante del pago ${numeroPago} por ${monto}.\n\nEn producción, aquí se descargará el archivo PDF del comprobante.`);
+        }
+
         // Cerrar modal al hacer clic fuera
         window.onclick = function(event) {
             const modal = document.getElementById('modal-detalle-pago');
             if (event.target === modal) {
                 cerrarModalDetallePago();
             }
+        }
+
+        function descargarExcelFacturasSinPago() {
+            // Obtener todas las filas visibles de la tabla
+            const tabla = document.getElementById('tbody-pagos');
+            const filas = tabla.querySelectorAll('tr');
+            let datosVisibles = [];
+
+            filas.forEach(fila => {
+                if (fila.style.display !== 'none') {
+                    const celdas = fila.querySelectorAll('td');
+                    const numero = celdas[1].textContent.trim();
+                    const cufe = celdas[2].textContent.trim();
+                    const fechaEmision = celdas[3].textContent.trim();
+                    const valorPagar = celdas[4].textContent.trim();
+                    const saldoPendiente = celdas[5].textContent.trim();
+                    const estado = celdas[6].textContent.trim();
+                    
+                    datosVisibles.push({
+                        'N° Factura': numero,
+                        'CUFE': cufe,
+                        'Fecha Emisión': fechaEmision,
+                        'Valor a Pagar': valorPagar,
+                        'Saldo Pendiente': saldoPendiente,
+                        'Estado': estado
+                    });
+                }
+            });
+
+            console.log('Descargando Excel con datos de Facturas sin Pago:', datosVisibles);
+            alert(`✅ Descarga de Excel - Facturas sin Pago\n\nSe descargará un archivo Excel con ${datosVisibles.length} facturas que están actualmente visibles en la tabla.\n\nNota: El archivo incluirá solo los registros que coinciden con los filtros aplicados.`);
+        }
+
+        function descargarExcelVerPagos() {
+            // Obtener todas las filas visibles de la tabla
+            const tabla = document.getElementById('tbody-pagos-realizados');
+            const filas = tabla.querySelectorAll('tr');
+            let datosVisibles = [];
+
+            filas.forEach(fila => {
+                if (fila.style.display !== 'none') {
+                    const celdas = fila.querySelectorAll('td');
+                    const numeroPago = celdas[1].textContent.trim();
+                    const fechaRegistro = celdas[2].textContent.trim();
+                    const fechaAceptacion = celdas[3].textContent.trim();
+                    const monto = celdas[4].textContent.trim();
+                    const nombre = celdas[5].textContent.trim();
+                    const estado = celdas[6].textContent.trim();
+                    const metodo = celdas[7].textContent.trim();
+                    
+                    datosVisibles.push({
+                        'N° Pago': numeroPago,
+                        'Fecha Registro': fechaRegistro,
+                        'Fecha Aceptación': fechaAceptacion,
+                        'Monto': monto,
+                        'Nombre': nombre,
+                        'Estado': estado,
+                        'Método': metodo
+                    });
+                }
+            });
+
+            console.log('Descargando Excel con datos de Ver Pagos:', datosVisibles);
+            alert(`✅ Descarga de Excel - Ver Pagos\n\nSe descargará un archivo Excel con ${datosVisibles.length} pagos que están actualmente visibles en la tabla.\n\nNota: El archivo incluirá solo los registros que coinciden con los filtros aplicados.`);
         }
     </script>
 </body>
