@@ -295,49 +295,71 @@
         function renderSingleInvoice() {
             const factura = facturas[0];
             document.getElementById('invoice-title').textContent = 'Datos de la Factura';
+            
+            // Usar el mismo formato de tabla que para múltiples facturas
+            const valorReserva = Math.round(factura.valor * VALOR_RESERVA);
+            const valorBase = factura.valor - valorReserva;
+            const comision = Math.round(valorBase * COMISION);
+            const usoPlataforma = Math.round(valorBase * USO_PLATAFORMA);
+            const negociacionRadian = Math.round(valorBase * NEGOCIACION_RADIAN);
+            const valorDesembolsar = valorBase - comision - usoPlataforma - negociacionRadian;
+            
             document.getElementById('invoice-details-container').innerHTML = `
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                    <div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">CUFE</label>
-                            <div style="font-size: 18px; font-weight: 500;">${factura.cufe}</div>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Número de Factura</label>
-                            <div style="font-size: 18px; font-weight: 500;">${factura.numero}</div>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Fecha de Emisión</label>
-                            <div style="font-size: 18px; font-weight: 500;">${factura.fechaEmision}</div>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Estado DTE</label>
-                            <div><span class="badge badge-success" style="font-size: 14px; padding: 8px 16px;">33 - Aceptada Expresamente</span></div>
-                        </div>
-                    </div>
-                    <div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Gran Pagador</label>
-                            <div style="font-size: 18px; font-weight: 500;">${factura.granPagador}</div>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Valor de la Factura</label>
-                            <div style="font-size: 24px; font-weight: 700; color: var(--color-primary);">$${factura.valor.toLocaleString('es-CO')}</div>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Fecha de Vencimiento</label>
-                            <div style="font-size: 18px; font-weight: 500;">15 de Febrero de 2026</div>
-                            <div style="font-size: 14px; color: var(--color-success); margin-top: 5px;">
-                                <i class="fas fa-check-circle"></i> Vigente (33 días restantes)
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Fecha de Pago Seleccionada</label>
-                            <div style="font-size: 16px; font-weight: 600; color: var(--color-info);">
-                                <i class="fas fa-calendar-alt"></i> ${factura.fechaPago}
-                            </div>
-                        </div>
-                    </div>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                        <thead>
+                            <tr style="background: white; border-bottom: 2px solid var(--color-primary);">
+                                <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">CUFE</th>
+                                <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">N° Factura</th>
+                                <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">Gran Pagador</th>
+                                <th style="padding: 12px; text-align: center; font-weight: 600; color: #666;">Fecha Pago</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Valor Factura</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Reserva (10%)</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Base Compra</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Comisión (2.5%)</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Uso Plat. (0.55%)</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Radian (0.28%)</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">A Desembolsar</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 12px;">${factura.cufe}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; font-weight: 600;">${factura.numero}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd;">${factura.granPagador}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: center;">${factura.fechaPago}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right;">
+                                    <input type="number" 
+                                           class="valor-editable" 
+                                           data-index="0" 
+                                           data-original="${factura.valor}"
+                                           value="${factura.valor}" 
+                                           min="1"
+                                           max="${factura.valor}"
+                                           onchange="validarYActualizarValor(this, 0)"
+                                           style="width: 120px; padding: 8px; text-align: right; border: 2px solid var(--color-primary); border-radius: 4px; font-weight: 600; font-size: 14px;">
+                                </td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="reserva-0">-$${valorReserva.toLocaleString('es-CO')}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 600;" id="base-0">$${valorBase.toLocaleString('es-CO')}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="comision-0">-$${comision.toLocaleString('es-CO')}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="plataforma-0">-$${usoPlataforma.toLocaleString('es-CO')}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="radian-0">-$${negociacionRadian.toLocaleString('es-CO')}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 700; color: var(--color-primary);" id="desembolso-0">$${valorDesembolsar.toLocaleString('es-CO')}</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="background: #e3f2fd; border-top: 2px solid var(--color-primary);">
+                                <td colspan="4" style="padding: 15px; font-weight: 700; font-size: 16px;">TOTAL</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);" id="total-valor">$${factura.valor.toLocaleString('es-CO')}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-reserva">-$${valorReserva.toLocaleString('es-CO')}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);" id="total-base">$${valorBase.toLocaleString('es-CO')}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-comision">-$${comision.toLocaleString('es-CO')}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-plataforma">-$${usoPlataforma.toLocaleString('es-CO')}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-radian">-$${negociacionRadian.toLocaleString('es-CO')}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 18px; color: var(--color-primary);" id="total-desembolso">$${valorDesembolsar.toLocaleString('es-CO')}</td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             `;
         }
@@ -356,20 +378,27 @@
                 
                 return `
                 <tr${idx % 2 === 0 ? '' : ' style="background: #f9f9f9;"'}>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: center;">
-                        <input type="checkbox" class="factura-checkbox" data-index="${idx}" checked onchange="recalcularSeleccionadas()" style="width: 18px; height: 18px; cursor: pointer;">
-                    </td>
                     <td style="padding: 12px; border-bottom: 1px solid #ddd;">${idx + 1}</td>
                     <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 12px;">${f.cufe}</td>
                     <td style="padding: 12px; border-bottom: 1px solid #ddd;">${f.granPagador}</td>
                     <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: center;">${f.fechaPago}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 600;">$${f.valor.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;">-$${valorReserva.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 600;">$${valorBase.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;">-$${comision.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;">-$${usoPlataforma.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;">-$${negociacionRadian.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 700; color: var(--color-primary);">$${valorDesembolsar.toLocaleString('es-CO')}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right;">
+                        <input type="number" 
+                               class="valor-editable" 
+                               data-index="${idx}" 
+                               data-original="${f.valor}"
+                               value="${f.valor}" 
+                               min="1"
+                               max="${f.valor}"
+                               onchange="validarYActualizarValor(this, ${idx})"
+                               style="width: 120px; padding: 8px; text-align: right; border: 2px solid var(--color-primary); border-radius: 4px; font-weight: 600; font-size: 14px;">
+                    </td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="reserva-${idx}">-$${valorReserva.toLocaleString('es-CO')}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 600;" id="base-${idx}">$${valorBase.toLocaleString('es-CO')}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="comision-${idx}">-$${comision.toLocaleString('es-CO')}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="plataforma-${idx}">-$${usoPlataforma.toLocaleString('es-CO')}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="radian-${idx}">-$${negociacionRadian.toLocaleString('es-CO')}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 700; color: var(--color-primary);" id="desembolso-${idx}">$${valorDesembolsar.toLocaleString('es-CO')}</td>
                 </tr>`;
             }).join('');
             
@@ -378,9 +407,6 @@
                     <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
                         <thead>
                             <tr style="background: white; border-bottom: 2px solid var(--color-primary);">
-                                <th style="padding: 12px; text-align: center; font-weight: 600; color: #666;">
-                                    <input type="checkbox" id="select-all" checked onchange="seleccionarTodas(this)" style="width: 18px; height: 18px; cursor: pointer;">
-                                </th>
                                 <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">#</th>
                                 <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">CUFE</th>
                                 <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">Gran Pagador</th>
@@ -403,50 +429,97 @@
                 </div>
             `;
             
-            // Calcular totales iniciales (todas seleccionadas)
-            recalcularSeleccionadas();
+            // Calcular totales iniciales
+            recalcularTotales();
         }
 
-        function seleccionarTodas(checkbox) {
-            const checkboxes = document.querySelectorAll('.factura-checkbox');
-            checkboxes.forEach(cb => cb.checked = checkbox.checked);
-            recalcularSeleccionadas();
-        }
-
-        function recalcularSeleccionadas() {
-            const checkboxes = document.querySelectorAll('.factura-checkbox');
-            let totalValorSeleccionado = 0;
+        function validarYActualizarValor(input, idx) {
+            const valorOriginal = parseInt(input.dataset.original);
+            let valorNuevo = parseInt(input.value);
             
-            checkboxes.forEach((cb, idx) => {
-                if (cb.checked) {
-                    totalValorSeleccionado += facturas[idx].valor;
-                }
+            // Validar que no sea mayor al original
+            if (valorNuevo > valorOriginal) {
+                alert(`⚠️ El valor no puede ser mayor al valor original de la factura ($${valorOriginal.toLocaleString('es-CO')})`);
+                input.value = valorOriginal;
+                valorNuevo = valorOriginal;
+            }
+            
+            // Validar que sea un valor válido
+            if (isNaN(valorNuevo) || valorNuevo <= 0) {
+                alert('⚠️ Ingrese un valor válido');
+                input.value = valorOriginal;
+                valorNuevo = valorOriginal;
+            }
+            
+            // Actualizar el valor en el array de facturas
+            facturas[idx].valor = valorNuevo;
+            
+            // Recalcular la fila
+            const valorReserva = Math.round(valorNuevo * VALOR_RESERVA);
+            const valorBase = valorNuevo - valorReserva;
+            const comision = Math.round(valorBase * COMISION);
+            const usoPlataforma = Math.round(valorBase * USO_PLATAFORMA);
+            const negociacionRadian = Math.round(valorBase * NEGOCIACION_RADIAN);
+            const valorDesembolsar = valorBase - comision - usoPlataforma - negociacionRadian;
+            
+            // Actualizar celdas de la fila
+            document.getElementById(`reserva-${idx}`).textContent = `-$${valorReserva.toLocaleString('es-CO')}`;
+            document.getElementById(`base-${idx}`).textContent = `$${valorBase.toLocaleString('es-CO')}`;
+            document.getElementById(`comision-${idx}`).textContent = `-$${comision.toLocaleString('es-CO')}`;
+            document.getElementById(`plataforma-${idx}`).textContent = `-$${usoPlataforma.toLocaleString('es-CO')}`;
+            document.getElementById(`radian-${idx}`).textContent = `-$${negociacionRadian.toLocaleString('es-CO')}`;
+            document.getElementById(`desembolso-${idx}`).textContent = `$${valorDesembolsar.toLocaleString('es-CO')}`;
+            
+            // Recalcular totales
+            recalcularTotales();
+        }
+
+        function recalcularTotales() {
+            let totalValorFacturas = 0;
+            
+            facturas.forEach(f => {
+                totalValorFacturas += f.valor;
             });
             
-            // Calcular totales sobre facturas seleccionadas
-            const totalReserva = Math.round(totalValorSeleccionado * VALOR_RESERVA);
-            const totalBase = totalValorSeleccionado - totalReserva;
+            // Calcular totales
+            const totalReserva = Math.round(totalValorFacturas * VALOR_RESERVA);
+            const totalBase = totalValorFacturas - totalReserva;
             const totalComision = Math.round(totalBase * COMISION);
             const totalUsoPlataforma = Math.round(totalBase * USO_PLATAFORMA);
             const totalNegociacionRadian = Math.round(totalBase * NEGOCIACION_RADIAN);
             const totalDesembolsar = totalBase - totalComision - totalUsoPlataforma - totalNegociacionRadian;
             
-            // Actualizar footer
-            document.getElementById('totales-footer').innerHTML = `
-                <tr style="background: #e3f2fd; border-top: 2px solid var(--color-primary);">
-                    <td colspan="5" style="padding: 15px; font-weight: 700; font-size: 16px;">TOTAL SELECCIONADAS</td>
-                    <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);">$${totalValorSeleccionado.toLocaleString('es-CO')}</td>
-                    <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalReserva.toLocaleString('es-CO')}</td>
-                    <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);">$${totalBase.toLocaleString('es-CO')}</td>
-                    <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalComision.toLocaleString('es-CO')}</td>
-                    <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalUsoPlataforma.toLocaleString('es-CO')}</td>
-                    <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalNegociacionRadian.toLocaleString('es-CO')}</td>
-                    <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 18px; color: var(--color-primary);">$${totalDesembolsar.toLocaleString('es-CO')}</td>
-                </tr>
-            `;
+            // Actualizar footer si existe (múltiples facturas)
+            const footer = document.getElementById('totales-footer');
+            if (footer) {
+                footer.innerHTML = `
+                    <tr style="background: #e3f2fd; border-top: 2px solid var(--color-primary);">
+                        <td colspan="4" style="padding: 15px; font-weight: 700; font-size: 16px;">TOTAL</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);">$${totalValorFacturas.toLocaleString('es-CO')}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalReserva.toLocaleString('es-CO')}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);">$${totalBase.toLocaleString('es-CO')}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalComision.toLocaleString('es-CO')}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalUsoPlataforma.toLocaleString('es-CO')}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalNegociacionRadian.toLocaleString('es-CO')}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 18px; color: var(--color-primary);">$${totalDesembolsar.toLocaleString('es-CO')}</td>
+                    </tr>
+                `;
+            } else {
+                // Actualizar los totales para factura única
+                const totalValor = document.getElementById('total-valor');
+                if (totalValor) {
+                    document.getElementById('total-valor').textContent = `$${totalValorFacturas.toLocaleString('es-CO')}`;
+                    document.getElementById('total-reserva').textContent = `-$${totalReserva.toLocaleString('es-CO')}`;
+                    document.getElementById('total-base').textContent = `$${totalBase.toLocaleString('es-CO')}`;
+                    document.getElementById('total-comision').textContent = `-$${totalComision.toLocaleString('es-CO')}`;
+                    document.getElementById('total-plataforma').textContent = `-$${totalUsoPlataforma.toLocaleString('es-CO')}`;
+                    document.getElementById('total-radian').textContent = `-$${totalNegociacionRadian.toLocaleString('es-CO')}`;
+                    document.getElementById('total-desembolso').textContent = `$${totalDesembolsar.toLocaleString('es-CO')}`;
+                }
+            }
             
             // Actualizar sección de liquidación
-            document.getElementById('valor-factura').textContent = `$${totalValorSeleccionado.toLocaleString('es-CO')}`;
+            document.getElementById('valor-factura').textContent = `$${totalValorFacturas.toLocaleString('es-CO')}`;
             document.getElementById('valor-reserva').textContent = `-$${totalReserva.toLocaleString('es-CO')}`;
             document.getElementById('valor-base-compra').textContent = `$${totalBase.toLocaleString('es-CO')}`;
             document.getElementById('comision-valor').textContent = `-$${totalComision.toLocaleString('es-CO')}`;
@@ -454,26 +527,13 @@
             document.getElementById('negociacion-radian').textContent = `-$${totalNegociacionRadian.toLocaleString('es-CO')}`;
             document.getElementById('valor-desembolsar').textContent = `$${totalDesembolsar.toLocaleString('es-CO')}`;
             document.getElementById('valor-recibir').textContent = `$${totalDesembolsar.toLocaleString('es-CO')}`;
+            
+            // Actualizar total global
+            totalValor = totalValorFacturas;
         }
 
         function calcularLiquidacion() {
-            // Cálculos según nueva estructura
-            const valorReserva = Math.round(totalValor * VALOR_RESERVA);
-            const valorBaseCompra = totalValor - valorReserva;
-            const comision = Math.round(valorBaseCompra * COMISION);
-            const usoPlataforma = Math.round(valorBaseCompra * USO_PLATAFORMA);
-            const negociacionRadian = Math.round(valorBaseCompra * NEGOCIACION_RADIAN);
-            const valorDesembolsar = valorBaseCompra - comision - usoPlataforma - negociacionRadian;
-
-            // Update UI
-            document.getElementById('valor-factura').textContent = `$${totalValor.toLocaleString('es-CO')}`;
-            document.getElementById('valor-reserva').textContent = `-$${valorReserva.toLocaleString('es-CO')}`;
-            document.getElementById('valor-base-compra').textContent = `$${valorBaseCompra.toLocaleString('es-CO')}`;
-            document.getElementById('comision-valor').textContent = `-$${comision.toLocaleString('es-CO')}`;
-            document.getElementById('uso-plataforma').textContent = `-$${usoPlataforma.toLocaleString('es-CO')}`;
-            document.getElementById('negociacion-radian').textContent = `-$${negociacionRadian.toLocaleString('es-CO')}`;
-            document.getElementById('valor-desembolsar').textContent = `$${valorDesembolsar.toLocaleString('es-CO')}`;
-            document.getElementById('valor-recibir').textContent = `$${valorDesembolsar.toLocaleString('es-CO')}`;
+            // Ya no se usa, se calcula en recalcularTotales
         }
         
         // Enable/disable confirm button based on checkbox
