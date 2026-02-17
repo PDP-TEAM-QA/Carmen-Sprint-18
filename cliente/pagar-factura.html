@@ -297,59 +297,20 @@
                 return;
             }
 
-            const isMultiple = facturas.length > 1;
             subtotal = facturas.reduce((sum, f) => sum + f.valor, 0);
 
-            document.getElementById('facturas-title').textContent = isMultiple 
+            document.getElementById('facturas-title').textContent = facturas.length > 1
                 ? `Facturas a Pagar (${facturas.length})` 
                 : 'Factura a Pagar';
 
-            if (isMultiple) {
-                renderMultiple();
-            } else {
-                renderSingle();
-            }
+            // Siempre usar formato de tabla
+            renderTabla();
 
             document.getElementById('subtotal-value').textContent = `$${subtotal.toLocaleString('es-CO')}`;
             document.getElementById('total-pagar').textContent = `$${subtotal.toLocaleString('es-CO')}`;
         }
 
-        function renderSingle() {
-            const f = facturas[0];
-            document.getElementById('facturas-container').innerHTML = `
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
-                    <div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">CUFE</label>
-                            <div style="font-size: 16px; font-weight: 500;">${f.cufe}</div>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Número de Factura</label>
-                            <div style="font-size: 16px; font-weight: 500;">${f.numero}</div>
-                        </div>
-                    </div>
-                    <div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 5px;">Gran Pagador</label>
-                            <div style="font-size: 16px; font-weight: 500;">${f.granPagador}</div>
-                        </div>
-                        <div style="margin-bottom: 20px;">
-                            <label style="display: block; font-weight: 600; color: #666; margin-bottom: 8px;">Valor a Pagar</label>
-                            <input type="number" 
-                                   id="valor-0" 
-                                   value="${f.valor}" 
-                                   min="0" 
-                                   step="1000"
-                                   oninput="updateValor(0, this.value)"
-                                   style="width: 100%; padding: 12px; border: 2px solid var(--color-primary); border-radius: 8px; font-size: 20px; font-weight: 700; color: var(--color-primary);" />
-                            <div style="font-size: 12px; color: #666; margin-top: 5px;">Editable si hubo ajustes</div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-
-        function renderMultiple() {
+        function renderTabla() {
             const rows = facturas.map((f, idx) => `
                 <tr${idx % 2 === 0 ? '' : ' style="background: #f9f9f9;"'}>
                     <td style="padding: 12px; border-bottom: 1px solid #ddd;">${idx + 1}</td>

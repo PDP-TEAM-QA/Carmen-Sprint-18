@@ -125,9 +125,7 @@
                             <td id="valor-factura" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600;">$9,000,000</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 15px 0; font-size: 16px; color: #666;">
-                                Valor Reserva <span style="font-size: 14px;">(10%)</span>
-                            </td>
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Valor Reserva</td>
                             <td id="valor-reserva" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;">-$900,000</td>
                         </tr>
                         <tr style="border-bottom: 2px solid #999;">
@@ -135,21 +133,15 @@
                             <td id="valor-base-compra" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 700; color: #333;">$8,100,000</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 15px 0; font-size: 16px; color: #666;">
-                                Comisión <span style="font-size: 14px;">(2.5%)</span>
-                            </td>
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Comisión</td>
                             <td id="comision-valor" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;">-$202,500</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #ddd;">
-                            <td style="padding: 15px 0; font-size: 16px; color: #666;">
-                                Uso de plataforma <span style="font-size: 14px;">(0.55%)</span>
-                            </td>
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Uso de plataforma</td>
                             <td id="uso-plataforma" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;">-$44,550</td>
                         </tr>
                         <tr style="border-bottom: 2px solid var(--color-primary);">
-                            <td style="padding: 15px 0; font-size: 16px; color: #666;">
-                                Negociación Radian <span style="font-size: 14px;">(0.28%)</span>
-                            </td>
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Negociación Radian</td>
                             <td id="negociacion-radian" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;">-$22,680</td>
                         </tr>
                         <tr>
@@ -247,6 +239,11 @@
         const COMISION = 0.025; // 2.5%
         const USO_PLATAFORMA = 0.0055; // 0.55%
         const NEGOCIACION_RADIAN = 0.0028; // 0.28%
+        
+        // Función para formatear números consistentemente
+        function formatearPesos(valor) {
+            return valor.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        }
 
         // Get parameters from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -314,11 +311,11 @@
                                 <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">Gran Pagador</th>
                                 <th style="padding: 12px; text-align: center; font-weight: 600; color: #666;">Fecha Pago</th>
                                 <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Valor Factura</th>
-                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Reserva (10%)</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Reserva</th>
                                 <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Base Compra</th>
-                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Comisión (2.5%)</th>
-                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Uso Plat. (0.55%)</th>
-                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Radian (0.28%)</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Comisión</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Uso Plat.</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Radian</th>
                                 <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">A Desembolsar</th>
                             </tr>
                         </thead>
@@ -328,35 +325,36 @@
                                 <td style="padding: 12px; border-bottom: 1px solid #ddd; font-weight: 600;">${factura.numero}</td>
                                 <td style="padding: 12px; border-bottom: 1px solid #ddd;">${factura.granPagador}</td>
                                 <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: center;">${factura.fechaPago}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 600;" id="valor-0">$${formatearPesos(factura.valor)}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="reserva-0">-$${formatearPesos(valorReserva)}</td>
                                 <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right;">
                                     <input type="number" 
-                                           class="valor-editable" 
+                                           class="base-editable" 
                                            data-index="0" 
-                                           data-original="${factura.valor}"
-                                           value="${factura.valor}" 
+                                           data-valor-factura="${factura.valor}"
+                                           data-original="${valorBase}"
+                                           value="${valorBase}" 
                                            min="1"
-                                           max="${factura.valor}"
-                                           onchange="validarYActualizarValor(this, 0)"
+                                           max="${valorBase}"
+                                           onchange="validarYActualizarBase(this, 0)"
                                            style="width: 120px; padding: 8px; text-align: right; border: 2px solid var(--color-primary); border-radius: 4px; font-weight: 600; font-size: 14px;">
                                 </td>
-                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="reserva-0">-$${valorReserva.toLocaleString('es-CO')}</td>
-                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 600;" id="base-0">$${valorBase.toLocaleString('es-CO')}</td>
-                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="comision-0">-$${comision.toLocaleString('es-CO')}</td>
-                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="plataforma-0">-$${usoPlataforma.toLocaleString('es-CO')}</td>
-                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="radian-0">-$${negociacionRadian.toLocaleString('es-CO')}</td>
-                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 700; color: var(--color-primary);" id="desembolso-0">$${valorDesembolsar.toLocaleString('es-CO')}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="comision-0">-$${formatearPesos(comision)}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="plataforma-0">-$${formatearPesos(usoPlataforma)}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="radian-0">-$${formatearPesos(negociacionRadian)}</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 700; color: var(--color-primary);" id="desembolso-0">$${formatearPesos(valorDesembolsar)}</td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr style="background: #e3f2fd; border-top: 2px solid var(--color-primary);">
                                 <td colspan="4" style="padding: 15px; font-weight: 700; font-size: 16px;">TOTAL</td>
-                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);" id="total-valor">$${factura.valor.toLocaleString('es-CO')}</td>
-                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-reserva">-$${valorReserva.toLocaleString('es-CO')}</td>
-                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);" id="total-base">$${valorBase.toLocaleString('es-CO')}</td>
-                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-comision">-$${comision.toLocaleString('es-CO')}</td>
-                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-plataforma">-$${usoPlataforma.toLocaleString('es-CO')}</td>
-                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-radian">-$${negociacionRadian.toLocaleString('es-CO')}</td>
-                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 18px; color: var(--color-primary);" id="total-desembolso">$${valorDesembolsar.toLocaleString('es-CO')}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);" id="total-valor">$${formatearPesos(factura.valor)}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-reserva">-$${formatearPesos(valorReserva)}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);" id="total-base">$${formatearPesos(valorBase)}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-comision">-$${formatearPesos(comision)}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-plataforma">-$${formatearPesos(usoPlataforma)}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;" id="total-radian">-$${formatearPesos(negociacionRadian)}</td>
+                                <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 18px; color: var(--color-primary);" id="total-desembolso">$${formatearPesos(valorDesembolsar)}</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -382,23 +380,24 @@
                     <td style="padding: 12px; border-bottom: 1px solid #ddd; font-size: 12px;">${f.cufe}</td>
                     <td style="padding: 12px; border-bottom: 1px solid #ddd;">${f.granPagador}</td>
                     <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: center;">${f.fechaPago}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 600;" id="valor-${idx}">$${formatearPesos(f.valor)}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="reserva-${idx}">-$${formatearPesos(valorReserva)}</td>
                     <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right;">
                         <input type="number" 
-                               class="valor-editable" 
+                               class="base-editable" 
                                data-index="${idx}" 
-                               data-original="${f.valor}"
-                               value="${f.valor}" 
+                               data-valor-factura="${f.valor}"
+                               data-original="${valorBase}"
+                               value="${valorBase}" 
                                min="1"
-                               max="${f.valor}"
-                               onchange="validarYActualizarValor(this, ${idx})"
+                               max="${valorBase}"
+                               onchange="validarYActualizarBase(this, ${idx})"
                                style="width: 120px; padding: 8px; text-align: right; border: 2px solid var(--color-primary); border-radius: 4px; font-weight: 600; font-size: 14px;">
                     </td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="reserva-${idx}">-$${valorReserva.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 600;" id="base-${idx}">$${valorBase.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="comision-${idx}">-$${comision.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="plataforma-${idx}">-$${usoPlataforma.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="radian-${idx}">-$${negociacionRadian.toLocaleString('es-CO')}</td>
-                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 700; color: var(--color-primary);" id="desembolso-${idx}">$${valorDesembolsar.toLocaleString('es-CO')}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="comision-${idx}">-$${formatearPesos(comision)}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="plataforma-${idx}">-$${formatearPesos(usoPlataforma)}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; color: #dc3545;" id="radian-${idx}">-$${formatearPesos(negociacionRadian)}</td>
+                    <td style="padding: 12px; border-bottom: 1px solid #ddd; text-align: right; font-weight: 700; color: var(--color-primary);" id="desembolso-${idx}">$${formatearPesos(valorDesembolsar)}</td>
                 </tr>`;
             }).join('');
             
@@ -412,11 +411,11 @@
                                 <th style="padding: 12px; text-align: left; font-weight: 600; color: #666;">Gran Pagador</th>
                                 <th style="padding: 12px; text-align: center; font-weight: 600; color: #666;">Fecha Pago</th>
                                 <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Valor Factura</th>
-                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Reserva (10%)</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Reserva</th>
                                 <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Base Compra</th>
-                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Comisión (2.5%)</th>
-                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Uso Plat. (0.55%)</th>
-                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Radian (0.28%)</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Comisión</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Uso Plat.</th>
+                                <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">Radian</th>
                                 <th style="padding: 12px; text-align: right; font-weight: 600; color: #666;">A Desembolsar</th>
                             </tr>
                         </thead>
@@ -433,100 +432,121 @@
             recalcularTotales();
         }
 
-        function validarYActualizarValor(input, idx) {
-            const valorOriginal = parseInt(input.dataset.original);
-            let valorNuevo = parseInt(input.value);
+        function validarYActualizarBase(input, idx) {
+            const valorFactura = parseInt(input.dataset.valorFactura);
+            const baseOriginal = parseInt(input.dataset.original);
+            let baseNueva = parseInt(input.value);
             
-            // Validar que no sea mayor al original
-            if (valorNuevo > valorOriginal) {
-                alert(`⚠️ El valor no puede ser mayor al valor original de la factura ($${valorOriginal.toLocaleString('es-CO')})`);
-                input.value = valorOriginal;
-                valorNuevo = valorOriginal;
+            // Validar que no sea mayor a la base original
+            if (baseNueva > baseOriginal) {
+                alert(`⚠️ La base de compra no puede ser mayor a la base original ($${formatearPesos(baseOriginal)})`);
+                input.value = baseOriginal;
+                baseNueva = baseOriginal;
             }
             
             // Validar que sea un valor válido
-            if (isNaN(valorNuevo) || valorNuevo <= 0) {
+            if (isNaN(baseNueva) || baseNueva <= 0) {
                 alert('⚠️ Ingrese un valor válido');
-                input.value = valorOriginal;
-                valorNuevo = valorOriginal;
+                input.value = baseOriginal;
+                baseNueva = baseOriginal;
             }
             
-            // Actualizar el valor en el array de facturas
-            facturas[idx].valor = valorNuevo;
+            // Actualizar el valor de facturas con base nueva PRIMERO
+            facturas[idx].baseCompra = baseNueva;
             
-            // Recalcular la fila
-            const valorReserva = Math.round(valorNuevo * VALOR_RESERVA);
-            const valorBase = valorNuevo - valorReserva;
+            // Calcular nueva reserva basada en la base de compra
+            const nuevaReserva = valorFactura - baseNueva;
+            
+            // Recalcular la fila con la nueva base
+            const valorBase = baseNueva;
             const comision = Math.round(valorBase * COMISION);
             const usoPlataforma = Math.round(valorBase * USO_PLATAFORMA);
             const negociacionRadian = Math.round(valorBase * NEGOCIACION_RADIAN);
             const valorDesembolsar = valorBase - comision - usoPlataforma - negociacionRadian;
             
-            // Actualizar celdas de la fila
-            document.getElementById(`reserva-${idx}`).textContent = `-$${valorReserva.toLocaleString('es-CO')}`;
-            document.getElementById(`base-${idx}`).textContent = `$${valorBase.toLocaleString('es-CO')}`;
-            document.getElementById(`comision-${idx}`).textContent = `-$${comision.toLocaleString('es-CO')}`;
-            document.getElementById(`plataforma-${idx}`).textContent = `-$${usoPlataforma.toLocaleString('es-CO')}`;
-            document.getElementById(`radian-${idx}`).textContent = `-$${negociacionRadian.toLocaleString('es-CO')}`;
-            document.getElementById(`desembolso-${idx}`).textContent = `$${valorDesembolsar.toLocaleString('es-CO')}`;
+            // Actualizar celdas de la fila en la tabla
+            const reservaElem = document.getElementById(`reserva-${idx}`);
+            const comisionElem = document.getElementById(`comision-${idx}`);
+            const plataformaElem = document.getElementById(`plataforma-${idx}`);
+            const radianElem = document.getElementById(`radian-${idx}`);
+            const desembolsoElem = document.getElementById(`desembolso-${idx}`);
             
-            // Recalcular totales
+            if (reservaElem) reservaElem.textContent = `-$${formatearPesos(nuevaReserva)}`;
+            if (comisionElem) comisionElem.textContent = `-$${formatearPesos(comision)}`;
+            if (plataformaElem) plataformaElem.textContent = `-$${formatearPesos(usoPlataforma)}`;
+            if (radianElem) radianElem.textContent = `-$${formatearPesos(negociacionRadian)}`;
+            if (desembolsoElem) desembolsoElem.textContent = `$${formatearPesos(valorDesembolsar)}`;
+            
+            // Recalcular totales (esto actualiza la sección de liquidación)
             recalcularTotales();
         }
 
         function recalcularTotales() {
             let totalValorFacturas = 0;
+            let totalBase = 0;
             
-            facturas.forEach(f => {
+            facturas.forEach((f, idx) => {
                 totalValorFacturas += f.valor;
+                // Si tiene baseCompra editada, usarla; si no, calcular
+                const base = f.baseCompra || (f.valor - Math.round(f.valor * VALOR_RESERVA));
+                totalBase += base;
             });
             
             // Calcular totales
-            const totalReserva = Math.round(totalValorFacturas * VALOR_RESERVA);
-            const totalBase = totalValorFacturas - totalReserva;
+            const totalReserva = totalValorFacturas - totalBase;
             const totalComision = Math.round(totalBase * COMISION);
             const totalUsoPlataforma = Math.round(totalBase * USO_PLATAFORMA);
             const totalNegociacionRadian = Math.round(totalBase * NEGOCIACION_RADIAN);
             const totalDesembolsar = totalBase - totalComision - totalUsoPlataforma - totalNegociacionRadian;
-            
             // Actualizar footer si existe (múltiples facturas)
             const footer = document.getElementById('totales-footer');
             if (footer) {
                 footer.innerHTML = `
                     <tr style="background: #e3f2fd; border-top: 2px solid var(--color-primary);">
                         <td colspan="4" style="padding: 15px; font-weight: 700; font-size: 16px;">TOTAL</td>
-                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);">$${totalValorFacturas.toLocaleString('es-CO')}</td>
-                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalReserva.toLocaleString('es-CO')}</td>
-                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);">$${totalBase.toLocaleString('es-CO')}</td>
-                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalComision.toLocaleString('es-CO')}</td>
-                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalUsoPlataforma.toLocaleString('es-CO')}</td>
-                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${totalNegociacionRadian.toLocaleString('es-CO')}</td>
-                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 18px; color: var(--color-primary);">$${totalDesembolsar.toLocaleString('es-CO')}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);">$${formatearPesos(totalValorFacturas)}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${formatearPesos(totalReserva)}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: var(--color-primary);">$${formatearPesos(totalBase)}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${formatearPesos(totalComision)}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${formatearPesos(totalUsoPlataforma)}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 16px; color: #dc3545;">-$${formatearPesos(totalNegociacionRadian)}</td>
+                        <td style="padding: 15px; text-align: right; font-weight: 700; font-size: 18px; color: var(--color-primary);">$${formatearPesos(totalDesembolsar)}</td>
                     </tr>
                 `;
             } else {
                 // Actualizar los totales para factura única
                 const totalValor = document.getElementById('total-valor');
                 if (totalValor) {
-                    document.getElementById('total-valor').textContent = `$${totalValorFacturas.toLocaleString('es-CO')}`;
-                    document.getElementById('total-reserva').textContent = `-$${totalReserva.toLocaleString('es-CO')}`;
-                    document.getElementById('total-base').textContent = `$${totalBase.toLocaleString('es-CO')}`;
-                    document.getElementById('total-comision').textContent = `-$${totalComision.toLocaleString('es-CO')}`;
-                    document.getElementById('total-plataforma').textContent = `-$${totalUsoPlataforma.toLocaleString('es-CO')}`;
-                    document.getElementById('total-radian').textContent = `-$${totalNegociacionRadian.toLocaleString('es-CO')}`;
-                    document.getElementById('total-desembolso').textContent = `$${totalDesembolsar.toLocaleString('es-CO')}`;
+                    document.getElementById('total-valor').textContent = `$${formatearPesos(totalValorFacturas)}`;
+                    document.getElementById('total-reserva').textContent = `-$${formatearPesos(totalReserva)}`;
+                    document.getElementById('total-base').textContent = `$${formatearPesos(totalBase)}`;
+                    document.getElementById('total-comision').textContent = `-$${formatearPesos(totalComision)}`;
+                    document.getElementById('total-plataforma').textContent = `-$${formatearPesos(totalUsoPlataforma)}`;
+                    document.getElementById('total-radian').textContent = `-$${formatearPesos(totalNegociacionRadian)}`;
+                    document.getElementById('total-desembolso').textContent = `$${formatearPesos(totalDesembolsar)}`;
                 }
             }
             
             // Actualizar sección de liquidación
-            document.getElementById('valor-factura').textContent = `$${totalValorFacturas.toLocaleString('es-CO')}`;
-            document.getElementById('valor-reserva').textContent = `-$${totalReserva.toLocaleString('es-CO')}`;
-            document.getElementById('valor-base-compra').textContent = `$${totalBase.toLocaleString('es-CO')}`;
-            document.getElementById('comision-valor').textContent = `-$${totalComision.toLocaleString('es-CO')}`;
-            document.getElementById('uso-plataforma').textContent = `-$${totalUsoPlataforma.toLocaleString('es-CO')}`;
-            document.getElementById('negociacion-radian').textContent = `-$${totalNegociacionRadian.toLocaleString('es-CO')}`;
-            document.getElementById('valor-desembolsar').textContent = `$${totalDesembolsar.toLocaleString('es-CO')}`;
-            document.getElementById('valor-recibir').textContent = `$${totalDesembolsar.toLocaleString('es-CO')}`;
+            const elemLiquidacion = {
+                valorFactura: document.getElementById('valor-factura'),
+                valorReserva: document.getElementById('valor-reserva'),
+                valorBaseCompra: document.getElementById('valor-base-compra'),
+                comisionValor: document.getElementById('comision-valor'),
+                usoPlataforma: document.getElementById('uso-plataforma'),
+                negociacionRadian: document.getElementById('negociacion-radian'),
+                valorDesembolsar: document.getElementById('valor-desembolsar'),
+                valorRecibir: document.getElementById('valor-recibir')
+            };
+            
+            if (elemLiquidacion.valorFactura) elemLiquidacion.valorFactura.textContent = `$${formatearPesos(totalValorFacturas)}`;
+            if (elemLiquidacion.valorReserva) elemLiquidacion.valorReserva.textContent = `-$${formatearPesos(totalReserva)}`;
+            if (elemLiquidacion.valorBaseCompra) elemLiquidacion.valorBaseCompra.textContent = `$${formatearPesos(totalBase)}`;
+            if (elemLiquidacion.comisionValor) elemLiquidacion.comisionValor.textContent = `-$${formatearPesos(totalComision)}`;
+            if (elemLiquidacion.usoPlataforma) elemLiquidacion.usoPlataforma.textContent = `-$${formatearPesos(totalUsoPlataforma)}`;
+            if (elemLiquidacion.negociacionRadian) elemLiquidacion.negociacionRadian.textContent = `-$${formatearPesos(totalNegociacionRadian)}`;
+            if (elemLiquidacion.valorDesembolsar) elemLiquidacion.valorDesembolsar.textContent = `$${formatearPesos(totalDesembolsar)}`;
+            if (elemLiquidacion.valorRecibir) elemLiquidacion.valorRecibir.textContent = `$${formatearPesos(totalDesembolsar)}`;
             
             // Actualizar total global
             totalValor = totalValorFacturas;
@@ -562,7 +582,7 @@
             const negociacionRadian = Math.round(valorBaseCompra * NEGOCIACION_RADIAN);
             const valorRecibir = valorBaseCompra - comision - usoPlataforma - negociacionRadian;
             
-            alert(`✅ ¡Venta confirmada!\n\n${facturaTexto} exitosamente.\nRecibirá $${valorRecibir.toLocaleString('es-CO')} en su billetera Mi Cash.\n\nPuede revisar el estado en la sección "Mis Liquidaciones".`);
+            alert(`✅ ¡Venta confirmada!\n\n${facturaTexto} exitosamente.\nRecibirá $${formatearPesos(valorRecibir)} en su billetera Mi Cash.\n\nPuede revisar el estado en la sección "Mis Liquidaciones".`);
             
             setTimeout(() => {
                 window.location.href = 'mis-facturas.html';

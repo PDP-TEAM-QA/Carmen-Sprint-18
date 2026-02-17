@@ -163,8 +163,81 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <!-- Facturas Pendientes de Desembolso -->
                         <tr>
                             <td>1</td>
+                            <td>
+                                <div style="font-weight: 600;">21789</div>
+                                <div style="font-size: 11px; color: #666;">MNE-0476220</div>
+                            </td>
+                            <td>TRANS JAPAGO PARDO</td>
+                            <td>20/01/2026</td>
+                            <td>08/03/2026</td>
+                            <td style="font-weight: 600;">$6,250,000</td>
+                            <td>JOSE SANCHEZ</td>
+                            <td>
+                                <span class="badge badge-warning" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
+                                    <i class="fas fa-clock"></i> Pendiente Desembolso
+                                </span>
+                            </td>
+                            <td>
+                                <div style="display: flex; gap: 5px; align-items: center;">
+                                    <button class="btn-icon" style="border: 2px solid #17a2b8; color: #17a2b8;" 
+                                            onclick="verDetalleFactura('21789')" 
+                                            onmouseover="this.style.background='#17a2b8'; this.style.color='white';" 
+                                            onmouseout="this.style.background='transparent'; this.style.color='#17a2b8';"
+                                            title="Ver detalle">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" style="border: 2px solid #28a745; color: #28a745;" 
+                                            onclick="abrirModalDesembolso('1', '21789', 'MNE-0476220')" 
+                                            onmouseover="this.style.background='#28a745'; this.style.color='white';" 
+                                            onmouseout="this.style.background='transparent'; this.style.color='#28a745';"
+                                            title="Procesar desembolso">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>
+                                <div style="font-weight: 600;">20896</div>
+                                <div style="font-size: 11px; color: #666;">MNE-0476198</div>
+                            </td>
+                            <td>JENNY SAVEDRA</td>
+                            <td>19/01/2026</td>
+                            <td>06/03/2026</td>
+                            <td style="font-weight: 600;">$3,850,000</td>
+                            <td>ALMACENES XYZ</td>
+                            <td>
+                                <span class="badge badge-warning" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
+                                    <i class="fas fa-clock"></i> Pendiente Desembolso
+                                </span>
+                            </td>
+                            <td>
+                                <div style="display: flex; gap: 5px; align-items: center;">
+                                    <button class="btn-icon" style="border: 2px solid #17a2b8; color: #17a2b8;" 
+                                            onclick="verDetalleFactura('20896')" 
+                                            onmouseover="this.style.background='#17a2b8'; this.style.color='white';" 
+                                            onmouseout="this.style.background='transparent'; this.style.color='#17a2b8';"
+                                            title="Ver detalle">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" style="border: 2px solid #28a745; color: #28a745;" 
+                                            onclick="abrirModalDesembolso('2', '20896', 'MNE-0476198')" 
+                                            onmouseover="this.style.background='#28a745'; this.style.color='white';" 
+                                            onmouseout="this.style.background='transparent'; this.style.color='#28a745';"
+                                            title="Procesar desembolso">
+                                        <i class="fas fa-money-bill-wave"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Facturas Completadas -->
+                        <tr>
+                            <td>3</td>
                             <td>
                                 <div style="font-weight: 600;">19917</div>
                                 <div style="font-size: 11px; color: #666;">MNE-0470033</div>
@@ -176,7 +249,7 @@
                             <td>TRANS JAPAGO PARDO</td>
                             <td>
                                 <span class="badge badge-success" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
-                                    <i class="fas fa-check-circle"></i> Pagada
+                                    <i class="fas fa-check-circle"></i> Desembolsada
                                 </span>
                             </td>
                             <td>
@@ -190,7 +263,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>2</td>
+                            <td>4</td>
                             <td>
                                 <div style="font-weight: 600;">20654</div>
                                 <div style="font-size: 11px; color: #666;">MNE-0470089</div>
@@ -202,7 +275,7 @@
                             <td>TRANS JAPAGO PARDO</td>
                             <td>
                                 <span class="badge badge-success" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
-                                    <i class="fas fa-check-circle"></i> Pagada
+                                    <i class="fas fa-check-circle"></i> Desembolsada
                                 </span>
                             </td>
                             <td>
@@ -216,7 +289,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>3</td>
+                            <td>5</td>
                             <td>
                                 <div style="font-weight: 600;">20761</div>
                                 <div style="font-size: 11px; color: #666;">MNE-0470124</div>
@@ -228,7 +301,7 @@
                             <td>TRANS JAPAGO PARDO</td>
                             <td>
                                 <span class="badge badge-success" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
-                                    <i class="fas fa-check-circle"></i> Pagada
+                                    <i class="fas fa-check-circle"></i> Desembolsada
                                 </span>
                             </td>
                             <td>
@@ -242,7 +315,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>4</td>
+                            <td>6</td>
                             <td>
                                 <div style="font-weight: 600;">20987</div>
                                 <div style="font-size: 11px; color: #666;">MNE-0476101</div>
@@ -253,8 +326,8 @@
                             <td style="font-weight: 600;">$1,276,870</td>
                             <td>TRANS JAPAGO PARDO</td>
                             <td>
-                                <span class="badge badge-warning" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
-                                    <i class="fas fa-clock"></i> En Espera de Pago
+                                <span class="badge badge-info" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
+                                    <i class="fas fa-handshake"></i> Negociada
                                 </span>
                             </td>
                             <td>
@@ -268,7 +341,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>5</td>
+                            <td>7</td>
                             <td>
                                 <div style="font-weight: 600;">21003</div>
                                 <div style="font-size: 11px; color: #666;">MNE-0476134</div>
@@ -294,7 +367,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>6</td>
+                            <td>8</td>
                             <td>
                                 <div style="font-weight: 600;">21234</div>
                                 <div style="font-size: 11px; color: #666;">MNE-0470177</div>
@@ -306,7 +379,7 @@
                             <td>TRANS JAPAGO PARDO</td>
                             <td>
                                 <span class="badge badge-success" style="display: flex; align-items: center; gap: 5px; width: fit-content;">
-                                    <i class="fas fa-check-circle"></i> Pagada
+                                    <i class="fas fa-check-circle"></i> Desembolsada
                                 </span>
                             </td>
                             <td>
@@ -537,6 +610,138 @@
         </div>
     </div>
 
+    <!-- Modal: Desembolso Manual -->
+    <div id="modalDesembolso" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <span class="modal-close" onclick="cerrarModalDesembolso()">&times;</span>
+            <h2 style="color: #28a745; margin-bottom: 20px;">
+                <i class="fas fa-money-bill-wave"></i> Procesar Desembolso Manual
+            </h2>
+            
+            <!-- Información de la Factura -->
+            <div style="background: #e7f5ff; padding: 20px; border-radius: 8px; border-left: 4px solid #17a2b8; margin-bottom: 20px;">
+                <h3 style="color: #0c5460; margin-bottom: 15px;">Datos de la Factura</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <strong style="color: #666;">Número de Factura:</strong><br>
+                        <span id="desembolso-numero" style="font-size: 18px; color: #333; font-weight: 600;">-</span>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">CUFE:</strong><br>
+                        <span id="desembolso-cufe" style="font-size: 14px; color: #333; font-family: monospace;">-</span>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">Entidad/Emisor:</strong><br>
+                        <span id="desembolso-entidad" style="font-size: 16px; color: #333; font-weight: 500;">-</span>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">Gran Pagador:</strong><br>
+                        <span id="desembolso-pagador" style="font-size: 16px; color: #333; font-weight: 500;">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detalle de Liquidación -->
+            <div style="background: white; padding: 20px; border-radius: 8px; border: 1px solid #ddd; margin-bottom: 20px;">
+                <h3 style="color: #333; margin-bottom: 15px;">Detalle de Liquidación</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Valor Factura</td>
+                            <td id="desembolso-valor-factura" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600;">$0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Valor Reserva (10%)</td>
+                            <td id="desembolso-reserva" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;">-$0</td>
+                        </tr>
+                        <tr style="border-bottom: 2px solid #999;">
+                            <td style="padding: 15px 0; font-size: 16px; font-weight: 600; color: #333;">Valor Base de Compra</td>
+                            <td id="desembolso-base-compra" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 700; color: #333;">$0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Comisión (2.5%)</td>
+                            <td id="desembolso-comision" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;">-$0</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #ddd;">
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Uso de plataforma (0.55%)</td>
+                            <td id="desembolso-plataforma" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;">-$0</td>
+                        </tr>
+                        <tr style="border-bottom: 2px solid var(--color-primary);">
+                            <td style="padding: 15px 0; font-size: 16px; color: #666;">Negociación Radian (0.28%)</td>
+                            <td id="desembolso-radian" style="padding: 15px 0; text-align: right; font-size: 18px; font-weight: 600; color: #dc3545;">-$0</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 20px 0 0 0; font-size: 20px; font-weight: 700;">Valor a desembolsar</td>
+                            <td id="desembolso-final" style="padding: 20px 0 0 0; text-align: right; font-size: 28px; font-weight: 700; color: var(--color-primary);">$0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Datos Bancarios -->
+            <div style="background: #f0f8ff; padding: 20px; border-radius: 8px; border-left: 4px solid #007bff; margin-bottom: 20px;">
+                <h3 style="color: #004085; margin-bottom: 15px;"><i class="fas fa-university"></i> Datos Bancarios Verificados</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <strong style="color: #666;">Banco:</strong><br>
+                        <span style="font-size: 16px; color: #333;">Bancolombia</span>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">Tipo de Cuenta:</strong><br>
+                        <span style="font-size: 16px; color: #333;">Ahorros</span>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">Número de Cuenta:</strong><br>
+                        <span style="font-size: 16px; color: #333; font-family: monospace;">****5678</span>
+                    </div>
+                    <div>
+                        <strong style="color: #666;">Titular:</strong><br>
+                        <span id="desembolso-titular" style="font-size: 16px; color: #333;">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notas del Administrador -->
+            <div style="margin-bottom: 20px;">
+                <label style="display: block; font-weight: 600; margin-bottom: 8px; color: #333;">
+                    <i class="fas fa-sticky-note"></i> Notas del Administrador (opcional)
+                </label>
+                <textarea id="desembolso-notas" 
+                    style="width: 100%; min-height: 80px; padding: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; font-family: inherit; resize: vertical;"
+                    placeholder="Ingrese cualquier observación o nota relevante sobre este desembolso..."></textarea>
+            </div>
+
+            <!-- Advertencia -->
+            <div style="background: #fff3cd; padding: 20px; border-radius: 8px; border-left: 4px solid #ffc107; margin-bottom: 20px;">
+                <strong><i class="fas fa-exclamation-triangle"></i> Importante:</strong>
+                <ul style="margin: 10px 0 0 20px; line-height: 1.8;">
+                    <li>Una vez confirmado el desembolso, la operación no podrá cancelarse.</li>
+                    <li>Se realizará la transferencia inmediata a la cuenta bancaria registrada.</li>
+                    <li>El cliente recibirá un comprobante del desembolso en su correo registrado.</li>
+                    <li>La factura cambiará al estado "Desembolsada" automáticamente.</li>
+                </ul>
+            </div>
+
+            <!-- Confirmación -->
+            <div style="margin: 20px 0;">
+                <label style="display: flex; align-items: center; font-size: 16px; cursor: pointer;">
+                    <input type="checkbox" id="confirmDesembolso" style="width: 20px; height: 20px; margin-right: 10px; cursor: pointer;">
+                    <span>Confirmo que los datos son correctos y autorizo el desembolso manual de esta factura</span>
+                </label>
+            </div>
+
+            <!-- Botones de Acción -->
+            <div style="display: flex; gap: 15px; justify-content: flex-end; margin-top: 30px;">
+                <button onclick="cerrarModalDesembolso()" class="btn-secondary" style="padding: 12px 30px;">
+                    <i class="fas fa-times"></i> Cancelar
+                </button>
+                <button onclick="confirmarDesembolso()" class="btn-primary" style="padding: 12px 30px; background: #28a745; border-color: #28a745;">
+                    <i class="fas fa-check-circle"></i> Confirmar Desembolso
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
@@ -741,11 +946,127 @@
             document.getElementById('modalRechazo').classList.remove('active');
         }
 
+        // Datos de facturas pendientes de desembolso
+        const facturasDesembolso = {
+            '1': {
+                numero: '21789',
+                cufe: 'MNE-0476220',
+                entidad: 'TRANS JAPAGO PARDO',
+                granPagador: 'JOSE SANCHEZ',
+                valorFactura: 6250000,
+                titular: 'TRANS JAPAGO PARDO SAS'
+            },
+            '2': {
+                numero: '20896',
+                cufe: 'MNE-0476198',
+                entidad: 'JENNY SAVEDRA',
+                granPagador: 'ALMACENES XYZ',
+                valorFactura: 3850000,
+                titular: 'JENNY SAVEDRA RODRIGUEZ'
+            }
+        };
+
+        // Formatear pesos
+        function formatearPesos(valor) {
+            return '$' + Math.round(valor).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        // Abrir modal de desembolso
+        function abrirModalDesembolso(id, numero, cufe) {
+            const factura = facturasDesembolso[id];
+            if (!factura) return;
+
+            // Llenar datos básicos
+            document.getElementById('desembolso-numero').textContent = numero;
+            document.getElementById('desembolso-cufe').textContent = cufe;
+            document.getElementById('desembolso-entidad').textContent = factura.entidad;
+            document.getElementById('desembolso-pagador').textContent = factura.granPagador;
+            document.getElementById('desembolso-titular').textContent = factura.titular;
+
+            // Calcular liquidación
+            const valorFactura = factura.valorFactura;
+            const valorReserva = valorFactura * 0.10;
+            const baseCompra = valorFactura - valorReserva;
+            const comision = baseCompra * 0.025;
+            const usoPlataforma = baseCompra * 0.0055;
+            const negociacionRadian = baseCompra * 0.0028;
+            const valorDesembolsar = baseCompra - comision - usoPlataforma - negociacionRadian;
+
+            // Llenar valores
+            document.getElementById('desembolso-valor-factura').textContent = formatearPesos(valorFactura);
+            document.getElementById('desembolso-reserva').textContent = '-' + formatearPesos(valorReserva);
+            document.getElementById('desembolso-base-compra').textContent = formatearPesos(baseCompra);
+            document.getElementById('desembolso-comision').textContent = '-' + formatearPesos(comision);
+            document.getElementById('desembolso-plataforma').textContent = '-' + formatearPesos(usoPlataforma);
+            document.getElementById('desembolso-radian').textContent = '-' + formatearPesos(negociacionRadian);
+            document.getElementById('desembolso-final').textContent = formatearPesos(valorDesembolsar);
+
+            // Limpiar campos
+            document.getElementById('desembolso-notas').value = '';
+            document.getElementById('confirmDesembolso').checked = false;
+
+            // Guardar ID para confirmar
+            document.getElementById('modalDesembolso').dataset.facturaId = id;
+            document.getElementById('modalDesembolso').dataset.facturaNumero = numero;
+
+            // Mostrar modal
+            document.getElementById('modalDesembolso').classList.add('active');
+        }
+
+        // Cerrar modal de desembolso
+        function cerrarModalDesembolso() {
+            document.getElementById('modalDesembolso').classList.remove('active');
+        }
+
+        // Confirmar desembolso
+        function confirmarDesembolso() {
+            const checkbox = document.getElementById('confirmDesembolso');
+            
+            if (!checkbox.checked) {
+                alert('Debe confirmar que los datos son correctos antes de proceder con el desembolso.');
+                return;
+            }
+
+            const modal = document.getElementById('modalDesembolso');
+            const facturaId = modal.dataset.facturaId;
+            const facturaNumero = modal.dataset.facturaNumero;
+            const notas = document.getElementById('desembolso-notas').value;
+
+            // Confirmación final
+            if (confirm('¿Está seguro de procesar el desembolso de la factura ' + facturaNumero + '?\n\nEsta acción no puede deshacerse.')) {
+                // Aquí iría la llamada al backend para procesar el desembolso
+                console.log('Procesando desembolso:', {
+                    facturaId: facturaId,
+                    facturaNumero: facturaNumero,
+                    notas: notas,
+                    timestamp: new Date().toISOString()
+                });
+
+                // Simular éxito
+                alert('Desembolso procesado exitosamente.\n\nFactura: ' + facturaNumero + '\nEstado: Desembolsada\n\nSe ha enviado el comprobante al correo del cliente.');
+                
+                // Cerrar modal
+                cerrarModalDesembolso();
+                
+                // En producción, aquí se recarga o actualiza la tabla
+                // location.reload();
+            }
+        }
+
+        function cerrarModalRechazo() {
+            document.getElementById('modalRechazo').classList.remove('active');
+        }
+
         // Close modal when clicking outside
         window.onclick = function(event) {
-            const modal = document.getElementById('modalRechazo');
-            if (event.target == modal) {
+            const modalRechazo = document.getElementById('modalRechazo');
+            const modalDesembolso = document.getElementById('modalDesembolso');
+            
+            if (event.target == modalRechazo) {
                 cerrarModalRechazo();
+            }
+            if (event.target == modalDesembolso) {
+                cerrarModalDesembolso();
             }
         }
     </script>
